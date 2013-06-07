@@ -7,22 +7,12 @@
 
 <p>
   <b>Description:</b>
-  <%= @product.description %>
+  <%= @product.description.html_safe %>
 </p>
 
 <p>
   <b>Amount:</b>
   <%= @product.amount %>
-</p>
-
-<p>
-  <b>Size:</b>
-  <%= @product.size %>
-</p>
-
-<p>
-  <b>Color:</b>
-  <%= @product.color %>
 </p>
 
 <p>
@@ -36,12 +26,13 @@
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @product.status %>
+amount: <input id="addAmount" type="number" />
 </p>
 
+<%= link_to 'Add to cart', "#", :id => "addToCart" %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= render 'cart' %>
 <%= link_to 'Back', products_path %>
 
-<%= render 'form' %>
+<%= render 'cart_js' %>
+

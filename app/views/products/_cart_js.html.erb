@@ -1,0 +1,63 @@
+<script type="text/javascript">
+// setCookie('cart', '', -2000);
+
+$("#addToCart").click(function(){
+  if(parseInt($("#addAmount").val(), 10)>0){
+    
+    var item = new Object();
+    item.id = "<%= @product.id if(@product) %>";
+    item.name = "<%= @product.name if(@product) %>";
+    item.price = "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>";
+    item.amount = $("#addAmount").val();
+
+    cartitems["<%= @product.id if(@product) %>"] = item;
+
+    setCookie('cart', JSON.stringify(cartitems));
+    cartListItems(JSON.stringify(cartitems));
+  }
+
+  $("#addAmount").val("");
+  
+});
+var cartitems;
+cartListItems(getCookie("cart"));
+
+function getCookie(key)
+{
+  if( document.cookie.length==0 )   return false;
+  var i=document.cookie.search(key+'=');
+
+  if( i==-1 )   return false;
+  i+=key.length+1;
+
+  var j=document.cookie.indexOf(';', i);
+  if( j==-1 )   j=document.cookie.length;
+
+  return decodeURIComponent(document.cookie.slice(i,j));
+}
+function setCookie(key, value, expire)
+{
+  var ck = key +'='+ encodeURIComponent(value);
+  if(expire)
+  {
+    var epr=new Date();
+    epr.setTime(epr.getTime()+ expire*1000 );
+    ck+=';expires='+ epr.toUTCString();
+  }
+  document.cookie=ck;
+}
+function cartListItems(items){
+  cartitems = items? JSON.parse(items) : new Object()
+  if(Object.keys(cartitems).length>0){
+    var html = "";
+    for(var item in cartitems){
+      html += "<p>" + cartitems[item].name + ": " + cartitems[item].amount + "個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 <a>刪除</a></p>";
+    }
+    $("#cartItems").html(html);
+  }
+  else{
+    var html = "<p>購物車內沒有任何商品。</p>";
+    $("#cartItems").html(html);
+  }
+}
+</script>
