@@ -1,5 +1,5 @@
 <script type="text/javascript">
-// setCookie('cart', '', -2000);
+ // setCookie('cart', '', -2000);
 
 $("#addToCart").click(function(){
   if(parseInt($("#addAmount").val(), 10)>0){
@@ -12,7 +12,7 @@ $("#addToCart").click(function(){
 
     cartitems["<%= @product.id if(@product) %>"] = item;
 
-    setCookie('cart', JSON.stringify(cartitems));
+    setCookie('cart', JSON.stringify(cartitems),0,"","/");
     cartListItems(JSON.stringify(cartitems));
   }
 
@@ -35,7 +35,7 @@ function getCookie(key)
 
   return decodeURIComponent(document.cookie.slice(i,j));
 }
-function setCookie(key, value, expire)
+function setCookie(key, value, expire, domain, path)
 {
   var ck = key +'='+ encodeURIComponent(value);
   if(expire)
@@ -44,6 +44,13 @@ function setCookie(key, value, expire)
     epr.setTime(epr.getTime()+ expire*1000 );
     ck+=';expires='+ epr.toUTCString();
   }
+  if( domain ){
+    ck+=';domain='+ domain;
+  }
+  if( path ){
+    ck+=';path='+ path;
+  }
+
   document.cookie=ck;
 }
 function cartListItems(items){
@@ -51,8 +58,9 @@ function cartListItems(items){
   if(Object.keys(cartitems).length>0){
     var html = "";
     for(var item in cartitems){
-      html += "<p>" + cartitems[item].name + ": " + cartitems[item].amount + "個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 <a>刪除</a></p>";
+      html += "<p><a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a>: " + cartitems[item].amount + "個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 <a>刪除</a></p>";
     }
+    html += "<p><a>結帳</a></p>";
     $("#cartItems").html(html);
   }
   else{
