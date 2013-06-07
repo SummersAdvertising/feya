@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart:Admin</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<p><%= session[:admin].username %>, 你好。 <%= link_to "登出", admin_logout_path %></p>
+	<h1>admin</h1>
+	<ul><li><a href="/admin">商品管理</a></li><li>訂單管理</li><li>購物金規則</li></ul>
+
+	<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<h1>管理者登入</h1>
+<%= form_for(@admin, :url => admin_checkAdmin_path(@admin)) do |f| %>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="50px">帳號</th>
+    <td><%= f.text_field :email, :autocomplete => "off" %></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="50px">密碼</th>
+    <td><%= f.password_field :password, :autocomplete => "off" %></td>
+  </tr>
+</table>
+<% end %>
+<p><%= flash[:loginError] %></p>
+<section class="button" id="btnLogin"><a href="#">登入</a></section>
+<!--button-->
+
+<script type="text/javascript">
+
+$("#btnLogin").click(function(){
+  $("form").submit();
+});
+
+$("#admin_password").keydown(function(event){
+  if (event.keyCode == 13){
+    $("form").submit();
+  }
+});
+</script>
