@@ -1,1 +1,15 @@
-check
+<h1>check</h1>
+<p>list items</p>
+<% @orderItems.each do |item| %>
+<p><%= item[:name] %></p>
+<% end %>
+
+<div>
+	<p>buyer info</p>
+</div>
+
+<div>
+	<p>receiver info</p>
+</div>
+
+<a href="/orders/cart">修改訂單</a>/<a href="#">確認結帳</a>

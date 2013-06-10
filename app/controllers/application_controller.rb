@@ -23,6 +23,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource_or_scope)
-  	request.referrer
+  	(request.referrer == "#{request.protocol}#{request.host_with_port}"+check_orders_path) ? root_path : request.referrer
   end
 end

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<% if current_member %>
-	<%= current_member.email %>, <%= link_to "登出", destroy_member_session_path, :method => :delete %>
+	<%= current_member.email %> <%= link_to "登出", destroy_member_session_path, :method => :delete %>
 	<% else %>
 	<%= link_to "登入", new_member_session_path %>
 	<% end %>
