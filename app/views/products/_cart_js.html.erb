@@ -2,25 +2,29 @@
  // setCookie('cart', '', -2000);
 
 $("#addToCart").click(function(){
-  if(parseInt($("#addAmount").val(), 10)>0){
-    
-    var item = new Object();
-    item.id = "<%= @product.id if(@product) %>";
-    item.name = "<%= @product.name if(@product) %>";
-    item.price = "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>";
-    item.amount = $("#addAmount").val();
 
-    cartitems["<%= @product.id if(@product) %>"] = item;
+  if(parseInt($("#addAmount").val(), 10)>0){
+    addCartItems("<%= @product.id if(@product) %>", "<%= @product.name if(@product) %>", "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val());
+  }
+
+  $("#addAmount").val("");  
+});
+
+var cartitems;
+cartListItems(getCookie("cart"));
+
+function addCartItems(id, name, price, amount){
+  var item = new Object();
+    item.id = id;
+    item.name = name;
+    item.price = price;
+    item.amount = amount;
+
+    cartitems[id] = item;
 
     setCookie('cart', JSON.stringify(cartitems),0,"","/");
     cartListItems(JSON.stringify(cartitems));
-  }
-
-  $("#addAmount").val("");
-  
-});
-var cartitems;
-cartListItems(getCookie("cart"));
+}
 
 function getCookie(key)
 {
@@ -54,14 +58,33 @@ function setCookie(key, value, expire, domain, path)
   document.cookie=ck;
 }
 function cartListItems(items){
-  cartitems = items? JSON.parse(items) : new Object()
+  cartitems = items? JSON.parse(items) : new Object();
   if(Object.keys(cartitems).length>0){
-    var html = "";
+    var html = "", totalPrice = 0;
+    html += "總共有"+Object.keys(cartitems).length+"件商品";
     for(var item in cartitems){
-      html += "<p><a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a>: " + cartitems[item].amount + "個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 <a>刪除</a></p>";
+
+        html += "<p><a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a> 單價: $"+cartitems[item].price+" <input type='number' value='" + cartitems[item].amount + "'>個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 <a class='edit-cartItem' data-id='"+cartitems[item].id+"' data-name='"+cartitems[item].name+"' data-price='"+cartitems[item].price+"' data-amount='"+cartitems[item].amount+"'>修改</a></p>";
+      totalPrice += cartitems[item].amount*cartitems[item].price;
+      
     }
+    html += "<p>總金額：$"+totalPrice+"</p>";
     html += "<p><a>結帳</a></p>";
     $("#cartItems").html(html);
+
+    $(".edit-cartItem").click(function(){
+      if(parseInt($(this).siblings("input").val(), 10)>0){
+        addCartItems($(this).data("id"), $(this).data("name"), $(this).data("price"), $(this).siblings("input").val());
+      }
+      else if(parseInt($(this).siblings("input").val(), 10)==0){
+        delete cartitems[$(this).data("id")];
+        setCookie('cart', JSON.stringify(cartitems),0,"","/");
+        cartListItems(JSON.stringify(cartitems));
+      }
+      else{
+        $(this).siblings("input").val($(this).data("amount"));
+      }
+    });
   }
   else{
     var html = "<p>購物車內沒有任何商品。</p>";
