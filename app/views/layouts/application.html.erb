@@ -7,8 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	<% if current_member %>
+	<%= current_member.email %>, <%= link_to "登出", destroy_member_session_path, :method => :delete %>
+	<% else %>
+	<%= link_to "登入", new_member_session_path %>
+	<% end %>
+	<ul>
+		<li><a href="/">首頁</a></li>
+		<li><a href="#">顧客中心</a></li>
+		<li><a href="/orders/cart">購物車</a></li>
+	</ul>
 
 <%= yield %>
 

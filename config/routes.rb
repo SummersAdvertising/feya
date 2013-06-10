@@ -1,5 +1,12 @@
 Cart::Application.routes.draw do
+  devise_for :members
   resources :products, :only => [:index, :show]
+  resources :orders, :only => [:create] do
+  	collection do
+  		get "cart"
+  		get "check"
+  	end
+  end
   
   namespace :admin do
     get "login", "logout"
