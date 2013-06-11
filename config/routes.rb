@@ -6,6 +6,11 @@ Cart::Application.routes.draw do
   		get "cart", "check", "finish"
   	end
   end
+
+  namespace :service do
+    resources :orders, :only => [:index, :show]
+    root :to => "orders#index"
+  end
   
   namespace :admin do
     get "login", "logout"

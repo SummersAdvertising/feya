@@ -9,25 +9,16 @@ class OrdersController < ApplicationController
 		@order = Order.new
 
 		if(cookies[:cart])
-			@cartItems = Array.new
-			JSON.parse(cookies[:cart]).each do |item|
-				@cartItems.push(item[1]["id"])
+			@checkItems = Hash.new
+
+			JSON.parse(cookies[:cart]).each do |orderItem|
+				@checkItems[orderItem[1]["id"].to_i] = orderItem[1]["amount"]
 			end
 
-			@cartItems = Product.find_all_by_id(@cartItems)
+			@checkResult = checkItem(@checkItems)
 
-			@orderItems = Array.new
-			@traceItems = Array.new
-
-			@cartItems.each do |item|
-				@item = JSON.parse(cookies[:cart])[item.id.to_s]
-
-				#check stock
-				# if(item.amount >= @item.amount)
-				# end
-
-				@orderItems.push({:id => item.id,:name => item.name, :amount => @item["amount"], :price => item.price, :saleprice => item.saleprice})
-			end
+			@orderItems = @checkResult[0]
+			@traceItems = @checkResult[1]
 		end
 	end
 

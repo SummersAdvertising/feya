@@ -12,13 +12,22 @@
 	<% else %>
 	<%= link_to "登入", new_member_session_path %>
 	<% end %>
-	<ul>
+	<ul class = "nav">
 		<li><a href="/">首頁</a></li>
-		<li><a href="#">顧客中心</a></li>
+		<li><a href="<%= service_root_path %>">顧客中心</a></li>
 		<li><a href="/orders/cart">購物車</a></li>
 	</ul>
 
-<%= yield %>
+	<% if params[:controller].split('/').first == "service" %>
+
+	<ul style="float: left;"><li><a href="<%= service_orders_path %>">訂單</a></li></ul>
+	<div style="float: left; margin-left: 10px;">
+		<%= yield %>
+	</div>
+
+	<% else %>
+	<%= yield %>
+	<% end %>
 
 </body>
 </html>

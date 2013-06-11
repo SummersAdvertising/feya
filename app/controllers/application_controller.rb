@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def is_member
   	unless(member_signed_in?)
-  		session["member_return_to"] = "/orders/check"
+  		session["member_return_to"] = "#{request.fullpath}"
   		redirect_to new_member_session_path
   	end
   end
