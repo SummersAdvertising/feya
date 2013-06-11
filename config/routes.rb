@@ -3,8 +3,7 @@ Cart::Application.routes.draw do
   resources :products, :only => [:index, :show]
   resources :orders, :only => [:create] do
   	collection do
-  		get "cart"
-  		get "check"
+  		get "cart", "check", "finish"
   	end
   end
   
