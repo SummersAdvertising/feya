@@ -4,20 +4,31 @@ class OrdersController < ApplicationController
 		@order = Order.new		
 	end
 	def check
-		#first check do products exist and have stocks
-		@cartItems = Array.new
-		JSON.parse(cookies[:cart]).each do |item|
-			@cartItems.push(item[1]["id"])
-		end
+		@order = Order.new
 
-		@cartItems = Product.find_all_by_id(@cartItems)
+		if(cookies[:cart])
+			@cartItems = Array.new
+			JSON.parse(cookies[:cart]).each do |item|
+				@cartItems.push(item[1]["id"])
+			end
 
-		@orderItems = Array.new
-		@traceItems = Array.new
-		@cartItems.each do |item|
-			#check stock
-			@item = JSON.parse(cookies[:cart])[item.id.to_s]
-			@orderItems.push({:name => item.name, :amount => @item["amount"]})
+			@cartItems = Product.find_all_by_id(@cartItems)
+
+			@orderItems = Array.new
+			@traceItems = Array.new
+
+			@cartItems.each do |item|
+				@item = JSON.parse(cookies[:cart])[item.id.to_s]
+
+				#check stock
+				# if(item.amount >= @item.amount)
+				# end
+
+				@orderItems.push({:id => item.id ,:name => item.name, :amount => @item["amount"], :price => item.price, :saleprice => item.saleprice})
+			end
 		end
+	end
+	def create
+		exit
 	end
 end

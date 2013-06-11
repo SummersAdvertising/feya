@@ -1,15 +1,48 @@
-<h1>check</h1>
-<p>list items</p>
+<% if @orderItems %>
+<h3>New order</h3>
+<% @orderPrice = 0 %>
 <% @orderItems.each do |item| %>
-<p><%= item[:name] %></p>
+
+<% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
+<% @orderPrice = @orderPrice + @itemSum %>
+
+<p><%= item[:name] %> : $<%= item[:saleprice] || item[:price] %>*<%= item[:amount] %>= $<%= @itemSum %></p>
+<% end %>
+<p>訂單金額：$<%= @orderPrice %></p>
+<%= form_for(@order) do |f| %>
+<div class="box">
+	<h4>buyer info</h4>
+	<p>*name: <%= f.text_field :buyername %></p>
+	<p>*tel: <%= f.text_field :buyertel %></p>
+	<p>invoice: <%= f.select(:invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]])) %></p>
+	<p>companyNo.: <%= f.text_field :companynum %></p>
+
+	<p><input type="checkbox" name="updateMemberinfo">更新為會員資料</p>
+
+</div>
+
+<div class="box">
+	<h4>receiver info</h4>
+	<p>list user's address book</p>
+	<p>*name: <%= f.text_field :receivername %></p>
+	<p>*address: <%= f.text_field :receiveraddress %><input type="checkbox" name="addAddressbook">add to address book</p>
+	<p>*tel: <%= f.text_field :receivertel %></p>
+	<p>*payment: <%= f.select(:paytype, options_for_select([["貨到付款", "貨到付款"], ["匯款", "匯款"]])) %></p>
+</div>
+
+<input type="hidden" name="orderItems" value="<%= @orderItems %>">
 <% end %>
 
-<div>
-	<p>buyer info</p>
-</div>
+<a href="/orders/cart">修改訂單</a> / <a href="#" id="submit">確認結帳</a>
 
-<div>
-	<p>receiver info</p>
-</div>
+<script type="text/javascript">
+$("#submit").click(function(){
+	$("#new_order").submit();
+});
+</script>
 
-<a href="/orders/cart">修改訂單</a>/<a href="#">確認結帳</a>
+<% else %>
+<script type="text/javascript">
+window.location.href = "/orders/cart";
+</script>
+<% end %>

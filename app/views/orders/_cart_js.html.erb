@@ -1,5 +1,4 @@
 <script type="text/javascript">
- // setCookie('cart', '', -2000);
 
 $("#addToCart").click(function(){
 
@@ -69,7 +68,8 @@ function cartListItems(items){
       
     }
     html += "<p>總金額：$"+totalPrice+"</p>";
-    html += "<p><a id = 'orderCheck'>結帳</a></p>";
+    html += "<p><a id = 'cleanCart'>清空購物車</a> / <a id = 'orderCheck'>結帳</a></p>";
+
     $("#cartItems").html(html);
 
     $(".edit-cartItem").unbind().click(function(){
@@ -86,10 +86,13 @@ function cartListItems(items){
       }
     });
 
-    $("#orderCheck").click(function(){
-      // var input = $("<input>").attr("type", "hidden").attr("name", "orderItems").val(JSON.stringify(cartitems));
-      // $("#new_order").append(input).submit();
+    $("#orderCheck").unbind().click(function(){
       window.location.href = "/orders/check";
+    });
+
+    $("#cleanCart").unbind().click(function(){
+      setCookie('cart', "",-2000,"","/");
+      cartListItems(getCookie("cart"));
     });
   }
   else{
