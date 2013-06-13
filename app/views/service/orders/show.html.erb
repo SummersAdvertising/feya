@@ -28,3 +28,8 @@
 		<% end %>
 	</p>
 </div>
+
+<% if (@order.status=="finish") %>
+<p>運送方式 : <%= @order.shippingway %></p>
+<p>追蹤碼 : <%= @order.shippingcode %></p>
+<% end %>

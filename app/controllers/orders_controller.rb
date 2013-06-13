@@ -53,8 +53,8 @@ class OrdersController < ApplicationController
 					#substract stock
 				end
 			end
-
-			#send mail
+			
+			Ordermailer.new(current_member.email, @order).deliver
 
 			respond_to do |format|
 				format.html { redirect_to finish_orders_path }

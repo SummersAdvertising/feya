@@ -38,10 +38,21 @@
 				<%= "已完成" %>
 				<% end %>
 			</p>
+
+			<% if (@order.status=="finish") %>
+			<p>運送方式 : <%= @order.shippingway %></p>
+			<p>追蹤碼 : <%= @order.shippingcode %></p>
+			<% end %>
 		</div>
 
 		<%= form_for(@order, :url => admin_order_path(@order) ) do |f| %>
 		<p>更改訂單狀態 : <%= f.select(:status, options_for_select([["新訂單", "new"],["處理中", "processing"],["已完成", "finish"]], :selected => @order.status)) %></p>
+
+		<div id="orderfinish" style="display:none;">
+			<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
+			<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
+		</div>
+
 		<%= f.submit %>
 		<% end %>
 
@@ -49,3 +60,15 @@
 		<a href="/admin/orders?type=<%= @order.status %>">回訂單列表</a>
 	</div>
 </div>
+
+<script type="text/javascript">
+$("#order_status").change(function(){
+	if($(this).val() == "finish"){
+		$("#orderfinish").show();
+
+	}
+	else{
+		$("#orderfinish").hide();
+	}
+});
+</script>
