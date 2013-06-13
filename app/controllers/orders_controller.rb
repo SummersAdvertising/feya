@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
 	def create
 		@order = Order.new(params[:order])
 		@order.member_id = current_member.id
+		@order.status = "new"
 
 		@checkItems = Hash.new
 		JSON.parse(params[:orderItems]).each do |orderItem|
@@ -44,6 +45,7 @@ class OrdersController < ApplicationController
 				@orderItem.order_id = @order.id
 				@orderItem.product_id = orderItem[:id]
 				@orderItem.amount = orderItem[:amount]
+				@orderItem.itemprice = orderItem[:saleprice] ? orderItem[:saleprice] : orderItem[:price]
 				if(@orderItem.save)
 					#substract stock
 				end

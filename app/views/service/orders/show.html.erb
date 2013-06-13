@@ -1,1 +1,30 @@
-<p><%= @order.to_json %></p>
+<p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+<p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
+<p>收件者 : <%= @order.receivername %> 電話 : <%= @order.receivertel %></p>
+<p>收件地址 : <%= @order.receiveraddress %></p>
+<p>統編 : <%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %></p>
+<p>發票 : <%= @order.invoicetype %></p>
+<p>付款方式 : <%= @order.paytype %></p>
+<div class="box">	
+	<p>明細 : </p>
+	<% @ordersum = 0 %>
+	<% @order.orderitems.select('orderitems.*, products.name').joins('LEFT OUTER JOIN products on products.id = orderitems.product_id').each do |item| %>
+	<% itemsum = item.itemprice.to_i * item.amount.to_i %>
+	<% @ordersum = @ordersum + itemsum %>
+
+	<p><%= link_to item.name, product_path(item.product_id) %> : $<%= item.itemprice %> / 訂購數量 : <%= item.amount %> = $<%= itemsum %></p>
+	<% end %>
+
+	<p>訂單金額 : <%= @ordersum %></p>
+
+	<p>訂單狀態 : 
+		<% case @order.status %>
+		<% when 'new' %>
+		<%= "新訂單" %>
+		<% when 'processing' %>
+		<%= "處理中" %>
+		<% when 'finish' %>
+		<%= "已完成" %>
+		<% end %>
+	</p>
+</div>

@@ -19,10 +19,15 @@
 	</ul>
 
 	<% if params[:controller].split('/').first == "service" %>
-
-	<ul style="float: left;"><li><a href="<%= service_orders_path %>">訂單</a></li></ul>
-	<div style="float: left; margin-left: 10px;">
-		<%= yield %>
+	<div id="WRAPPER">
+		<div id="SIDE">
+			<ul>
+				<li><a href="<%= service_orders_path %>">訂單</a></li>
+			</ul>
+		</div>
+		<div id="CONTENT">
+			<%= yield %>
+		</div>
 	</div>
 
 	<% else %>

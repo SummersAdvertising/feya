@@ -1,3 +1,9 @@
+<% if @orders.length>0 %>
+
 <% @orders.each do |order| %>
 <p><%= order.created_at.strftime("%Y-%m-%d") %> <%= link_to ("共"+order.orderitems.count.to_s+"件商品"), service_order_path(order) %>。</p>
+<% end %>
+
+<% else %>
+<p>沒有訂單紀錄。</p>
 <% end %>
