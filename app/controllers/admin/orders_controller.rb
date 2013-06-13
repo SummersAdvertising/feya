@@ -1,4 +1,5 @@
 class Admin::OrdersController < AdminController
+  before_filter :count_orders
   layout "admin"
 
   def index

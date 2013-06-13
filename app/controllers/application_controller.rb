@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
   	end
   end
 
+  def count_orders
+    @countnew = Order.where(["status = ?", "new"]).count
+    @countprocessing = Order.where(["status = ?", "processing"]).count
+    
+  end
+
   def record_login_redirect_path
   	session["member_return_to"] = "#{request.fullpath}"
   end
