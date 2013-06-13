@@ -17,7 +17,7 @@ Cart::Application.routes.draw do
     match "checkAdmin", :via => :post
 
     resources :products
-    resources :orders, :only => [:index, :show]
+    resources :orders, :only => [:index, :show, :update]
     root :to => "products#index"
   end
 

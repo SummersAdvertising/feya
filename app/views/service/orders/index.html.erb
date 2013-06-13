@@ -1,7 +1,18 @@
 <% if @orders.length>0 %>
 
 <% @orders.each do |order| %>
-<p><%= order.created_at.strftime("%Y-%m-%d") %> <%= link_to ("共"+order.orderitems.count.to_s+"件商品"), service_order_path(order) %>。</p>
+<% case order.status %>
+<% when 'new' %>
+<% @status = "新訂單" %>
+<% when 'processing' %>
+<% @status = "處理中" %>
+<% when 'finish' %>
+<% @status = "已完成" %>
+<% end %>
+
+<p>
+	<%= order.created_at.strftime("%Y-%m-%d %H:%M") %> <%= link_to ("共"+order.orderitems.count.to_s+"件商品"), service_order_path(order) %> 訂單狀態 : <%= @status %>。
+</p>
 <% end %>
 
 <% else %>

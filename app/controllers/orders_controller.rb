@@ -27,6 +27,9 @@ class OrdersController < ApplicationController
 		@order.member_id = current_member.id
 		@order.status = "new"
 
+		#if(params[:updateMemberinfo]) => update
+		#if(params[:addAddressbook]) => create
+
 		@checkItems = Hash.new
 		JSON.parse(params[:orderItems]).each do |orderItem|
 			@checkItems[orderItem["id"]] = orderItem["amount"]

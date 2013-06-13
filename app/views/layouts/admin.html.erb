@@ -8,8 +8,12 @@
 </head>
 <body>
 	<% if session[:admin] %>
-	<p><%= session[:admin].username %>, 你好。 <%= link_to "登出", admin_logout_path %></p>
-	<ul><li><a href="/admin">商品管理</a></li><li>訂單管理</li><li>購物金規則</li></ul>
+	<p><%= session[:admin].username %>, 你好。 <%= link_to "登出", admin_logout_path %> / <%= link_to "回首頁", root_path %></p>
+	<ul class = "nav">
+		<li><a href="/admin">商品管理</a></li>
+		<li><a href="/admin/orders">訂單管理</a></li>
+		<li>購物金規則</li>
+	</ul>
 	<% end %>
 
 	<%= yield %>

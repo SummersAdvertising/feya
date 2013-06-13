@@ -6,6 +6,6 @@ class Service::OrdersController < ApplicationController
 	end
 
 	def show
-		@order = Order.find(params[:id])		
+		@order = Order.find(params[:id])
 	end
 end
