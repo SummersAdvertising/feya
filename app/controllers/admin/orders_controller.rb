@@ -18,15 +18,21 @@ class Admin::OrdersController < AdminController
   end
 
   def update
-    @order = Order.find(params[:id])
+    @order = Order.where(["orders.id = ?", params[:id]]).select("orders.*, members.email").joins('LEFT OUTER JOIN members on members.id = orders.member_id').first
 
     respond_to do |format|
-      if @order.update_attributes(params[:order])
-
-        #send email
+      if (@order.status != params[:order][:status] && @order.update_attributes(params[:order]))
 
         format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
         format.json { head :no_content }
+
+        case(@order.status)
+        when "processing"
+          Ordermailer.statusprocessing(@order.email, @order).deliver
+        when "finish"
+          Ordermailer.statusfinish(@order.email, @order).deliver
+        end
+
       else
         format.html { render action: "show" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
