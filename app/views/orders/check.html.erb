@@ -17,8 +17,8 @@
 <div class="box">
 	<h4>buyer info</h4>
 
-	<p>*name: <%= f.text_field :buyername %></p>
-	<p>*tel: <%= f.text_field :buyertel %></p>
+	<p>*name: <%= f.text_field :buyername, :value => current_member.username %></p>
+	<p>*tel: <%= f.text_field :buyertel, :value => current_member.tel %></p>
 	<p>invoice: <%= f.select(:invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]])) %></p>
 	<p>companyNo.: <%= f.text_field :companynum %></p>
 
@@ -32,6 +32,16 @@
 	<p>list user's address book</p>
 	<p>*name: <%= f.text_field :receivername %></p>
 	<p>*address: <%= f.text_field :receiveraddress %><input type="checkbox" name="addAddressbook">add to address book</p>
+
+	<p>
+		<% if current_member.addressbooks.count > 0 %>
+		常用地址：
+		<% current_member.addressbooks.each do |addressbook| %>
+		<a class="addressbook"><%= addressbook.address %></a>
+		<% end %>
+		<% end %>
+	</p>
+
 	<p>*tel: <%= f.text_field :receivertel %></p>
 	<p>*payment: <%= f.select(:paytype, options_for_select([["貨到付款", "貨到付款"], ["匯款", "匯款"]])) %></p>
 	
@@ -43,6 +53,10 @@
 <a href="/orders/cart">修改訂單</a> / <a href="#" id="submit">確認結帳</a>
 
 <script type="text/javascript">
+$(".addressbook").click(function(){
+	$("#order_receiveraddress").val($(this).html());
+});
+
 $("#submit").click(function(){
 	$("#new_order").submit();
 });

@@ -27,9 +27,6 @@ class OrdersController < ApplicationController
 		@order.member_id = current_member.id
 		@order.status = "new"
 
-		#if(params[:updateMemberinfo]) => update
-		#if(params[:addAddressbook]) => create
-
 		@checkItems = Hash.new
 		JSON.parse(params[:orderItems]).each do |orderItem|
 			@checkItems[orderItem["id"]] = orderItem["amount"]
@@ -43,6 +40,22 @@ class OrdersController < ApplicationController
 		#count discountpoints
 
 		if(@order.save)
+
+			#if(params[:updateMemberinfo]) => update
+			if(params[:updateMemberinfo])
+				current_member.username = params[:order][:buyername]
+				current_member.tel = params[:order][:buyertel]
+				current_member.save
+			end
+
+			#if(params[:addAddressbook]) => create
+			if(params[:addAddressbook])
+				@addressbook = Addressbook.new
+				@addressbook.member_id = current_member.id
+				@addressbook.address = params[:order][:receiveraddress]
+				@addressbook.save
+			end
+
 			@orderItems.each do |orderItem|
 				@orderItem = Orderitem.new
 				@orderItem.order_id = @order.id

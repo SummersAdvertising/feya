@@ -4,8 +4,10 @@ class Addressbook < ActiveRecord::Base
   validates :address, :uniqueness => true
   validates :name, :uniqueness => true, :if => :is_not_blank?
 
+  belongs_to :member
+
   def is_not_blank?
-  	name.length > 0
+  	name && name.length > 0
   end
   
 end

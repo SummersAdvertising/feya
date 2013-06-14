@@ -15,10 +15,10 @@
 	<% end %>
 </div>
 
-<% if @addresses.length > 0 %>
+<% if @addresses && @addresses.length > 0 %>
 
 <% @addresses.each do |addressbook| %>
-<p><%= (addressbook.name + " : ") if(addressbook.name.length > 0) %><%= addressbook.address %> <%= link_to "刪除", service_addressbook_path(addressbook), :method => :delete %></p>
+<p><%= (addressbook.name + " : ") if(addressbook.name && addressbook.name.length > 0) %><%= addressbook.address %> <%= link_to "刪除", service_addressbook_path(addressbook), :method => :delete %></p>
 <% end %>
 
 <% else %>

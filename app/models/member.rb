@@ -7,5 +7,6 @@ class Member < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :address, :tel
-  # attr_accessible :title, :body
+  
+  has_many :addressbooks, :dependent => :destroy
 end
