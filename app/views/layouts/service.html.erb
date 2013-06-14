@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cart</title>
+  <title>Service</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -18,7 +18,18 @@
 		<li><a href="/orders/cart">購物車</a></li>
 	</ul>
 
-	<%= yield %>
-	
+	<div id="WRAPPER">
+		<div id="SIDE">
+			<ul>
+				<li><a href="<%= service_orders_path %>">訂單</a></li>
+				<li><a href="<%= edit_member_registration_path %>">修改會員資料</a></li>
+				<li><a href="<%= service_addressbooks_path %>">常用收件人地址</a></li>
+			</ul>
+		</div>
+		<div id="CONTENT">
+			<%= yield %>
+		</div>
+	</div>
+
 </body>
 </html>

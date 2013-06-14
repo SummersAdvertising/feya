@@ -4,7 +4,7 @@ class Ordermailer < ActionMailer::Base
   def new(receiver, order)
   	@order = order
 
-  	mail(:to => receiver, :subject => "訂單成立通知")
+  	mail(:to => [ receiver, Admin.first.email ], :subject => "訂單成立通知")
   	
   end
 
