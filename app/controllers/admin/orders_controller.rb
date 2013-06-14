@@ -19,6 +19,7 @@ class Admin::OrdersController < AdminController
 
   def update
     @order = Order.where(["orders.id = ?", params[:id]]).select("orders.*, members.email").joins('LEFT OUTER JOIN members on members.id = orders.member_id').first
+    @originStatus = @order.status
 
     respond_to do |format|
       if (@order.status != params[:order][:status] && @order.update_attributes(params[:order]))
@@ -34,7 +35,9 @@ class Admin::OrdersController < AdminController
         end
 
       else
-        format.html { render action: "show" }
+        @order.status = @originStatus
+
+        format.html { render "show" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
