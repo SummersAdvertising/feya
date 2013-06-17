@@ -11,21 +11,6 @@
 </p>
 
 <p>
-  <b>Amount:</b>
-  <%= @product.amount %>
-</p>
-
-<p>
-  <b>Size:</b>
-  <%= @product.size %>
-</p>
-
-<p>
-  <b>Color:</b>
-  <%= @product.color %>
-</p>
-
-<p>
   <b>Price:</b>
   <%= @product.price %>
 </p>
@@ -39,7 +24,6 @@
   <b>Status:</b>
   <%= @product.status %>
 </p>
-
 
 <%= link_to 'Edit', edit_admin_product_path(@product) %> |
 <%= link_to 'Back', admin_products_path %>

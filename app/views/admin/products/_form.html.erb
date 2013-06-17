@@ -1,35 +1,58 @@
 <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<div id="error_explanation">
+  <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description, :rows => "5" %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.number_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.number_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :saleprice %><br />
-    <%= f.number_field :saleprice %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :description %><br />
+  <%= f.text_area :description, :rows => "5" %>
+</div>
+<div class="field">
+  <%= f.label :price %><br />
+  <%= f.number_field :price %>
+</div>
+<div class="field">
+  <%= f.label :saleprice %><br />
+  <%= f.number_field :saleprice %>
+</div>
+<div class="field">
+  add product color: <input data-type="color" type="text" /> <a class="addType" data-type="color" href="#">增加</a>
+</div>
+<div class="field">
+  add product size: <input data-type="size" type="text" /> <a class="addType" data-type="size" href="#">增加</a>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+
+<script type="text/javascript">
+$(".addType").click(function(){
+  var type = $(this).data("type");
+  var typeContent = $("input[data-type="+type+"]").val();
+
+  if(typeContent){
+    var html = "<div>";
+    html += "<a href='#' data-type='delete'>刪除</a>";
+    html += "<input type='text' name='"+type+"[]' value='"+typeContent+"' readonly/>";
+    html += "</div>";
+    $(this).after(html);
+
+    $("a[data-type=delete]").unbind().click(function(){
+      $(this).parent().remove();
+    });
+  }
+  
+  $("input[data-type="+type+"]").val("");
+});
+</script>

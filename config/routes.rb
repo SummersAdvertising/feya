@@ -17,7 +17,13 @@ Cart::Application.routes.draw do
     get "login", "logout"
     match "checkAdmin", :via => :post
 
-    resources :products
+    resources :products do
+      member do
+        get "stock"
+        match "saveStock", :via => :post
+      end
+    end
+
     resources :orders, :only => [:index, :show, :update]
     root :to => "products#index"
   end

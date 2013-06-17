@@ -47,6 +47,7 @@ class Admin::ProductsController < AdminController
   end
 
   def update
+    exit
     @product = Product.find(params[:id])
 
     respond_to do |format|

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_id: 1
+  productsize_id: 1
+  productcolor_id: 1
+  amount: 1
+
+two:
+  product_id: 1
+  productsize_id: 1
+  productcolor_id: 1
+  amount: 1
