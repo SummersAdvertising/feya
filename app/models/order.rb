@@ -7,5 +7,6 @@ class Order < ActiveRecord::Base
     self.status == "finish"
   end
 
+  belongs_to :member
   has_many :orderitems, :dependent => :destroy
 end

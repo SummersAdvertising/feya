@@ -3,10 +3,12 @@ class Service::OrdersController < ApplicationController
 	layout "service"
 
 	def index
-		@orders = Order.where(["member_id = ?", current_member.id])
+		@orders = current_member.orders
 	end
 
 	def show
-		@order = Order.find(params[:id])
+		@order = current_member.orders.find(params[:id])
+		rescue ActiveRecord::RecordNotFound
+		@order = nil
 	end
 end

@@ -1,0 +1,13 @@
+<h4>庫存管理</h4>
+<p>商品名稱: <%= @product.name %></p>
+
+<%= form_for(@product, :url => saveStock_admin_product_path, :method => :post ) do |f| %>
+
+<% @product.stocks.each do |stock| %>
+<p><%= stock.typename %>: <input type="number" name="stock[<%=stock.id%>]" /></p>
+<% end %>
+
+<%= f.submit %>
+<% end %>
+
+<%= link_to 'Back', admin_product_path(@product) %>

@@ -27,10 +27,15 @@
   <%= f.number_field :saleprice %>
 </div>
 <div class="field">
-  add product color: <input data-type="color" type="text" /> <a class="addType" data-type="color" href="#">增加</a>
-</div>
-<div class="field">
-  add product size: <input data-type="size" type="text" /> <a class="addType" data-type="size" href="#">增加</a>
+  增加商品規格（顏色/尺寸）: <input data-type="type" type="text" /> <a class="addType" data-type="type" href="#">增加</a>
+
+  <% if @product.stocks.any? %>
+  <p>
+    <% @product.stocks.each do |stock| %>
+    <%= stock.typename %> 
+    <% end %>
+  </p>
+  <% end %>
 </div>
 <div class="actions">
   <%= f.submit %>

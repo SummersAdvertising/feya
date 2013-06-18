@@ -47,18 +47,46 @@ class Admin::ProductsController < AdminController
   end
 
   def update
-    exit
     @product = Product.find(params[:id])
+
+    if(params[:type])
+      params[:type].each do |type|
+        @stock = Stock.new
+        @stock.product_id = params[:id]
+        @stock.typename = type
+        @stock.amount = nil
+
+        @stock.save
+      end
+    end
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully updated.' }
+        format.html { redirect_to stock_admin_product_path(@product), notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def stock
+    @product = Product.find(params[:id])    
+  end
+
+  def saveStock
+    params[:stock].each do |stock|
+      @stock = Stock.find(stock[0])
+      @stock.amount = stock[1]
+
+      @stock.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_product_path(params[:id]) }
+    end
+
   end
 
   def destroy
