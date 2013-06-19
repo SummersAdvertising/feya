@@ -91,18 +91,18 @@ class OrdersController < ApplicationController
 		@orderItems = Array.new
 		@traceItems = Array.new
 
-		@items = Product.find_all_by_id(checkItems.keys)
+		@items = Stock.where(:id => checkItems.keys ).select("stocks.*, products.name, products.price, products.saleprice").joins('LEFT OUTER JOIN products on products.id = stocks.product_id')
 		@items.each do |stockItem|
 			if(stockItem.amount)
 				if(stockItem.amount > @checkItems[stockItem.id].to_i)
-					@orderItems.push({:id => stockItem.id,:name => stockItem.name, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+					@orderItems.push({:id => stockItem.id, :product_id => stockItem.product_id ,:name => (stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 				elsif(stockItem.amount > 0)
-					@orderItems.push({:id => stockItem.id,:name => stockItem.name, :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
+					@orderItems.push({:id => stockItem.id, :product_id => stockItem.product_id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
 				else
-					@traceItems.push({:id => stockItem.id,:name => stockItem.name})
+					@traceItems.push({:id => stockItem.id, :product_id => stockItem.product_id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)})
 				end
 			else
-				@orderItems.push({:id => stockItem.id,:name => stockItem.name, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+				@orderItems.push({:id => stockItem.id, :product_id => stockItem.product_id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 			end
 		end
 

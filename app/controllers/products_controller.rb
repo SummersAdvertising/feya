@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   def show
     @order = Order.new
     @product = Product.find(params[:id])
+    @product["hasType"] = (@product.stocks.first.typename != "default")
 
     respond_to do |format|
       format.html # show.html.erb

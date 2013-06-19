@@ -4,7 +4,7 @@
 <%= form_for(@product, :url => saveStock_admin_product_path, :method => :post ) do |f| %>
 
 <% @product.stocks.each do |stock| %>
-<p><%= stock.typename %>: <input type="number" name="stock[<%=stock.id%>]" /></p>
+<p><%= stock.typename %>: <input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></p>
 <% end %>
 
 <%= f.submit %>

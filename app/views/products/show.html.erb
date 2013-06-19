@@ -10,10 +10,12 @@
   <%= @product.description.html_safe %>
 </p>
 
+<% if !@product.hasType %>
 <p>
   <b>Amount:</b>
-  <%= @product.amount %>
+  <%= @product.stocks.first.amount %>
 </p>
+<% end %>
 
 <p>
   <b>Price:</b>
@@ -26,10 +28,20 @@
 </p>
 
 <p>
-amount: <input id="addAmount" type="number" />
+  amount: 
+  
+  <% if @product.hasType %>
+  <select id="productType">
+    <% @product.stocks.each do |stock| %>
+    <option value='{"id":<%= stock.id %>, "name":"<%= @product.name %>(<%= stock.typename %>)" }'><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+    <% end %>
+  </select>
+  <% end %>
+  
+  <input id="addAmount" type="number" />
+  <%= link_to 'Add to cart', "#", :id => "addToCart", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name } %>
 </p>
 
-<%= link_to 'Add to cart', "#", :id => "addToCart" %>
 
 <%= render 'orders/cart' %>
 <%= link_to 'Back', products_path %>

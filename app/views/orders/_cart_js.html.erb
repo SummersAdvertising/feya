@@ -1,9 +1,18 @@
 <script type="text/javascript">
 
 $("#addToCart").click(function(){
+  var item = new Object();
+
+  if($("#productType").length > 0){
+    item = JSON.parse($("#productType").val());
+  }
+  else{
+    item.id = $(this).data("stockid");
+    item.name = $(this).data("stockname");
+  }
 
   if(parseInt($("#addAmount").val(), 10)>0){
-    addCartItems("<%= @product.id if(@product) %>", "<%= @product.name if(@product) %>", "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val());
+    addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val());
   }
 
   $("#addAmount").val("");  
@@ -54,7 +63,7 @@ function setCookie(key, value, expire, domain, path)
     ck+=';path='+ path;
   }
 
-  document.cookie=ck;
+  document.cookie = ck;
 }
 function cartListItems(items){
   cartitems = items? JSON.parse(items) : new Object();
