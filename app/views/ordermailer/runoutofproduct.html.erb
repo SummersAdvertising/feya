@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <p>管理者您好，您的商品庫存數目歸零了，請登入後台管理商品庫存。</p>
+  <div>
+    <p>待更新商品明細:</p>
+    <% @traceitems.each do |traceitem| %>
+      <p><%= traceitem.name %>(<%= traceitem.typename %>)</p>
+    <% end %>
+  </div>  
+</body>
+</html>

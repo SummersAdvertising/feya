@@ -4,8 +4,13 @@ class Ordermailer < ActionMailer::Base
   def new(receiver, order)
   	@order = order
 
-  	mail(:to => [ receiver, Admin.first.email ], :subject => "訂單成立通知")
-  	
+  	mail(:to => [ receiver, Admin.first.email ], :subject => "訂單成立通知")  	
+  end
+
+  def runoutofproduct(traceitems)
+    @traceitems = Stock.where(:id => traceitems).select('products.name, stocks.*').joins("LEFT OUTER JOIN products on products.id = stocks.product_id")
+
+    mail(:to => [ receiver, Admin.first.email, "kobanae@summers.com.tw"], :subject => "商品補貨通知")    
   end
 
   def statusprocessing(receiver, order)

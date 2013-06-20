@@ -56,6 +56,8 @@ class OrdersController < ApplicationController
 				@addressbook.save
 			end
 
+			@runoutItems = Array.new
+
 			@orderItems.each do |orderItem|
 				@orderItem = Orderitem.new
 				@orderItem.order_id = @order.id
@@ -64,10 +66,25 @@ class OrdersController < ApplicationController
 				@orderItem.itemprice = orderItem[:saleprice] ? orderItem[:saleprice] : orderItem[:price]
 				if(@orderItem.save)
 					#substract stock
+					@stock = Stock.find(orderItem[:id])
+					
+					if(@stock.amount)
+						@stock.amount = (@stock.amount.to_i - orderItem[:amount].to_i)
+						@stock.save
+
+						if(@stock.amount <= 0)
+							@runoutItems.push(@stock.id)
+						end
+					end
+
 				end
 			end
 			
 			Ordermailer.new(current_member.email, @order).deliver
+
+			if(@runoutItems.length > 0)
+				Ordermailer.runoutofproduct(@runoutItems)
+			end
 
 			respond_to do |format|
 				format.html { redirect_to finish_orders_path }
