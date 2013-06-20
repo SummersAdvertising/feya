@@ -61,7 +61,7 @@ class OrdersController < ApplicationController
 			@orderItems.each do |orderItem|
 				@orderItem = Orderitem.new
 				@orderItem.order_id = @order.id
-				@orderItem.product_id = orderItem[:id]
+				@orderItem.stock_id = orderItem[:id]
 				@orderItem.amount = orderItem[:amount]
 				@orderItem.itemprice = orderItem[:saleprice] ? orderItem[:saleprice] : orderItem[:price]
 				if(@orderItem.save)
@@ -112,14 +112,14 @@ class OrdersController < ApplicationController
 		@items.each do |stockItem|
 			if(stockItem.amount)
 				if(stockItem.amount > @checkItems[stockItem.id].to_i)
-					@orderItems.push({:id => stockItem.id, :product_id => stockItem.product_id ,:name => (stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+					@orderItems.push({:id => stockItem.id ,:name => (stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 				elsif(stockItem.amount > 0)
-					@orderItems.push({:id => stockItem.id, :product_id => stockItem.product_id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
+					@orderItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
 				else
-					@traceItems.push({:id => stockItem.id, :product_id => stockItem.product_id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)})
+					@traceItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)})
 				end
 			else
-				@orderItems.push({:id => stockItem.id, :product_id => stockItem.product_id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+				@orderItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 			end
 		end
 
