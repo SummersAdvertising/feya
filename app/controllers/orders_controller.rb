@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class OrdersController < ApplicationController
 	before_filter :is_member, :only => [:check]
 	
@@ -26,6 +27,16 @@ class OrdersController < ApplicationController
 		@order = Order.new(params[:order])
 		@order.member_id = current_member.id
 		@order.status = "new"
+
+		case @order.paytype
+		when "匯款"
+			@order.shippingfee = 60
+		when "貨到付款"
+			@order.shippingfee = 150
+		else
+			@order.shippingfee = 0
+		end
+			 	
 
 		@checkItems = Hash.new
 		JSON.parse(params[:orderItems]).each do |orderItem|
@@ -83,7 +94,7 @@ class OrdersController < ApplicationController
 			Ordermailer.new(current_member.email, @order).deliver
 
 			if(@runoutItems.length > 0)
-				Ordermailer.runoutofproduct(@runoutItems)
+				Ordermailer.runoutofproduct(@runoutItems).deliver
 			end
 
 			respond_to do |format|
@@ -116,7 +127,7 @@ class OrdersController < ApplicationController
 				elsif(stockItem.amount > 0)
 					@orderItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
 				else
-					@traceItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename)})
+					@traceItems.push(stockItem.id)
 				end
 			else
 				@orderItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})

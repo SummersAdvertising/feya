@@ -1,4 +1,5 @@
 <% if @order %>
+<a href="#">退貨申請</a>
 <p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
 <p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
 <p>收件者 : <%= @order.receivername %> 電話 : <%= @order.receivertel %></p>
@@ -6,6 +7,15 @@
 <p>統編 : <%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %></p>
 <p>發票 : <%= @order.invoicetype %></p>
 <p>付款方式 : <%= @order.paytype %></p>
+
+<% if @order.paytype == "匯款" %>
+<div class="box">
+	<h4>通知已匯款</h4>
+
+	<p>提供匯款日期時間及匯款帳號後五碼。</p>
+</div>
+<% end %>
+
 <div class="box">	
 	<p>明細 : </p>
 	<% @ordersum = 0 %>
@@ -16,7 +26,8 @@
 	<p><%= link_to (item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "") ), product_path(item.productlink) %> : $<%= item.itemprice %> / 訂購數量 : <%= item.amount %> = $<%= itemsum %></p>
 	<% end %>
 
-	<p>訂單金額 : <%= @ordersum %></p>
+	<p>運費 : <%= @order.shippingfee %></p>
+	<p>訂單金額 : <%= @ordersum + @order.shippingfee %></p>
 
 	<p>訂單狀態 : 
 		<% case @order.status %>

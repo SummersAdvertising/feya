@@ -5,6 +5,7 @@ class CreateOrderitems < ActiveRecord::Migration
       t.integer :stock_id
       t.integer :amount
       t.string :status
+      t.integer :itemprice
 
       t.timestamps
     end

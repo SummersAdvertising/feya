@@ -9,5 +9,6 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :address, :tel
   
   has_many :addressbooks, :dependent => :destroy
+  has_many :tracebooks, :dependent => :destroy
   has_many :orders
 end

@@ -1,5 +1,15 @@
 <% if @orderItems %>
-<%= @traceItems.to_json %>
+
+<!--
+<% if @traceItems %>
+<div class="box">
+	<h4>以下商品已售完，請選擇是否加入追蹤清單。</h4>
+<% Stock.where(:id => @traceItems).select('products.name, stocks.*').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |tracebook| %>
+<p><%= tracebook.name %><%= ("("+tracebook.typename+")" if tracebook.typename != "default") %></p>
+<% end %>
+</div>
+<% end %>
+-->
 
 <h3>New order</h3>
 

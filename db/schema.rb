@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618035620) do
+ActiveRecord::Schema.define(:version => 20130621090705) do
 
   create_table "addressbooks", :force => true do |t|
     t.integer  "member_id"
@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(:version => 20130618035620) do
 
   create_table "orderitems", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "product_id"
+    t.integer  "stock_id"
     t.integer  "amount"
     t.string   "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "itemprice"
   end
 
@@ -77,19 +77,21 @@ ActiveRecord::Schema.define(:version => 20130618035620) do
     t.string   "receiveraddress"
     t.string   "receivertel"
     t.string   "paytype"
+    t.string   "ordernum"
+    t.date     "paydate"
+    t.string   "paytime"
+    t.string   "payaccount"
+    t.integer  "discountpoint"
   end
 
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "amount"
-    t.text     "size"
-    t.text     "color"
     t.integer  "price"
     t.integer  "saleprice"
     t.string   "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "stocks", :force => true do |t|
@@ -102,9 +104,9 @@ ActiveRecord::Schema.define(:version => 20130618035620) do
 
   create_table "tracebooks", :force => true do |t|
     t.integer  "member_id"
-    t.integer  "product_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "stock_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

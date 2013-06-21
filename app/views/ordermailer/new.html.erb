@@ -17,13 +17,15 @@
     <p>明細 : </p>
     <% @ordersum = 0 %>
     <% @order.orderitems.select('orderitems.*, products.name, stocks.typename, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |item| %>
-  <% itemsum = item.itemprice.to_i * item.amount.to_i %>
-  <% @ordersum = @ordersum + itemsum %>
+    <% itemsum = item.itemprice.to_i * item.amount.to_i %>
+    <% @ordersum = @ordersum + itemsum %>
 
-  <p><%= link_to (item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "") ), product_path(item.productlink) %> : $<%= item.itemprice %> / 訂購數量 : <%= item.amount %> = $<%= itemsum %></p>
-  <% end %>
+    <p><%= link_to (item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "") ), product_path(item.productlink) %> : $<%= item.itemprice %> / 訂購數量 : <%= item.amount %> = $<%= itemsum %></p>
+    <% end %>
 
-    <p>訂單金額 : <%= @ordersum %></p>
+    <p>運費 : <%= @order.shippingfee %></p>
+    <p>訂單金額 : <%= @ordersum + @order.shippingfee %></p>
+  
   </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-#coding: utf-8
+#encoding: utf-8
 class AdminController < ApplicationController
 	before_filter :is_admin, :except => [:login, :checkAdmin]
 

@@ -72,11 +72,12 @@ function cartListItems(items){
     html += "總共有"+Object.keys(cartitems).length+"件商品";
     for(var item in cartitems){
 
-        html += "<p>";
-        html += "<a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a> ";
-        html += "單價: $"+cartitems[item].price+" <input type='number' value='" + cartitems[item].amount + "'>個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 ";
-        html += "<a class='edit-cartItem' data-id='"+cartitems[item].id+"' data-name='"+cartitems[item].name+"' data-price='"+cartitems[item].price+"' data-amount='"+cartitems[item].amount+"'>修改</a>";
-        html += "</p>";
+      html += "<p>";
+      html += "<a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a> ";
+      html += "單價: $"+cartitems[item].price+" <input type='number' value='" + cartitems[item].amount + "'>個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 ";
+      html += "<a class='edit-cartItem' data-id='"+cartitems[item].id+"' data-name='"+cartitems[item].name+"' data-price='"+cartitems[item].price+"' data-amount='"+cartitems[item].amount+"'>修改</a>";
+      html += "</p>";
+
       totalPrice += cartitems[item].amount*cartitems[item].price;
       
     }

@@ -10,6 +10,7 @@ Cart::Application.routes.draw do
   namespace :service do
     resources :orders, :only => [:index, :show]
     resources :addressbooks, :only => [:index, :create, :update, :destroy]
+    resources :tracebooks
     root :to => "orders#index"
   end
   
