@@ -1,0 +1,10 @@
+<table>
+	<tr>
+		<th>Name</th>
+	</tr>
+	<% @orderrefunds.each do |orderrefund| %>
+	<tr>
+		<td><%= orderrefund.to_json %></td>
+	</tr>
+	<% end %>
+</table>

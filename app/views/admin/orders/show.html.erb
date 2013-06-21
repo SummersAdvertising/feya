@@ -23,6 +23,12 @@
 		<p>統編 : <%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %></p>
 		<p>發票 : <%= @order.invoicetype %></p>
 		<p>付款方式 : <%= @order.paytype %></p>
+		
+		<% if @order.payaccount %>
+		<p>付款日期 : <%= @order.paydate %></p>
+		<p>付款時間 : <%= @order.paytime %></p>
+		<p>付款帳號末五碼 : <%= @order.payaccount %></p>
+		<% end %>
 
 		<div class="box">
 			<p>明細 : </p>
