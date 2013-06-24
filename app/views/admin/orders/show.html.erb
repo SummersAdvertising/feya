@@ -30,14 +30,17 @@
 		<p>付款帳號末五碼 : <%= @order.payaccount %></p>
 		<% end %>
 
+		<%= form_for(@order, :url => admin_order_path(@order) ) do |f| %>
 		<div class="box">
 			<p>明細 : </p>
 			<% @ordersum = 0 %>
-			<% @order.orderitems.select('orderitems.*, products.name').joins('LEFT OUTER JOIN products on products.id = orderitems.product_id').each do |item| %>
+			<% @order.orderitems.select('orderitems.*, products.name, stocks.typename, stocks.id as stock_id, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |item| %>
+
 			<% itemsum = item.itemprice.to_i * item.amount.to_i %>
 			<% @ordersum = @ordersum + itemsum %>
 
-			<p><%= link_to item.name, product_path(item.product_id) %> : $<%= item.itemprice %> / 訂購數量 : <%= item.amount %> = $<%= itemsum %></p>
+			<p><%= link_to (item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "") ), product_path(item.productlink) %> : $<%= item.itemprice %> / 訂購數量 : <input type="number" name="orderitem[<%=item.id%>]" value="<%=item.amount%>" /> = $<%= itemsum %></p>
+
 			<% end %>
 
 			<p>運費 : <%= @order.shippingfee %></p>
@@ -58,9 +61,14 @@
 			<p>運送方式 : <%= @order.shippingway %></p>
 			<p>追蹤碼 : <%= @order.shippingcode %></p>
 			<% end %>
+
+			<% if (@order.orderlogs) %>
+			<% @order.orderlogs.each do |log| %>
+			<p><%= log.created_at.strftime("%Y-%m-%d %H:%M") %> : <%= log.description %></p>
+			<% end %>
+			<% end %>
 		</div>
 
-		<%= form_for(@order, :url => admin_order_path(@order) ) do |f| %>
 		<p>更改訂單狀態 : <%= f.select(:status, options_for_select([["新訂單", "new"],["處理中", "processing"],["已完成", "finish"]], :selected => @order.status)) %></p>
 
 		<div id="orderfinish" style="display:none;">

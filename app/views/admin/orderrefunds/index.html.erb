@@ -1,10 +1,14 @@
 <table>
 	<tr>
-		<th>Name</th>
+		<th>created_at</th>
+		<th>order number</th>
+		<th>buyer</th>
 	</tr>
 	<% @orderrefunds.each do |orderrefund| %>
 	<tr>
-		<td><%= orderrefund.to_json %></td>
+		<td><%= orderrefund.created_at.strftime("%Y-%m-%d") %></td>
+		<td><%= orderrefund.ordernum %></td>
+		<td><%= link_to orderrefund.buyername, admin_orderrefund_path(orderrefund) %></td>
 	</tr>
 	<% end %>
 </table>

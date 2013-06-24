@@ -35,6 +35,7 @@ class Service::OrdersController < ApplicationController
 
 		respond_to do |format|
 			if ( @orderrefund.save )
+				#寄信
 				format.html { redirect_to service_order_path(@order), notice: 'Order was successfully updated.' }
 			else
 				format.html { render "show" }

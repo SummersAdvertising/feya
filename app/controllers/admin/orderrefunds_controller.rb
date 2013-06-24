@@ -2,7 +2,7 @@ class Admin::OrderrefundsController < AdminController
   layout "admin"
   
   def index
-    @orderrefunds = Orderrefund.all
+    @orderrefunds = Orderrefund.select("orderrefunds.id, orderrefunds.created_at, orders.buyername, orders.ordernum").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,7 +11,7 @@ class Admin::OrderrefundsController < AdminController
   end
 
   def show
-    @orderrefund = Orderrefund.find(params[:id])
+    @orderrefund = Orderrefund.where(:id => params[:id]).select("*").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id").first
 
     respond_to do |format|
       format.html # show.html.erb
