@@ -12,6 +12,7 @@
 -->
 
 <h3>New order</h3>
+<%= form_for(@order) do |f| %>
 
 <% @orderPrice = 0 %>
 <% @orderItems.each do |item| %>
@@ -23,8 +24,8 @@
 <% end %>
 
 <p>訂單金額：$<%= @orderPrice %></p>
+<p>目前可用購物金：/抵用購物金：</p>
 
-<%= form_for(@order) do |f| %>
 <div class="box">
 	<h4>buyer info</h4>
 

@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
 		@order = Order.new(params[:order])
 		@order.member_id = current_member.id
 		@order.status = "new"
+		@order.ordernum = Date.today.strftime("%Y%m%d").to_s + ("%04d" % (Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1))
 
 		case @order.paytype
 		when "匯款"
@@ -48,8 +49,6 @@ class OrdersController < ApplicationController
 		@orderItems = @checkResult[0]
 		@traceItems = @checkResult[1]
 
-		#count discountpoints
-
 		if(@order.save)
 
 			#if(params[:updateMemberinfo]) => update
@@ -68,6 +67,7 @@ class OrdersController < ApplicationController
 			end
 
 			@runoutItems = Array.new
+			@ordersum = 0
 
 			@orderItems.each do |orderItem|
 				@orderItem = Orderitem.new
@@ -75,6 +75,7 @@ class OrdersController < ApplicationController
 				@orderItem.stock_id = orderItem[:id]
 				@orderItem.amount = orderItem[:amount]
 				@orderItem.itemprice = orderItem[:saleprice] ? orderItem[:saleprice] : orderItem[:price]
+
 				if(@orderItem.save)
 					#substract stock
 					@stock = Stock.find(orderItem[:id])
@@ -88,10 +89,25 @@ class OrdersController < ApplicationController
 						end
 					end
 
+					#calculate sum
+					@ordersum = @ordersum + (@orderItem.amount.to_i * @orderItem.itemprice.to_i)
+
 				end
 			end
-			
-			Ordermailer.new(current_member.email, @order).deliver
+
+			if(@order.orderitems > 0)
+				#count discountpoints
+				@order.discountpoint = (@ordersum / 200).floor
+				current_member.discountpoint = current_member.discountpoint + @order.discountpoint
+
+				if(@order.save)
+					current_member.save
+				end
+
+				Ordermailer.new(current_member.email, @order).deliver
+			else
+				@order.delete
+			end
 
 			if(@runoutItems.length > 0)
 				Ordermailer.runoutofproduct(@runoutItems).deliver

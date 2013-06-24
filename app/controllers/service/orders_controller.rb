@@ -18,6 +18,12 @@ class Service::OrdersController < ApplicationController
 	def update
 		@order = current_member.orders.find(params[:id])
 
+		#order log
+		@orderlog = Orderlog.new
+        @orderlog.order_id = @order.id
+        @orderlog.description = "通知已匯款。"
+        @orderlog.save
+
 		respond_to do |format|
 			if ( @order.update_attributes(params[:order]) )
 				format.html { redirect_to service_order_path(@order), notice: 'Order was successfully updated.' }
@@ -36,6 +42,7 @@ class Service::OrdersController < ApplicationController
 		respond_to do |format|
 			if ( @orderrefund.save )
 				#寄信
+				Ordermailer.refund(current_member.email, @orderrefund).deliver
 				format.html { redirect_to service_order_path(@order), notice: 'Order was successfully updated.' }
 			else
 				format.html { render "show" }
