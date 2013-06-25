@@ -24,7 +24,10 @@
 <% end %>
 
 <p>訂單金額：$<%= @orderPrice %></p>
-<p>目前可用購物金：/抵用購物金：</p>
+<p>預期產生的購物金：<%= (@orderPrice/200).floor %>點</p>
+<p>目前可用購物金：<%= current_member.discountpoint %></p>
+<% @discountceiling =  (@orderPrice/10).floor %>
+<p>抵用購物金：<input name="discount" type="number" value="<%= (current_member.discountpoint > @discountceiling) ? @discountceiling : current_member.discountpoint %>"></p>
 
 <div class="box">
 	<h4>buyer info</h4>

@@ -13,5 +13,6 @@ class AddColumnsToOrders < ActiveRecord::Migration
     add_column :orders, :paytime, :string
     add_column :orders, :payaccount, :string
     add_column :orders, :discountpoint, :integer
+    add_column :orders, :discount, :integer
   end
 end

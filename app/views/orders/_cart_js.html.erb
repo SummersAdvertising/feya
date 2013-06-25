@@ -82,6 +82,7 @@ function cartListItems(items){
       
     }
     html += "<p>總金額：$"+totalPrice+"</p>";
+    html += "<p>預期產生的購物金："+Math.floor(totalPrice/200)+"點</p>";
     html += "<p><a id = 'cleanCart'>清空購物車</a> / <a id = 'orderCheck'>結帳</a></p>";
 
     $("#cartItems").html(html);

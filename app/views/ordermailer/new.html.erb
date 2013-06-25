@@ -24,7 +24,10 @@
     <% end %>
 
     <p>運費 : <%= @order.shippingfee %></p>
-    <p>訂單金額 : <%= @ordersum + @order.shippingfee %></p>
+    <p>抵用購物金 : <%= @order.discount %></p>
+    <p>訂單金額 : <%= @ordersum + @order.shippingfee - @order.discount %></p>
+
+    <p>產生購物金 : <%= @order.discountpoint %></p>
   
   </div>
 </body>

@@ -36,8 +36,7 @@ class OrdersController < ApplicationController
 			@order.shippingfee = 150
 		else
 			@order.shippingfee = 0
-		end
-			 	
+		end			 	
 
 		@checkItems = Hash.new
 		JSON.parse(params[:orderItems]).each do |orderItem|
@@ -95,10 +94,29 @@ class OrdersController < ApplicationController
 				end
 			end
 
-			if(@order.orderitems > 0)
+			if(@order.orderitems.count > 0)
+
+				if(params[:discount] && (params[:discount].to_i.is_a? Integer)  && params[:discount].to_i > 0)
+					if(params[:discount].to_i > current_member.discountpoint)
+						if(current_member.discountpoint > (@ordersum/10).floor)
+							@order.discount = (@ordersum/10).floor
+						else
+							@order.discount = current_member.discountpoint
+						end
+					else
+						if(params[:discount].to_i > (@ordersum/10).floor)
+							@order.discount = (@ordersum/10).floor
+						else
+							@order.discount = params[:discount].to_i
+						end
+					end
+				else
+					@order.discount = 0
+				end
+
 				#count discountpoints
 				@order.discountpoint = (@ordersum / 200).floor
-				current_member.discountpoint = current_member.discountpoint + @order.discountpoint
+				current_member.discountpoint = current_member.discountpoint + @order.discountpoint - @order.discount
 
 				if(@order.save)
 					current_member.save

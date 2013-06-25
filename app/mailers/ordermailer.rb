@@ -28,8 +28,8 @@ class Ordermailer < ActionMailer::Base
 
   def refund(receiver, refund)
     @refund = refund
-    @order = Order.find(refund.order_id)
-    mail(:to => [receiver, Admin.first.email], :subject => ("[訂單異動申請]訂單編號：" + @order.ordernum) )
+    @order = Order.find(@refund.order_id)
+    mail(:to => [receiver, Admin.first.email], :subject => ("[訂單異動申請]訂單編號：" + (@order.ordernum ? @order.ordernum : "") ) )
   end
 
 end

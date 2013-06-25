@@ -3,6 +3,14 @@ class Order < ActiveRecord::Base
   validates :member_id, :status, :buyername, :buyertel, :invoicetype, :receivername, :receiveraddress, :receivertel, :paytype, :presence => true
   validates :shippingcode, :shippingway, :presence => true, :if => :is_finish?
 
+  before_save :checkpoints
+
+  def checkpoints
+    if(!self.discountpoint || self.discountpoint < 0 )
+      self.discountpoint = 0
+    end    
+  end
+
   def is_finish?
     self.status == "finish"
   end
