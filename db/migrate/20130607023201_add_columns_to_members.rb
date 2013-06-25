@@ -4,5 +4,6 @@ class AddColumnsToMembers < ActiveRecord::Migration
     add_column :members, :address, :string
     add_column :members, :tel, :string
     add_column :members, :discountpoint, :integer
+    add_column :members, :receiveaddress, :string
   end
 end

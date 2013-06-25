@@ -19,8 +19,7 @@ class Service::OrdersController < ApplicationController
 		@order = current_member.orders.find(params[:id])
 
 		#order log
-		@orderlog = Orderlog.new
-        @orderlog.order_id = @order.id
+		@orderlog = @order.orderlogs.new
         @orderlog.description = "通知已匯款。"
         @orderlog.save
 

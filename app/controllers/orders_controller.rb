@@ -51,16 +51,20 @@ class OrdersController < ApplicationController
 		if(@order.save)
 
 			#if(params[:updateMemberinfo]) => update
-			if(params[:updateMemberinfo])
-				current_member.username = params[:order][:buyername]
-				current_member.tel = params[:order][:buyertel]
+			if(params[:updateMemberinfo] || params[:setDefault])
+				if(params[:updateMemberinfo])
+					current_member.username = params[:order][:buyername]
+					current_member.tel = params[:order][:buyertel]
+				end
+				if(params[:setDefault])
+					current_member.receiveaddress = params[:order][:receiveraddress]
+				end
 				current_member.save
 			end
 
 			#if(params[:addAddressbook]) => create
 			if(params[:addAddressbook])
-				@addressbook = Addressbook.new
-				@addressbook.member_id = current_member.id
+				@addressbook = current_member.addressbooks.new
 				@addressbook.address = params[:order][:receiveraddress]
 				@addressbook.save
 			end

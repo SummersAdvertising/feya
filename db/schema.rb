@@ -11,14 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621110216) do
+ActiveRecord::Schema.define(:version => 20130625093548) do
 
   create_table "addressbooks", :force => true do |t|
     t.integer  "member_id"
-    t.string   "name"
     t.string   "address"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "admins", :force => true do |t|
@@ -46,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130621110216) do
     t.string   "address"
     t.string   "tel"
     t.integer  "discountpoint"
+    t.string   "receiveaddress"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
@@ -77,13 +77,14 @@ ActiveRecord::Schema.define(:version => 20130621110216) do
   end
 
   create_table "orders", :force => true do |t|
+    t.integer  "discount"
     t.integer  "member_id"
     t.integer  "shippingfee"
     t.string   "status"
     t.string   "shippingway"
     t.string   "shippingcode"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "buyername"
     t.string   "buyertel"
     t.string   "invoicetype"

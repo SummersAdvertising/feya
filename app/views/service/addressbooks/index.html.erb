@@ -1,3 +1,4 @@
+<p class="alert"><%= alert %></p>
 <% if @address.errors.any? %>
 <p style="color:red">
 	<% @address.errors.full_messages.each do |message| %>
@@ -8,8 +9,7 @@
 
 <div class="box">
 	<h4>new address</h4>
-	<%= form_for(@address, :url => service_addressbooks_path) do |f| %>
-	<p>顯示名稱：<%= f.text_field :name %></p>
+	<%= form_for(@address, :url => service_addressbooks_path, :method => :post) do |f| %>
 	<p>*地址：<%= f.text_field :address %></p>
 	<%= f.submit %>
 	<% end %>
@@ -18,7 +18,7 @@
 <% if @addresses && @addresses.length > 0 %>
 
 <% @addresses.each do |addressbook| %>
-<p><%= (addressbook.name + " : ") if(addressbook.name && addressbook.name.length > 0) %><%= addressbook.address %> <%= link_to "刪除", service_addressbook_path(addressbook), :method => :delete %></p>
+<p><%= addressbook.address %> <%= link_to "刪除", service_addressbook_path(addressbook), :method => :delete %></p>
 <% end %>
 
 <% else %>

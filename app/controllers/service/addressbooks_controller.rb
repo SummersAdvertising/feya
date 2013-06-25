@@ -3,20 +3,23 @@ class Service::AddressbooksController < ApplicationController
 	layout "service"
 
 	def index
-		@addresses = Addressbook.where(["member_id = ?", current_member.id])
+		@addresses = current_member.addressbooks
 		@address = Addressbook.new
 	end
 
 	def create
-		@address = Addressbook.new(params[:addressbook])
-		@address.member_id = current_member.id
+		@address = current_member.addressbooks.new(params[:addressbook])
 
 		respond_to do |format|
-			if @address.save
+			if (current_member.addressbooks.count < 5 && @address.save)
 				format.html { redirect_to  service_addressbooks_path }
 				format.json { render json: @address, status: :created, location: @address }
 			else
-				@addresses = Addressbook.where(["member_id = ?", current_member.id])
+				@addresses = Addressbook.where(:member_id => current_member.id).all
+
+				if (current_member.addressbooks.count >= 5)
+					flash[:alert] = "can only save 5 addresses"
+				end
 
 				format.html { render action: "index" }
 				format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -26,7 +29,7 @@ class Service::AddressbooksController < ApplicationController
 	end
 
 	def destroy
-		@address = Addressbook.find(params[:id])
+		@address = current_member.addressbooks.find(params[:id])
 		@address.destroy
 
 		respond_to do |format|

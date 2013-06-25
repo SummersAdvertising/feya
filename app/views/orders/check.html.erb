@@ -46,7 +46,10 @@
 
 	<p>list user's address book</p>
 	<p>*name: <%= f.text_field :receivername %></p>
-	<p>*address: <%= f.text_field :receiveraddress %><input type="checkbox" name="addAddressbook">add to address book</p>
+	<p>*address: <%= f.text_field :receiveraddress, :value => current_member.receiveaddress %><br>
+		<input type="checkbox" name="addAddressbook">add to address book<br>
+		<input type="checkbox" name="setDefault">set as default address
+	</p>
 
 	<p>
 		<% if current_member.addressbooks.count > 0 %>
