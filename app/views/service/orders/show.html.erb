@@ -26,8 +26,8 @@
 	<h4>通知已匯款</h4>
 
 	<%= form_for(@order, :url => service_order_path(@order)) do |f| %>
-	<p>匯款日期：<%= f.text_field :paydate %></p>
-	<p>匯款時間：<%= f.text_field :paytime %></p>
+	<p>匯款日期：<%= f.text_field :paydate, :value => Date.today.strftime("%Y-%m-%d") %></p>
+	<p>匯款時間：<%= f.select(:paytime, options_for_select([["上午0-1時"],["上午1-2時"],["上午2-3時"],["上午3-4時"],["上午4-5時"],["上午5-6時"],["上午6-7時"],["上午7-8時"],["上午8-9時"],["上午9-10時"],["上午10-11時"],["上午11-12時"],["下午12-13時"],["下午13-14時"],["下午14-15時"],["下午15-16時"],["下午16-17時"],["下午17-18時"],["下午18-19時"],["下午19-20時"],["下午20-21時"],["下午21-22時"],["下午22-23時"],["下午23-24時"]]) ) %></p>
 	<p>匯款帳號末五碼：<%= f.text_field :payaccount %></p>
 	<%= f.submit %>
 	<% end %>
@@ -46,8 +46,10 @@
 	<% end %>
 
 	<p>運費 : <%= @order.shippingfee %></p>
-	<p>抵用購物金 : -<%= @order.discount.to_s %></p>
+	<p>抵用購物金 : -<%= @order.discount %></p>
 	<p>訂單金額 : <%= @ordersum + @order.shippingfee - @order.discount %></p>
+
+	<p>產生購物金 : <%= @order.discountpoint %></p>
 
 	<p>訂單狀態 : 
 		<% case @order.status %>
@@ -71,6 +73,18 @@
 <p>運送方式 : <%= @order.shippingway %></p>
 <p>追蹤碼 : <%= @order.shippingcode %></p>
 <% end %>
+
+<script type="text/javascript">
+$( "#order_paydate" ).datepicker().change(function(){
+  $(this).datepicker("option", "dateFormat", "yy-mm-dd");
+
+  //compare the date
+  if(new Date($(this).val()) > new Date()){
+  	$(this).val('<%= Date.today.strftime("%Y-%m-%d") %>');
+    alert("請填寫正確的匯款日期");
+  }
+});
+</script>
 
 <% else %>
 <p>找不到該筆訂單。</p>
