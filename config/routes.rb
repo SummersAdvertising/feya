@@ -1,5 +1,5 @@
 Cart::Application.routes.draw do
-  devise_for :members, :controllers => { :registrations => "registrations" }
+  devise_for :members, :controllers => { :sessions => "sessions", :registrations => "registrations" }
   resources :products, :only => [:index, :show]
   resources :orders, :only => [:create] do
   	collection do
