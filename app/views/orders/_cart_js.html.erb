@@ -1,4 +1,10 @@
 <script type="text/javascript">
+$("#addAmount").change(function(){
+  var amount = parseInt($(this).val(), 10);
+  if ( !(amount > 0) ){
+    $(this).val("");
+  }
+});
 
 $("#addToCart").click(function(){
   var item = new Object();
@@ -77,11 +83,11 @@ function cartListItems(items){
 
       html += "<p>";
       html += "<a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a> ";
-      html += "單價: $"+cartitems[item].price+" <input type='number' value='" + cartitems[item].amount + "'>個 共$" + (cartitems[item].amount*cartitems[item].price) + "。 ";
-      html += "<a class='edit-cartItem' data-id='"+cartitems[item].id+"' data-name='"+cartitems[item].name+"' data-price='"+cartitems[item].price+"' data-amount='"+cartitems[item].amount+"'>修改</a>";
+      html += "單價: $"+cartitems[item].price+" <input type='number' value='" + parseInt(cartitems[item].amount, 10) + "'>個 共$" + (parseInt(cartitems[item].amount, 10)*cartitems[item].price) + "。 ";
+      html += "<a class='edit-cartItem' data-id='"+cartitems[item].id+"' data-name='"+cartitems[item].name+"' data-price='"+cartitems[item].price+"' data-amount='"+parseInt(cartitems[item].amount, 10)+"'>修改</a>";
       html += "</p>";
 
-      totalPrice += cartitems[item].amount*cartitems[item].price;
+      totalPrice += parseInt(cartitems[item].amount, 10)*cartitems[item].price;
       
     }
     html += "<p>總金額：$"+totalPrice+"</p>";

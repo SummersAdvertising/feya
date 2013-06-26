@@ -20,7 +20,7 @@
           </td>
         </tr>
 
-        <% if !@product.hasType %>
+        <% if !@product.hasType && @product.stocks.first.amount %>
         <tr>
           <td class="count">庫存 <%= @product.stocks.first.amount %></td>
         </tr>
@@ -37,7 +37,7 @@
             </select>
             <% end %>
 
-            <input id="addAmount" type="number" />
+            <input id="addAmount" type="text" />
             
           </td>
         </tr>
