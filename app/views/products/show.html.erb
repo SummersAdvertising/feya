@@ -1,50 +1,56 @@
-<p id="notice"><%= notice %></p>
+<section class="content" id="index-show">
+  <div class="quick"><p>購物車</p><span></span>件<a href="/orders/cart">結帳</a></div>
+  <div style="overflow:hidden">
+    <div id="preview"><img src="/example_img/02.jpg"></div>
+    <div id="intro">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="name"><%= @product.name %><br>
+            <span class="number">商品編號：<%= @product.id %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="price">
+            <% if @product.saleprice %>
+            <span class="original">NT$ <%= @product.price %></span><br>
+            NT$ <%= @product.saleprice %>
+            <% else %>
+            NT$ <%= @product.price %>
+            <% end %>
+          </td>
+        </tr>
 
-<p>
-  <b>Name:</b>
-  <%= @product.name %>
-</p>
+        <% if !@product.hasType %>
+        <tr>
+          <td class="count">庫存 <%= @product.stocks.first.amount %></td>
+        </tr>
+        <% end %>
 
-<p>
-  <b>Description:</b>
-  <%= @product.description.html_safe %>
-</p>
+        <tr>
+          <td class="count">
+            訂購數量 <br/>
+             <% if @product.hasType %>
+             <select id="productType">
+              <% @product.stocks.each do |stock| %>
+              <option value='{"id":<%= stock.id %>, "name":"<%= @product.name %>(<%= stock.typename %>)" }'><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+              <% end %>
+            </select>
+            <% end %>
 
-<% if !@product.hasType %>
-<p>
-  <b>Amount:</b>
-  <%= @product.stocks.first.amount %>
-</p>
-<% end %>
+            <input id="addAmount" type="number" />
+            
+          </td>
+        </tr>
+        <tr>
+          <td class="add"><%= link_to '加入購物車', "#", :id => "addToCart", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name } %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-<p>
-  <b>Price:</b>
-  <%= @product.price %>
-</p>
-
-<p>
-  <b>Saleprice:</b>
-  <%= @product.saleprice %>
-</p>
-
-<p>
-  amount: 
-  
-  <% if @product.hasType %>
-  <select id="productType">
-    <% @product.stocks.each do |stock| %>
-    <option value='{"id":<%= stock.id %>, "name":"<%= @product.name %>(<%= stock.typename %>)" }'><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
-    <% end %>
-  </select>
-  <% end %>
-  
-  <input id="addAmount" type="number" />
-  <%= link_to 'Add to cart', "#", :id => "addToCart", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name } %>
-</p>
-
-
-<%= render 'orders/cart' %>
-<%= link_to 'Back', products_path %>
-
+  <div id="detail">
+    <h3>產品說明及注意事項</h3>
+    <p><%= @product.description.html_safe %></p>
+  </div>
+</section>
 <%= render 'orders/cart_js' %>
-
