@@ -1,16 +1,28 @@
-<h1>Listing products</h1>
+<section class="content" id="index-list">
+  <div class="quick"><p>購物車</p><span></span>件<a href="/orders/cart">結帳</a></div>
+  <%= render 'orders/cart_js' %>
+  
+  <% @products.each do |product| %>
 
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
+  <div class="product">
+  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  		<tr>
+  			<td height="160"><%= link_to image_tag("/example_img/01.jpg"), product %></td>
+  		</tr>
+  		<tr>
+  			<td height="25" valign="top" class="name"><%= product.name %></td>
+  		</tr>
+  		<tr>
+  			<td class="price">
+  				<% if product.saleprice %>
+  				<span class="original">$ <%= product.price %></span><span class="special">$ <%= product.saleprice %></span>
+  				<% else %>
+  				$ <%= product.price %>
+  				<% end %>
+  			</td>
+        </tr>
+    </table>
+  </div>
+  <% end %>
 
-<% @products.each do |product| %>
-  <tr>
-    <td><%= link_to product.name, product %></td>
-  </tr>
-<% end %>
-</table>
-
-<%= render 'orders/cart' %>
-<%= render 'orders/cart_js' %>
+</section>

@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cart</title>
+	<!--[if lt IE 9]>
+	<script src="js/html5.js"></script>
+	<![endif]-->
+  <meta charset="utf-8">
+  <title>夏天廣告購物車系統</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/style.css">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<% if current_member %>
-	<%= current_member.email %> <%= link_to "登出", destroy_member_session_path, :method => :delete %>
-	<% else %>
-	<%= link_to "登入", new_member_session_path %>
-	<% end %>
-	<ul class = "nav">
-		<li><a href="/">首頁</a></li>
-		<li><a href="<%= service_root_path %>">顧客中心</a></li>
-		<li><a href="/orders/cart">購物車</a></li>
-	</ul>
+	<body>
+<header>
+  <div id="tool">
+  	<img src="/images/tool-1.png"/>聯絡客服 01-23456789 <span>|</span>
+  	<a href="/orders/cart"><img src="/images/tool-3.png">購物車</a> <span>|</span> 
+  	
+  	<% if current_member %>
+  	<a href="<%= service_root_path %>"><img src="/images/tool-2.png">帳戶</a> <span>|</span> 
+  	<%= link_to "登出", destroy_member_session_path, :method => :delete %>
+  	<% else %>
+  	<%= link_to "登入", new_member_session_path %>
+  	<% end %>
 
-	<%= yield %>
-	
-</body>
+  </div>
+</header>
+<section id="container">
+  <aside>
+    <h3>商品分類 | Categories</h3>
+    <div class="side">
+      <h4><a><img src="/images/li-open.png">Apple電腦</a></h4>
+      <ul>
+        <li><a href="#">蘋果電腦主機（155）</a></li>
+        <li><a href="#">Appel原廠配件（29）</a></li>
+        <li><a href="#">Apple電腦周邊（546）</a></li>
+      </ul>
+    </div>
+    <div class="side">
+      <h4><a href="#"><img src="/images/li-close.png">Apple電腦</a></h4>
+    </div>
+    <div class="side">
+      <h4><a href="#"><img src="/images/li-close.png">Apple電腦</a></h4>
+    </div>
+  </aside>
+  <%= yield %>
+</section>
+</body>	
 </html>

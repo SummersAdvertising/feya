@@ -69,6 +69,9 @@ function cartListItems(items){
   cartitems = items? JSON.parse(items) : new Object();
   if(Object.keys(cartitems).length>0){
     var html = "", totalPrice = 0;
+
+    $("div.quick>span").text(Object.keys(cartitems).length);
+
     html += "總共有"+Object.keys(cartitems).length+"件商品";
     for(var item in cartitems){
 
@@ -111,6 +114,7 @@ function cartListItems(items){
     });
   }
   else{
+    $("div.quick>span").text(0);
     var html = "<p>購物車內沒有任何商品。</p>";
     $("#cartItems").html(html);
   }

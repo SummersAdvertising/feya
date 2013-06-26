@@ -22,7 +22,7 @@
 		<% if @orders.length>0 %>
 
 		<% @orders.each do |order| %>
-		<p><%= order.created_at.strftime("%Y-%m-%d %H:%M") %> <%= order.buyername %>, <%= link_to ("共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order) %>。</p>
+		<p><%= order.created_at.strftime("%Y-%m-%d %H:%M") %> <%= order.buyername %>, <%= link_to (order.ordernum+" : 共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order) %>。</p>
 		<% end %>
 
 		<% else %>
