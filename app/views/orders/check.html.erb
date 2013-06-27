@@ -51,20 +51,39 @@
 		    <td width="120">NT$ <span class="sum"><%= @orderPrice %></span></td>
 		  </tr>
 		  <tr>
-		    <td>預期產生折扣金</td>
-		    <td><span class="discountpoint"><%= (@orderPrice/200).floor %></span>  點</td>
+		    <td>運費</td>
+		    <td>NT$ <span class="shippingfee">150</span></td>
 		  </tr>
 		  <tr>
 		    <td class="total">訂單總計</td>
-		    <td class="total">NT$ <span class="sum"><%= @orderPrice %></span></td>
+		    <td class="total">NT$ <span class="orderprice"><%= @orderPrice + 150 %></span></td>
+		  </tr>
+		  <tr>
+		    <td>預期產生折扣金</td>
+		    <td><span class="discountpoint"><%= (@orderPrice/200).floor %></span>  點</td>
 		  </tr>
 		</table>
 	</div>
 </section>
 
-<section class="content order-step2">
 <%= form_for(@order) do |f| %>
+<section class="content order-step2" style="margin:25px 0 0 0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+    <td width="10%" valign="top" class="way">宅配貨到付款</td>
+    <td width="5%" valign="top"><input data-fee="150" type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
+    <td width="85%" valign="top">宅配貨到付款，將酌收 150 元物流費。（「貨到付款」服務僅限台灣本島）。</td>
+  </tr>
+  <tr>
+    <td valign="top" class="way">宅配一般付款</td>
+    <td valign="top"><input data-fee="60" type="radio" name="order[paytype]" class="radio" value="匯款"></td>
+    <td valign="top" style="line-height:1.7em">宅配一般付款，請至郵局匯款XXX，將酌收 60 元物流費。<br>
+      ※ 匯款戶名：夏天廣告有限公司　　國泰世華銀行 信義分行(總行代碼013)　　帳號：888-88-888888-8</td>
+  </tr>
+</table>
+</section>
 
+<section class="content order-step2">
 	<input type="hidden" name="orderItems" value="<%= @orderItems.to_json %>">
 
 	<h3>填寫您的資料
@@ -75,11 +94,6 @@
     <tr>
       <th width="9%" align="left">中文姓名</th>
       <td width="24%"><%= f.text_field :buyername, :value => current_member.username %></td>
-      <td width="67%"><input type="radio" name="gender" class="radio" value="">
-        先生
-        <input type="radio" name="gender" class="radio" value="">
-        小姐
-        </form></td>
     </tr>
     <tr>
       <th align="left">電子郵件</th>
@@ -92,7 +106,7 @@
       <td>&nbsp;</td>
     </tr>
   </table>
-  
+
   <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:30px 0">
     <tr>
       <th width="9%" align="left">發票資訊</th>
@@ -120,11 +134,6 @@
     <tr>
       <th width="9%" align="left">中文姓名</th>
       <td width="24%"><%= f.text_field :receivername %></td>
-      <td width="67%"><input type="radio" name="radio" class="radio" value="">
-        先生
-        <input type="radio" name="radio" class="radio" value="">
-        小姐
-        </form></td>
     </tr>
     <tr>
       <th align="left">手機號碼</th>
@@ -135,16 +144,9 @@
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <th width="9%" align="left">送貨地址</th>
-      <td width="12%"><select name="">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select></td>
       <td width="41%"><%= f.text_field :receiveraddress, :value => current_member.receiveaddress %></td>
-      <td width="38%"><span>※ 地址請勿填寫郵政信箱</span></td>
     </tr>
     <tr>
-      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>
       	<% if current_member.addressbooks.count > 0 %>
@@ -172,22 +174,6 @@
     </table>
   </div>
 </section>
-<section class="content order-step2" style="margin:25px 0 0 0">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-    <td width="10%" valign="top" class="way">宅配貨到付款</td>
-    <td width="5%" valign="top"><input type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
-    <td width="85%" valign="top">宅配貨到付款，將酌收 50 元物流費。（「貨到付款」服務僅限台灣本島）。</td>
-  </tr>
-  <tr>
-    <td valign="top" class="way">宅配一般付款</td>
-    <td valign="top"><input type="radio" name="order[paytype]" class="radio" value="匯款"></td>
-    <td valign="top" style="line-height:1.7em">宅配一般付款，請至郵局匯款XXX，將酌收 50 元物流費。<br>
-      ※ 匯款戶名：夏天廣告有限公司　　國泰世華銀行 信義分行(總行代碼013)　　帳號：888-88-888888-8</td>
-  </tr>
-</table>
-
-</section>
 
 <section class="content order-step2" style="position:relative;top:-1px">
 	<% @discountceiling =  (@orderPrice/10).floor %>
@@ -205,6 +191,12 @@
 
 <script type="text/javascript">
 $("ul.step>li").eq(2).addClass("active");
+
+$(".radio").click(function(){
+	var shippingfee = parseInt($(this).data("fee"));
+	$("span.orderprice").text(parseInt("<%= @orderPrice %>") + shippingfee);
+	$("span.shippingfee").text(shippingfee);
+});
 
 $("#asBuyer").change(function(){
 	if($(this).prop('checked')){
