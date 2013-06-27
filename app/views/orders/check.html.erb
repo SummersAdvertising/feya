@@ -11,71 +11,218 @@
 <% end %>
 -->
 
-<h3>New order</h3>
+<section class="content" id="order-step1">
+	<div id="detail">
+		<table id="cartItems" width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <th width="8%" align="center">&nbsp;</th>
+		    <th width="16%" align="center">明細</th>
+		    <th width="8%" align="center">顏色</th>
+		    <th width="22%" align="center">數量</th>
+		    <th width="10%" align="center">單價</th>
+		    <th width="10%" align="center">折扣價</th>
+		    <th width="10%" align="center">小計</th>
+		    <th width="8%" align="center">現貨庫存</th>
+		  </tr>
+
+		  <% @orderPrice = 0 %>
+		  <% @orderItems.each do |item| %>
+
+		  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
+		  <% @orderPrice = @orderPrice + @itemSum %>
+		  <tr>
+		    <td align="center"><img src="/example_img/04.jpg"></td>
+		    <td align="center"><%= item[:name] %></td>
+		    <td align="center">白色</td>
+		    <td align="center" class="count"><%= item[:amount] %></td>
+		    <td align="center"><%= item[:price] %></td>
+		    <td align="center"><%= item[:saleprice] || item[:price] %></td>
+		    <td align="center"><%= @itemSum %></td>
+		    <td align="center">有</td>
+		  </tr>
+		  <% end %>
+		  
+		</table>
+	</div>
+	<div id="check">
+		<table width="240" border="0" align="right" cellpadding="0" cellspacing="0">
+		  <tr>
+		    <td width="120">購物小計</td>
+		    <td width="120">NT$ <span class="sum"><%= @orderPrice %></span></td>
+		  </tr>
+		  <tr>
+		    <td>預期產生折扣金</td>
+		    <td><span class="discountpoint"><%= (@orderPrice/200).floor %></span>  點</td>
+		  </tr>
+		  <tr>
+		    <td class="total">訂單總計</td>
+		    <td class="total">NT$ <span class="sum"><%= @orderPrice %></span></td>
+		  </tr>
+		</table>
+	</div>
+</section>
+
+<section class="content order-step2">
 <%= form_for(@order) do |f| %>
 
-<% @orderPrice = 0 %>
-<% @orderItems.each do |item| %>
+	<input type="hidden" name="orderItems" value="<%= @orderItems.to_json %>">
 
-<% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
-<% @orderPrice = @orderPrice + @itemSum %>
+	<h3>填寫您的資料
+		<input type="checkbox" name="updateMemberinfo" class="checkbox">
+		<span>更新為會員資料</span></h3>
 
-<p><%= item[:name] %> : $<%= item[:saleprice] || item[:price] %>*<%= item[:amount] %>= $<%= @itemSum %></p>
-<% end %>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th width="9%" align="left">中文姓名</th>
+      <td width="24%"><%= f.text_field :buyername, :value => current_member.username %></td>
+      <td width="67%"><input type="radio" name="gender" class="radio" value="">
+        先生
+        <input type="radio" name="gender" class="radio" value="">
+        小姐
+        </form></td>
+    </tr>
+    <tr>
+      <th align="left">電子郵件</th>
+      <td><input type="text" value="<%= current_member.email %>" disabled></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th align="left">手機號碼</th>
+      <td><%= f.text_field :buyertel, :value => current_member.tel %></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:30px 0">
+    <tr>
+      <th width="9%" align="left">發票資訊</th>
+      <td colspan="5"><span>※ 依統一發票使用辦法規定：個人戶（二聯式）發票一經開立，不得任意更改為公司戶（三聯式）發票。</span></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <th width="7%" align="left">統一編號</th>
+      <td width="21%"><%= f.text_field :companynum %></td>
+      <th width="7%" align="left">發票</th>
+      <td width="21%"><%= f.select(:invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]])) %></td>
+      <td width="35%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="5" align="left"><span><a href="#">電子發票說明</a> ，核准文號：北區國稅北縣三字第0980023790號</span></td>
+    </tr>
+  </table>
 
-<p>訂單金額：$<%= @orderPrice %></p>
-<p>預期產生的購物金：<%= (@orderPrice/200).floor %>點</p>
-<p>目前可用購物金：<%= current_member.discountpoint %></p>
-<% @discountceiling =  (@orderPrice/10).floor %>
-<p>抵用購物金：<input name="discount" type="number" value="<%= (current_member.discountpoint > @discountceiling) ? @discountceiling : current_member.discountpoint %>"></p>
+  <h3 style="border-top:1px solid #E6E6E6;padding:30px 0;height:80px">收件人資訊
+    <input type="checkbox" class="checkbox" id="asBuyer">
+    <span>同訂購人</span></h3>
 
-<div class="box">
-	<h4>buyer info</h4>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th width="9%" align="left">中文姓名</th>
+      <td width="24%"><%= f.text_field :receivername %></td>
+      <td width="67%"><input type="radio" name="radio" class="radio" value="">
+        先生
+        <input type="radio" name="radio" class="radio" value="">
+        小姐
+        </form></td>
+    </tr>
+    <tr>
+      <th align="left">手機號碼</th>
+      <td><%= f.text_field :receivertel %></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th width="9%" align="left">送貨地址</th>
+      <td width="12%"><select name="">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select></td>
+      <td width="41%"><%= f.text_field :receiveraddress, :value => current_member.receiveaddress %></td>
+      <td width="38%"><span>※ 地址請勿填寫郵政信箱</span></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>
+      	<% if current_member.addressbooks.count > 0 %>
+      	選擇常用地址：<br/>
+      	<% current_member.addressbooks.each do |addressbook| %>
+      	<span><a href="#" class="addressbook"><%= addressbook.address %></a></span><br/>
+      	<% end %>
+      	<% end %>
+      	
+        <input type="checkbox" name="addAddressbook" class="checkbox">
+        <span>加入常用地址</span>
+        <input type="checkbox" name="setDefault" class="checkbox">
+        <span>設為預設地址</span>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  <div id="agree">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="22%" align="right" valign="top"><input type="checkbox" class="checkbox"></td>
+        <td width="78%">我已仔細閱讀並明瞭「網站使用條款」、「隱私權政策」、「免責聲明」等所載內容及其意義，<br>
+          茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。</td>
+      </tr>
+    </table>
+  </div>
+</section>
+<section class="content order-step2" style="margin:25px 0 0 0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+    <td width="10%" valign="top" class="way">宅配貨到付款</td>
+    <td width="5%" valign="top"><input type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
+    <td width="85%" valign="top">宅配貨到付款，將酌收 50 元物流費。（「貨到付款」服務僅限台灣本島）。</td>
+  </tr>
+  <tr>
+    <td valign="top" class="way">宅配一般付款</td>
+    <td valign="top"><input type="radio" name="order[paytype]" class="radio" value="匯款"></td>
+    <td valign="top" style="line-height:1.7em">宅配一般付款，請至郵局匯款XXX，將酌收 50 元物流費。<br>
+      ※ 匯款戶名：夏天廣告有限公司　　國泰世華銀行 信義分行(總行代碼013)　　帳號：888-88-888888-8</td>
+  </tr>
+</table>
 
-	<p>*name: <%= f.text_field :buyername, :value => current_member.username %></p>
-	<p>*tel: <%= f.text_field :buyertel, :value => current_member.tel %></p>
-	<p>invoice: <%= f.select(:invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]])) %></p>
-	<p>companyNo.: <%= f.text_field :companynum %></p>
+</section>
 
-	<p><input type="checkbox" name="updateMemberinfo">update as user's info</p>
-
-</div>
-
-<div class="box">
-	<h4>receiver info</h4>
-
-	<p>list user's address book</p>
-	<p>*name: <%= f.text_field :receivername %></p>
-	<p>*address: <%= f.text_field :receiveraddress, :value => current_member.receiveaddress %><br>
-		<input type="checkbox" name="addAddressbook">add to address book<br>
-		<input type="checkbox" name="setDefault">set as default address
+<section class="content order-step2" style="position:relative;top:-1px">
+	<% @discountceiling =  (@orderPrice/10).floor %>
+	<p>您目前可用點數：<strong><%= current_member.discountpoint %></strong>點，本次訂單您需要抵用點數：<input name="discount" type="number" value="<%= (current_member.discountpoint > @discountceiling) ? @discountceiling : current_member.discountpoint %>" style="width:150px"><br>
+		<span>* 購物金一點可以抵一元。</span>
 	</p>
+</section>
 
-	<p>
-		<% if current_member.addressbooks.count > 0 %>
-		常用地址：
-		<% current_member.addressbooks.each do |addressbook| %>
-		<a class="addressbook"><%= addressbook.address %></a>
-		<% end %>
-		<% end %>
-	</p>
-
-	<p>*tel: <%= f.text_field :receivertel %></p>
-	<p>*payment: <%= f.select(:paytype, options_for_select([["貨到付款", "貨到付款"], ["匯款", "匯款"]])) %></p>
-	
-</div>
-
-<input type="hidden" name="orderItems" value="<%= @orderItems.to_json %>">
 <% end %>
+<!-- the end of the form -->
 
-<a href="/orders/cart">修改訂單</a> / <a href="#" id="submit">確認結帳</a>
+<div id="button"> 
+  <a href="/" id="back"><img src="/images/left.png">繼續購物</a><a href="/orders/cart" id="prev"><img src="/images/left.png">上一步</a><a href="#" id="next">下一步<img src="/images/right.png"></a> </div>
+
 
 <script type="text/javascript">
-$(".addressbook").click(function(){
+$("ul.step>li").eq(2).addClass("active");
+
+$("#asBuyer").change(function(){
+	if($(this).prop('checked')){
+		$("#order_receivername").val($("#order_buyername").val());
+		$("#order_receivertel").val($("#order_buyertel").val());
+	}
+	else{
+		$("#order_receivername").val("");
+		$("#order_receivertel").val("");
+	}
+});
+
+$(".addressbook").click(function(event){
+	event.preventDefault();
 	$("#order_receiveraddress").val($(this).html());
 });
 
-$("#submit").click(function(){
+$("#next").click(function(){
 	$("#new_order").submit();
 });
 </script>

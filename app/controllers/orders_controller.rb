@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 	def check
 		@order = Order.new
 
-		if(cookies[:cart])
+		if(cookies[:cart].length > 0)
 			@checkItems = Hash.new
 
 			JSON.parse(cookies[:cart]).each do |orderItem|
