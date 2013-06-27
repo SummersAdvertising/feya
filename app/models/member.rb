@@ -7,6 +7,14 @@ class Member < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :address, :tel
+  validates :username, :tel, :presence => true
+  before_save :checkpoints
+
+  def checkpoints
+    if(!self.discountpoint || self.discountpoint < 0 )
+      self.discountpoint = 0
+    end    
+  end
   
   has_many :addressbooks, :dependent => :destroy
   has_many :tracebooks, :dependent => :destroy

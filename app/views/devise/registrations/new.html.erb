@@ -1,16 +1,54 @@
-<h2>Sign up</h2>
+<section class="content order-step2">
+	<h3>填寫您的資料</h3>
 
-<%= form_for(resource, :as => resource_name, :url => member_registration_path()) do |f| %>
+	<%= form_for(resource, :as => resource_name, :url => member_registration_path()) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <th width="9%" align="left">中文姓名</th>
+	    <td width="24%"><%= f.text_field :username, :autofocus => true %></td>
+	  </tr>
+	  <tr>
+	    <th align="left">電子郵件</th>
+	    <td><%= f.email_field :email%></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <th align="left">設定密碼</th>
+	    <td><%= f.password_field :password %></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <th align="left">密碼確認</th>
+	    <td><%= f.password_field :password_confirmation %></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	  <tr>
+	    <th align="left">手機號碼</th>
+	    <td><%= f.text_field :tel %></td>
+	    <td>&nbsp;</td>
+	  </tr>
+	</table>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <th width="9%" align="left">收件地址(可不填)</th>
+	    <td width="41%"><%= f.text_field :address %></td>
+	  </tr>
+	</table>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+	<% end %>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+</section>
+<div id="button">
+	<a href="#" id="next">下一步<img src="/images/right.png"></a>
+</div>
+
+<script type="text/javascript">
+$("ul.step>li").eq(2).addClass("active");
+
+$("#next").click(function(){
+	$("#new_member").submit();
+});
+</script>

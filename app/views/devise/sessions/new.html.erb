@@ -29,21 +29,23 @@
 				</tr>
 				<tr>
 					<td class="forget"><a href="#">忘記密碼 ?</a></td>
-					<td align="right" class="button"><a href="#">登入</a></td>
+					<td align="right" class="button"><a id = "submit" href="#">登入</a></td>
+					<td>&nbsp;</td>
+					<td align="right" class="button"><a href="/">取消</a></td>
 				</tr>
 			</table>
 			<% end %>
 		</div>
 		<div class="register">
 			<h3>第一次購物</h3>
-			<a href="#">註冊成為會員。</a>
+			<a href="/members/sign_up">註冊成為會員。</a>
 			</div>
 		</section>
 	</body>
 </html>
 
 <script type="text/javascript">
-$(".button").click(function(){
+$("#submit").click(function(){
 	$("#new_member").submit();
 });
 </script>

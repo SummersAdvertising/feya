@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  layout "order"
   def update
     # required for settings form to submit when password is left blank
     if params[:member][:password].blank?
