@@ -78,23 +78,25 @@ function cartListItems(items){
 
     $("div.quick>span").text(Object.keys(cartitems).length);
 
-    html += "總共有"+Object.keys(cartitems).length+"件商品";
     for(var item in cartitems){
-
-      html += "<p>";
-      html += "<a href='/products/" + cartitems[item].id + "'>" + cartitems[item].name + "</a> ";
-      html += "單價: $"+cartitems[item].price+" <input type='number' value='" + parseInt(cartitems[item].amount, 10) + "'>個 共$" + (parseInt(cartitems[item].amount, 10)*cartitems[item].price) + "。 ";
-      html += "<a class='edit-cartItem' data-id='"+cartitems[item].id+"' data-name='"+cartitems[item].name+"' data-price='"+cartitems[item].price+"' data-amount='"+parseInt(cartitems[item].amount, 10)+"'>修改</a>";
-      html += "</p>";
-
+      html += '<tr>';
+      html += '<td align="center"><img src="/example_img/04.jpg"></td>';
+      html += '<td align="center">'+cartitems[item].name+'</td>';
+      html += '<td align="center">白色</td>';
+      html += '<td align="center" class="count"><a href="#" id="plus">+</a><input disabled type="text" value="'+parseInt(cartitems[item].amount, 10)+'"><a href="#" id="minor">-</a></td>';
+      html += '<td align="center">'+(cartitems[item].price)+'</td>';
+      html += '<td align="center">'+cartitems[item].price+'</td>';
+      html += '<td align="center">'+(parseInt(cartitems[item].amount, 10)*cartitems[item].price)+'</td>';
+      html += '<td align="center">有</td>';
+      html += '<td align="center" class="delete"><a href="#">刪除</a></td>';
+      html += '</tr>';
       totalPrice += parseInt(cartitems[item].amount, 10)*cartitems[item].price;
       
     }
-    html += "<p>總金額：$"+totalPrice+"</p>";
-    html += "<p>預期產生的購物金："+Math.floor(totalPrice/200)+"點</p>";
-    html += "<p><a id = 'cleanCart'>清空購物車</a> / <a id = 'orderCheck'>結帳</a></p>";
+    $("span.sum").text(totalPrice);
+    $("span.discountpoint").text(Math.floor(totalPrice/200));
 
-    $("#cartItems").html(html);
+    $("#cartItems").append(html);
 
     $(".edit-cartItem").unbind().click(function(){
       if(parseInt($(this).siblings("input").val(), 10)>0){

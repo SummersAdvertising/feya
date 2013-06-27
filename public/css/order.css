@@ -1,0 +1,70 @@
+﻿
+/*-----------------------------------------------------------------------全域---*/
+
+body{width:1080px;margin:0 auto;font:300 .9em 微軟正黑體,"Microsoft JhengHei",verdana;color:#959595}
+a{font:300 1em 微軟正黑體,"Microsoft JhengHei",verdana;text-decoration:none;color:#959595}
+
+/*-----------------------------------------------------------------------步驟---*/
+
+.step{overflow:hidden;width:520px;margin:0 auto;height:200px;padding:75px 0 0 0}
+.step li{float:left}
+.step .active a{background:url(/images/bt.jpg) 0 bottom repeat-x;color:#2e2e2e}
+.step li a{display:inline-block;width:140px;height:45px;border:1px solid #CAC8C8;
+border-radius:5px;text-align:center;padding:13px 0 0 0}
+.step li span{display:inline-block;width:50px;height:45px;text-align:center;padding:15px 0 0 0}
+
+.content{border:1px solid #D2D2D2}
+
+/*-----------------------------------------------------------------------按鈕---*/
+
+#button{margin:50px 0 0 0;width:100%;text-align:right}
+#button a{display:inline-block;height:30px;border:1px solid #CAC8C8;width:100px;color:#222;margin:0 0 0 25px;
+border-radius:5px;text-align:center;padding:6px 0 0 0;background:url(/images/active.jpg) 0 bottom repeat-x;}
+#button img{margin:0 5px;position:relative;top:-1px}
+#button #next,#button #prev{color:#3cabd0}
+
+/*-----------------------------------------------------------------------訂購明細---*/
+
+#order-step1{padding:10px 20px 20px 20px}
+#order-step1 #detail th{border-bottom:1px solid #e6e6e6;height:40px;color:#2e2e2e}
+#order-step1 #detail td{padding:8px 0 4px 0;border-bottom:1px solid #e6e6e6;}
+#order-step1 #detail img{max-width:61px;height:auto}
+#order-step1 #detail input{color:#3cabd0;width:50px;padding:3px 0;margin:0 10px;border:1px solid #DBDBDB;
+text-align:center;font:300 .8em 微軟正黑體,"Microsoft JhengHei",verdana}
+#order-step1 #detail .delete a{display:block;width:15px;height:17px;background:url(/images/delete.jpg) 0 0 no-repeat;text-indent:-7777px}
+#order-step1 #detail .count a{display:inline-block;width:21px;height:20px;text-indent:-7777px}
+#order-step1 #detail #plus{background:url(/images/minor.jpg) 0 0 no-repeat}
+#order-step1 #detail #minor{background:url(/images/plus.jpg) 0 0 no-repeat}
+
+#order-step1 #check{overflow:hidden;margin:20px 0 0 0}
+#order-step1 #check td{padding:4px 0;color:#222}
+#order-step1 #check .total{border-top:1px dotted #e5e5e5;color:#3cabd0}
+
+/*-----------------------------------------------------------------------訂購資料---*/
+
+.order-step2{padding:45px 55px}
+.order-step2 h3{font-size:16px;color:#2e2e2e;height:50px}
+.order-step2 h3 input{margin:0 0 0 20px}
+.order-step2 h3 span{font:300 14px "";color:#828282}
+.order-step2 input{width:95%;border:1px solid #DBDBDB;padding:3px 5px}
+.order-step2 td{padding:3px 0;color:#828282}
+.order-step2 .radio,
+.order-step2 .checkbox{width:25px}
+.order-step2 select{width:95%;border:1px solid #DBDBDB;padding:2px 0}
+.order-step2 span,.order-step2 span a{color:#c6c6c6}
+.order-step2 span a{text-decoration:underline}
+.order-step2 #agree{background:url(/images/bt.jpg) 0 bottom repeat-x;border:1px solid #C9C9C9;border-radius:10px;padding:20px 0;margin:30px 0 0 0} 
+.order-step2 #agree td{color:#222;line-height:1.5em}
+.order-step2 .way{color:#222!important}
+.order-step2 strong{color:#3cabd0;padding:0 10px;border-bottom:1px solid #3cabd0}
+
+/*-----------------------------------------------------------------------完成訂購---*/
+
+#order-step3{padding:100px;text-align:center}
+#order-step3 p{font-size:28px;color:#3cabd0}
+#order-step3 a{display:inline-block;height:30px;border:1px solid #CAC8C8;width:100px;color:#777;margin:35px 0 0 0;
+border-radius:5px;text-align:center;padding:5px 0 0 0;background:url(/images/active.jpg) 0 bottom repeat-x;}
+
+/*-----------------------------------------------------------------------頁尾---*/
+
+footer{clear:both;height:50px}

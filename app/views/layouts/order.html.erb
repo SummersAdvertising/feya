@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--[if lt IE 9]>
+	<script src="js/html5.js"></script>
+	<![endif]-->
+  <meta charset="utf-8">
+  <title>夏天廣告購物車系統</title>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/order.css">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <ul class="step">
+    <li class="active"><a>1. 購物明細確認</a></li>
+    <li><span>&gt;</span></li>
+    <li><a>2. 填寫訂購資料</a></li>
+    <li><span>&gt;</span></li>
+    <li><a>3. 完成訂購</a></li>
+  </ul>
+  
+  <%= yield %>
+
+  <footer></footer>
+</body>	
+</html>

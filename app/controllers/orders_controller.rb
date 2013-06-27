@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class OrdersController < ApplicationController
+	layout "order"
 	before_filter :is_member, :only => [:check]
 	
 	def cart
