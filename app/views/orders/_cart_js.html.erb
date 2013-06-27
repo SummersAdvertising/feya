@@ -21,7 +21,8 @@ $("#addToCart").click(function(){
     addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val());
   }
 
-  $("#addAmount").val("");  
+  $("#addAmount").val("");
+  alert("已將"+item.name+"加入購物車。");
 });
 
 var cartitems;
@@ -32,7 +33,7 @@ function addCartItems(id, name, price, amount){
     item.id = id;
     item.name = name;
     item.price = price;
-    item.amount = amount;
+    item.amount = parseInt(amount, 10);
 
     cartitems[id] = item;
 
@@ -78,17 +79,18 @@ function cartListItems(items){
 
     $("div.quick>span").text(Object.keys(cartitems).length);
 
+    $("#cartItems").html($("#cartItems tr:first").clone());
+
     for(var item in cartitems){
       html += '<tr>';
       html += '<td align="center"><img src="/example_img/04.jpg"></td>';
       html += '<td align="center">'+cartitems[item].name+'</td>';
-      html += '<td align="center">白色</td>';
-      html += '<td align="center" class="count"><a href="#" id="plus">+</a><input disabled type="text" value="'+parseInt(cartitems[item].amount, 10)+'"><a href="#" id="minor">-</a></td>';
+      html += '<td align="center" class="count"><a href="#" class="minor" data-id="'+cartitems[item].id+'">+</a><input disabled type="text" value="'+parseInt(cartitems[item].amount, 10)+'"><a href="#" class="plus" data-id="'+cartitems[item].id+'">-</a></td>';
       html += '<td align="center">'+(cartitems[item].price)+'</td>';
       html += '<td align="center">'+cartitems[item].price+'</td>';
       html += '<td align="center">'+(parseInt(cartitems[item].amount, 10)*cartitems[item].price)+'</td>';
       html += '<td align="center">有</td>';
-      html += '<td align="center" class="delete"><a href="#">刪除</a></td>';
+      html += '<td align="center" class="delete"><a href="#" data-id="'+cartitems[item].id+'">刪除</a></td>';
       html += '</tr>';
       totalPrice += parseInt(cartitems[item].amount, 10)*cartitems[item].price;
       
@@ -97,6 +99,36 @@ function cartListItems(items){
     $("span.discountpoint").text(Math.floor(totalPrice/200));
 
     $("#cartItems").append(html);
+
+    $(".delete>a").click(function(event){
+      event.preventDefault();
+      if(confirm("確定刪除？")){
+        delete cartitems[$(this).data("id")];
+        setCookie('cart', JSON.stringify(cartitems),0,"","/");
+        cartListItems(JSON.stringify(cartitems));
+      }
+    });
+
+    $("a.plus, a.minor").click(function(event){
+      event.preventDefault();
+      switch($(this).attr("class")){
+        case "plus":
+          cartitems[$(this).data("id")].amount += 1;
+        break;
+        case "minor":
+          if(cartitems[$(this).data("id")].amount > 1){
+            cartitems[$(this).data("id")].amount -= 1;
+          }
+          else{
+            delete cartitems[$(this).data("id")];
+          }
+        break;
+
+      }
+      setCookie('cart', JSON.stringify(cartitems),0,"","/");
+      cartListItems(JSON.stringify(cartitems));
+      
+    });
 
     $(".edit-cartItem").unbind().click(function(){
       if(parseInt($(this).siblings("input").val(), 10)>0){
@@ -115,16 +147,13 @@ function cartListItems(items){
     $("#orderCheck").unbind().click(function(){
       window.location.href = "/orders/check";
     });
-
-    $("#cleanCart").unbind().click(function(){
-      setCookie('cart', "",-2000,"","/");
-      cartListItems(getCookie("cart"));
-    });
   }
   else{
     $("div.quick>span").text(0);
     var html = "<p>購物車內沒有任何商品。</p>";
     $("#cartItems").html(html);
+    $("span.sum").text(0);
+    $("span.discountpoint").text(0);
   }
 }
 </script>

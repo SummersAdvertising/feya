@@ -1,22 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Cart:Admin</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<!--[if lt IE 9]>
+<script src="/js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<title>夏天廣告購物車系統</title>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/style.css">
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
 </head>
+
 <body>
-	<% if session[:admin] %>
-	<p><%= session[:admin].username %>, 你好。 <%= link_to "登出", admin_logout_path %> / <%= link_to "回首頁", root_path %></p>
-	<ul class = "nav">
-		<li><a href="/admin">商品管理</a></li>
-		<li><a href="/admin/orders">訂單管理</a></li>
-		<li><a href="/admin/orderrefunds">客服管理</a></li>
-	</ul>
-	<% end %>
+	<header>
+		<div id="tool"><img src="/images/tool-1.png"/>聯絡客服 01-23456789 <span>|</span><a href="#"><img src="/images/tool-2.png">帳戶</a> <span>|</span> <a href="#"><img src="/images/tool-3.png">購物車</a></div>
+	</header>
+	<section id="container">
+		<aside>
+			<% if session[:admin] %>
+			<h3>管理者中心
+				<p><%= link_to "登出", admin_logout_path %> / <%= link_to "回首頁", root_path %></p>
+			</h3>
 
-	<%= yield %>
+			<div class="side">
+				<h4><a href="/admin"><img src="/images/li-close.png">商品管理</a></h4>
+			</div>
+			<div class="side">
+				<h4><a href="/admin/orders"><img src="/images/li-close.png">訂單管理</a></h4>
+			</div>
+			<div class="side">
+				<h4><a href="/admin/orderrefunds"><img src="/images/li-close.png">客服管理</a></h4>
+			</div>
+			<div class="side">
+				<h4><a href="/admin/members"><img src="/images/li-close.png">會員管理</a></h4>
+			</div>
+			<% end %>
+		</aside>
 
+		<%= yield %>
+
+	</section>
+	<footer></footer>
 </body>
 </html>
