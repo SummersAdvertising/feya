@@ -1,28 +1,44 @@
-<p class="alert"><%= alert %></p>
-<% if @address.errors.any? %>
-<p style="color:red">
-	<% @address.errors.full_messages.each do |message| %>
-	<%= message %><br>
+<section class="content" id="mb-add">
+	<h3>常用地址設定</h3>
+	<p class="alert">
+		<%= alert %>
+	</p>
+	<% if @address.errors.any? %>	
+	<p style="color:red">
+		<% @address.errors.full_messages.each do |message| %>
+		<%= message %>
+		<br>
+		<% end %>
+	</p>
 	<% end %>
-</p>
-<% end %>
-
-<div class="box">
-	<h4>new address</h4>
-	<%= form_for(@address, :url => service_addressbooks_path, :method => :post) do |f| %>
-	<p>*地址：<%= f.text_field :address %></p>
-	<%= f.submit %>
-	<% end %>
-</div>
-
-<% if @addresses && @addresses.length > 0 %>
-
-<% @addresses.each do |addressbook| %>
-<p><%= addressbook.address %> <%= link_to "刪除", service_addressbook_path(addressbook), :method => :delete %></p>
-<% end %>
-
-<% else %>
-
-<p>尚未建立常用地址。</p>
-
-<% end %>
+	<div class="add-content">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<% @addresses.each do |addressbook| %>
+			<tr>
+				<td width="95%" align="left"><%= addressbook.address %></td>
+				<td width="5%" class="delete">
+					<%= link_to "刪除", service_addressbook_path(addressbook), :method => :delete %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<div class="add-content">
+		<%= form_for(@address, :url =>service_addressbooks_path, :method => :post) do |f| %>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="mb-add-new">
+			<tr>
+				<td width="92%" align="left">
+					<%= f.text_field :address %></td>
+				<td width="8%">
+					<a href="#" id="submit">新增</a>
+				</td>
+			</tr>
+		</table>
+		<% end %>	
+	</div>
+</section>
+<script type="text/javascript">
+$("#submit").click(function(){
+	$(this).parents("form:first").submit();
+});
+</script>

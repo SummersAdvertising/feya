@@ -1,36 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Service</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<!--[if lt IE 9]>
+<script src="/js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<title>夏天廣告購物車系統</title>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/style.css">
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
 </head>
+
 <body>
-	<% if current_member %>
-	<%= current_member.email %> <%= link_to "登出", destroy_member_session_path, :method => :delete %>
-	<% else %>
-	<%= link_to "登入", new_member_session_path %>
-	<% end %>
-	<ul class = "nav">
-		<li><a href="/">首頁</a></li>
-		<li><a href="<%= service_root_path %>">顧客中心</a></li>
-		<li><a href="/orders/cart">購物車</a></li>
-	</ul>
+<header>
+  <div id="tool">
+  	<a href="/">首頁</a> <span>|</span> 
+  	<a href="/orders/cart"><img src="/images/tool-3.png">購物車</a> <span>|</span> 
+  	
+  	<% if current_member %>
+  	<a href="<%= service_root_path %>"><img src="/images/tool-2.png">帳戶</a> <span>|</span> 
+  	<%= link_to "登出", destroy_member_session_path, :method => :delete %>
+  	<% else %>
+  	<%= link_to "登入", new_member_session_path %>
+  	<% end %>
 
-	<div id="WRAPPER">
-		<div id="SIDE">
-			<ul>
-				<li>可用購物金：<%= current_member.discountpoint %>點</li>
-				<li><a href="<%= service_orders_path %>">訂單</a></li>
-				<li><a href="<%= edit_member_registration_path %>">修改會員資料</a></li>
-				<li><a href="<%= service_addressbooks_path %>">常用收件人地址</a></li>
-			</ul>
-		</div>
-		<div id="CONTENT">
-			<%= yield %>
-		</div>
-	</div>
-
+  </div>
+</header>
+<section id="container">
+  <aside>
+    <h3>會員中心</h3>
+    <div class="side">
+      <h4>可用購物金：<%= current_member.discountpoint %>點</h4>
+    </div>
+    <div class="side">
+      <h4><a href="<%= service_orders_path %>"><img src="/images/li-close.png">訂單查詢</a></h4>
+    </div>
+    <div class="side">
+      <h4><a href="<%= edit_member_registration_path %>"><img src="/images/li-close.png">會員資料</a></h4>
+    </div>
+    <div class="side">
+      <h4><a href="<%= service_addressbooks_path %>"><img src="/images/li-close.png">常用地址設定</a></h4>
+    </div>
+  </aside>
+  <%= yield %>
+</section>
+<footer></footer>
 </body>
 </html>

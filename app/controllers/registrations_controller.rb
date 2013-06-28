@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
-  layout "order"
+  layout :determine_layout
+
   def update
     # required for settings form to submit when password is left blank
     if params[:member][:password].blank?
@@ -17,4 +18,9 @@ class RegistrationsController < Devise::RegistrationsController
 
     redirect_to edit_member_registration_path
   end
+
+  private
+    def determine_layout
+      params[:action]=="edit" ? "service" : "order"
+    end
 end
