@@ -1,20 +1,125 @@
-<% if @orders.length>0 %>
+<section class="content" id="mb-order">
+	<h3>
+		訂單管理
+	</h3>
+	<div class="order-content">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th align="center">訂單編號</th>
+				<th align="center">訂單時間</th>
+				<th align="center">付款方式</th>
+				<th align="center">處理狀態</th>
+			</tr>
+			<% @orders.each do |order| %>			
+			<% case order.status %>			
+			<% when 'new' %>			
+			<% @status = "新訂單" %>			
+			<% when 'processing' %>			
+			<% @status = "處理中" %>			
+			<% when 'finish' %>			
+			<% @status = "已完成" %>			
+			<% end %>
 
-<% @orders.each do |order| %>
-<% case order.status %>
-<% when 'new' %>
-<% @status = "新訂單" %>
-<% when 'processing' %>
-<% @status = "處理中" %>
-<% when 'finish' %>
-<% @status = "已完成" %>
-<% end %>
+			<tr>
+				<td align="center" >
+					<%= link_to order.ordernum, service_order_path(order) %>
+				</td>
+				<td align="center"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %>	</td>
+				<td align="center"><%= order.paytype %></td>
+				<td align="center"><%= @status %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<div class="order-page">
+		<ul>
+			<li>
+				<a href="#">1</a>
+			</li>
+			<li>.</li>
+			<li>
+				<a href="#">2</a>
+			</li>
+			<li>.</li>
+			<li>
+				<a href="#">3</a>
+			</li>
+			<li>.</li>
+			<li>
+				<a href="#">下一頁</a>
+			</li>
+		</ul>
+	</div>
+	<h3>
+		訂單明細　20130612888888
+		<a href="#" style="color:#3cabd0">聯絡客服</a>
+	</h3>
+	<div class="order-list">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th width="52%" align="center">商品名稱</th>
+				<th width="12%" align="center">單價</th>
+				<th width="12%" align="center">數量</th>
+				<th width="12%" align="center">折扣</th>
+				<th width="12%" align="center">訂單金額</th>
+			</tr>
+			<tr>
+				<td align="center">13 吋 MacBook Pro</td>
+				<td align="center">70,286</td>
+				<td align="center">2</td>
+				<td align="center">無</td>
+				<td align="center">70,286</td>
+			</tr>
+			<tr>
+				<td align="center">13 吋 MacBook Pro</td>
+				<td align="center">70,286</td>
+				<td align="center">5</td>
+				<td align="center">無</td>
+				<td align="center">70,286</td>
+			</tr>
+		</table>
+		<h4>處理狀態</h4>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td colspan="5" style="padding:15px 0 15px 15px;color:#3cabd0">
+					<span href="#" class="active">訂單已出貨</span>
+					<a href="#">貨單追蹤查詢</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="order-log">
+		<h4>訂單狀態</h4>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="19%" align="center">2013/06/20  01:42</td>
+				<td width="81%">訂單處理中。</td>
+			</tr>
+			<tr>
+				<td align="center">2013/06/20  05:26</td>
+				<td>訂單匯款已確認。</td>
+			</tr>
+			<tr>
+				<td align="center">2013/06/20  07:07</td>
+				<td>訂單已出貨。</td>
+			</tr>
+		</table>
+	</div>
+	<div class="order-check">
+		<h4>匯款後登錄確認</h4>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th>請輸入匯款帳號密五碼</th>
+				<td>
+					<input name="" type="text"></td>
+				<th>匯款日期時間</th>
+				<td>
+					<input name="" type="text"></td>
+				<td>
+					<a>確認送出</a>
+				</td>
+			</tr>
+		</table>
 
-<p>
-	<%= order.created_at.strftime("%Y-%m-%d %H:%M") %> <%= link_to ("共"+order.orderitems.count.to_s+"件商品"), service_order_path(order) %> 訂單狀態 : <%= @status %>。
-</p>
-<% end %>
-
-<% else %>
-<p>沒有訂單紀錄。</p>
-<% end %>
+	</div>
+</section>
