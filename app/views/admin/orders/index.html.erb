@@ -1,32 +1,12 @@
-<div id="WRAPPER">
-	<div id="SIDE">
-		<ul>
-			<li><a href="/admin/orders?type=new">新訂單(<%= @countnew %>)</a></li>
-			<li><a href="/admin/orders?type=processing">處理中(<%= @countprocessing %>)</a></li>
-			<li><a href="/admin/orders?type=finish">已完成</a></li>
-		</ul>
-	</div>
-	<div id="CONTENT">
-		<% case params[:type] %>
-		<% when 'new' %>
-		<% @status = "新訂單" %>
-		<% when 'processing' %>
-		<% @status = "處理中訂單" %>
-		<% when 'finish' %>
-		<% @status = "已完成訂單" %>
-		<% else %>
-		<% @status = "新訂單" %>
-		<% end %>
-		<p><%= @status %>列表</p>
+<section class="content" id="sv-order">
+	<h3>訂單管理
+		<a href="/admin/orders?type=new" class="<%= 'active' if params[:type] == 'new' %>">未處理訂單(<%= @countnew %>)</a>
+		<a href="/admin/orders?type=processing" class="<%= 'active' if params[:type] == 'processing' %>">處理中訂單(<%= @countprocessing %>)</a>
+		<a href="/admin/orders?type=finish" class="<%= 'active' if params[:type] == 'finish' %>">已處理訂單</a></h3>
 
-		<% if @orders.length>0 %>
+		<%= render 'list' %>
+</section>
 
-		<% @orders.each do |order| %>
-		<p><%= order.created_at.strftime("%Y-%m-%d %H:%M") %> <%= order.buyername %>, <%= link_to (order.ordernum+" : 共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order) %>。</p>
-		<% end %>
-
-		<% else %>
-		<p>沒有訂單。</p>
-		<% end %>
-	</div>
-</div>
+<script type="text/javascript">
+$("div.side").eq(1).find("img").attr("src","/images/li-open.png");
+</script>

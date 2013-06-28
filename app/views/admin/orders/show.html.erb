@@ -1,12 +1,16 @@
-<div id="WRAPPER">
-	<div id="SIDE">
-		<ul>
-			<li><a href="/admin/orders?type=new">新訂單(<%= @countnew %>)</a></li>
-			<li><a href="/admin/orders?type=processing">處理中(<%= @countprocessing %>)</a></li>
-			<li><a href="/admin/orders?type=finish">已完成</a></li>
-		</ul>
-	</div>
-	<div id="CONTENT">
+<section class="content" id="sv-order">
+	<h3>訂單管理
+		<a href="/admin/orders?type=new" class="<%= 'active' if @order.status == 'new' %>">未處理訂單(<%= @countnew %>)</a>
+		<a href="/admin/orders?type=processing" class="<%= 'active' if @order.status == 'processing' %>">處理中訂單(<%= @countprocessing %>)</a>
+		<a href="/admin/orders?type=finish" class="<%= 'active' if @order.status == 'finish' %>">已處理訂單</a></h3>
+
+		<%= render 'list' %>
+
+		<h3>
+			出貨明細　<%= @order.ordernum %>
+			<a href="#" style="color:red">取消訂單</a>
+		</h3>
+
 		<% if @order.errors.any? %>
 		<p style="color:red">
 			<% @order.errors.full_messages.each do |message| %>
@@ -15,85 +19,137 @@
 		</p>
 		<% end %>
 
-		<p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-		<p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
-		<p>email : <%= @order.email %></p>
-		<p>收件者 : <%= @order.receivername %> 電話 : <%= @order.receivertel %></p>
-		<p>收件地址 : <%= @order.receiveraddress %></p>
-		<p>統編 : <%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %></p>
-		<p>發票 : <%= @order.invoicetype %></p>
-		<p>付款方式 : <%= @order.paytype %></p>
-		
-		<% if @order.payaccount %>
-		<p>付款日期 : <%= @order.paydate %></p>
-		<p>付款時間 : <%= @order.paytime %></p>
-		<p>付款帳號末五碼 : <%= @order.payaccount %></p>
-		<% end %>
-
-		<%= form_for(@order, :url => admin_order_path(@order) ) do |f| %>
-		<div class="box">
-			<p>明細 : </p>
-			<% @ordersum = 0 %>
-			<% @order.orderitems.select('orderitems.*, products.name, stocks.typename, stocks.id as stock_id, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |item| %>
-
-			<% itemsum = item.itemprice.to_i * item.amount.to_i %>
-			<% @ordersum = @ordersum + itemsum %>
-
-			<p><%= link_to (item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "") ), product_path(item.productlink) %> : $<%= item.itemprice %> / 訂購數量 : <input type="number" name="orderitem[<%=item.id%>]" value="<%=item.amount%>" /> = $<%= itemsum %></p>
-
-			<% end %>
-
-			<p>運費 : <%= @order.shippingfee %></p>
-			<p>抵用購物金 : <%= @order.discount %></p>
-			<p>訂單金額 : <%= @ordersum + @order.shippingfee - @order.discount %></p>
-
-			<p>產生購物金 : <%= @order.discountpoint %></p>
-
-			<p>訂單狀態 :
-				<% case @order.status %>
-				<% when 'new' %>
-				<%= "新訂單" %>
-				<% when 'processing' %>
-				<%= "處理中" %>
-				<% when 'finish' %>
-				<%= "已完成" %>
+		<div class="order-detail">
+			<h4>訂購人資訊</h4>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="10%">中文姓名</th>
+					<td width="27%"><%= @order.buyername %></td>
+					<th width="10%">電子郵件</th>
+					<td width="53%"><%= @order.email %></td>
+				</tr>
+				<tr>
+					<th>手機號碼</th>
+					<td><%= @order.buyertel %></td>
+					<th>聯絡地址</th>
+					<td>台北市新生南路一段142號3樓</td>
+				</tr>
+				<tr>
+					<th>發票資訊</th>
+					<td colspan="3">公司抬頭：夏天廣告有限公司         統一編號：<%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %> <%= @order.invoicetype %></td>
+				</tr>
+			</table>
+			<h4>收件人資訊</h4>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="10%">中文姓名</th>
+					<td width="27%"><%= @order.receivername %></td>
+					<th width="10%">手機號碼</th>
+					<td width="53%"><%= @order.receivertel %></td>
+				</tr>
+				<tr>
+					<th>送貨地址</th>
+					<td colspan="3"><%= @order.receiveraddress %></td>
+				</tr>
+				<tr>
+					<th>宅配方式</th>
+					<td colspan="3"><%= @order.paytype %></td>
+				</tr>
+				<% if @order.payaccount %>
+				<tr>
+					<th>付款日期</th>
+					<td colspan="3"><%= @order.paydate %></td>
+				</tr>
+				<tr>
+					<th>付款時間</th>
+					<td colspan="3"><%= @order.paytime %></td>
+				</tr>
+				<tr>
+					<th>付款帳號末五碼</th>
+					<td colspan="3"><%= @order.payaccount %></td>
+				</tr>
 				<% end %>
-			</p>
-
-			<% if (@order.status=="finish") %>
-			<p>運送方式 : <%= @order.shippingway %></p>
-			<p>追蹤碼 : <%= @order.shippingcode %></p>
-			<% end %>
-
-			<% if (@order.orderlogs) %>
-			<% @order.orderlogs.each do |log| %>
-			<p><%= log.created_at.strftime("%Y-%m-%d %H:%M") %> : <%= log.description %></p>
-			<% end %>
-			<% end %>
+			</table>
 		</div>
+		<div class="order-list">
+			<%= form_for(@order, :url => admin_order_path(@order) ) do |f| %>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="29%" align="center">商品名稱</th>
+					<th width="35%" align="center">單價</th>
+					<th width="12%" align="center">數量</th>
+					<th width="12%" align="center">小計</th>
+				</tr>
 
-		<p>更改訂單狀態 : <%= f.select(:status, options_for_select([["新訂單", "new"],["處理中", "processing"],["已完成", "finish"]], :selected => @order.status)) %></p>
+				<% @ordersum = 0 %>				
+				<% @order.orderitems.select('orderitems.*, products.name, stocks.typename, stocks.id as stock_id, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |item| %>
+
+				<% itemsum = item.itemprice.to_i * item.amount.to_i %>				
+				<% @ordersum = @ordersum + itemsum %>
+
+				<tr>
+					<td align="center"><%= item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "") %></td>
+					<td align="center"><%= item.itemprice %></td>
+					<td align="center">
+						<input type="number" name="orderitem[<%=item.id%>]" value="<%=item.amount%>" />
+					</td>
+					<td align="center">
+						<%= itemsum %>
+					</td>
+				</tr>
+
+				<% end %>
+				<tr>
+					<td colspan="4" align="right">
+						運費: <%= @order.shippingfee %><br>
+						抵用購物金 : <%= @order.discount %><br>
+						訂單金額 : <%= @ordersum + @order.shippingfee - @order.discount %><br>
+						產生購物金 : <%= @order.discountpoint %><br>
+						<%= f.submit "更新內容" %>
+
+						<% if (@order.status=="finish") %>
+						<p>運送方式 : <%= @order.shippingway %></p>
+						<p>追蹤碼 : <%= @order.shippingcode %></p>
+						<% end %>
+					</td>
+				</tr>
+			</table>
+			<h4>處理狀態</h4>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="5" style="padding:15px 0">
+						<p>更改訂單狀態 : <%= f.select(:status, options_for_select([["新訂單", "new"],["處理中", "processing"],["已完成", "finish"]], :selected => @order.status)) %></p>
 
 		<div id="orderfinish" style="display:none;">
 			<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
 			<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
 		</div>
+						<a href="#" class="active">未處理訂單</a>
+						<a href="#">處理中訂單</a>
+						<a href="#">已處理訂單</a>
+					</td>
+				</tr>
+			</table>
+			<% end %>
+		</div>
 
-		<%= f.submit %>
+		<% if (@order.orderlogs.count > 0) %>
+		<div class="order-log">
+			<h4>訂單狀態</h4>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<% @order.orderlogs.each do |log| %>
+				<tr>
+					<td width="19%" align="center"><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+					<td width="81%"><%= log.description %></td>
+				</tr>
+				<% end %>
+			</table>
+
+		</div>
+
 		<% end %>
-
-		<br>
-		<a href="/admin/orders?type=<%= @order.status %>">回訂單列表</a>
-	</div>
-</div>
+</section>
 
 <script type="text/javascript">
-$("#order_status").change(function(){
-	if($(this).val() == "finish"){
-		$("#orderfinish").show();
-	}
-	else{
-		$("#orderfinish").hide();
-	}
-});
+$("div.side").eq(1).find("img").attr("src","/images/li-open.png");
 </script>

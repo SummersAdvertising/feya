@@ -1,0 +1,37 @@
+<div class="order-content">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th align="center">訂單編號</th>
+			<th align="center">訂單時間</th>
+			<th align="center">付款方式</th>
+		</tr>
+		<% @orders.each do |order| %>
+		<tr>
+			<td align="center" >
+				<%= link_to (order.ordernum+" : 共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order) %></td>
+			<td align="center">
+				<%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+			<td align="center">
+				<%= order.paytype %></td>
+		</tr>
+		<% end %></table>
+</div>
+<div class="order-page">
+	<ul>
+		<li>
+			<a href="#">1</a>
+		</li>
+		<li>.</li>
+		<li>
+			<a href="#">2</a>
+		</li>
+		<li>.</li>
+		<li>
+			<a href="#">3</a>
+		</li>
+		<li>.</li>
+		<li>
+			<a href="#">下一頁</a>
+		</li>
+	</ul>
+</div>

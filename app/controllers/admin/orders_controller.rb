@@ -16,6 +16,7 @@ class Admin::OrdersController < AdminController
 
   def show
   	@order = Order.where(["orders.id = ?", params[:id]]).select("orders.*, members.email").joins('LEFT OUTER JOIN members on members.id = orders.member_id').first
+    @orders = Order.where(["status = ?", @order.status])
   end
 
   def update

@@ -27,7 +27,6 @@ padding:3px 0;margin:3px 0 0 1px;text-shadow:0 -1px 0 #1E81A2}
 
 aside{width:225px;float:left}
 aside h3{font-size:1.1em;color:#3cabd0;height:35px;border-bottom:1px dotted #3cabd0}
-aside h3 p{font-size:0.5em;color:#3cabd0; border-bottom:1px dotted #3cabd0}
 aside h4{padding:0 0 0 5px}
 aside h4 img{margin:0 8px 0 0;position:relative;top:-2px}
 aside h4 a{color:#2e2e2e}
@@ -150,6 +149,114 @@ width:75px;text-align:center;height:30px;padding:7px 0 0 0;float:right}
 #sv-member .active td{color:#3cabd0}
 
 #sv-member tr:last-child td{border-bottom:none}
+
+/*-----------------------------------------------------------------------管理者訂單---*/
+
+#sv-order h3{font-size:1.1em;color:#222;height:50px}
+#sv-order h3 a{display:inline-block;margin:0 0 0 10px;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:100px;text-align:center;height:30px;padding:7px 0 0 0;float:right}
+#sv-order h3 .active{background:url(/images/active.jpg) 0 bottom repeat-x}
+
+#sv-order .order-content{border:1px solid #D2D2D2;margin:0 0 30px 0}
+#sv-order .order-content th{border-bottom:1px solid #E6E6E6;color:#2e2e2e;padding:15px 0}
+#sv-order .order-content td{border-bottom:1px dotted #C6C6C6;padding:5px 0;color:#c6c6c6}
+#sv-order .order-content a{color:#ccc;text-decoration:underline}
+#sv-order .order-content .active,
+#sv-order .order-content .active a{color:#3cabd0}
+
+#sv-order .order-page{width:100%;text-align:right;height:55px}
+#sv-order .order-page ul{overflow:hidden;display:inline-block}
+#sv-order .order-page li{float:left;margin:0 0 0 10px}
+
+#sv-order h4{background:#E5E5E5;padding:10px 15px;border:1px solid #D2D2D2;color:#333}
+#sv-order .order-detail table{border-left:1px solid #E5E5E5;}
+#sv-order .order-detail th{border-bottom:1px solid #E6E6E6;color:#2e2e2e;padding:10px 0}
+#sv-order .order-detail td{border-bottom:1px dotted #C6C6C6;border-left:1px solid #E5E5E5;border-right:1px solid #E5E5E5;
+;padding:5px 0;color:#222;padding:0 0 0 10px}
+#sv-order .order-list input{text-align:center;border:1px solid #aaa;width:50px!important}
+
+#sv-order .order-list table{border-right:1px solid #E5E5E5}
+#sv-order .order-list th{border-bottom:1px solid #E6E6E6;border-left:1px solid #E5E5E5;color:#2e2e2e;padding:10px 0}
+#sv-order .order-list td{border-bottom:1px dotted #C6C6C6;border-left:1px solid #E5E5E5;padding:5px 0;color:#222}
+#sv-order .order-list a{display:inline-block;margin:0 0 0 10px;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:100px;text-align:center;height:30px;padding:7px 0 0 0;}
+
+#sv-order .order-log td{border-bottom:1px dashed #C6C6C6;padding:5px 0;color:#ccc}
+
+/*-----------------------------------------------------------------------會員訂單---*/
+
+#mb-order h3{font-size:1.1em;color:#222;height:50px}
+#mb-order h3 a{display:inline-block;margin:0 0 0 10px;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:100px;text-align:center;height:30px;padding:7px 0 0 0;float:right}
+
+#mb-order .order-content{border:1px solid #D2D2D2;margin:0 0 30px 0}
+#mb-order .order-content th{border-bottom:1px solid #E6E6E6;color:#2e2e2e;padding:15px 0}
+#mb-order .order-content td{border-bottom:1px dotted #C6C6C6;padding:5px 0;color:#c6c6c6}
+#mb-order .order-content a{color:#ccc;text-decoration:underline}
+#mb-order .order-content .active,
+#mb-order .order-content .active a{color:#3cabd0}
+
+#mb-order .order-page{width:100%;text-align:right;height:55px}
+#mb-order .order-page ul{overflow:hidden;display:inline-block}
+#mb-order .order-page li{float:left;margin:0 0 0 10px}
+
+#mb-order h4{background:#E5E5E5;padding:10px 15px;border:1px solid #D2D2D2;color:#333}
+#mb-order .order-detail table{border-left:1px solid #E5E5E5;}
+#mb-order .order-detail th{border-bottom:1px solid #E6E6E6;color:#2e2e2e;padding:10px 0}
+#mb-order .order-detail td{border-bottom:1px dotted #C6C6C6;border-left:1px solid #E5E5E5;border-right:1px solid #E5E5E5;
+;padding:5px 0;color:#222;padding:0 0 0 10px}
+#mb-order .order-list input{text-align:center;border:1px solid #aaa;width:50px!important}
+#mb-order .order-list table{border-right:1px solid #E5E5E5;border-top:1px solid #E5E5E5}
+#mb-order .order-list th{border-bottom:1px solid #E6E6E6;border-left:1px solid #E5E5E5;color:#2e2e2e;padding:10px 0}
+#mb-order .order-list td{border-bottom:1px dotted #C6C6C6;border-left:1px solid #E5E5E5;padding:5px 0;color:#222}
+#mb-order .order-list a{display:inline-block;margin:0 0 0 10px;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:100px;text-align:center;height:30px;padding:7px 0 0 0;color:#3cabd0}
+
+#mb-order .order-log td{border-bottom:1px dashed #C6C6C6;padding:5px 0;color:#ccc}
+#mb-order .order-check table{border:1px solid #E5E5E5;padding:10px}
+#mb-order .order-check table a{display:inline-block;margin:0 0 0 10px;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:100px;text-align:center;height:30px;padding:7px 0 0 0;color:#3cabd0}
+
+/*-----------------------------------------------------------------------會員資料+聯絡客服---*/
+
+#mb-info .info-content{margin:20px 0;border:1px solid #D2D2D2;padding:50px}
+#mb-info h3{font-size:1.1em;color:#222;height:20px}
+#mb-info th,
+#mb-info td{padding:10px 0}
+#mb-info th{color:#555}
+#mb-info td{color:#ccc}
+#mb-info .radio{width:25px}
+#mb-info input,
+#mb-info select{width:95%}
+
+#mb-info textarea{width:100%;min-height:150px;border:1px solid #DBDBDB}
+
+#mb-info .bt a{display:inline-block;margin:0 10px 0 0;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:75px;text-align:center;height:30px;padding:7px 0 0 0}
+
+#mb-info p{color:#222}
+#mb-info p a{color:#3cabd0;padding:0 15px;border-bottom:1px solid #3cabd0}
+#mb-info p span{color:#aaa}
+
+/*-----------------------------------------------------------------------會員資料---*/
+
+#mb-add h3{font-size:1.1em;color:#222;height:20px}
+#mb-add .add-content{margin:20px 0;border:1px solid #D2D2D2}
+#mb-add td{color:#ccc;padding:5px;border-bottom:1px dotted #C6C6C6}
+#mb-add .delete a{display:block;width:15px;height:17px;background:url(/images/delete.jpg) 0 0 no-repeat;text-indent:-7777px}
+
+#mb-add-new{padding:10px}
+#mb-add-new td{border:none}
+#mb-add-new a{display:inline-block;margin:0 10px 0 0;font-size:13px;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:75px;text-align:center;height:30px;padding:7px 0 0 0}
+#mb-add-new input{width:95%;}
 
 /*-----------------------------------------------------------------------頁尾---*/
 
