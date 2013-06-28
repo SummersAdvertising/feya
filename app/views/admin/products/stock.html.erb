@@ -1,13 +1,44 @@
-<h4>庫存管理</h4>
-<p>商品名稱: <%= @product.name %></p>
+<section class="content" id="sv-stock">
+	<h3>庫存管理</h3>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <td width="70%" style="color:#222"><%= @product.name %></td>
+	    <td width="24%" align="right"><input name="" type="text"></td>
+	    <td width="6%" align="right"><input name="" type="button" value="新增"></td>
+	  </tr>
+	</table>
 
-<%= form_for(@product, :url => saveStock_admin_product_path, :method => :post ) do |f| %>
+	<%= form_for(@product, :url => saveStock_admin_product_path, :method => :post ) do |f| %>
+	<div class="stock-content">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+		    <th width="17%">顏色</th>
+		    <th width="83%" align="left"  style="padding:0 0 0 20px">數量</th>
+		  </tr>
 
-<% @product.stocks.each do |stock| %>
-<p><%= (stock.typename + ": ") if stock.typename != "default" %><input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></p>
-<% end %>
+		  <% @product.stocks.each do |stock| %>
+		  <tr>
+		    <td align="center"><%= stock.typename %></td>
+		    <td align="left"><input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></td>
+		  </tr>
+		  <% end %>
+		</table>
+	</div>
 
-<%= f.submit %>
-<% end %>
+	<div class="stock-send">
+		<a href="#" id="submit">更新庫存</a> <a href="<%= edit_admin_product_path(params[:id]) %>">返回商品頁</a>
+	</div>
 
-<%= link_to 'Back', admin_product_path(@product) %>
+	<% end %>
+</section>
+
+<script type="text/javascript">
+if("<%= notice %>"){
+	alert("<%= notice %>");
+}
+$("#submit").click(function(event){
+	event.preventDefault();
+	$(this).parents("form:first").submit();
+});
+$("div.side").eq(0).find("img").attr("src","/images/li-open.png");
+</script>

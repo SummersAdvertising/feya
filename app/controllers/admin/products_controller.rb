@@ -53,7 +53,7 @@ class Admin::ProductsController < AdminController
           end
         end
         
-        format.html { redirect_to  admin_product_path(@product), notice: 'Product was successfully created.' }
+        format.html { redirect_to  stock_admin_product_path(@product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         @products = Product.all
@@ -102,7 +102,7 @@ class Admin::ProductsController < AdminController
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_product_path(params[:id]) }
+      format.html { redirect_to stock_admin_product_path(params[:id]), notice: ( '商品庫存已更新。') }
     end
 
   end

@@ -28,9 +28,11 @@
             <td><%= f.number_field :saleprice %></td>
           </tr>
           <tr>
+            <% if(@product.id) %>
             <td colspan="2">
-              <a href="#">編輯商品庫存量</a>
+              <a href="<%= stock_admin_product_path(@product) %>">編輯商品庫存量</a>
             </td>
+            <% end %>
           </tr>
         </table>
       </td>

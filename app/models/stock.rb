@@ -4,7 +4,7 @@ class Stock < ActiveRecord::Base
   validate :amount_value
 
   def amount_value
-  	if self.amount <= 0
+  	if (!self.amount || !(self.amount.is_a? Integer) || self.amount <= 0)
   		errors.add(:amount, "amount must be a positive number.")
   	end
   end

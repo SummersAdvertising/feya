@@ -4,7 +4,7 @@
 	<%= render 'list' %>
 
 	<div class="new-top">
-		<h3>編輯商品</h3>
+		<h3>編輯商品<a href="#" class="active">上架</a><a href="#">下架</a></h3>
 	</div>
 
 	<%= form_for(@product, :url => admin_product_path(@product)) do |f| %>
