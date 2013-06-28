@@ -2,7 +2,7 @@ class Admin::OrderrefundsController < AdminController
   layout "admin"
   
   def index
-    @orderrefunds = Orderrefund.select("orderrefunds.id, orderrefunds.created_at, orders.buyername, orders.ordernum").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id")
+    @orderrefunds = Orderrefund.select("orderrefunds.*, orders.buyername, orders.ordernum").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id")
 
     respond_to do |format|
       format.html # index.html.erb

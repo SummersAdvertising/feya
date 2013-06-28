@@ -1,14 +1,25 @@
-<table>
-	<tr>
-		<th>created_at</th>
-		<th>order number</th>
-		<th>buyer</th>
-	</tr>
-	<% @orderrefunds.each do |orderrefund| %>
-	<tr>
-		<td><%= orderrefund.created_at.strftime("%Y-%m-%d") %></td>
-		<td><%= orderrefund.ordernum %></td>
-		<td><%= link_to orderrefund.buyername, admin_orderrefund_path(orderrefund) %></td>
-	</tr>
-	<% end %>
-</table>
+<section class="content" id="sv-service">
+	<h3>客服管理<a href="#" class="active">已處理</a><a href="#">未處理</a></h3>
+	<div class="service-content">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th width="20%" align="center">申請日期</th>
+				<th width="20%" align="center">訂單編號</th>
+				<th width="50%" align="left">訊息內容</th>
+				<th width="10%" align="center">處理狀態</th>
+			</tr>
+			<% @orderrefunds.each do |orderrefund| %>
+			<tr>
+				<td align="center"><%= orderrefund.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+				<td align="center"><%= orderrefund.ordernum %></td>
+				<td align="left"><%= link_to orderrefund.buyername, admin_orderrefund_path(orderrefund) %></td>
+				<td align="center"><%= orderrefund.status %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</section>
+
+<script type="text/javascript">
+$("div.side").eq(2).find("img").attr("src","/images/li-open.png");
+</script>
