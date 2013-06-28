@@ -25,7 +25,7 @@ Cart::Application.routes.draw do
 
     get "members" => "members#index"
 
-    resources :products do
+    resources :products, :only => [:index, :edit, :create, :update] do
       member do
         get "stock"
         match "saveStock", :via => :post

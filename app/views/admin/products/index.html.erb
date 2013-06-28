@@ -1,20 +1,15 @@
-<% if @products.length > 0 %>
+<section class="content" id="sv-product-list">
+	<h3>商品管理</h3>
+	<%= render 'list' %>
 
-<table>
-	<tr>
-		<th>Name</th>
-	</tr>
-	<% @products.each do |product| %>
-	<tr>
-		<td><%= link_to product.name, admin_product_path(product) %></td>
-	</tr>
+	<div class="new-top">
+		<h3>新增商品</h3>
+	</div>
+	<%= form_for(@product, :url => admin_products_path) do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f} %>
 	<% end %>
-</table>
+</section>
 
-<% else %>
-
-<p>沒有任何上架商品。</p>
-
-<% end %>
-
-<%= link_to "新增商品", new_admin_product_path %>
+<script type="text/javascript">
+$("div.side").eq(0).find("img").attr("src","/images/li-open.png");
+</script>

@@ -1,8 +1,20 @@
-<h1>Editing product</h1>
+<section class="content" id="sv-product-list">
+	<h3>商品管理</h3>
 
-<%= form_for(@product, :url => admin_product_path(@product)) do |f| %>
-<%= render :partial => 'form', :locals => { :f => f} %>
-<% end %>
+	<%= render 'list' %>
 
-<%= link_to 'Show', admin_product_path(@product) %> |
-<%= link_to 'Back', admin_products_path %>
+	<div class="new-top">
+		<h3>編輯商品</h3>
+	</div>
+
+	<%= form_for(@product, :url => admin_product_path(@product)) do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f} %>
+	<% end %>
+</section>
+
+<script type="text/javascript">
+if("<%= notice %>"){
+	alert("<%= notice %>");
+}
+$("div.side").eq(0).find("img").attr("src","/images/li-open.png");
+</script>

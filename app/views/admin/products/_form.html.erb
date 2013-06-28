@@ -10,54 +10,59 @@
 </div>
 <% end %>
 
-<div class="field">
-  <%= f.label :name %><br />
-  <%= f.text_field :name %>
+<div class="new-content">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="50%" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="21%">商品名稱：</td>
+            <td width="79%"><%= f.text_field :name %></td>
+          </tr>
+          <tr>
+            <td>商品訂價：</td>
+            <td><%= f.number_field :price %></td>
+          </tr>
+          <tr>
+            <td>商品折扣價：</td>
+            <td><%= f.number_field :saleprice %></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <a href="#">編輯商品庫存量</a>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="50%" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="24%">商品主圖照片</td>
+            <td width="76%"><input name="" type="file"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="preview">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>產品說明：</td>
+    </tr>
+    <tr>
+      <td><%= f.text_area :description %></td>
+    </tr>
+  </table>
 </div>
-<div class="field">
-  <%= f.label :description %><br />
-  <%= f.text_area :description, :rows => "5" %>
-</div>
-<div class="field">
-  <%= f.label :price %><br />
-  <%= f.number_field :price %>
-</div>
-<div class="field">
-  <%= f.label :saleprice %><br />
-  <%= f.number_field :saleprice %>
-</div>
-<div class="field">
-  增加商品規格（顏色/尺寸）: <input data-type="type" type="text" /> <a class="addType" data-type="type" href="#">增加</a>
 
-  <% if @product.stocks.any? %>
-  <p>
-    <% @product.stocks.each do |stock| %>
-    <%= stock.typename %> 
-    <% end %>
-  </p>
-  <% end %>
-</div>
-<div class="actions">
-  <%= f.submit %>
+<div class="new-send">
+  <a href="#" id="submit">確認送出</a>
 </div>
 
 <script type="text/javascript">
-$(".addType").click(function(){
-  var type = $(this).data("type");
-  var typeContent = $("input[data-type="+type+"]").val();
-
-  if(typeContent){
-    var html = "<div>";
-    html += "<a href='#' data-type='delete'>刪除</a>";
-    html += "<input type='text' name='"+type+"[]' value='"+typeContent+"' readonly/>";
-    html += "</div>";
-    $(this).after(html);
-
-    $("a[data-type=delete]").unbind().click(function(){
-      $(this).parent().remove();
-    });
-  }
-  
-  $("input[data-type="+type+"]").val("");
+$("#submit").click(function(){
+  $(this).parents("form:first").submit();
 });
 </script>

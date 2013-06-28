@@ -1,0 +1,49 @@
+<% if @products.length > 0 %>
+<div class="list-content">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th align="center">編號</th>
+			<th align="center">名稱</th>
+			<th align="center">價格</th>
+			<th align="center">狀態</th>
+			<th align="center">編輯內容</th>
+		</tr>
+
+		<% @products.each do |product| %>
+		<tr>
+			<td align="center" class="number"><a><%= product.id %></a>
+				<% if product.stocks %>
+				<ul>
+					<li>庫存</li>
+					<% product.stocks.each do |stock| %>
+					<li><%= stock.typename == "default" ? product.name : stock.typename %><%= (": " + stock.amount.to_s) if stock.amount %></li>
+					<% end %>
+				</ul>
+				<% end %>
+			</td>
+			<td align="center"><%= product.name %></td>
+			<td align="center"><%= product.saleprice || product.price %></td>
+			<td align="center" class="status"><%= product.status %></td>
+			<td align="center" class="edit"><%= link_to "編輯", edit_admin_product_path(product) %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+<!--list-content-->
+<div class="list-page">
+	<ul>
+		<li><a href="#">1</a></li>
+		<li>.</li>
+		<li><a href="#">2</a></li>
+		<li>.</li>
+		<li><a href="#">3</a></li>
+		<li>.</li>
+		<li><a href="#">下一頁</a></li>
+	</ul>
+</div>
+<!--list-page-->
+<% else %>
+
+<p>沒有任何上架商品。</p>
+
+<% end %>

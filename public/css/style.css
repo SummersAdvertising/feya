@@ -63,7 +63,7 @@ aside li{padding:10px 0 0 0}
 #index-show #intro .count{color:#2e2e2e}
 
 #index-show #intro .add a{color:#3cabd0;font-size:22px;width:175px;height:40px;border:1px solid #CAC8C8;
-background:url(../images/bt.jpg) 0 bottom repeat-x;display:block;text-align:center;border-radius:5px;
+background:url(/images/bt.jpg) 0 bottom repeat-x;display:block;text-align:center;border-radius:5px;
 padding:5px 0 0 0}
 
 #index-show #detail{clear:both;border:1px solid #E5E5E5;margin:20px 0 0 0}
@@ -77,10 +77,10 @@ padding:5px 0 0 0}
 #sv-product-list .list-content{border:1px solid #D2D2D2;margin:0 0 30px 0}
 #sv-product-list .list-content th{border-bottom:1px solid #E6E6E6;color:#2e2e2e;padding:15px 0}
 #sv-product-list .list-content td{border-bottom:1px dotted #C6C6C6;padding:5px 0;color:#c6c6c6}
-#sv-product-list .list-content .edit a{display:block;width:17px;height:17px;text-indent:-7777px;background:url(../images/edit.png)}
+#sv-product-list .list-content .edit a{display:block;width:17px;height:17px;text-indent:-7777px;background:url(/images/edit.png)}
 #sv-product-list .list-content .number{position:relative}
 #sv-product-list .list-content .number a{position:relative;z-index:1;color:#c6c6c6;text-decoration:underline}
-#sv-product-list .list-content .number ul{display:none;border:1px solid #BFBFBF;background:url(../images/bt.jpg) 0 bottom repeat-x #fff;color:#888;
+#sv-product-list .list-content .number ul{display:none;border:1px solid #BFBFBF;background:url(/images/bt.jpg) 0 bottom repeat-x #fff;color:#888;
 position:absolute;top:28px;left:65px;padding:10px 15px;z-index:999}
 #sv-product-list .list-content .number:hover ul{display:block}
 #sv-product-list .list-content .number li{padding:2px 0}
@@ -94,9 +94,9 @@ position:absolute;top:28px;left:65px;padding:10px 15px;z-index:999}
 
 #sv-product-list .new-top h3{padding:25px 0 0 0;height:80px}
 #sv-product-list .new-top h3 a{display:inline-block;margin:0 0 0 10px;font-size:13px;
-background:url(../images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
 width:50px;text-align:center;height:30px;padding:7px 0 0 0}
-#sv-product-list .new-top h3 .active{background:url(../images/active.jpg) 0 bottom repeat-x}
+#sv-product-list .new-top h3 .active{background:url(/images/active.jpg) 0 bottom repeat-x}
 
 #sv-product-list .new-content td{padding:5px 0;color:#555}
 
@@ -108,7 +108,7 @@ width:50px;text-align:center;height:30px;padding:7px 0 0 0}
 
 #sv-product-list .new-send{width:100%;text-align:center;margin:20px 0 0 0}
 #sv-product-list .new-send a{display:inline-block;font-size:13px;
-background:url(../images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
 width:120px;text-align:center;height:40px;padding:12px 0 0 0}
 
 /*-----------------------------------------------------------------------庫存---*/
@@ -121,7 +121,7 @@ width:120px;text-align:center;height:40px;padding:12px 0 0 0}
 #sv-stock .stock-content th{color:#555}
 #sv-stock .stock-send{width:100%;text-align:right}
 #sv-stock .stock-send a{display:inline-block;font-size:13px;
-background:url(../images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
 width:100px;text-align:center;height:40px;padding:12px 0 0 0}
 
 /*-----------------------------------------------------------------------客服---*/
@@ -135,7 +135,7 @@ width:100px;text-align:center;height:40px;padding:12px 0 0 0}
 #sv-service .active td{color:#3cabd0}
 
 #sv-service h3 a{display:inline-block;margin:0 0 0 10px;font-size:13px;
-background:url(../images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
 width:75px;text-align:center;height:30px;padding:7px 0 0 0;float:right}
 
 /*-----------------------------------------------------------------------會員---*/
