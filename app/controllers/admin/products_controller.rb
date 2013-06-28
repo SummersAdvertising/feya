@@ -42,17 +42,12 @@ class Admin::ProductsController < AdminController
 
     respond_to do |format|
       if @product.save
-        if(params[:type])
-          params[:type].each do |type|
-            @stock = Stock.new
-            @stock.product_id = params[:id]
-            @stock.typename = type
-            @stock.amount = nil
+        @stock = @product.stocks.new
+        @stock.typename = "default"
+        @stock.amount = nil
 
-            @stock.save
-          end
-        end
-        
+        @stock.save
+
         format.html { redirect_to  stock_admin_product_path(@product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
