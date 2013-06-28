@@ -29,6 +29,8 @@ Cart::Application.routes.draw do
       member do
         get "stock"
         match "saveStock", :via => :post
+        match "enable", :via => :post
+        match "disable", :via => :post
       end
     end
 

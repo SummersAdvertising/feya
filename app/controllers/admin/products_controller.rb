@@ -116,4 +116,28 @@ class Admin::ProductsController < AdminController
       format.json { head :no_content }
     end
   end
+
+  def enable
+    @product = Product.find(params[:id])
+    @product.status = "上架"
+    @product.save
+
+    respond_to do |format|
+      format.html { redirect_to edit_admin_product_path(@product) }
+      format.json { render json: @product }
+    end
+    
+  end
+
+  def disable
+    @product = Product.find(params[:id])
+    @product.status = "下架"
+    @product.save
+
+    respond_to do |format|
+      format.html { redirect_to edit_admin_product_path(@product) }
+      format.json { render json: @product }
+    end
+    
+  end
 end

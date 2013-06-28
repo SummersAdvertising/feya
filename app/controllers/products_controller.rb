@@ -1,8 +1,9 @@
+#encoding: UTF-8
 class ProductsController < ApplicationController
   before_filter :record_login_redirect_path
   def index
     @order = Order.new
-    @products = Product.all
+    @products = Product.where(:status => "上架").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,8 +13,11 @@ class ProductsController < ApplicationController
 
   def show
     @order = Order.new
-    @product = Product.find(params[:id])
-    @product["hasType"] = (@product.stocks.first.typename != "default")
+    @product = Product.where(:status => "上架", :id => params[:id]).first
+    
+    if(@product)
+      @product["hasType"] = (@product.stocks.first.typename != "default")
+    end
 
     respond_to do |format|
       format.html # show.html.erb
