@@ -4,15 +4,22 @@
 
 	<h3>
 		訂單明細　<%= @order.ordernum %>
-		<a href="#" style="color:#3cabd0">聯絡客服</a>
-		<div>
-			<%= form_for(@orderrefund, :url => refund_service_order_path(@order)) do |f| %>
-			<p>原因描述：</p>
-			<p><%= f.text_area :description, :rows => "5" %></p>
-			<%= f.submit %>
-			<% end %>
-		</div>
+		<a href="#" style="color:#3cabd0" id="orderrefund">聯絡客服</a>
 	</h3>
+	<%= form_for(@orderrefund, :url => refund_service_order_path(@order), :html => { :style => "display:none;" }) do |f| %>
+	<table>
+		<tr>
+			<td><p>原因描述：</p></td>
+		</tr>
+		<tr>
+			<td><p><%= f.text_area :description, :rows => "5" %></p></td>
+		</tr>
+		<tr>
+			<td><%= f.submit "submit" %></td>
+		</tr>
+	</table>
+	<% end %>
+
 	<div class="order-list">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -34,11 +41,14 @@
 				<td align="center"><%= itemsum %></td>
 			</tr>
 			<% end %>
-
+			<tr>
+				<td align="left">
 			<p>運費 : <%= @order.shippingfee %></p>
 			<p>抵用購物金 : <%= @order.discount %></p>
 			<p>訂單金額 : <%= @ordersum + @order.shippingfee - @order.discount %></p>
 			<p>產生購物金 : <%= @order.discountpoint %></p>
+			</td>
+			</tr>
 		</table>
 
 		<h4>處理狀態</h4>
@@ -74,7 +84,7 @@
 		</table>
 	</div>
 
-	<% if (@order.orderlogs) %>
+	<% if (@order.orderlogs.count>0) %>
 	<div class="order-log">
 		<h4>訂單狀態</h4>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -86,7 +96,6 @@
 			<% end %>
 		</table>
 	</div>
-	
 	<% end %>
 
 	<% if (@order.paytype == "匯款" && !@order.payaccount ) %>
@@ -113,20 +122,19 @@
 			</tr>
 			<tr>
 				<td>
-					<a>確認送出</a><%= f.submit %>
+					<a>確認送出</a>
 				</td>
 			</tr>
 		</table>
 		<% end %>
-		
-
 	</div>
-<% end %>
-
-
-<% end %>
+	<% end %>
 
 <script type="text/javascript">
+$("#orderrefund").click(function(event) {
+	event.preventDefault();
+	$("#new_orderrefund").toggle();
+});
 $( "#order_paydate" ).datepicker().change(function(){
   $(this).datepicker("option", "dateFormat", "yy-mm-dd");
 
