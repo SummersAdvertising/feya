@@ -8,6 +8,7 @@ class Service::OrdersController < ApplicationController
 	end
 
 	def show
+		@orders = current_member.orders
 		@order = current_member.orders.find(params[:id])
 		@orderrefund = @order.orderrefunds.new
 

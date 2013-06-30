@@ -51,7 +51,7 @@
 
   <div id="detail">
     <h3>產品說明及注意事項</h3>
-    <p><%= @product.description.html_safe %></p>
+    <%= simple_format(@product.description.html_safe) %>
   </div>
 
   <% else %>

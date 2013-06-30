@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Product < ActiveRecord::Base
   attr_accessible :description, :name, :price, :saleprice
   validates :name, :price, :presence => true

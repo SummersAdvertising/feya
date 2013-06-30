@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130628025827) do
+ActiveRecord::Schema.define(:version => 20130621110216) do
 
   create_table "addressbooks", :force => true do |t|
     t.integer  "member_id"
+    t.string   "name"
     t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "admins", :force => true do |t|
@@ -56,9 +57,9 @@ ActiveRecord::Schema.define(:version => 20130628025827) do
     t.integer  "stock_id"
     t.integer  "amount"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "itemprice"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "orderlogs", :force => true do |t|
@@ -71,20 +72,20 @@ ActiveRecord::Schema.define(:version => 20130628025827) do
   create_table "orderrefunds", :force => true do |t|
     t.integer  "order_id"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "discount"
     t.integer  "member_id"
     t.integer  "shippingfee"
     t.string   "status"
     t.string   "shippingway"
     t.string   "shippingcode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "ordernum"
     t.string   "buyername"
     t.string   "buyertel"
     t.string   "invoicetype"
@@ -93,11 +94,11 @@ ActiveRecord::Schema.define(:version => 20130628025827) do
     t.string   "receiveraddress"
     t.string   "receivertel"
     t.string   "paytype"
-    t.string   "ordernum"
     t.date     "paydate"
     t.string   "paytime"
     t.string   "payaccount"
     t.integer  "discountpoint"
+    t.integer  "discount"
   end
 
   create_table "products", :force => true do |t|
@@ -106,8 +107,8 @@ ActiveRecord::Schema.define(:version => 20130628025827) do
     t.integer  "price"
     t.integer  "saleprice"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "stocks", :force => true do |t|
@@ -121,8 +122,8 @@ ActiveRecord::Schema.define(:version => 20130628025827) do
   create_table "tracebooks", :force => true do |t|
     t.integer  "member_id"
     t.integer  "stock_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
