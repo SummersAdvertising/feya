@@ -102,18 +102,27 @@
 
 				<% end %>
 				<tr>
-					<td colspan="4" align="right">
-						運費: <%= @order.shippingfee %><br>
-						抵用購物金 : <%= @order.discount %><br>
-						訂單金額 : <%= @ordersum + @order.shippingfee - @order.discount %><br>
-						產生購物金 : <%= @order.discountpoint %><br>
-						<%= f.submit "更新內容" %>
-
-						<% if (@order.status=="deliver") %>
-						<p>運送方式 : <%= @order.shippingway %></p>
-						<p>追蹤碼 : <%= @order.shippingcode %></p>
-						<% end %>
-					</td>
+					<td colspan="2" align="center">&nbsp;</td>
+					<td align="center">購物小計</td>
+					<td align="center"><%= @ordersum %></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">&nbsp;</td>
+					<td align="center">運費小計</td>
+					<td align="center"><%= @order.shippingfee %></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">&nbsp;</td>
+					<td align="center" class="total">訂單總計</td>
+					<td align="center" class="total"><%= @ordersum + @order.shippingfee - @order.discount %></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">&nbsp;</td>
+					<td align="center" class="total">產生購物金</td>
+					<td align="center" class="total"><%= @order.discountpoint %></td>
+				</tr>
+				<tr>
+					<td colspan="4" align="right"><%= f.submit "更新訂單內容", :style => "width:100px!important;" %></td>
 				</tr>
 			</table>
 			<% end %>
@@ -140,8 +149,8 @@
 						<% end %>
 
 						<% when 'deliver' %>
-						<%= "已出貨" %>
-
+						<%= "已出貨" %><br>
+						運送方式 : <%= @order.shippingway %> / 追蹤碼 : <%= @order.shippingcode %>
 						<% when 'cancel' %>
 						<%= "已取消此筆訂單" %>
 						<% end %>

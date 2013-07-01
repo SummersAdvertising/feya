@@ -26,10 +26,9 @@ class Admin::OrdersController < AdminController
     params[:orderitem].each do |orderitem|
       @orderitem = Orderitem.where(:id => orderitem[0]).select("orderitems.* ,products.name").joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id LEFT OUTER JOIN products on products.id = stocks.product_id').first
       @refundSum = 0
-      if(@orderitem.amount != orderitem[1].to_i)
-        @orderlog = Orderlog.new
-        @orderlog.order_id = @order.id
-        @orderlog.description = @orderitem.name + ((orderitem[1].to_i - @orderitem.amount) > 0 ? "增加" : "減少") + (@orderitem.amount - orderitem[1].to_i).abs.to_s + "個。"
+      if(@orderitem.amount != orderitem[1].to_i && orderitem[1].to_i > 0 )
+        @orderlog = @order.orderlogs.new
+        @orderlog.description = @orderitem.name + ((orderitem[1].to_i - @orderitem.amount) > 0 ? ": 追加" : ": 退訂") + (@orderitem.amount - orderitem[1].to_i).abs.to_s + "個。"
 
         if(@orderlog.save)
           #substract

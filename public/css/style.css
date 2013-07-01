@@ -227,6 +227,12 @@ width:100px;text-align:center;height:30px;padding:7px 0 0 0;color:#3cabd0}
 background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
 width:100px;text-align:center;height:30px;padding:7px 0 0 0;color:#3cabd0}
 
+#mb-order .info-content{margin:0 0 10px 0}
+#mb-order .info-content textarea{width:50%;min-height:100px;border:1px solid #dbdbdb}
+#mb-order .info-content .bt a{display:inline-block;margin:0 10px 0 0;font-size:13px;
+background:url(../images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
+width:75px;text-align:center;height:30px;padding:7px 0 0 0}
+
 /*-----------------------------------------------------------------------會員資料+聯絡客服---*/
 
 #mb-info .info-content{margin:20px 0;border:1px solid #D2D2D2;padding:50px}
