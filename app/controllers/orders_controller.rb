@@ -169,7 +169,7 @@ class OrdersController < ApplicationController
 					@traceItems.push(stockItem.id)
 				end
 			else
-				@orderItems.push({:id => stockItem.id,:name => stockItem.name+(("("+stockItem.typename+")") if stockItem.typename), :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+				@orderItems.push({:id => stockItem.id,:name => stockItem.name, :typename =>  stockItem.typename == "default" ? "未指定" : stockItem.typename, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 			end
 		end
 
