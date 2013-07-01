@@ -59,16 +59,20 @@
 						<% case @order.status %>
 						<% when 'new' %>
 						<%= "新訂單" %>
+						<% when 'check' %>
+						<%= "已收款" %>
 						<% when 'processing' %>
 						<%= "處理中" %>
-						<% when 'finish' %>
-						<%= "已完成" %>
+						<% when 'deliver' %>
+						<%= "已出貨" %>
+						<% when 'cancel' %>
+						<%= "已取消" %>
 						<% end %>
 					</span>
 				</td>
 			</tr>
 
-			<% if (@order.status=="finish") %>
+			<% if (@order.status=="deliver") %>
 			<tr>
 				<td colspan="5" style="padding:15px 0 15px 15px;color:#3cabd0">
 					運送方式 : <%= @order.shippingway %>

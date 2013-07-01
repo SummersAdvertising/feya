@@ -5,7 +5,7 @@ class Admin::OrdersController < AdminController
 
   def index
   	case params[:type]
-  	when "new", "processing", "finish"
+  	when "new", "check", "processing", "deliver", "cancel"
   		#do nothing
   	else
   		params[:type] = "new"
@@ -66,28 +66,8 @@ class Admin::OrdersController < AdminController
     end
 
     respond_to do |format|
-      if (@order.status != params[:order][:status] && @order.update_attributes(params[:order]))
-        @orderlog = Orderlog.new
-        @orderlog.order_id = @order.id
-        @orderlog.description = "訂單變更狀態為：" + params[:order][:status]
-        @orderlog.save
-
-        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
-        format.json { head :no_content }
-
-        case(@order.status)
-        when "processing"
-          Ordermailer.statusprocessing(@order.email, @order).deliver
-        when "finish"
-          Ordermailer.statusfinish(@order.email, @order).deliver
-        end
-
-      else
-        @order.status = @originStatus
-
-        format.html { render "show" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
+      format.json { head :no_content }
     end
   end
 

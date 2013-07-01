@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
 
   def count_orders
     @countnew = Order.where(["status = ?", "new"]).count
+    @countcheck = Order.where(["status = ?", "check"]).count
     @countprocessing = Order.where(["status = ?", "processing"]).count
+    @countdeliver = Order.where(["status = ?", "deliver"]).count
+    @countcancel = Order.where(["status = ?", "cancel"]).count
     
   end
 

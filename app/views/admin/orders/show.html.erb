@@ -1,14 +1,16 @@
 <section class="content" id="sv-order">
 	<h3>訂單管理
 		<a href="/admin/orders?type=new" class="<%= 'active' if @order.status == 'new' %>">未處理訂單(<%= @countnew %>)</a>
+		<a href="/admin/orders?type=check" class="<%= 'active' if @order.status == 'check' %>">已收款訂單(<%= @countcheck %>)</a>
 		<a href="/admin/orders?type=processing" class="<%= 'active' if @order.status == 'processing' %>">處理中訂單(<%= @countprocessing %>)</a>
-		<a href="/admin/orders?type=finish" class="<%= 'active' if @order.status == 'finish' %>">已處理訂單</a></h3>
+		<a href="/admin/orders?type=deliver" class="<%= 'active' if @order.status == 'deliver' %>">已出貨訂單(<%= @countdeliver %>)</a>
+		<a href="/admin/orders?type=cancel" class="<%= 'active' if @order.status == 'cancel' %>">已取消訂單(<%= @countcancel %>)</a></h3>
 
 		<%= render 'list' %>
 
 		<h3>
 			出貨明細　<%= @order.ordernum %>
-			<a href="#" style="color:red">取消訂單</a>
+			<%= link_to "取消訂單", admin_order_changestatus_cancel_path(@order), :method => :post, :style => "color:red", :class => "changeStatus" if @order.status != "cancel" %>
 		</h3>
 
 		<% if @order.errors.any? %>
@@ -107,30 +109,49 @@
 						產生購物金 : <%= @order.discountpoint %><br>
 						<%= f.submit "更新內容" %>
 
-						<% if (@order.status=="finish") %>
+						<% if (@order.status=="deliver") %>
 						<p>運送方式 : <%= @order.shippingway %></p>
 						<p>追蹤碼 : <%= @order.shippingcode %></p>
 						<% end %>
 					</td>
 				</tr>
 			</table>
+			<% end %>
 			<h4>處理狀態</h4>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td colspan="5" style="padding:15px 0">
-						<p>更改訂單狀態 : <%= f.select(:status, options_for_select([["新訂單", "new"],["處理中", "processing"],["已完成", "finish"]], :selected => @order.status)) %></p>
+						<% case @order.status %>
+						<% when 'new' %>
+						<% if @order.paytype == "匯款" %>
+						<%= link_to "確認已收款", admin_order_changestatus_check_path(@order), :method => :post, :class => "changeStatus active" %>
+						<% else %>
+						<%= link_to "確認訂單成立", admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
+						<% end %>
 
-		<div id="orderfinish" style="display:none;">
-			<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
-			<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
-		</div>
-						<a href="#" class="active">未處理訂單</a>
-						<a href="#">處理中訂單</a>
-						<a href="#">已處理訂單</a>
+						<% when 'check' %>
+						<%= link_to "確認訂單成立", admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
+						
+						<% when 'processing' %>
+						<%= form_for(@order, :url => admin_order_changestatus_deliver_path(@order), :method => :post) do |f| %>
+							<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
+							<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
+							<a href="#" id="submitDeliver">確認出貨</a>
+						<% end %>
+
+						<% when 'deliver' %>
+						<%= "已出貨" %>
+
+						<% when 'cancel' %>
+						<%= "已取消此筆訂單" %>
+						<% end %>
+						
+
+		
 					</td>
 				</tr>
 			</table>
-			<% end %>
+			
 		</div>
 
 		<% if (@order.orderlogs.count > 0) %>
@@ -151,5 +172,17 @@
 </section>
 
 <script type="text/javascript">
+if("<%= alert %>"){
+	alert("<%= alert %>");
+}
 $("div.side").eq(1).find("img").attr("src","/images/li-open.png");
+$(".changeStatus").click(function(event){
+	event.preventDefault();
+	if(!confirm("確定改變訂單狀態?")){
+		return false;
+	}
+});
+$("#submitDeliver").click(function(){
+	$(this).parents("form:first").submit();
+});
 </script>

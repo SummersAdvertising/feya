@@ -8,11 +8,14 @@ Cart::Application.routes.draw do
   end
 
   namespace :service do
+
     resources :orders, :only => [:index, :show, :update] do
       member do
         match "refund", :via => :post
       end
     end
+
+    resources :points, :only => [:index]
 
     resources :addressbooks, :only => [:index, :create, :update, :destroy]
     resources :tracebooks
@@ -35,7 +38,15 @@ Cart::Application.routes.draw do
     end
 
     resources :orderrefunds, :only => [:index, :show]
-    resources :orders, :only => [:index, :show, :update]
+    resources :orders, :only => [:index, :show, :update] do
+      namespace :changestatus do
+        match "check", :via => :post
+        match "processing", :via => :post
+        match "deliver", :via => :post
+        match "cancel", :via => :post
+      end
+    end
+    
     root :to => "products#index"
   end
 

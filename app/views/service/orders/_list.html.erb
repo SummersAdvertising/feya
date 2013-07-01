@@ -12,11 +12,15 @@
 			<% @orders.each do |order| %>			
 			<% case order.status %>			
 			<% when 'new' %>			
-			<% @status = "新訂單" %>			
+			<% @status = "新訂單" %>
+			<% when 'check' %>			
+			<% @status = "已收款" %>			
 			<% when 'processing' %>			
 			<% @status = "處理中" %>			
-			<% when 'finish' %>			
-			<% @status = "已完成" %>			
+			<% when 'deliver' %>			
+			<% @status = "已出貨" %>
+			<% when 'cancel' %>			
+			<% @status = "已取消" %>			
 			<% end %>
 
 			<tr>

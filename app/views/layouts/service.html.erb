@@ -31,17 +31,20 @@
   <aside>
     <h3>會員中心</h3>
     <div class="side">
-      <h4>可用購物金：<%= current_member.discountpoint %>點</h4>
-    </div>
-    <div class="side">
       <h4><a href="<%= service_orders_path %>"><img src="/images/li-close.png">訂單查詢</a></h4>
     </div>
     <div class="side">
       <h4><a href="<%= edit_member_registration_path %>"><img src="/images/li-close.png">會員資料</a></h4>
     </div>
     <div class="side">
+      <h4><a href="/service/points"><img src="/images/li-close.png">購物金記錄</a></h4>
+    </div>
+    <div class="side">
       <h4><a href="<%= service_addressbooks_path %>"><img src="/images/li-close.png">常用地址設定</a></h4>
     </div>
+    <!-- <div class="side">
+      <h4><a href="#"><img src="/images/li-close.png">聯絡客服</a></h4>
+    </div> -->
   </aside>
   <%= yield %>
 </section>
