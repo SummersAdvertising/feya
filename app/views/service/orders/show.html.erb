@@ -108,7 +108,7 @@
 		<%= form_for(@order, :url => service_order_path(@order)) do |f| %>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<th>請輸入匯款帳號密五碼</th>
+				<th>請輸入匯款帳號後五碼</th>
 				<td>
 					<%= f.text_field :payaccount %></td>
 			</tr>
@@ -126,7 +126,7 @@
 			</tr>
 			<tr>
 				<td>
-					<a>確認送出</a>
+					<a href="#" id="submit">確認送出</a>
 				</td>
 			</tr>
 		</table>
@@ -135,9 +135,13 @@
 	<% end %>
 
 <script type="text/javascript">
-if("<%= alert %>"){
-	alert("<%= alert %>");
+if("<%= alert || notice %>"){
+	alert("<%= alert|| notice %>");
 }
+$("#submit").click(function(event){
+	event.preventDefault();
+	$(this).parents("form:first").submit();
+});
 $("#orderrefund").click(function(event) {
 	event.preventDefault();
 	$("#new_orderrefund").toggle();
