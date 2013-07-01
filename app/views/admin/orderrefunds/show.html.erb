@@ -1,8 +1,0 @@
-<p>buyer: <%= @orderrefund.buyername %> / tel: <%= @orderrefund.buyertel %></p>
-<p>created_at: <%= @orderrefund.created_at.strftime("%Y-%m-%d") %></p>
-<p><%= link_to "detail", admin_order_path(@orderrefund.id) %></p>
-<p>msg:<%= @orderrefund.description %></p>
-
-<script type="text/javascript">
-$("div.side").eq(2).find("img").attr("src","/images/li-open.png");
-</script>
