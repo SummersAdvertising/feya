@@ -1,5 +1,5 @@
 <section class="content" id="sv-service">
-	<h3>客服管理<a href="#" class="active">已處理</a><a href="#">未處理</a></h3>
+	<h3>客服管理<a href="/admin/orderrefunds?type=done" <%= 'class=active' if(@status=='已處理') %> >已處理</a><a href="/admin/orderrefunds?type=new" <%= 'class=active' if(@status=='未處理') %> >未處理</a></h3>
 	<div class="service-content">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -11,9 +11,15 @@
 			<% @orderrefunds.each do |orderrefund| %>
 			<tr>
 				<td align="center"><%= orderrefund.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-				<td align="center"><%= orderrefund.ordernum %></td>
-				<td align="left"><%= link_to orderrefund.buyername, admin_orderrefund_path(orderrefund) %></td>
-				<td align="center"><%= orderrefund.status %></td>
+				<td align="center"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.id) %></td>
+				<td align="left"><%= simple_format(orderrefund.description.html_safe) %></td>
+				<td align="center">
+					<%if orderrefund.status =='未處理' %>
+					<%=link_to "設為已處理", done_admin_orderrefund_path(orderrefund), :method => :post %>
+					<% else %>
+					<%= orderrefund.status %>
+					<% end %>
+				</td>
 			</tr>
 			<% end %>
 		</table>

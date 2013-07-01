@@ -45,7 +45,8 @@ class Service::OrdersController < ApplicationController
 				Ordermailer.refund(current_member.email, @orderrefund).deliver
 				format.html { redirect_to service_order_path(@order), notice: 'Order was successfully updated.' }
 			else
-				format.html { render "show" }
+				@orders = current_member.orders
+				format.html { redirect_to service_order_path(@order), alert: '請輸入問題描述' }
 				format.json { render json: @order.errors, status: :unprocessable_entity }
 			end
 		end

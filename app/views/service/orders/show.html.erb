@@ -135,6 +135,9 @@
 	<% end %>
 
 <script type="text/javascript">
+if("<%= alert %>"){
+	alert("<%= alert %>");
+}
 $("#orderrefund").click(function(event) {
 	event.preventDefault();
 	$("#new_orderrefund").toggle();

@@ -37,7 +37,12 @@ Cart::Application.routes.draw do
       end
     end
 
-    resources :orderrefunds, :only => [:index, :show]
+    resources :orderrefunds, :only => [:index, :show] do
+      member do
+        match "done", :via => :post
+      end
+    end
+
     resources :orders, :only => [:index, :show, :update] do
       namespace :changestatus do
         match "check", :via => :post
