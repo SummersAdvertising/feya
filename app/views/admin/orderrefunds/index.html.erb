@@ -11,11 +11,11 @@
 			<% @orderrefunds.each do |orderrefund| %>
 			<tr>
 				<td align="center"><%= orderrefund.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-				<td align="center"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.id) %></td>
+				<td align="center"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.id), :target => "_blank" %></td>
 				<td align="left"><%= simple_format(orderrefund.description.html_safe) %></td>
 				<td align="center">
 					<%if orderrefund.status =='未處理' %>
-					<%=link_to "設為已處理", done_admin_orderrefund_path(orderrefund), :method => :post %>
+					<%=link_to "設為已處理", done_admin_orderrefund_path(orderrefund), :method => :post, data: { confirm: "確定將此留言設為已處理?" } %>
 					<% else %>
 					<%= orderrefund.status %>
 					<% end %>

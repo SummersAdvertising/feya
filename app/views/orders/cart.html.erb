@@ -36,4 +36,11 @@
 <%= render 'cart_js' %>
 <script type="text/javascript">
 $("ul.step>li").eq(0).addClass("active");
+$("#next").click(function(){
+  if(!(Object.keys(cartitems).length > 0)){
+    alert("請先將商品放入購物車。");
+    return false;
+  }
+
+});
 </script>

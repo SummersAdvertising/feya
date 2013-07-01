@@ -14,14 +14,12 @@
 
 <body>
 	<header>
-		<div id="tool"><img src="/images/tool-1.png"/>聯絡客服 01-23456789 <span>|</span><a href="#"><img src="/images/tool-2.png">帳戶</a> <span>|</span> <a href="#"><img src="/images/tool-3.png">購物車</a></div>
+		<div id="tool"><img src="/images/tool-1.png"/>聯絡客服 01-23456789 <span>|</span><%= link_to (image_tag("/images/tool-2.png")+"登出"), admin_logout_path %> <span>|</span> <a href="/"><img src="/images/tool-3.png">回首頁</a></div>
 	</header>
 	<section id="container">
 		<aside>
 			<% if session[:admin] %>
-			<h3>管理者中心
-				<!-- <p><%= link_to "登出", admin_logout_path %> / <%= link_to "回首頁", root_path %></p> -->
-			</h3>
+			<h3>管理者中心</h3>
 
 			<div class="side">
 				<h4><a href="/admin"><img src="/images/li-close.png">商品管理</a></h4>
