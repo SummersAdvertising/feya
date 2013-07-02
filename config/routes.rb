@@ -33,7 +33,7 @@ Cart::Application.routes.draw do
         match "disable", :via => :post
       end
 
-      resources :stocks, :only => [:index, :create] do
+      resources :stocks, :only => [:index, :create, :destroy] do
         collection do
           match "updateStocks", :via => :post
         end

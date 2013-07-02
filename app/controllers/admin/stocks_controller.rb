@@ -38,6 +38,22 @@ class Admin::StocksController < AdminController
     respond_to do |format|
       format.html { redirect_to admin_product_stocks_path(params[:product_id]), notice: ( '商品庫存已更新。') }
     end
+  end
 
+  def destroy
+    @stock = Stock.find(params[:id])
+    @stock.destroy
+
+    @product = Product.find(params[:product_id])
+
+    if(@product.stocks.count == 0)
+      @stock = @product.stocks.new
+      @stock.typename = "default"
+      @stock.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_product_stocks_path(params[:product_id]) }
+    end    
   end
 end

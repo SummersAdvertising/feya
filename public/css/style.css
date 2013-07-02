@@ -123,6 +123,8 @@ width:120px;text-align:center;height:40px;padding:12px 0 0 0}
 background:url(/images/bt.jpg) 0 0 repeat-x;border-radius:5px;border:1px solid #CAC8C8;
 width:100px;text-align:center;height:40px;padding:12px 0 0 0}
 
+#sv-stock .delete a{display:block;width:15px;height:17px;background:url(/images/delete.jpg) 0 0 no-repeat;text-indent:-7777px}
+
 /*-----------------------------------------------------------------------客服---*/
 
 #sv-service .service-content{border:1px solid #D2D2D2;border-bottom:none;margin:20px 0}
