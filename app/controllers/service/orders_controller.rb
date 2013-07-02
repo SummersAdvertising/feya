@@ -4,11 +4,11 @@ class Service::OrdersController < ApplicationController
 	layout "service"
 
 	def index
-		@orders = current_member.orders
+		@orders = current_member.orders.order("created_at DESC").all
 	end
 
 	def show
-		@orders = current_member.orders
+		@orders = current_member.orders.order("created_at DESC").all
 		@order = current_member.orders.find(params[:id])
 		@orderrefund = @order.orderrefunds.new
 

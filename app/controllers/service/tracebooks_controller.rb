@@ -3,7 +3,7 @@ class Service::TracebooksController < ApplicationController
 	layout "service"
 
 	def index
-		@tracebooks = current_member.tracebooks
+		@tracebooks = current_member.tracebooks.order("created_at DESC").all
 	end
 
 	def show

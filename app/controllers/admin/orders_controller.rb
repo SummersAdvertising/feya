@@ -11,12 +11,12 @@ class Admin::OrdersController < AdminController
   		params[:type] = "new"
   	end
 
-  	@orders = Order.where(["status = ?", params[:type]])
+  	@orders = Order.where(["status = ?", params[:type]]).order("created_at DESC").all
   end
 
   def show
   	@order = Order.where(["orders.id = ?", params[:id]]).select("orders.*, members.email").joins('LEFT OUTER JOIN members on members.id = orders.member_id').first
-    @orders = Order.where(["status = ?", @order.status])
+    @orders = Order.where(["status = ?", @order.status]).order("created_at DESC").all
   end
 
   def update

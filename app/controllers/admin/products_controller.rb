@@ -3,7 +3,7 @@ class Admin::ProductsController < AdminController
   layout "admin"
   
   def index
-    @products = Product.all
+    @products = Product.order("created_at DESC").all
     @product = Product.new
 
     respond_to do |format|
@@ -13,7 +13,7 @@ class Admin::ProductsController < AdminController
   end
 
   def edit
-    @products = Product.all
+    @products = Product.order("created_at DESC").all
     @product = Product.find(params[:id])
   end
 
