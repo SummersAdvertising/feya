@@ -25,8 +25,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		@order = Order.new(params[:order])
-		@order.member_id = current_member.id
+		@order = current_member.orders.new(params[:order])
 		@order.status = "new"
 		@order.ordernum = Date.today.strftime("%Y%m%d").to_s + ("%04d" % (Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1))
 
@@ -37,7 +36,7 @@ class OrdersController < ApplicationController
 			@order.shippingfee = 150
 		else
 			@order.shippingfee = 0
-		end			 	
+		end
 
 		@checkItems = Hash.new
 		JSON.parse(params[:orderItems]).each do |orderItem|
@@ -49,8 +48,12 @@ class OrdersController < ApplicationController
 		@orderItems = @checkResult[0]
 		@traceItems = @checkResult[1]
 
-		if(@order.save)
-
+		if(!params[:check])
+			respond_to do |format|
+				format.html { redirect_to check_orders_path, alert: '請閱讀「網站使用條款」、「隱私權政策」、「免責聲明」勾選' }
+				format.json { render json: @order }
+			end
+		elsif(@order.save)
 			#if(params[:updateMemberinfo]) => update
 			if(params[:updateMemberinfo] || params[:setDefault])
 				if(params[:updateMemberinfo])
