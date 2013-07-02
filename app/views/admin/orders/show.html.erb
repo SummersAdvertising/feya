@@ -33,12 +33,11 @@
 				<tr>
 					<th>手機號碼</th>
 					<td><%= @order.buyertel %></td>
-					<th>聯絡地址</th>
-					<td>台北市新生南路一段142號3樓</td>
 				</tr>
 				<tr>
 					<th>發票資訊</th>
-					<td colspan="3">公司抬頭：夏天廣告有限公司         統一編號：<%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %> <%= @order.invoicetype %></td>
+					<td colspan="3">
+						<%= @order.invoicetype %> / 發票抬頭：<%= (@order.invoicename && @order.invoicename.length > 0) ? @order.invoicename : "未填寫。" %> 統一編號：<%= (@order.companynum && @order.companynum.length > 0) ? @order.companynum : "未填寫。" %></td>
 				</tr>
 			</table>
 			<h4>收件人資訊</h4>

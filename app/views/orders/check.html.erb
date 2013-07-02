@@ -1,5 +1,15 @@
 <% if @orderItems && @orderItems.length>0 %>
 
+<% if @order.errors.any? %>
+<div id="error_explanation">
+  <ul>
+    <% @order.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
 <!--
 <% if @traceItems %>
 <div class="box">
@@ -114,10 +124,15 @@
     </tr>
     <tr>
       <td>&nbsp;</td>
+      <th width="7%" align="left">發票</th>
+      <td width="21%"><%= f.select :invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]]) %></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <th width="7%" align="left">發票抬頭</th>
+      <td width="21%"><%= f.text_field :invoicename %></td>
       <th width="7%" align="left">統一編號</th>
       <td width="21%"><%= f.text_field :companynum %></td>
-      <th width="7%" align="left">發票</th>
-      <td width="21%"><%= f.select(:invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]])) %></td>
       <td width="35%">&nbsp;</td>
     </tr>
     <tr>
