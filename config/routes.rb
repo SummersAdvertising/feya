@@ -8,7 +8,6 @@ Cart::Application.routes.draw do
   end
 
   namespace :service do
-
     resources :orders, :only => [:index, :show, :update] do
       member do
         match "refund", :via => :post
@@ -18,7 +17,7 @@ Cart::Application.routes.draw do
     resources :points, :only => [:index]
 
     resources :addressbooks, :only => [:index, :create, :update, :destroy]
-    resources :tracebooks
+    #resources :tracebooks
     root :to => "orders#index"
   end
   
@@ -26,7 +25,7 @@ Cart::Application.routes.draw do
     get "login", "logout"
     match "checkAdmin", :via => :post
 
-    get "members" => "members#index"
+    resources :members, :only => [:index]
 
     resources :products, :only => [:index, :edit, :create, :update] do
       member do
@@ -37,7 +36,7 @@ Cart::Application.routes.draw do
       end
     end
 
-    resources :orderrefunds, :only => [:index, :show] do
+    resources :orderrefunds, :only => [:index] do
       member do
         match "done", :via => :post
       end

@@ -18,7 +18,7 @@
 
 		  <% @product.stocks.each do |stock| %>
 		  <tr>
-		    <td align="center"><%= stock.typename %></td>
+		    <td align="center"><%= stock.typename == "default" ? "未指定" : stock.typename %></td>
 		    <td align="left"><input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></td>
 		  </tr>
 		  <% end %>
