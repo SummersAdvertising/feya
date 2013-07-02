@@ -7,7 +7,7 @@
   <p>訂單異動申請。</p>
   <div>
     <p>訂單編號:<%= @order.ordernum %></p>
-    <p>異動描述:<%= @refund.description %></p>
+    <p>異動描述:<%= simple_format(@refund.description) %></p>
   </div>  
 </body>
 </html>

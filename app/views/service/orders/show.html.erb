@@ -27,40 +27,47 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<th width="52%" align="center">商品名稱</th>
+				<th width="12%" align="center">分類</th>
 				<th width="12%" align="center">單價</th>
 				<th width="12%" align="center">數量</th>
 				<th width="12%" align="center">訂單金額</th>
 			</tr>
 
 			<% @ordersum = 0 %>
-			<% @order.orderitems.select('orderitems.*, products.name, stocks.typename, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |item| %>
+			<% @order.orderitems.select('orderitems.*, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').each do |item| %>
 			<% itemsum = item.itemprice.to_i * item.amount.to_i %>
 			<% @ordersum = @ordersum + itemsum %>
 
 			<tr>
-				<td align="center"><%= item.name + ((item.typename && item.typename != "default") ? ("("+item.typename+")") : "")  %></td>
+				<td align="center"><%= item.itemname %></td>
+				<td align="center"><%= item.itemtype %></td>
 				<td align="center"><%= item.itemprice %></td>
 				<td align="center"><%= item.amount %></td>
 				<td align="center"><%= itemsum %></td>
 			</tr>
 			<% end %>
 			<tr>
-				<td colspan="2" align="center">&nbsp;</td>
+				<td colspan="3" align="center">&nbsp;</td>
 				<td align="center">購物小計</td>
 				<td align="center"><%= @ordersum %></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">&nbsp;</td>
+				<td colspan="3" align="center">&nbsp;</td>
 				<td align="center">運費小計</td>
 				<td align="center"><%= @order.shippingfee %></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">&nbsp;</td>
+				<td colspan="3" align="center">&nbsp;</td>
+				<td align="center">抵用購物金</td>
+				<td align="center"><%= @order.discount %></td>
+			</tr>
+			<tr>
+				<td colspan="3" align="center">&nbsp;</td>
 				<td align="center" class="total">訂單總計</td>
 				<td align="center" class="total"><%= @ordersum + @order.shippingfee - @order.discount %></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">&nbsp;</td> 
+				<td colspan="3" align="center">&nbsp;</td> 
 				<td align="center" class="total">產生購物金</td>
 				<td align="center" class="total"><%= @order.discountpoint %></td>
 			</tr>

@@ -77,11 +77,12 @@ class OrdersController < ApplicationController
 			@ordersum = 0
 
 			@orderItems.each do |orderItem|
-				@orderItem = Orderitem.new
-				@orderItem.order_id = @order.id
+				@orderItem = @order.orderitems.new
 				@orderItem.stock_id = orderItem[:id]
 				@orderItem.amount = orderItem[:amount]
 				@orderItem.itemprice = orderItem[:saleprice] ? orderItem[:saleprice] : orderItem[:price]
+				@orderItem.itemname = orderItem[:name]
+				@orderItem.itemtype = orderItem[:typename]
 
 				if(@orderItem.save)
 					#substract stock

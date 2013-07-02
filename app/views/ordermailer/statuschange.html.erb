@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <% case @order.status %>
+  <% when "check" %>
+  <% @msg = "已收到您的匯款，將儘速處理您的訂單。" %>
+  <% when "processing" %>
+  <% @msg = "您的訂單已成立，將儘速為您出貨。" %>
+  <% when "deliver" %>
+  <% @msg = "您訂購的商品已寄出。" %>
+  <% when "cancel" %>
+  <% @msg = "您的訂單已取消。" %>
+  <% end %>
+  <p><%= @msg %></p>
+  <p>下單時間：<%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+  <p>訂單編號：<%= @order.ordernum %></p>
+</body>
+</html>

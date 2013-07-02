@@ -13,16 +13,21 @@ class Ordermailer < ActionMailer::Base
     mail(:to => Admin.first.email, :subject => "商品補貨通知")    
   end
 
-  def statusprocessing(receiver, order)
-  	@order = order
-  	mail(:to => receiver, :subject => "[進度通知]訂單處理中")
-  	
-  end
-
-  def statusfinish(receiver, order)
+  def statuschange(receiver, order)
   	@order = order
 
-  	mail(:to => receiver, :subject => "[進度通知]訂單已完成")
+    case @order.status
+    when "check"
+      @status = "已收款。"
+    when "processing"
+      @status = "處理中。"
+    when "deliver"
+      @status = "已寄送。"
+    when "cancel"
+      @status = "已取消。"
+    end
+
+  	mail(:to => receiver, :subject => ("[進度通知]訂單" + @status) )
   	
   end
 
