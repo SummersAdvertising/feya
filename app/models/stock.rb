@@ -1,5 +1,6 @@
 class Stock < ActiveRecord::Base
   attr_accessible :amount, :product_id, :typename
+  validates :typename, :presence => true
   validates_uniqueness_of :typename, :scope => [:product_id]
   validate :amount_value, :if => :is_amount?
 

@@ -12,20 +12,11 @@ class Admin::OrderrefundsController < AdminController
       @status = "未處理"
     end
 
-    @orderrefunds = Orderrefund.where(["orderrefunds.status = ?", @status]).select("orderrefunds.*, orders.buyername, orders.ordernum").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id")
+    @orderrefunds = Orderrefund.where(["orderrefunds.status = ?", @status]).select("orderrefunds.*, orders.buyername, orders.ordernum").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id").order("orderrefunds.created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orderrefunds }
-    end
-  end
-
-  def show
-    @orderrefund = Orderrefund.where(:id => params[:id]).select("*").joins("LEFT OUTER JOIN orders on orders.id = orderrefunds.order_id").first
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @orderrefund }
     end
   end
 

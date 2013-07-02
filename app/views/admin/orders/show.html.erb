@@ -113,6 +113,11 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">&nbsp;</td>
+					<td align="center" class="total">抵用購物金</td>
+					<td align="center" class="total"><%= @order.discount %></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">&nbsp;</td>
 					<td align="center" class="total">訂單總計</td>
 					<td align="center" class="total"><%= @ordersum + @order.shippingfee - @order.discount %></td>
 				</tr>

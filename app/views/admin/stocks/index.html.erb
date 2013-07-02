@@ -1,0 +1,46 @@
+<section class="content" id="sv-stock">
+	<h3>庫存管理</h3>
+	<%= form_for(@stock, :url => admin_product_stocks_path(params[:product_id])) do |f| %>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <td width="70%" style="color:#222"><%= @product.name %></td>
+	    <td width="24%" align="right"><%= f.text_field :typename %></td>
+	    <td width="6%" align="right"><%= f.submit "新增分類" %></td>
+	  </tr>
+	</table>
+	<% end %>
+
+	<%= form_for(@stocks, :url => updateStocks_admin_product_stocks_path(params[:product_id]), :method => :post ) do |f| %>
+	<div class="stock-content">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+		    <th width="17%">分類</th>
+		    <th width="83%" align="left"  style="padding:0 0 0 20px">數量</th>
+		  </tr>
+
+		  <% @stocks.each do |stock| %>
+		  <tr>
+		    <td align="center"><%= stock.typename == "default" ? "未指定" : stock.typename %></td>
+		    <td align="left"><input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></td>
+		  </tr>
+		  <% end %>
+		</table>
+	</div>
+
+	<div class="stock-send">
+		<a href="#" id="submit">更新庫存</a> <a href="<%= edit_admin_product_path(params[:product_id]) %>">返回商品頁</a>
+	</div>
+
+	<% end %>
+</section>
+
+<script type="text/javascript">
+if("<%= notice || alert %>"){
+	alert("<%= notice || alert %>");
+}
+$("#submit").click(function(event){
+	event.preventDefault();
+	$(this).parents("form:first").submit();
+});
+$("div.side").eq(0).find("img").attr("src","/images/li-open.png");
+</script>

@@ -16,7 +16,7 @@ Cart::Application.routes.draw do
 
     resources :points, :only => [:index]
 
-    resources :addressbooks, :only => [:index, :create, :update, :destroy]
+    resources :addressbooks, :only => [:index, :create, :destroy]
     #resources :tracebooks
     root :to => "orders#index"
   end
@@ -29,10 +29,14 @@ Cart::Application.routes.draw do
 
     resources :products, :only => [:index, :edit, :create, :update] do
       member do
-        get "stock"
-        match "saveStock", :via => :post
         match "enable", :via => :post
         match "disable", :via => :post
+      end
+
+      resources :stocks, :only => [:index, :create] do
+        collection do
+          match "updateStocks", :via => :post
+        end
       end
     end
 
