@@ -24,13 +24,15 @@
 			<td align="center"><%= product.name %></td>
 			<td align="center"><%= product.saleprice || product.price %></td>
 			<td align="center" class="status"><%= product.status %></td>
-			<td align="center" class="edit"><%= link_to "編輯", edit_admin_product_path(product) %></td>
+			<td align="center" class="edit"><%= link_to "編輯", edit_admin_product_path(product, :page => params[:page]) %></td>
 		</tr>
 		<% end %>
 	</table>
 </div>
 <!--list-content-->
+
 <div class="list-page">
+	<%= paginate @products %>
 	<ul>
 		<li><a href="#">1</a></li>
 		<li>.</li>

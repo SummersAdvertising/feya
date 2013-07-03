@@ -3,7 +3,7 @@ class Admin::ProductsController < AdminController
   layout "admin"
   
   def index
-    @products = Product.order("created_at DESC").all
+    @products = Product.order("created_at DESC").page(params[:page])
     @product = Product.new
 
     respond_to do |format|
@@ -13,7 +13,7 @@ class Admin::ProductsController < AdminController
   end
 
   def edit
-    @products = Product.order("created_at DESC").all
+    @products = Product.order("created_at DESC").page(params[:page])
     @product = Product.find(params[:id])
   end
 
@@ -29,10 +29,10 @@ class Admin::ProductsController < AdminController
 
         @stock.save
 
-        format.html { redirect_to  stock_admin_product_path(@product), notice: 'Product was successfully created.' }
+        format.html { redirect_to  admin_product_stocks_path(@product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
-        @products = Product.all
+        @products = Product.order("created_at DESC").page(params[:page])
         format.html { render action: "index" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -44,10 +44,10 @@ class Admin::ProductsController < AdminController
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to edit_admin_product_path(@product), notice: ( @product.name + '已更新。') }
+        format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]), notice: ( @product.name + '已更新。') }
         format.json { head :no_content }
       else
-        @products = Product.all
+        @products = Product.order("created_at DESC").page(params[:page])
         format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -60,7 +60,7 @@ class Admin::ProductsController < AdminController
     @product.save
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_product_path(@product) }
+      format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]) }
       format.json { render json: @product }
     end
     
@@ -72,7 +72,7 @@ class Admin::ProductsController < AdminController
     @product.save
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_product_path(@product) }
+      format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]) }
       format.json { render json: @product }
     end
     

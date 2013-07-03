@@ -6,6 +6,8 @@ class Product < ActiveRecord::Base
 
   mount_uploader :cover, ProductcoverUploader
 
+  paginates_per 5
+
   def price_value
   	if (!self.price || !(self.price.is_a? Integer) || self.price <= 0)
   		errors.add(:price, "price must be a positive number.")

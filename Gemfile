@@ -33,6 +33,8 @@ gem 'jquery-ui-rails'
 gem "mini_magick"
 gem 'carrierwave'
 
+gem 'kaminari'
+
 gem 'therubyracer'
 
 # To use ActiveModel has_secure_password

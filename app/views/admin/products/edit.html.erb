@@ -5,12 +5,12 @@
 
 	<div class="new-top">
 		<h3>編輯商品
-			<%= link_to "上架" ,enable_admin_product_path(@product), :class => @product.status == "上架" ? "active" : "", :method => :post %>
-			<%= link_to "下架" ,disable_admin_product_path(@product), :class => @product.status == "下架" ? "active" : "", :method => :post %>
+			<%= link_to "上架" ,enable_admin_product_path(@product, :page => params[:page]), :class => @product.status == "上架" ? "active" : "", :method => :post %>
+			<%= link_to "下架" ,disable_admin_product_path(@product, :page => params[:page]), :class => @product.status == "下架" ? "active" : "", :method => :post %>
 		</h3>
 	</div>
 
-	<%= form_for(@product, :url => admin_product_path(@product)) do |f| %>
+	<%= form_for(@product, :url => admin_product_path(@product, :page => params[:page])) do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f} %>
 	<% end %>
 </section>
