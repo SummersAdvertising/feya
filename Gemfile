@@ -30,6 +30,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'jquery-ui-rails'
 
+gem 'carrierwave'
+
 gem 'therubyracer'
 
 # To use ActiveModel has_secure_password
