@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'jquery-ui-rails'
 
+gem "mini_magick"
 gem 'carrierwave'
 
 gem 'therubyracer'

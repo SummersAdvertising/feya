@@ -1,8 +1,10 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
-  attr_accessible :description, :name, :price, :saleprice
+  attr_accessible :description, :name, :price, :saleprice, :cover
   validates :name, :price, :presence => true
   validate :price_value
+
+  mount_uploader :cover, ProductcoverUploader
 
   def price_value
   	if (!self.price || !(self.price.is_a? Integer) || self.price <= 0)

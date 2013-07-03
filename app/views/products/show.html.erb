@@ -2,7 +2,7 @@
   <% if @product %>
   <div class="quick"><p>購物車</p><span></span>件<a href="/orders/cart">結帳</a></div>
   <div style="overflow:hidden">
-    <div id="preview"><img src="/example_img/02.jpg"></div>
+    <div id="preview"><%= (@product.cover && @product.cover.length > 0) ? image_tag(@product.cover) : "尚未上傳產品封面。" %></div>
     <div id="intro">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>

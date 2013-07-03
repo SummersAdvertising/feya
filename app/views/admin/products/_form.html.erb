@@ -37,15 +37,15 @@
         </table>
       </td>
       <td width="50%" valign="top">
-        <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="24%">商品主圖照片</td>
-            <td width="76%"><input name="" type="file"></td>
+            <td width="76%"><%= f.file_field :cover %></td>
           </tr>
           <tr>
-            <td colspan="2" class="preview">&nbsp;</td>
+            <td colspan="2" class="preview"><%= (@product.cover && @product.cover.length > 0) ? image_tag(@product.cover) : "尚未上傳產品封面。" %></td>
           </tr>
-        </table> -->
+        </table>
       </td>
     </tr>
   </table>
