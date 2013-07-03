@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
 
   before_save :checkpoints
 
-  paginates_per 1
+  paginates_per 13
 
   def checkpoints
     if(!self.discountpoint || self.discountpoint < 0 )
