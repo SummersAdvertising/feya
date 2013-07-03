@@ -41,7 +41,7 @@
 		  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
 		  <% @orderPrice = @orderPrice + @itemSum %>
 		  <tr>
-		    <td align="center"><img src="/example_img/04.jpg"></td>
+		    <td align="center"><%= item[:image] ? image_tag("/uploads/product/"+item[:image]) : "未上傳圖片。" %></td>
 		    <td align="center"><%= item[:name] %></td>
 		    <td align="center"><%= item[:typename] %></td>
 		    <td align="center" class="count"><%= item[:amount] %></td>

@@ -18,7 +18,7 @@ $("#addToCart").click(function(){
   }
 
   if(parseInt($("#addAmount").val(), 10)>0){
-    addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val());
+    addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val(),"<%= @product.cover if(@product) %>");
   }
 
   $("#addAmount").val("");
@@ -28,12 +28,13 @@ $("#addToCart").click(function(){
 var cartitems;
 cartListItems(getCookie("cart"));
 
-function addCartItems(id, name, price, amount){
+function addCartItems(id, name, price, amount, image){
   var item = new Object();
     item.id = id;
     item.name = name;
     item.price = price;
     item.amount = parseInt(amount, 10);
+    item.image = image;
 
     cartitems[id] = item;
 
@@ -83,7 +84,7 @@ function cartListItems(items){
 
     for(var item in cartitems){
       html += '<tr>';
-      html += '<td align="center"><img src="/example_img/04.jpg"></td>';
+      html += '<td align="center">'+(cartitems[item].image? ('<img src="'+cartitems[item].image+'">') : '無圖片。' )+'</td>';
       html += '<td align="center">'+cartitems[item].name+'</td>';
       html += '<td align="center" class="count"><a href="#" class="minor" data-id="'+cartitems[item].id+'">+</a><input disabled type="text" value="'+parseInt(cartitems[item].amount, 10)+'"><a href="#" class="plus" data-id="'+cartitems[item].id+'">-</a></td>';
       html += '<td align="center">'+(cartitems[item].price)+'</td>';

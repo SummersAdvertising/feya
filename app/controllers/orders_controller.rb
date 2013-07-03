@@ -4,7 +4,19 @@ class OrdersController < ApplicationController
 	before_filter :is_member, :only => [:check]
 	
 	def cart
-		@order = Order.new		
+		@order = Order.new
+		if(cookies[:cart].length > 0)
+			@checkItems = Hash.new
+
+			JSON.parse(cookies[:cart]).each do |orderItem|
+				@checkItems[orderItem[1]["id"].to_i] = orderItem[1]["amount"]
+			end
+
+			@checkResult = checkItem(@checkItems)
+
+			@orderItems = @checkResult[0]
+			@traceItems = @checkResult[1]
+		end
 	end
 
 	def check
@@ -162,18 +174,18 @@ class OrdersController < ApplicationController
 		@orderItems = Array.new
 		@traceItems = Array.new
 
-		@items = Stock.where(:id => checkItems.keys ).select("stocks.*, products.name, products.price, products.saleprice").joins('LEFT OUTER JOIN products on products.id = stocks.product_id')
+		@items = Stock.where(:id => checkItems.keys ).select("stocks.*, products.name, products.price, products.saleprice, products.cover").joins('LEFT OUTER JOIN products on products.id = stocks.product_id')
 		@items.each do |stockItem|
 			if(stockItem.amount)
 				if(stockItem.amount > @checkItems[stockItem.id].to_i)
-					@orderItems.push({:id => stockItem.id ,:name => stockItem.name, :typename => stockItem.typename == "default" ? "未指定" : stockItem.typename, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+					@orderItems.push({:id => stockItem.id ,:name => stockItem.name, :typename => stockItem.typename == "default" ? "未指定" : stockItem.typename, :image => stockItem.cover, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 				elsif(stockItem.amount > 0)
-					@orderItems.push({:id => stockItem.id,:name => stockItem.name, :typename =>  stockItem.typename == "default" ? "未指定" : stockItem.typename, :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
+					@orderItems.push({:id => stockItem.id,:name => stockItem.name, :typename =>  stockItem.typename == "default" ? "未指定" : stockItem.typename, :image => stockItem.cover, :amount => stockItem.amount,:price => stockItem.price, :saleprice => stockItem.saleprice})
 				else
 					@traceItems.push(stockItem.id)
 				end
 			else
-				@orderItems.push({:id => stockItem.id,:name => stockItem.name, :typename =>  stockItem.typename == "default" ? "未指定" : stockItem.typename, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
+				@orderItems.push({:id => stockItem.id,:name => stockItem.name, :typename =>  stockItem.typename == "default" ? "未指定" : stockItem.typename, :image => stockItem.cover, :amount => checkItems[stockItem.id],:price => stockItem.price, :saleprice => stockItem.saleprice})
 			end
 		end
 
