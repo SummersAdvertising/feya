@@ -29,7 +29,7 @@ class Admin::ProductsController < AdminController
 
         @stock.save
 
-        format.html { redirect_to  admin_product_stocks_path(@product), notice: 'Product was successfully created.' }
+        format.html { redirect_to  edit_admin_product_path(@product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         @products = Product.order("created_at DESC").page(params[:page])

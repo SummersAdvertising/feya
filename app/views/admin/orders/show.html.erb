@@ -73,7 +73,7 @@
 			</table>
 		</div>
 		<div class="order-list">
-			<%= form_for(@order, :url => admin_order_path(@order) ) do |f| %>
+			<%= form_for(@order, :url => admin_order_path(@order, :page => params[:page]) ) do |f| %>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<th width="29%" align="center">商品名稱</th>
@@ -92,7 +92,7 @@
 					<td align="center"><%= item.itemname %></td>
 					<td align="center"><%= item.itemtype %></td>
 					<td align="center"><%= item.itemprice %></td>
-					<td align="center"><%= item.amount %></td>
+					<td align="center"><input type="number" name="orderitem[<%=item.id%>]" value="<%=item.amount%>" /></td>
 					<td align="center"><%= itemsum %></td>
 				</tr>
 				<% end %>
@@ -120,6 +120,9 @@
 					<td colspan="3" align="center">&nbsp;</td> 
 					<td align="center" class="total">產生購物金</td>
 					<td align="center" class="total"><%= @order.discountpoint %></td>
+				</tr>
+				<tr>
+					<td colspan="5" align="right"><%= f.submit "修改訂單", :style => "width: 80px!important; margin-right: 5px;" %></td>
 				</tr>
 			</table>
 			<% end %>

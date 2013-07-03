@@ -8,7 +8,7 @@
 		<% @orders.each do |order| %>
 		<tr>
 			<td align="center" >
-				<%= link_to (order.ordernum+" : 共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order) %></td>
+				<%= link_to (order.ordernum+" : 共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order, :page => params[:page]) %></td>
 			<td align="center">
 				<%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
 			<td align="center">
@@ -17,21 +17,5 @@
 		<% end %></table>
 </div>
 <div class="order-page">
-	<ul>
-		<li>
-			<a href="#">1</a>
-		</li>
-		<li>.</li>
-		<li>
-			<a href="#">2</a>
-		</li>
-		<li>.</li>
-		<li>
-			<a href="#">3</a>
-		</li>
-		<li>.</li>
-		<li>
-			<a href="#">下一頁</a>
-		</li>
-	</ul>
+	<%= paginate @orders, :theme => 'page' %>
 </div>

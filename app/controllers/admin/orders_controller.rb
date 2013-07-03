@@ -11,12 +11,12 @@ class Admin::OrdersController < AdminController
   		params[:type] = "new"
   	end
 
-  	@orders = Order.where(["status = ?", params[:type]]).order("created_at DESC").all
+  	@orders = Order.where(["status = ?", params[:type]]).order("created_at DESC").page(params[:page])
   end
 
   def show
   	@order = Order.where(["orders.id = ?", params[:id]]).select("orders.*, members.email").joins('LEFT OUTER JOIN members on members.id = orders.member_id').first
-    @orders = Order.where(["status = ?", @order.status]).order("created_at DESC").all
+    @orders = Order.where(["status = ?", @order.status]).order("created_at DESC").page(params[:page])
   end
 
   def update
@@ -24,11 +24,11 @@ class Admin::OrdersController < AdminController
     @originStatus = @order.status
 
     params[:orderitem].each do |orderitem|
-      @orderitem = Orderitem.where(:id => orderitem[0]).select("orderitems.* ,products.name").joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id LEFT OUTER JOIN products on products.id = stocks.product_id').first
+      @orderitem = Orderitem.where(:id => orderitem[0]).first
       @refundSum = 0
       if(@orderitem.amount != orderitem[1].to_i && orderitem[1].to_i > 0 )
         @orderlog = @order.orderlogs.new
-        @orderlog.description = @orderitem.name + ((orderitem[1].to_i - @orderitem.amount) > 0 ? ": 追加" : ": 退訂") + (@orderitem.amount - orderitem[1].to_i).abs.to_s + "個。"
+        @orderlog.description = @orderitem.itemname.to_s + ((orderitem[1].to_i - @orderitem.amount) > 0 ? ": 追加" : ": 退訂") + (@orderitem.amount - orderitem[1].to_i).abs.to_s + "個。"
 
         if(@orderlog.save)
           #substract
@@ -65,7 +65,7 @@ class Admin::OrdersController < AdminController
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
+      format.html { redirect_to admin_order_path(@order, :page => params[:page]), notice: 'Order was successfully updated.' }
       format.json { head :no_content }
     end
   end

@@ -32,16 +32,7 @@
 <!--list-content-->
 
 <div class="list-page">
-	<%= paginate @products %>
-	<ul>
-		<li><a href="#">1</a></li>
-		<li>.</li>
-		<li><a href="#">2</a></li>
-		<li>.</li>
-		<li><a href="#">3</a></li>
-		<li>.</li>
-		<li><a href="#">下一頁</a></li>
-	</ul>
+	<%= paginate @products, :theme => 'page' %>
 </div>
 <!--list-page-->
 <% else %>
