@@ -73,7 +73,7 @@ class Admin::Changestatus::OrdersController < AdminController
     @orderlog.description = "訂單變更狀態為：" + status
     @orderlog.save
 
-    Ordermailer.statuschange(Member.find(@order.member_id).email, @order).deliver
+    Ordermailer.delay.statuschange(Member.find(@order.member_id).email, @order)
   end
   
   def find_order

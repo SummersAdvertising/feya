@@ -143,13 +143,13 @@ class OrdersController < ApplicationController
 					current_member.save
 				end
 
-				Ordermailer.new(current_member.email, @order).deliver
+				Ordermailer.delay.new(current_member.email, @order)
 			else
 				@order.delete
 			end
 
 			if(@runoutItems.length > 0)
-				Ordermailer.runoutofproduct(@runoutItems).deliver
+				Ordermailer.delay.runoutofproduct(@runoutItems)
 			end
 
 			respond_to do |format|

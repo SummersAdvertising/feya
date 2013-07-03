@@ -4,11 +4,11 @@ class Service::OrdersController < ApplicationController
 	layout "service"
 
 	def index
-		@orders = current_member.orders.order("created_at DESC").all
+		@orders = current_member.orders.order("created_at DESC").page(params[:page])
 	end
 
 	def show
-		@orders = current_member.orders.order("created_at DESC").all
+		@orders = current_member.orders.order("created_at DESC").page(params[:page])
 		@order = current_member.orders.find(params[:id])
 		@orderrefund = @order.orderrefunds.new
 
@@ -45,10 +45,10 @@ class Service::OrdersController < ApplicationController
 		respond_to do |format|
 			if ( @orderrefund.save )
 				#寄信
-				Ordermailer.refund(current_member.email, @orderrefund).deliver
+				Ordermailer.delay.refund(current_member.email, @orderrefund)
 				format.html { redirect_to service_order_path(@order), notice: '您的問題已送出，請等待客服人員與您聯繫。' }
 			else
-				@orders = current_member.orders
+				@orders = current_member.orders.orders.order("created_at DESC").page(params[:page])
 				format.html { redirect_to service_order_path(@order), alert: '請輸入問題描述' }
 				format.json { render json: @order.errors, status: :unprocessable_entity }
 			end

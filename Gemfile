@@ -35,6 +35,9 @@ gem 'carrierwave'
 
 gem 'kaminari'
 
+gem 'delayed_job_active_record'
+gem "daemons"
+
 gem 'therubyracer'
 
 # To use ActiveModel has_secure_password
