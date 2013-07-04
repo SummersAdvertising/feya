@@ -126,7 +126,7 @@
 	</div>
 	<% end %>
 
-	<% if (@order.paytype == "匯款" && !@order.payaccount ) %>
+	<% if (@order.paytype == "匯款" && !@order.payaccount && @order.status != "cancel" ) %>
 	<div class="order-check">
 		<h4>匯款後登錄確認</h4>
 		<%= form_for(@order, :url => service_order_path(@order)) do |f| %>

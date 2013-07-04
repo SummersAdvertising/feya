@@ -11,7 +11,7 @@
 			<% @orderrefunds.each do |orderrefund| %>
 			<tr>
 				<td align="center"><%= orderrefund.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-				<td align="center"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.id), :target => "_blank" %></td>
+				<td align="center"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.order_id), :target => "_blank" %></td>
 				<td align="left"><%= simple_format(orderrefund.description.html_safe) %></td>
 				<td align="center">
 					<%if orderrefund.status =='未處理' %>

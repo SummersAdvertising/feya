@@ -21,19 +21,28 @@
           </td>
         </tr>
 
-        <% if !@product.hasType && @product.stocks.first.amount %>
+        <% if !@product.hasType && @product.hasStock %>
+        <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
         <tr>
           <td class="count">庫存 <%= @product.stocks.first.amount %></td>
         </tr>
         <% end %>
+        <% elsif !@product.hasStock %>
+        <tr>
+          <td class="count">本商品目前無庫存。</td>
+        </tr>
+        <% end %>
 
+        <% if @product.hasStock %>
         <tr>
           <td class="count">
             訂購數量 <br/>
              <% if @product.hasType %>
              <select id="productType">
               <% @product.stocks.each do |stock| %>
+              <% if !stock.amount || stock.amount > 0 %>
               <option value='{"id":<%= stock.id %>, "name":"<%= @product.name %>(<%= stock.typename %>)" }'><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+              <% end %>
               <% end %>
             </select>
             <% end %>
@@ -45,6 +54,7 @@
         <tr>
           <td class="add"><%= link_to '加入購物車', "#", :id => "addToCart", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name } %></td>
         </tr>
+        <% end %>
       </table>
     </div>
   </div>

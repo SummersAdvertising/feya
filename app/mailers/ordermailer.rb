@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Ordermailer < ActionMailer::Base
   default from: "mailer@example.com"
-  def new(receiver, order)
+  def newOrder(receiver, order)
   	@order = order
 
   	mail(:to => [ receiver, Admin.first.email ], :subject => "訂單成立通知")  	

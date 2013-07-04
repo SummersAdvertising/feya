@@ -19,10 +19,12 @@ $("#addToCart").click(function(){
 
   if(parseInt($("#addAmount").val(), 10)>0){
     addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val(),"<%= @product.cover if(@product) %>");
+
+    alert("已將"+item.name+"加入購物車。");
   }
 
   $("#addAmount").val("");
-  alert("已將"+item.name+"加入購物車。");
+  
 });
 
 var cartitems;
@@ -120,9 +122,9 @@ function cartListItems(items){
           if(cartitems[$(this).data("id")].amount > 1){
             cartitems[$(this).data("id")].amount -= 1;
           }
-          else{
-            delete cartitems[$(this).data("id")];
-          }
+          // else{
+          //   delete cartitems[$(this).data("id")];
+          // }
         break;
 
       }

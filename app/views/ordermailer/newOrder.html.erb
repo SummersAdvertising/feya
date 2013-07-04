@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <p>訂單成立通知，以下是您的購物明細。</p>
+  <p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+  <p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
+  <p>收件者 : <%= @order.receivername %> 電話 : <%= @order.receivertel %></p>
+  <p>收件地址 : <%= @order.receiveraddress %></p>
+  <p>統編 : <%= (@order.companynum.length == 0) ? "未填寫。" : @order.companynum %></p>
+  <p>發票 : <%= @order.invoicetype %></p>
+  <p>付款方式 : <%= @order.paytype %></p>
+
+  <div class="box"> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="29%" align="center">商品名稱</th>
+          <th width="12%" align="center">分類</th>
+          <th width="35%" align="center">單價</th>
+          <th width="12%" align="center">數量</th>
+          <th width="12%" align="center">小計</th>
+        </tr>
+
+        <% @ordersum = 0 %>       
+        <% @order.orderitems.select('orderitems.*, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').each do |item| %>
+        <% itemsum = item.itemprice.to_i * item.amount.to_i %>
+        <% @ordersum = @ordersum + itemsum %>
+
+        <tr>
+          <td align="center"><%= item.itemname %></td>
+          <td align="center"><%= item.itemtype %></td>
+          <td align="center"><%= item.itemprice %></td>
+          <td align="center"><%= item.amount %></td>
+          <td align="center"><%= itemsum %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td align="center">購物小計</td>
+          <td align="center"><%= @ordersum %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td align="center">運費小計</td>
+          <td align="center"><%= @order.shippingfee %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td align="center">抵用購物金</td>
+          <td align="center"><%= @order.discount %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td align="center" class="total">訂單總計</td>
+          <td align="center" class="total"><%= @ordersum + @order.shippingfee - @order.discount %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td> 
+          <td align="center" class="total">產生購物金</td>
+          <td align="center" class="total"><%= @order.discountpoint %></td>
+        </tr>
+      </table>
+    </div>
+</body>
+</html>

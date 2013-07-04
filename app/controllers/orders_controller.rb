@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
 				if(@orderItem.save)
 					#substract stock
 					@stock = Stock.find(orderItem[:id])
-					
+
 					if(@stock.amount)
 						@stock.amount = (@stock.amount.to_i - orderItem[:amount].to_i)
 						@stock.save
@@ -143,7 +143,7 @@ class OrdersController < ApplicationController
 					current_member.save
 				end
 
-				Ordermailer.delay.new(current_member.email, @order)
+				Ordermailer.delay.newOrder(current_member.email, @order)
 			else
 				@order.delete
 			end
