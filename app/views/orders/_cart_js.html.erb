@@ -15,12 +15,17 @@ $("#addToCart").click(function(){
   else{
     item.id = $(this).data("stockid");
     item.name = $(this).data("stockname");
+    item.typename = "未指定";
+    item.ceiling = $(this).data("stockceiling");
   }
 
-  if(parseInt($("#addAmount").val(), 10)>0){
-    addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val(),"<%= @product.cover if(@product) %>");
+  if(parseInt($("#addAmount").val(), 10) > 0 && (!item.ceiling || parseInt($("#addAmount").val(), 10)<=item.ceiling )){
+    addCartItems(item.id, item.name, "<%= (@product.saleprice ? @product.saleprice : @product.price) if(@product) %>", $("#addAmount").val(),"<%= @product.cover if(@product) %>", item.typename, item.ceiling);
 
     alert("已將"+item.name+"加入購物車。");
+  }
+  else{
+    alert("請輸入正確訂購數量。");
   }
 
   $("#addAmount").val("");
@@ -30,13 +35,15 @@ $("#addToCart").click(function(){
 var cartitems;
 cartListItems(getCookie("cart"));
 
-function addCartItems(id, name, price, amount, image){
+function addCartItems(id, name, price, amount, image, typename, ceiling){
   var item = new Object();
     item.id = id;
     item.name = name;
     item.price = price;
     item.amount = parseInt(amount, 10);
     item.image = image;
+    item.typename = typename;
+    item.ceiling = ceiling;
 
     cartitems[id] = item;
 
@@ -88,6 +95,7 @@ function cartListItems(items){
       html += '<tr>';
       html += '<td align="center">'+(cartitems[item].image? ('<img src="'+cartitems[item].image+'">') : '無圖片。' )+'</td>';
       html += '<td align="center">'+cartitems[item].name+'</td>';
+      html += '<td align="center">'+cartitems[item].typename+'</td>';
       html += '<td align="center" class="count"><a href="#" class="minor" data-id="'+cartitems[item].id+'">+</a><input disabled type="text" value="'+parseInt(cartitems[item].amount, 10)+'"><a href="#" class="plus" data-id="'+cartitems[item].id+'">-</a></td>';
       html += '<td align="center">'+(cartitems[item].price)+'</td>';
       html += '<td align="center">'+cartitems[item].price+'</td>';
@@ -116,15 +124,14 @@ function cartListItems(items){
       event.preventDefault();
       switch($(this).attr("class")){
         case "plus":
-          cartitems[$(this).data("id")].amount += 1;
+          if((cartitems[$(this).data("id")].ceiling && cartitems[$(this).data("id")].amount < cartitems[$(this).data("id")].ceiling) || !cartitems[$(this).data("id")].ceiling ){
+            cartitems[$(this).data("id")].amount += 1;
+          }
         break;
         case "minor":
           if(cartitems[$(this).data("id")].amount > 1){
             cartitems[$(this).data("id")].amount -= 1;
           }
-          // else{
-          //   delete cartitems[$(this).data("id")];
-          // }
         break;
 
       }

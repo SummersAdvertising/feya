@@ -20,11 +20,14 @@
             <% end %>
           </td>
         </tr>
+        <%= form_for(@cartitem, :url => add_cart_orders_path) do |f| %>
 
         <% if !@product.hasType && @product.hasStock %>
+        <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
         <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
         <tr>
-          <td class="count">庫存 <%= @product.stocks.first.amount %></td>
+          <td class="count">庫存 <%= @product.stocks.first.amount %>
+          </td>
         </tr>
         <% end %>
         <% elsif !@product.hasStock %>
@@ -34,26 +37,28 @@
         <% end %>
 
         <% if @product.hasStock %>
+        
         <tr>
           <td class="count">
             訂購數量 <br/>
              <% if @product.hasType %>
-             <select id="productType">
+             <select id="productType" name="orderitem[stock_id]">
               <% @product.stocks.each do |stock| %>
               <% if !stock.amount || stock.amount > 0 %>
-              <option value='{"id":<%= stock.id %>, "name":"<%= @product.name %>(<%= stock.typename %>)" }'><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+              <option value="<%= stock.id %>"><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
               <% end %>
               <% end %>
             </select>
             <% end %>
 
-            <input id="addAmount" type="text" />
+            <%= f.text_field :amount %>
             
           </td>
         </tr>
         <tr>
-          <td class="add"><%= link_to '加入購物車', "#", :id => "addToCart", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name } %></td>
+          <td class="add"><%= link_to '加入購物車', "#", :id => "submit", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name, :stockceiling => @product.stocks.first.amount } %></td>
         </tr>
+        <% end %>
         <% end %>
       </table>
     </div>
@@ -64,8 +69,13 @@
     <%= simple_format(@product.description.html_safe) %>
   </div>
 
+  <script type="text/javascript">
+  $("#submit").click(function(){
+    $("#new_orderitem").submit();
+  });
+  </script>
+
   <% else %>
   <p>找不到此商品。</p>
   <% end %>
 </section>
-<%= render 'orders/cart_js' %>

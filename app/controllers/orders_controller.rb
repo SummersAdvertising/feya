@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class OrdersController < ApplicationController
 	layout "order"
-	before_filter :is_member, :only => [:check]
+	before_filter :is_member, :only => [:check, :create]
 	
 	def cart
 		@order = Order.new
