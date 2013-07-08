@@ -1,6 +1,6 @@
 <section class="content" id="index-show">
   <% if @product %>
-  <div class="quick"><p>購物車</p><span></span>件<a href="/orders/cart">結帳</a></div>
+  <div class="quick"><p>購物車</p><span><%= @cartitems_count %></span>件<a href="/orders/cart">結帳</a></div>
   <div style="overflow:hidden">
     <div id="preview"><%= (@product.cover && @product.cover.length > 0) ? image_tag(@product.cover) : "尚未上傳產品封面。" %></div>
     <div id="intro">
@@ -70,6 +70,9 @@
   </div>
 
   <script type="text/javascript">
+  if("<%= alert || notice %>"){
+    alert("<%= alert || notice %>");
+  }
   $("#submit").click(function(){
     $("#new_orderitem").submit();
   });

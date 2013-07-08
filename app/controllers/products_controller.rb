@@ -1,6 +1,8 @@
 #encoding: UTF-8
 class ProductsController < ApplicationController
   before_filter :record_login_redirect_path
+  before_filter :count_cartitems
+
   def index
     @order = Order.new
     @products = Product.where(:status => "上架").all
@@ -42,5 +44,15 @@ class ProductsController < ApplicationController
     end
 
     return false    
+  end
+
+  def count_cartitems
+    if(cookies[:cart])
+      @cartitems = JSON.parse(cookies[:cart]) 
+      @cartitems_count = @cartitems.length
+    else
+      @cartitems_count = 0
+    end
+    
   end
 end

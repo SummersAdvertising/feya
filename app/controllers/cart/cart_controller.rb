@@ -8,18 +8,32 @@ class Cart::CartController < ApplicationController
 	end
 
 	def add
-		if(cookies[:cart])
-			@cartiems = JSON.parse(cookies[:cart]) 
-		else
-			@cartiems = Hash.new
-		end
+		#check stock
+		@stock = Stock.find(params[:orderitem][:stock_id])
+		
+		if(@stock)
+			if(!@stock.amount || @stock.amount >= params[:orderitem][:amount].to_i )
+				#write cookie
+				if(cookies[:cart])
+					@cartitems = JSON.parse(cookies[:cart])
+				else
+					@cartitems = Hash.new
+				end
 
-		@cartiems.merge({ "stock_id" => params[:orderitem][:stock_id], "amount" => params[:orderitem][:amount] })
-		return render :text => @cartiems.to_s
-		cookies[:cart] = @cartiems.to_json
+				@cartitems[params[:orderitem][:stock_id]] = params[:orderitem][:amount]
+				# return render :text => @cartitems.to_json
+				cookies[:cart] = @cartitems.to_json
 
-		respond_to do |format|
-			format.html { redirect_to :back }
+				respond_to do |format|
+					format.html { redirect_to :back, notice: "已新增至購物車。" }
+				end
+			
+			else
+				respond_to do |format|
+					format.html { redirect_to :back, alert: "商品的庫存量不足。" }
+				end
+			end
+
 		end
 		
 	end

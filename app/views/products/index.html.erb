@@ -1,6 +1,5 @@
 <section class="content" id="index-list">
-  <div class="quick"><p>購物車</p><span></span>件<a href="/orders/cart">結帳</a></div>
-  <%= render 'orders/cart_js' %>
+  <div class="quick"><p>購物車</p><span><%= @cartitems_count %></span>件<a href="/orders/cart">結帳</a></div>
   
   <% @products.each do |product| %>
 

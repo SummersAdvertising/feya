@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
     @countprocessing = Order.where(["status = ?", "processing"]).count
     @countdeliver = Order.where(["status = ?", "deliver"]).count
     @countcancel = Order.where(["status = ?", "cancel"]).count
-    
   end
 
   def record_login_redirect_path
