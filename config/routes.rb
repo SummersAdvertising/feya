@@ -7,7 +7,7 @@ Cart::Application.routes.draw do
         match "add" => "cart#add" , :via => :post
         match ":stock_id/plus" => "cart#plus" , :via => :post, :as => "plus"
         match ":stock_id/minus" => "cart#minus" , :via => :post, :as => "minus"
-        match ":stock_id/delete" => "cart#delete" , :via => :post, :as => "delete"
+        match ":stock_id/delete" => "cart#delete" , :via => :delete, :as => "delete"
 
         root :to => "cart#show"
       end
