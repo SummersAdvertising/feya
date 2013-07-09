@@ -126,10 +126,19 @@
 	</div>
 	<% end %>
 
-	<% if (@order.paytype == "匯款" && !@order.payaccount && @order.status != "cancel" ) %>
+	<% if (@order.paytype == "匯款" && !@order.payaccount && @order.status == "new" ) %>
 	<div class="order-check">
 		<h4>匯款後登錄確認</h4>
 		<%= form_for(@order, :url => service_order_path(@order)) do |f| %>
+		
+		<% if @order.errors.any? %>
+		<div id="error_explanation">
+			<% @order.errors.full_messages.each do |msg| %>
+			<p><%= msg %></p>
+			<% end %>
+		</div>
+		<% end %>
+
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<th>請輸入匯款帳號後五碼</th>

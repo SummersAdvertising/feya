@@ -20,15 +20,23 @@ class Service::OrdersController < ApplicationController
 		@order = current_member.orders.find(params[:id])
 
 		if(params[:order][:payaccount].length>0 && params[:order][:paydate].length>0 && params[:order][:paytime].length>0)
-			@order.update_attributes(params[:order])
-			
-			#order log
-			@orderlog = @order.orderlogs.new
-			@orderlog.description = "通知已匯款。"
-			@orderlog.save
+			if(@order.update_attributes(params[:order]))
+				#order log
+				@orderlog = @order.orderlogs.new
+				@orderlog.description = "通知已匯款。"
+				@orderlog.save
 
-			respond_to do |format|
-				format.html { redirect_to service_order_path(@order) }
+				respond_to do |format|
+					format.html { redirect_to service_order_path(@order) }
+				end
+			else
+				@orders = current_member.orders.order("created_at DESC").page(params[:page])
+				@orderrefund = @order.orderrefunds.new
+				@order.payaccount = nil
+				respond_to do |format|
+					format.html { render :action => :show   }
+					format.json { render json: @order.errors, status: :unprocessable_entity }
+				end
 			end
 		else
 			respond_to do |format|

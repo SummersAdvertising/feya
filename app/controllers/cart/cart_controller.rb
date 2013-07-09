@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class Cart::CartController < ApplicationController
 	layout "order"
-	before_filter :is_member, :only => [:check]
+	before_filter :count_cartitems
 	
 	def show
 		if(cookies[:cart] && cookies[:cart].length > 0)

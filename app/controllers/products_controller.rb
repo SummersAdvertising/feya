@@ -45,14 +45,4 @@ class ProductsController < ApplicationController
 
     return false    
   end
-
-  def count_cartitems
-    if(cookies[:cart])
-      @cartitems = JSON.parse(cookies[:cart]) 
-      @cartitems_count = @cartitems.length
-    else
-      @cartitems_count = 0
-    end
-    
-  end
 end

@@ -22,6 +22,16 @@ class ApplicationController < ActionController::Base
     @countcancel = Order.where(["status = ?", "cancel"]).count
   end
 
+  def count_cartitems
+    if(cookies[:cart])
+      @cartitems = JSON.parse(cookies[:cart]) 
+      @cartitems_count = @cartitems.length
+    else
+      @cartitems_count = 0
+    end
+    
+  end
+
   def record_login_redirect_path
   	session["member_return_to"] = "#{request.fullpath}"
   end

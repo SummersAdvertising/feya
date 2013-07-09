@@ -73,7 +73,7 @@ if("<%= alert || notice %>"){
 }
 
 $("#next").click(function(){
-  if(!(<%= @orderItems && @orderItems.length > 0 %>)){
+  if(!(<%= @cartitems_count > 0 %>)){
     alert("請先將商品放入購物車。");
     return false;
   }

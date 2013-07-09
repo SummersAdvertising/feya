@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   validates :member_id, :status, :buyername, :buyertel, :invoicetype, :receivername, :receiveraddress, :receivertel, :paytype, :presence => true
   validates :shippingcode, :shippingway, :presence => true, :if => :is_finish?
   validates :invoicename, :companynum, :presence => true, :if => :is_company?
+  validates :payaccount, format: { with: /\d{5}/, message: "請輸入正確的匯款帳戶" }, :if => :is_payment?
 
   before_save :checkpoints
 
@@ -21,6 +22,10 @@ class Order < ActiveRecord::Base
 
   def is_company?
     self.invoicetype == "三聯式"
+  end
+
+  def is_payment?
+    self.payaccount && self.payaccount.length > 0
   end
 
   belongs_to :member
