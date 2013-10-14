@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Cart::Application.load_tasks
+Feya::Application.load_tasks
 
 begin
 	require 'delayed/tasks'
