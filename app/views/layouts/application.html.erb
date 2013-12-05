@@ -26,7 +26,7 @@
   	<% end %>
   
     <div id="link"> <a href="#"><img src="/images/fb.png"> │</a> 
-    <%= link_to "會員登入", new_member_session_path %> | 
+    <%= link_to "會員登入 | ", new_member_session_path %>
     <a href="/orders/cart">購物車</a> </div>
     <ul id="nav">
       <li id="nav-1" class="<%= 'active' if params[:controller] == 'classes' || params[ :controller ] == 'courses' %>"><a href="<%= classes_path %>">專業課程</a>
