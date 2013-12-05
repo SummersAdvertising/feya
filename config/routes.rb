@@ -1,6 +1,33 @@
 Feya::Application.routes.draw do
+
+  resources :articles
+  resources :photos
+  
+  resources :testimonies
+  
+  resources :entries
+  resources :classes do 
+  	resources :courses
+  end
+  
+  resources :categories do 
+  	resources :products, :only => [:show]
+  end
+  
+  resources :tickets
+  
+  resources :pages, :controller => :static_pages, :action => :show do  	
+  	collection do
+  		get ':pagename', :as => :page
+  	end
+  	
+  end
+  
+    match 'articles/:id/uploadPhoto' => 'articles#createPhoto', :via => [:post] 
+    match 'articles/:artid/deletePhoto/:id' => 'articles#destroyPhoto', :via => [:delete]
+
   devise_for :members, :controllers => { :sessions => "sessions", :registrations => "registrations" }
-  resources :products, :only => [:index, :show]
+  
   resources :orders, :only => [:create] do
   	collection do
       namespace :cart do
@@ -31,12 +58,20 @@ Feya::Application.routes.draw do
   end
   
   namespace :admin do
+  
+  	match 'peditor/:id/createPhoto' => 'peditor#createPhoto', :via => [:post] 
+  
     get "login", "logout"
     match "checkAdmin", :via => :post
 
     resources :members, :only => [:index]
+    
+    resources :categories
+    
+    resources :testimonies 
+    resources :entries 
 
-    resources :products, :only => [:index, :edit, :create, :update] do
+    resources :products, :only => [:index, :new, :edit, :create, :update] do
       member do
         match "enable", :via => :post
         match "disable", :via => :post
@@ -67,5 +102,6 @@ Feya::Application.routes.draw do
     root :to => "products#index"
   end
 
-  root :to => "products#index"
+  root :to => "static_pages#index"
+  
 end

@@ -1,0 +1,21 @@
+#banner{background:url(/images/nw-banner.jpg) 0 0 no-repeat}
+
+#list tr{background:url(/images/nw-02.gif) 0 0 repeat-x}
+#list .date{color:#00b1ae;font:300 19px verdana;padding:15px 30px 10px 30px}
+#list td{padding:5px 0 0 0}
+#list a{color:#000}
+#list a:hover{color:#f2b705}
+
+#new .left{width:220px}
+#new .left h3{height:32px;background:url(/images/nw-02.gif) 0 bottom repeat-x}
+#new .left ul{background:url(/images/nw-02.gif) 0 bottom repeat-x}
+#new .left li{height:50px;border-bottom:1px solid #E4DDD6;padding:10px 0 0 10px}
+#new .left li a{color:#00b1ae}
+#new .left .active a{font:900 15px verdana!important}
+
+#new .right{width:620px}
+#new .right .back a{color:#59493f}
+#new .right .back a:hover{text-decoration:underline}
+#new .right .hgroup{margin:0 0 20px 0}
+#new .right .hgroup a{background:#00B1AE;color:#fff;padding:5px;font-size:25px}
+#new .right .date{color:#00B1AE;padding:0 0 0 0;font-size:18px}

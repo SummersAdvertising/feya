@@ -4,7 +4,6 @@ class Admin::ProductsController < AdminController
   
   def index
     @products = Product.order("created_at DESC").page(params[:page])
-    @product = Product.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,10 +15,41 @@ class Admin::ProductsController < AdminController
     @products = Product.order("created_at DESC").page(params[:page])
     @product = Product.find(params[:id])
   end
+  
+  def new
+    @product = Product.new
+    @product.status = "下架"
+
+    @product.article = Article.new
+
+    @photo = Photo.new
+
+    respond_to do |format|
+      if @product.save
+        @stock = @product.stocks.new
+        @stock.typename = "default"
+        @stock.amount = nil
+
+        @stock.save
+
+        format.html { redirect_to  edit_admin_product_path(@product), notice: 'Product was successfully created.' }
+        format.json { render json: @product, status: :created, location: @product }
+      else
+        @products = Product.order("created_at DESC").page(params[:page])
+        format.html { render action: "index" }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def create
     @product = Product.new(params[:product])
     @product.status = "上架"
+
+    @product.article = Article.new
+
+    @photo = Photo.new
+
 
     respond_to do |format|
       if @product.save
@@ -41,9 +71,10 @@ class Admin::ProductsController < AdminController
 
   def update
     @product = Product.find(params[:id])
-
+    
+    
     respond_to do |format|
-      if @product.update_attributes(params[:product])
+      if @product.update_attributes(params[:product]) && @product.article.update_attributes( params[ :article ] )
         format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]), notice: ( @product.name + '已更新。') }
         format.json { head :no_content }
       else
@@ -77,4 +108,7 @@ class Admin::ProductsController < AdminController
     end
     
   end
+  
+  
+  
 end

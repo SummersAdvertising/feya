@@ -1,0 +1,14 @@
+
+article{background:url(/images/mb-01.jpg) right bottom no-repeat}
+
+article .left {width:460px;background:url(/images/cs-03.gif);padding:10px 15px;float:left}
+article .left a{color:#00b1ae;text-decoration:underline}
+article .left span{color:#626262;font-size:13px;position:relative;top:-8px;margin:0 0 0 5px}
+
+article .right{padding:10px 15px;width:375px;float:right;background:url(/images/mb-07.gif);margin:90px 0 0 0}
+
+.button a{display:inline-block;text-decoration:none!important;background:#fff;color:#00b1ae;border:1px solid #00b1ae;margin:0 0 0 15px;padding:0px 30px}
+.button a:hover{background:#00b1ae;color:#fff}
+
+
+#content{width:570px;background:url(/images/cs-03.gif);padding:10px 15px}

@@ -1,0 +1,32 @@
+
+/*-----------------------------------------------------------------------全域---*/
+
+html{background:#FCF6EF}
+body{width:1280px;margin:0 auto;background:#fff;font:300 14px 微軟正黑體,Microsoft JhengHei;line-height:1.7em}
+a{font:300 14px 微軟正黑體,Microsoft JhengHei;line-height:1.7em;text-decoration:none}
+
+/*-----------------------------------------------------------------------頁首---*/
+
+header{background:url(/images/mb-banner.jpg) 0 0 no-repeat;height:195px}
+
+#top{width:1000px;margin:0 auto;color:#716d6d;font-size:14px;padding:5px 0 0 0;position:relative;text-align:right;height:33px}
+#top a{font-size:14px;color:#716d6d;margin:0 10px}
+#top a:hover{color:#333;text-decoration:underline}
+#top img{position:absolute;right:120px;bottom:-210px}
+
+#back{background:#FFCC00;padding:0 10px;position:absolute;right:40px;bottom:-72px}
+#back:hover{background:#FFDF5D;text-decoration:none!important}
+
+/*-----------------------------------------------------------------------頁身---*/
+
+article{width:940px;margin:0 auto;padding:70px 0 35px 0;overflow:hidden}
+article .text{border:none;padding:5px;width:100%}
+article td{padding:5px 0}
+
+/*-----------------------------------------------------------------------頁尾---*/
+
+footer{height:185px;color:#fff;font-size:12px;background:#362E2B}
+footer a{color:#fff;font-size:13px;color:#fff}
+footer a:hover{color:#F5D856}
+footer p span{color:#a6937c}
+footer .container{width:940px;margin:0 auto;background:url(/images/footer.jpg) 0 25px no-repeat;text-align:right;padding:50px 0 0 0}

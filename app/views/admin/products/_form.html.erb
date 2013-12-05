@@ -1,3 +1,12 @@
+
+  <link rel="stylesheet" type="text/css" href="/peditor/css/peditor.css">
+  <script src="/peditor/js/editor.js"></script>
+  <script src="/peditor/js/editor_p.js"></script>
+  <script src="/peditor/js/editor_img.js"></script>
+  <script src="/peditor/js/editor_list.js"></script>
+  <script src="/peditor/js/editor_video.js"></script>
+
+
 <% if @product.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -54,7 +63,24 @@
       <td>產品說明：</td>
     </tr>
     <tr>
-      <td><%= f.text_area :description %></td>
+      <td>
+      	
+<div id="editorPanel"></div>
+
+<hr />
+<%= fields_for @product.article do | a | %>
+
+	<%= a.hidden_field :content, {:id => 'product_content'} %>
+
+<% end %>
+	
+<!--show the content of article -->
+<section id="articleContent"></section>
+
+<hr />
+
+      
+      <%#= f.text_area :description %></td>
     </tr>
   </table>
 </div>
@@ -67,4 +93,22 @@
 $("#submit").click(function(){
   $(this).parents("form:first").submit();
 });
+
+
+$(document).ready(function(){
+	editor.init({ articleModel: 'product', photoUpload: '../../peditor/<%= @product.article.id %>/createPhoto' });
+
+	$("#submit").click(function(e){
+		e.preventDefault();
+
+		if(!editor.isPostNotSent()){
+			$("#edit_article_<%= @product.article.id %>").submit();
+		}
+		else{
+			editor.alert("段落編輯尚未完成。", "error");
+		}
+		
+	});
+});
+
 </script>

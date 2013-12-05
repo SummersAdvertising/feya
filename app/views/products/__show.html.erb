@@ -1,0 +1,84 @@
+<section class="content" id="index-show">
+  <% if @product %>
+  <div class="quick"><p>購物車</p><span><%= @cartitems_count %></span>件<a href="/orders/cart">結帳</a></div>
+  <div style="overflow:hidden">
+    <div id="preview"><%= (@product.cover && @product.cover.length > 0) ? image_tag(@product.cover) : "尚未上傳產品封面。" %></div>
+    <div id="intro">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="name"><%= @product.name %><br>
+            <span class="number">商品編號：<%= @product.id %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="price">
+            <% if @product.saleprice %>
+            <span class="original">NT$ <%= @product.price %></span><br>
+            NT$ <%= @product.saleprice %>
+            <% else %>
+            NT$ <%= @product.price %>
+            <% end %>
+          </td>
+        </tr>
+        <%= form_for(@cartitem, :url => add_cart_orders_path) do |f| %>
+
+        <% if !@product.hasType && @product.hasStock %>
+        <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
+        <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
+        <tr>
+          <td class="count">庫存 <%= @product.stocks.first.amount %>
+          </td>
+        </tr>
+        <% end %>
+        <% elsif !@product.hasStock %>
+        <tr>
+          <td class="count">本商品目前無庫存。</td>
+        </tr>
+        <% end %>
+
+        <% if @product.hasStock %>
+        
+        <tr>
+          <td class="count">
+            訂購數量 <br/>
+             <% if @product.hasType %>
+             <select id="productType" name="orderitem[stock_id]">
+              <% @product.stocks.each do |stock| %>
+              <% if !stock.amount || stock.amount > 0 %>
+              <option value="<%= stock.id %>"><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+              <% end %>
+              <% end %>
+            </select>
+            <% end %>
+
+            <%= f.text_field :amount %>
+            
+          </td>
+        </tr>
+        <tr>
+          <td class="add"><%= link_to '加入購物車', "#", :id => "submit", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name, :stockceiling => @product.stocks.first.amount } %></td>
+        </tr>
+        <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div id="detail">
+    <h3>產品說明及注意事項</h3>
+    <%= simple_format(@product.description.html_safe) %>
+  </div>
+
+  <script type="text/javascript">
+  if("<%= alert || notice %>"){
+    alert("<%= alert || notice %>");
+  }
+  $("#submit").click(function(){
+    $("#new_orderitem").submit();
+  });
+  </script>
+
+  <% else %>
+  <p>找不到此商品。</p>
+  <% end %>
+</section>

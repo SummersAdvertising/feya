@@ -11,19 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703102546) do
+ActiveRecord::Schema.define(:version => 20131022072828) do
 
   create_table "addressbooks", :force => true do |t|
     t.integer  "member_id"
+    t.string   "name"
     t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "admins", :force => true do |t|
     t.string   "email"
     t.string   "password"
     t.string   "username"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "articles", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.string   "status"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -43,6 +63,14 @@ ActiveRecord::Schema.define(:version => 20130703102546) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "entries", :force => true do |t|
+    t.string   "title"
+    t.integer  "article_id"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "members", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -72,9 +100,9 @@ ActiveRecord::Schema.define(:version => 20130703102546) do
     t.integer  "stock_id"
     t.integer  "amount"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "itemprice"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "itemname"
     t.string   "itemtype"
   end
@@ -89,20 +117,20 @@ ActiveRecord::Schema.define(:version => 20130703102546) do
   create_table "orderrefunds", :force => true do |t|
     t.integer  "order_id"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "discount"
     t.integer  "member_id"
     t.integer  "shippingfee"
     t.string   "status"
     t.string   "shippingway"
     t.string   "shippingcode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "ordernum"
     t.string   "buyername"
     t.string   "buyertel"
     t.string   "invoicetype"
@@ -111,12 +139,20 @@ ActiveRecord::Schema.define(:version => 20130703102546) do
     t.string   "receiveraddress"
     t.string   "receivertel"
     t.string   "paytype"
-    t.string   "ordernum"
     t.date     "paydate"
     t.string   "paytime"
     t.string   "payaccount"
     t.integer  "discountpoint"
+    t.integer  "discount"
     t.string   "invoicename"
+  end
+
+  create_table "photos", :force => true do |t|
+    t.string   "image"
+    t.string   "name"
+    t.integer  "article_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "products", :force => true do |t|
@@ -125,9 +161,11 @@ ActiveRecord::Schema.define(:version => 20130703102546) do
     t.integer  "price"
     t.integer  "saleprice"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "cover"
+    t.integer  "article_id"
+    t.integer  "category_id"
   end
 
   create_table "stocks", :force => true do |t|
@@ -138,11 +176,20 @@ ActiveRecord::Schema.define(:version => 20130703102546) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "testimonies", :force => true do |t|
+    t.string   "title"
+    t.integer  "article_id"
+    t.string   "cover"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "tracebooks", :force => true do |t|
     t.integer  "member_id"
     t.integer  "stock_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

@@ -1,0 +1,32 @@
+
+#step{margin:0 0 40px 0}
+
+#content{background:url(/images/cs-03.gif);padding:20px;overflow:hidden}
+#detail th{padding:0 0 10px 0}
+#detail th,#detail td a{color:#00b1ae}
+#detail td{background:#fff}
+#detail .delete a{position:relative;top:3px}
+#detail .delete a:hover{opacity:.7}
+#detail td input{width:50px}
+
+#check{font-weight:900;margin:20px 0 0 0}
+#check .total{color:#00b1ae;border-top:1px solid #000}
+
+#info{padding:20px;background:#EEEEEE;margin:50px 0 0 0}
+#info h3{color:#00b1ae;font:300 18px 微軟正黑體,Microsoft JhengHei}
+#info h3 span,#info h4,#info h4 span{font:300 14px 微軟正黑體,Microsoft JhengHei;color:#000}
+#info .text{width:95%}
+#info .checkbox{margin:0 0 0 15px}
+#info span{color:#707070}
+#info a{color:#448aca;text-decoration:underline}
+
+#form{padding:25px 0;margin:25px 0;border-top:1px solid #00b1ae;border-bottom:1px solid #00b1ae}
+
+.button{clear:both;margin:20px 0 0 0}
+.button a{display:inline-block;text-decoration:none!important;background:#fff;color:#00b1ae!important;border:1px solid #00b1ae;margin:0 0 0 15px;padding:0px 30px}
+.button a:hover{background:#00b1ae;color:#fff!important}
+#return {color:#959595!important;border:1px solid #959595!important}
+#return:hover{background:#959595;color:#fff!important}
+
+#thx{background:url(/images/sc-06.gif) 0 0 no-repeat;width:430px;height:125px;margin:0 auto;position:relative}
+#thx .button{position:absolute;bottom:20px;left:130px}

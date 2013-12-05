@@ -1,8 +1,12 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
   attr_accessible :description, :name, :price, :saleprice, :cover
-  validates :name, :price, :presence => true
-  validate :price_value
+ # validates :name, :price, :presence => true
+ #validate :price_value
+  
+  belongs_to :article
+  
+  belongs_to :category
 
   mount_uploader :cover, ProductcoverUploader
 

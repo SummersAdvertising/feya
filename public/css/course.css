@@ -1,0 +1,32 @@
+#banner{background:url(/images/cs-banner.jpg) 0 0 no-repeat}
+
+#course .tab{height:60px;background:url(/images/cs-01.gif) 0 bottom no-repeat}
+#course .tab li{float:left;padding:0 10px}
+#course .tab li a{font-size:19px;color:#000;display:block}
+#course .tab li span{color:#D1C0A5;position:relative;top:3px}
+#course .tab .active a{background:#FFEC4C;padding:0px 5px;box-shadow:-4px 4px 0 #C490BF}
+
+#course .intro{background:url(/images/cs-02.gif) center 0 no-repeat;height:95px;margin:25px 0;overflow:hidden;padding:0 60px;overflow:hidden}
+#course .intro h3{font:900 italic 35px 微軟正黑體,Microsoft JhengHei;color:#00b1ae;float:left;width:30%}
+#course .intro p{float:right;width:70%}
+.list{clear:both}
+
+#course .list{background:url(/images/cs-06.png) center 40px repeat-y #E4DDD6;overflow:hidden;}
+#course .list section{background:url(/images/cs-03.gif);width:345px;height:455px;float:left;padding:25px;margin:38px 62px}
+#course .list h4{background:#00B1AE;color:#fff;padding:1px 5px;font:300 18px 微軟正黑體,Microsoft JhengHei;margin:20px 0}
+#course .list p{font-size:14px;line-height:1.5em}
+#course .list a{display:block;background:url(/images/cs-04.png) 0 0 no-repeat;width:137px;height:35px;margin:25px auto 0 auto}
+#course .list a:hover{background:url(/images/cs-04h.png) 0 0 no-repeat}
+
+#course .content{border:1px solid #E4DDD6;padding:50px;margin:0 0 25px 0}
+#course .content h4{background:#00B1AE;color:#fff;padding:1px 5px;font:300 21px 微軟正黑體,Microsoft JhengHei}
+#course .content p{margin:20px 0 40px 0;color:#494542}
+#course #cover img{max-width:95%}
+#course .peditor{padding:50px 25px 0 25px}
+
+#course .others{border:1px solid #E4DDD6;padding:10px}
+#course .others article{background:url(/images/cs-03.gif);padding:10px}
+#course .others img{width:270px;height:120px}
+#course .others div{position:relative}
+#course .others a{position:absolute;bottom:7px;right:0;background:#00B1AE;padding:5px 10px;color:#fff}
+#course .others a:hover{background:#C490BF}

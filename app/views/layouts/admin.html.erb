@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <title>夏天廣告購物車系統</title>
 <link rel="stylesheet" href="/css/reset.css">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/admin/style.css">
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
 </head>
@@ -32,6 +32,15 @@
 			</div>
 			<div class="side">
 				<h4><a href="/admin/members"><img src="/images/li-close.png">會員管理</a></h4>
+			</div>
+			<div class="side">
+				<h4><a href="/admin/testimonies"><img src="/images/li-close.png">使用者見證管理</a></h4>
+			</div>
+			<div class="side">
+				<h4><a href="/admin/entries"><img src="/images/li-close.png">最新消息管理</a></h4>
+			</div>
+			<div class="side">
+				<h4><a href="/admin/categories"><img src="/images/li-close.png">類別管理</a></h4>
 			</div>
 			<% end %>
 		</aside>

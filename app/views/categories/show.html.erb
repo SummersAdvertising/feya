@@ -1,0 +1,171 @@
+
+<link rel="stylesheet" href="/css/products.css">
+
+<script type="text/javascript">
+$(function(){
+	$('.single').addClass('accordionPart').find('h4').addClass('open').hover(function(){
+		$(this).addClass('open_on');
+	}, function(){
+		$(this).removeClass('open_on');
+	}).click(function(){
+
+
+		var $qa_content = $(this).next('.single article');
+		if(!$qa_content.is(':visible')){
+			$('.single article:visible').slideUp();
+		}
+		$qa_content.slideToggle()
+	}).siblings().addClass('open_on').hide();
+});
+</script>
+
+<article id="products">
+  <div id="crumb"> <a href="#">首頁</a> &gt; <a href="#">美容商品</a> &gt; <a href="#">商品介紹</a></div>
+  <!--crumb-->
+  
+  <div class="left">
+    <div id="left-header"></div>
+    <div id="left-body">
+      <ul>
+        <li class="active"><a href="#">{ 美容美體商品 }</a></li>
+        <li><a href="#">{ 芳香精油（單方）}</a></li>
+        <li><a href="#">{ 芳香精油（複方）}</a></li>
+        <li><a href="#">{ 優惠商品 }</a></li>
+      </ul>
+    </div>
+    <div id="left-footer"></div>
+  </div>
+  <div class="right">
+    <div class="quick">購物車<span>9</span>件<a href="#">結帳</a></div>
+    <% @products.each do | product | %>
+    
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img width="195" src="<%= product.cover %>"></td>
+        </tr>
+        <tr>
+          <td valign="top"><%= link_to product.name, category_product_path(product,  :category_id => 1 ) %></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <% end %>
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="single">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center"><img src="image03.jpg"></td>
+        </tr>
+        <tr>
+          <td valign="top"><a href="#">霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養霏亞系列保養</a></td>
+        </tr>
+        <tr>
+          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+        </tr>
+      </table>
+    </div>
+    <!--single-->
+    <div class="page"> <a href="#">< 上一頁</a> <a href="#" class="active">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">下一頁 ></a></div>
+  </div>
+</article>

@@ -1,0 +1,29 @@
+<h1>Listing admin_testimonies</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Article</th>
+    <th>Cover</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @testimonies.each do |testimony| %>
+  <tr>
+    <td><%= testimony.title %></td>
+    <td><%= testimony.article_id %></td>
+    <td><%= testimony.cover %></td>
+    <td><%= testimony.status %></td>
+    <td><%= link_to 'Show', admin_testimony_path(testimony) %></td>
+    <td><%= link_to 'Edit', edit_admin_testimony_path(testimony) %></td>
+    <td><%= link_to 'Destroy', admin_testimony_path( testimony ), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Testimony', new_admin_testimony_path %>

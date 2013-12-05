@@ -1,84 +1,90 @@
-<section class="content" id="index-show">
-  <% if @product %>
-  <div class="quick"><p>購物車</p><span><%= @cartitems_count %></span>件<a href="/orders/cart">結帳</a></div>
-  <div style="overflow:hidden">
-    <div id="preview"><%= (@product.cover && @product.cover.length > 0) ? image_tag(@product.cover) : "尚未上傳產品封面。" %></div>
-    <div id="intro">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="name"><%= @product.name %><br>
-            <span class="number">商品編號：<%= @product.id %></span>
-          </td>
-        </tr>
-        <tr>
-          <td class="price">
-            <% if @product.saleprice %>
-            <span class="original">NT$ <%= @product.price %></span><br>
-            NT$ <%= @product.saleprice %>
-            <% else %>
-            NT$ <%= @product.price %>
-            <% end %>
-          </td>
-        </tr>
-        <%= form_for(@cartitem, :url => add_cart_orders_path) do |f| %>
 
-        <% if !@product.hasType && @product.hasStock %>
+
+<link rel="stylesheet" href="/css/products.css">
+
+<script type="text/javascript">
+$(function(){
+	$('.single').addClass('accordionPart').find('h4').addClass('open').hover(function(){
+		$(this).addClass('open_on');
+	}, function(){
+		$(this).removeClass('open_on');
+	}).click(function(){
+
+
+		var $qa_content = $(this).next('.single article');
+		if(!$qa_content.is(':visible')){
+			$('.single article:visible').slideUp();
+		}
+		$qa_content.slideToggle()
+	}).siblings().addClass('open_on').hide();
+});
+</script>
+
+<article id="products">
+  <div id="crumb"> <a href="#">首頁</a> &gt; <a href="#">美容商品</a> &gt; <a href="#">商品介紹</a></div>
+  <!--crumb-->
+  
+  <div class="left">
+    <div id="left-header"></div>
+    <div id="left-body">
+      <ul>
+        <li class="active"><a href="#">{ 美容美體商品 }</a></li>
+        <li><a href="#">{ 芳香精油（單方）}</a></li>
+        <li><a href="#">{ 芳香精油（複方）}</a></li>
+        <li><a href="#">{ 優惠商品 }</a></li>
+      </ul>
+    </div>
+    <div id="left-footer"></div>
+  </div>
+  <div class="right">
+    <div class="content">
+    <%= form_for(@cartitem, :url => add_cart_orders_path) do |f| %>
+    
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">      
+        <tr>
+          <td width="43%" valign="top" id="cover"><img src="<%= @product.cover %>"></td>
+          <td width="57%" valign="top"><h4><%= @product.name %></h4>
+      <% if !@product.hasType && @product.hasStock %>
         <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
         <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
         <tr>
           <td class="count">庫存 <%= @product.stocks.first.amount %>
           </td>
         </tr>
+        
+        
+        
+        
+        
+            <div class="size"> 數量
+              <select name="">
+                <option>選 擇 數 量</option>
+              </select>
+              <br>
+              規格
+              <select name="">
+                <option>選 擇 規 格</option>
+              </select>
+            </div>
         <% end %>
         <% elsif !@product.hasStock %>
-        <tr>
-          <td class="count">本商品目前無庫存。</td>
-        </tr>
+        <div class="size"> 本商品目前無庫存。   </div>
+        
         <% end %>
-
-        <% if @product.hasStock %>
+            <p> 專業價 <del>$ <%= @product.price %></del><br>
+              限時優惠 <strong>$ <%= @product.saleprice %></strong><br>
+            </p>
+            <a href="#"></a></td>
+        </tr>
         
         <tr>
-          <td class="count">
-            訂購數量 <br/>
-             <% if @product.hasType %>
-             <select id="productType" name="orderitem[stock_id]">
-              <% @product.stocks.each do |stock| %>
-              <% if !stock.amount || stock.amount > 0 %>
-              <option value="<%= stock.id %>"><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
-              <% end %>
-              <% end %>
-            </select>
-            <% end %>
-
-            <%= f.text_field :amount %>
-            
-          </td>
+          <td colspan="2" align="center" valign="top"><br>
+            <img src="/images/pd-06.gif"></td>
         </tr>
-        <tr>
-          <td class="add"><%= link_to '加入購物車', "#", :id => "submit", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name, :stockceiling => @product.stocks.first.amount } %></td>
-        </tr>
-        <% end %>
-        <% end %>
       </table>
+      <% end %>
+      <article class="peditor"> 概略課程介紹，光療凝膠保養實務班 2013081。另有考取美容乙級‧考取美容丙級‧新娘顧問達人班‧時尚造型‧時尚美甲養成‧全方位行動美容達人班‧時尚造型班 </article>
     </div>
+    <!--content--> 
   </div>
-
-  <div id="detail">
-    <h3>產品說明及注意事項</h3>
-    <%= simple_format(@product.description.html_safe) %>
-  </div>
-
-  <script type="text/javascript">
-  if("<%= alert || notice %>"){
-    alert("<%= alert || notice %>");
-  }
-  $("#submit").click(function(){
-    $("#new_orderitem").submit();
-  });
-  </script>
-
-  <% else %>
-  <p>找不到此商品。</p>
-  <% end %>
-</section>
+</article>
