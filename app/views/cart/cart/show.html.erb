@@ -1,70 +1,84 @@
-<section class="content" id="order-step1">
-	<div id="detail">
-		<table id="cartItems" width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <th width="8%" align="center">&nbsp;</th>
-		    <th width="16%" align="center">明細</th>
-		    <th width="8%" align="center">顏色</th>
-		    <th width="22%" align="center">數量</th>
-		    <th width="10%" align="center">單價</th>
-		    <th width="10%" align="center">折扣價</th>
-		    <th width="10%" align="center">小計</th>
-		    <th width="8%" align="center">現貨庫存</th>
-		    <th width="8%" align="center">刪除</th>
-		  </tr>
 
+<link rel="stylesheet" href="/css/shopcart.css">
+
+
+<article _height='auto'>
+  <div id="step"><img src="/images/sc-02.jpg"></div>
+  <div id="content">
+    <div id="detail">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+      
+        <tr>
+          <th width="24%" align="center">明細</th>
+          <th width="8%" align="center">規格</th>
+          <th width="22%" align="center">數量</th>
+          <th width="10%" align="center">單價</th>
+          <th width="10%" align="center">折扣價</th>
+          <th width="10%" align="center">小計</th>
+          <th width="8%" align="center">庫存</th>
+          <th width="8%" align="center">刪除</th>
+        </tr>
+      
 		  <% if @orderItems && @orderItems.length>0 %>
 
-		  <% @orderPrice = 0 %>
-		  <% @orderItems.each do |item| %>
-
-		  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
-		  <% @orderPrice = @orderPrice + @itemSum %>
-		  <tr>
-		    <td align="center"><%= item[:image] ? image_tag("/uploads/product/"+item[:image]) : "未上傳圖片。" %></td>
-		    <td align="center"><%= item[:name] %></td>
-		    <td align="center"><%= item[:typename] %></td>
-		    <td align="center" class="count">
-		    	<%= link_to "-", minus_cart_orders_path(item[:id]), :method => :post, :class => "minor" %>
-		    	<input disabled type="text" value="<%= item[:amount] %>">
-		    	<%= link_to "+", plus_cart_orders_path(item[:id]), :method => :post, :class => "plus" %>
-		    </td>
-		    <td align="center"><%= item[:price] %></td>
-		    <td align="center"><%= item[:saleprice] || item[:price] %></td>
-		    <td align="center"><%= @itemSum %></td>
-		    <td align="center">有</td>
-		    <td align="center" class="delete"><%= link_to "刪除", delete_cart_orders_path(item[:id]), :method => :delete, :data => {:confirm => "確定刪除？"} %></td>
-		  </tr>
-		  <% end %>
+			  <% @orderPrice = 0 %>
+			  <% @orderItems.each do |item| %>
+		
+				  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
+				  <% @orderPrice = @orderPrice + @itemSum %>
+				  <tr>
+				    <td align="center"><%= item[:image] ? image_tag("/uploads/product/"+item[:image]) : "未上傳圖片。" %></td>
+				    <td align="center"><%= item[:name] %></td>
+				    <td align="center"><%= item[:typename] %></td>
+				    <td align="center" class="count">
+				    	<%= link_to "-", minus_cart_orders_path(item[:id]), :method => :post, :class => "minor" %>
+				    	<input disabled type="text" value="<%= item[:amount] %>">
+				    	<%= link_to "+", plus_cart_orders_path(item[:id]), :method => :post, :class => "plus" %>
+				    </td>
+				    <td align="center"><%= item[:price] %></td>
+				    <td align="center"><%= item[:saleprice] || item[:price] %></td>
+				    <td align="center"><%= @itemSum %></td>
+				    <td align="center">有</td>
+				    <td align="center" class="delete"><%= link_to image_tag('/images/sc-03.gif'), delete_cart_orders_path(item[:id]), :method => :delete, :data => {:confirm => "確定刪除？"} %></td>
+				  </tr>
+			  <% end %>
 
 		  <% else %>
-		  <tr>
-		    <td align="center" colspan="9">尚未將商品加入購物車。</td>
-		  </tr>
+			  <tr>
+			    <td align="center" colspan="9">尚未將商品加入購物車。</td>
+			  </tr>
 		  <% end %>
 		  
-		</table>
-	</div>
-	<div id="check">
-		<table width="240" border="0" align="right" cellpadding="0" cellspacing="0">
-		  <tr>
-		    <td width="120">購物小計</td>
-		    <td width="120">NT$ <span class="sum"><%= @orderPrice %></span></td>
-		  </tr>
-		  <tr>
-		    <td class="total">訂單總計</td>
-		    <td class="total">NT$ <span class="orderprice"><%= @orderPrice %></span></td>
-		  </tr>
-		  <tr>
-		    <td>預期產生折扣金</td>
-		    <td><span class="discountpoint"><%= ((@orderPrice || 0) /200).floor %></span>  點</td>
-		  </tr>
-		</table>
-	</div>
-</section>
-<div id="button">
-<a href="/" id="back"><img src="/images/left.png">繼續購物</a><a href="/orders/check" id="next">下一步<img src="/images/right.png"></a>
-</div>
+      </table>
+    </div>
+    <div id="check">
+    
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="80%">&nbsp;</td>
+          <td width="10%">購物小計</td>
+          <td width="10%" align="right">NT$ <%= @orderPrice %></td>
+        </tr>        
+        <tr>
+          <td width="80%">&nbsp;</td>
+          <td width="10%">訂單總計</td>
+          <td width="10%" align="right">NT$ <%= @orderPrice %></td>
+        </tr>      
+      </table>
+    </div>
+    <div class="button">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="right"><a href="/" id="back">繼續購物</a><a href="#"  id="next">下一步</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!--content--> 
+</article>
+
+
 <script type="text/javascript">
 $("ul.step>li").eq(0).addClass("active");
 

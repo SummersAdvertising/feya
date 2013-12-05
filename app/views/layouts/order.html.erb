@@ -1,28 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<!--[if lt IE 9]>
-	<script src="js/html5.js"></script>
-	<![endif]-->
-  <meta charset="utf-8">
-  <title>夏天廣告購物車系統</title>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>霏亞國際美容機構</title>
+
+
 <link rel="stylesheet" href="/css/reset.css">
-<link rel="stylesheet" href="/css/order.css">
+
+
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-</head>
-<body>
-  <ul class="step">
-    <li><a>1. 購物明細確認</a></li>
-    <li><span>&gt;</span></li>
-    <li><a>2. 填寫訂購資料</a></li>
-    <li><span>&gt;</span></li>
-    <li><a>3. 完成訂購</a></li>
-  </ul>
   
-  <%= yield %>
+<link rel="stylesheet" href="/css/style-m.css">
+<link rel="stylesheet" href="/css/shopcart.css">
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/auto-full-height.min.js"></script>
+</head>
 
-  <footer></footer>
-</body>	
+<body>
+<header _height='none'>
+  <div id="top"> XXX 您好　│<a href="#">您的帳戶</a>│<a href="#">購物車</a> <img src="/images/sc-01.png"> <a id="back" href="index.html">回首頁 &gt;</a></div>
+</header>
+
+<%= yield %>
+
+<footer _height='none'>
+  <div class="container">
+    <nav><a href="#">專 業 課 程 </a>│ <a href="#">學 員 見 證</a> │ <a href="#">專 業 師 資 </a>│ <a href="#">美 容 商 品 </a>│ <a href="#">最 新 消 息 </a>│ <a href="#">關 於 霏 亞</a></nav>
+    <p>台北　台北市中山區長安東路二段82號<br>
+      桃園　桃園縣蘆竹鄉中正路308號18樓之2<br>
+      鶯歌　新北市鶯歌區永明街67-3號<br>
+      <span>Copyright (C) 霏亞國際 All Rights Reserved.</span></p>
+  </div>
+</footer>
+</body>
 </html>
