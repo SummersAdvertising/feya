@@ -2,42 +2,37 @@
 /*-----------------------------------------------------------------------全域---*/
 
 html{background:#FCF6EF}
-body{width:1280px;margin:0 auto;background:#fff;font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em}
-a{font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em;text-decoration:none}
-
-
+body{width:100%;max-width:1280px;min-width:940px;margin:0 auto;background:#fff;font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em}
+a{font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em;text-decoration:none;
+-webkit-transition:all ease .3s;-moz-transition:all ease .3s}
 
 /*-----------------------------------------------------------------------頁首---*/
 
 header{height:300px;border-bottom:1px solid #362E2B}
 
-
-
-#link{background:url(/images/call.png) right 0 no-repeat;height:70px;width:1000px;margin:0 auto}
+#link{background:url(../images/call.png) right 0 no-repeat;height:70px;width:1000px;margin:0 auto}
 #link a{font-size:12px;color:#716d6d}
 #link a:hover{color:#aaa}
 #link img{position:relative;top:4px}
 
-#top{height:118px;background:url(/images/header.png) 0 0 no-repeat}
+#top{height:118px;background:url(../images/header.png) center 0 no-repeat;width:100%}
 #nav{height:40px;width:940px;margin:0 auto;}
-#nav > li{float:left;width:130px;height:100%;text-align:center;position:relative;background:url(/images/cs-05.png) 0 7px no-repeat}
+#nav > li{float:left;width:130px;height:100%;text-align:center;position:relative;background:url(../images/cs-05.png) 0 7px no-repeat}
 #nav > li > a{display:inline-block;width:91px;height:100%;text-indent:-7777px;
 background-position:center 8px;background-repeat:no-repeat;}
 #nav > li:hover > a,
 #nav .active > a{border-bottom:5px solid #FFCC00}
 #nav > li:hover .menu{display:block}
 
-#home{display:block;width:160px;height:111px; float: left; margin-top: -70px;}
-
 #nav-3{text-align:left!important;padding:0 0 0 25px;border:none!important}
 #nav-6{border:none!important}
 
-#nav-1 > a{background-image:url(/images/nav-1.png)}
-#nav-2 > a{background-image:url(/images/nav-2.png)}
-#nav-3 > a{background-image:url(/images/nav-3.png)}
-#nav-4 > a{background-image:url(/images/nav-4.png)}
-#nav-5 > a{background-image:url(/images/nav-5.png)}
-#nav-6 > a{background-image:url(/images/nav-6.png)}
+#nav-1 > a{background-image:url(../images/nav-1.png)}
+#nav-2 > a{background-image:url(../images/nav-2.png)}
+#nav-3 > a{background-image:url(../images/nav-3.png)}
+#nav-4 > a{background-image:url(../images/nav-4.png)}
+#nav-5 > a{background-image:url(../images/nav-5.png)}
+#nav-6 > a{background-image:url(../images/nav-6.png)}
 
 #nav-1,#nav-4{background:none!important}
 
@@ -48,6 +43,7 @@ background-position:center 8px;background-repeat:no-repeat;}
 #top .menu a:hover{color:#00B1AE}
 
 #banner{height:174px}
+#home{display:block;width:160px;height:111px; float: left; margin-top: -70px;}
 
 /*-----------------------------------------------------------------------頁身---*/
 
@@ -64,5 +60,5 @@ footer{height:185px;color:#fff;font-size:12px;background:#362E2B}
 footer a{color:#fff;font-size:13px;color:#fff}
 footer a:hover{color:#F5D856}
 footer p span{color:#a6937c}
-footer .container{width:940px;margin:0 auto;background:url(/images/footer.jpg) 0 25px no-repeat;text-align:right;padding:50px 0 0 0}
+footer .container{width:940px;margin:0 auto;background:url(../images/footer.jpg) 0 25px no-repeat;text-align:right;padding:50px 0 0 0}
 

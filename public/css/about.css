@@ -1,4 +1,4 @@
-#banner{background:url(/images/ab-banner.jpg) 0 0 no-repeat}
+#banner{background:url(../images/ab-banner.jpg) center 0 no-repeat}
 
-#content{background:url(/images/ab-02.jpg) right 20% no-repeat}
+#content{background:url(../images/ab-02.jpg) right 20% no-repeat}
 #content p{width:575px;color:#1b1b1b;padding:50px 35px}

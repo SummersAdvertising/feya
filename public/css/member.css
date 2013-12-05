@@ -1,7 +1,7 @@
 
 /*-----------------------------------------------------------------------側欄---*/
 
-article .left {width:265px;background:url(/images/mb-07.gif);padding:10px 15px;float:left}
+article .left {width:265px;background:url(../images/mb-07.gif);padding:10px 15px;float:left}
 article .left ul{padding:0 10px} 
 article .left ul li{margin:10px 0}
 article .left ul li a{color:#000}
@@ -11,7 +11,7 @@ article .left ul li a:hover,.active a{background:#FFEC4C;display:block;padding:1
 
 article .right{width:615px;float:right;color:#59493f}
 article .right h4{color:#00b1ae;height:30px}
-article .right .content{background:url(/images/cs-03.gif);padding:20px;margin:0 0 35px 0}
+article .right .content{background:url(../images/cs-03.gif);padding:20px;margin:0 0 35px 0}
 article .right .button{background:#fff;border:1px solid #00b1ae;color:#00b1ae;padding:5px 10px 5px 20px;letter-spacing:10px;cursor:pointer;font:300 15px 微軟正黑體,Microsoft JhengHei}
 article .right .button:hover{background:#00b1ae;color:#fff}
 

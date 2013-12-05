@@ -1,7 +1,7 @@
-#banner{background:url(/images/pf-banner.jpg) 0 0 no-repeat}
+#banner{background:url(../images/pf-banner.jpg) center 0 no-repeat}
 
 #content{padding:60px 0 0 0}
 #content .avator{width:180px}
 #content .avator div{position:relative}
 #content .avator img{position:absolute;top:-60px}
-#content .text{background:url(/images/pf-05.gif) center 0 no-repeat;padding:60px 45px 30px 45px;width:760px}
+#content .text{background:url(../images/pf-05.gif) center 0 no-repeat;padding:60px 45px 30px 45px;width:760px}

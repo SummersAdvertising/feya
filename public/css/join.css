@@ -1,14 +1,14 @@
-#banner{background:url(/images/ju-banner.jpg) 0 0 no-repeat}
+#banner{background:url(../images/ju-banner.jpg) center 0 no-repeat}
 
 #content #intro{margin:0 0 25px 0}
-#content #intro p{background:url(/images/ju-01.jpg) 0 0 no-repeat;height:167px;padding:25px 0 0 400px;color:#959595}
+#content #intro p{background:url(../images/ju-01.jpg) 0 0 no-repeat;height:167px;padding:25px 0 0 400px;color:#959595}
 
-#form{background:url(/images/ju-04.png) 0 0 no-repeat;width:681px;margin:0 auto;padding:80px 40px 0 40px;height:565px}
-#form th{background:url(/images/ju-05.png) 0 23px no-repeat;text-align:left;font-weight:300;padding:13px 0 0 15px}
+#form{background:url(../images/ju-04.png) 0 0 no-repeat;width:681px;margin:0 auto;padding:80px 40px 0 40px;height:565px}
+#form th{background:url(../images/ju-05.png) 0 23px no-repeat;text-align:left;font-weight:300;padding:13px 0 0 15px}
 #form td{width:100%;padding:10px 0}
 
 #form td input{width:100%;border:none;padding:5px}
 #form td textarea{min-height:150px;border:none;width:100%;padding:5px}
 
-#send{background:url(/images/ju-02.gif) 0 0 no-repeat;width:213px!important;height:29px;border:none;margin:0 auto;cursor:pointer;}
+#send{background:url(../images/ju-02.gif) 0 0 no-repeat;width:213px!important;height:29px;border:none;margin:0 auto;cursor:pointer;}
 #send:hover{position:relative;top:3px}

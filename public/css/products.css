@@ -1,19 +1,19 @@
-#banner{background:url(/images/pd-banner.jpg) 0 0 no-repeat}
+#banner{background:url(../images/pd-banner.jpg) center 0 no-repeat}
 
 #products .left{width:215px}
 #products .right{width:725px;padding:0 10px 10px 10px;position:relative;}
 
-#left-header{height:27px;background:url(/images/pd-04.jpg) 0 0 no-repeat}
-#left-body{background:url(/images/pd-03.jpg) 0 0 repeat-y;height:781px}
-#left-footer{height:27px;background:url(/images/pd-05.jpg) 0 0 no-repeat}
+#left-header{height:27px;background:url(../images/pd-04.jpg) 0 0 no-repeat}
+#left-body{background:url(../images/pd-03.jpg) 0 0 repeat-y;height:781px}
+#left-footer{height:27px;background:url(../images/pd-05.jpg) 0 0 no-repeat}
 
 .left ul{padding:0 30px;}
-.left li{height:50px;background:url(/images/pd-02.gif) 0 bottom no-repeat;padding:10px 0 0 0}
+.left li{height:50px;background:url(../images/pd-02.gif) 0 bottom no-repeat;padding:10px 0 0 0}
 .left a{color:#000;display:block;padding:0 0 0 5px}
 .left a:hover{color:#C490BF}
 .left .active a{background:#FFEC4C;box-shadow:-4px 4px 0 #C490BF;}
 
-.single{width:215px;height:265px;background:url(/images/pd-01.gif);padding:10px;float:left;margin:0 10px 20px 10px;color:#7d7d7d}
+.single{width:215px;height:265px;background:url(../images/pd-01.gif);padding:10px;float:left;margin:0 10px 20px 10px;color:#7d7d7d}
 .single img{border:3px solid #fff}
 .single b{color:#af73ba;font:900 18px 微軟正黑體,Microsoft JhengHei}
 .single a{color:#333;display:block;padding:0 0 0 5px;max-height:48px;position:relative;overflow:hidden;text-decoration:underline;font-size:13px}
@@ -36,7 +36,7 @@ padding:3px 0;margin:3px 0 0 1px;text-shadow:0 -1px 0 #843377}
 .content .peditor{padding:20px 0 0 0}
 
 .content h4{background:#00B1AE;color:#fff;font:300 19px 微軟正黑體,Microsoft JhengHei;padding:2px 5px}
-.content table a{display:block;width:136px;height:25px;background:url(/images/pd-07.gif) 0 0 no-repeat;margin:20px 0 0 0}
+.content table a{display:block;width:136px;height:25px;background:url(../images/pd-07.gif) 0 0 no-repeat;margin:20px 0 0 0}
 
 .content .size{color:#959595;margin:20px 0}
 .content .size select{border:1px solid #959595;padding:5px;width:200px;color:#959595;margin:5px 0 5px 10px}

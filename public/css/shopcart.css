@@ -1,7 +1,7 @@
 
 #step{margin:0 0 40px 0}
 
-#content{background:url(/images/cs-03.gif);padding:20px;overflow:hidden}
+#content{background:url(../images/cs-03.gif);padding:20px;overflow:hidden}
 #detail th{padding:0 0 10px 0}
 #detail th,#detail td a{color:#00b1ae}
 #detail td{background:#fff}
@@ -28,5 +28,5 @@
 #return {color:#959595!important;border:1px solid #959595!important}
 #return:hover{background:#959595;color:#fff!important}
 
-#thx{background:url(/images/sc-06.gif) 0 0 no-repeat;width:430px;height:125px;margin:0 auto;position:relative}
+#thx{background:url(../images/sc-06.gif) 0 0 no-repeat;width:430px;height:125px;margin:0 auto;position:relative}
 #thx .button{position:absolute;bottom:20px;left:130px}

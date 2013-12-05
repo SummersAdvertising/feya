@@ -1,5 +1,5 @@
 header{height:568px;}
-#banner{background:url(../images/df-banner.jpg) 0 0 no-repeat;height:442px}
+#banner{background:url(../images/df-banner.jpg) center 0 no-repeat;height:442px}
 
 body > article{width:100%;padding:0}
 
@@ -9,8 +9,8 @@ body > article{width:100%;padding:0}
 #course a{display:inline-block;background:url(../images/cs-04.png) 0 0 no-repeat;width:137px;height:35px}
 #course a:hover{background:url(../images/cs-04h.png) 0 0 no-repeat;}
 
-#news{background:url(../images/df-06.jpg) 160px 30px no-repeat #FFCC00;font:300 18px 微軟正黑體,Microsoft JhengHei;padding:20px 0}
-#news ul{width:565px;margin:0 auto}
+#news{background:#FFCC00;font:300 18px 微軟正黑體,Microsoft JhengHei;padding:20px 0}
+#news table{width:940px;margin:0 auto}
 #news li{border-bottom:1px solid #FFE064;padding:10px 0}
 #news a{font:300 16px 微軟正黑體,Microsoft JhengHei;color:#000}
 #news span{color:#25b29d;margin:0 15px 0 0;font-weight:900}

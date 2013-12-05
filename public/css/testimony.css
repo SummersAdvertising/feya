@@ -1,26 +1,26 @@
-#banner{background:url(/images/wn-banner.jpg) 0 0 no-repeat}
+#banner{background:url(../images/wn-banner.jpg) center 0 no-repeat}
 
 #witness{overflow:hidden}
-#witness .intro{clear:both;background:url(/images/wn-01.jpg) 0 0 no-repeat;height:361px;padding:130px 0 0 260px;margin:0 0 50px 0}
+#witness .intro{clear:both;background:url(../images/wn-01.jpg) 0 0 no-repeat;height:361px;padding:130px 0 0 260px;margin:0 0 50px 0}
 #witness .intro p{width:340px;color:#362e2b;line-height:1.9em}
 #witness .intro b{background:#FFEC4C}
 
 #witness > .right{width:220px}
 #witness .right .cate{display:block;width:140px;height:133px;
 background-repeat:no-repeat;background-position:0 0;}
-#cate-1{background-image:url(/images/wn-08.gif)}
-#cate-2{background-image:url(/images/wn-09.gif)}
-#cate-3{background-image:url(/images/wn-10.gif)}
-#cate-1:hover{background-image:url(/images/wn-08h.gif)}
-#cate-2:hover{background-image:url(/images/wn-09h.gif)}
-#cate-3:hover{background-image:url(/images/wn-10h.gif)}
+#cate-1{background-image:url(../images/wn-08.gif)}
+#cate-2{background-image:url(../images/wn-09.gif)}
+#cate-3{background-image:url(../images/wn-10.gif)}
+#cate-1:hover{background-image:url(../images/wn-08h.gif)}
+#cate-2:hover{background-image:url(../images/wn-09h.gif)}
+#cate-3:hover{background-image:url(../images/wn-10h.gif)}
 
 #witness .right table{width:140px;text-align:center;margin:0 auto 50px auto}
 #witness .right td{padding:10px 0;border-bottom:1px solid #B9AA98}
 
 #witness > .left{width:620px}
-#witness .single{background:url(/images/wn-04.gif) center bottom no-repeat;padding:30px 0;color:#4C4643;font-size:14px}
-#witness h4{color:#362e2b;font:300 24px 微軟正黑體,Microsoft JhengHei;background:url(/images/wn-11.gif) right center no-repeat;padding:0 0 0 10px;cursor:pointer}
+#witness .single{background:url(../images/wn-04.gif) center bottom no-repeat;padding:30px 0;color:#4C4643;font-size:14px}
+#witness h4{color:#362e2b;font:300 24px 微軟正黑體,Microsoft JhengHei;background:url(../images/wn-11.gif) right center no-repeat;padding:0 0 0 10px;cursor:pointer}
 #witness h4 span{font-size:14px;color:#4C4643}
 #witness .single article{padding:30px 0 0 0}
 #witness .single img{margin:10px 0}
