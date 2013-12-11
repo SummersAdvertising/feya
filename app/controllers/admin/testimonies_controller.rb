@@ -9,21 +9,10 @@ class Admin::TestimoniesController < AdminController
       format.json { render json: @testimonies }
     end
   end
-
-  # GET /admin/testimonies/1
-  # GET /admin/testimonies/1.json
-  def show
-    @testimony = Testimony.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @testimony }
-    end
-  end
-
+  
   # GET /admin/testimonies/new
   # GET /admin/testimonies/new.json
-  def new
+  def create
     @testimony = Testimony.new
     @testimony.article = Article.new
 
@@ -50,7 +39,7 @@ class Admin::TestimoniesController < AdminController
 
     respond_to do |format|
       if @testimony.update_attributes(params[:testimony]) && ( params[ :article ].nil? ^ @testimony.article.update_attributes( params[ :article ] ) )
-        format.html { redirect_to admin_testimony_path(@testimony), notice: 'Testimony was successfully updated.' }
+        format.html { redirect_to admin_testimonies_path, notice: 'Testimony was successfully updated.' }
         format.js { head :no_content }
       else
         format.html { render action: "edit" }
@@ -66,7 +55,7 @@ class Admin::TestimoniesController < AdminController
     @testimony.destroy
 
     respond_to do |format|
-      format.html { redirect_to testimonies_url }
+      format.html { redirect_to admin_testimonies_path }
       format.json { head :no_content }
     end
   end

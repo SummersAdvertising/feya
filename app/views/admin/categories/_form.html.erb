@@ -1,0 +1,31 @@
+<%= form_for [:admin, @instruction] do | f | %>
+  <div class="title-edit">   
+  <div class="button" id="button-up"> <a href="#" class="right">刪除分類<img src="/images/trash.png"></a></div>
+    <h3>新增分類</h3>     
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="85%"><%= f.text_field :name, :placeholder => '文章標題' %></td>              
+          <td width="15%" align="center"><%= @instruction.created_at.strftime( '%Y-%m-%d' ) if !@instruction.new_record? %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!--title-edit-->
+  <div class="box-edit">
+	<div class="box">	      
+	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	        <tr>
+	          <td width="8%" valign="top">描述：</td>
+	          <td width="92%" colspan="3" valign="top"><%= f.text_area :description, :class => 'autoglow'  %></td>
+	        </tr>
+	    </table>
+	</div>  
+  </div>
+	
+<div class="button" id="button-down"> <a href="<%= admin_instructions_path %>" class="left"><img src="/images/arrow-left.png">返回列表</a>
+<a href="javascript: document.forms[0].submit(); " class="right light">儲存發佈<img src="/images/update.png"></a></div>
+
+<% end %>
+
+<!--button--> 

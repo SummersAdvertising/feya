@@ -1,29 +1,21 @@
-<h1>Listing admin_testimonies</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Article</th>
-    <th>Cover</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<header>
+  <h2>學員見證</h2>
+</header>
+    
+<article>
+  <div class="button" id="button-down">
+  <a href="<%= admin_testimonies_path %>" data-method="post" class="right light" rel="nofollow">新增文章<img src="/images/add.png"></a></div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @testimonies.each do |testimony| %>
+      <tr>
+        <td><a href="#"><%= link_to testimony.title, edit_admin_testimony_path(testimony) %></a></td>
+        <td align="center"><%= testimony.created_at.strftime('%Y-%m-%d') %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="page"> <a href="#">&lt;</a><a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">&gt;</a></div>
+</article>
 
-<% @testimonies.each do |testimony| %>
-  <tr>
-    <td><%= testimony.title %></td>
-    <td><%= testimony.article_id %></td>
-    <td><%= testimony.cover %></td>
-    <td><%= testimony.status %></td>
-    <td><%= link_to 'Show', admin_testimony_path(testimony) %></td>
-    <td><%= link_to 'Edit', edit_admin_testimony_path(testimony) %></td>
-    <td><%= link_to 'Destroy', admin_testimony_path( testimony ), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Testimony', new_admin_testimony_path %>

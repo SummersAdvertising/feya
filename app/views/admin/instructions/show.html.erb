@@ -1,0 +1,31 @@
+
+<header>
+  <h2>專業課程</h2>
+  <%= render 'menu' %>
+</header>
+<article>
+
+	 <div class="title-show">
+    <div class="button" id="button-up"> <a href="<%= edit_admin_instruction_path( @instruction ) %>" class="right">編輯簡介<img src="/images/edit-large.png"></a></div>
+    <h3>分類簡介</h3>
+    <div class="box">
+      <p><%= @instruction.description %></p>
+    </div>
+  </div>
+
+ 
+  <div class="button" id="button-down"> <a href="<%= admin_instruction_courses_path( @instruction ) %>" data-method="post" class="right light">新增課程<img src="/images/add.png"></a></div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <% @instruction.courses.each do | course | %>      	
+	      <tr class="<%= course.status != 'disable' ? '' : 'hidden' %>">
+	        <td><% image_tag('images/hidden.png', :width => 16, :height => 16) if course.status != 'enable' %></td>
+	        <td><a href="<%= edit_admin_instruction_course_path( @instruction, course ) %>"><%= course.name %></a></td>
+	        <td align="center"><a href="<%= switch_admin_instruction_course_path( @instruction, course, :page => params[ :page ] ) %>"><%= course.status == 'disable' ? '顯示' : '隱藏' %></a></td>
+	        <td align="center"><%= course.created_at.strftime( '%Y-%m-%d' ) %></td>
+	      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="page"> <a href="#">&lt;</a><a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">&gt;</a></div>
+</article>

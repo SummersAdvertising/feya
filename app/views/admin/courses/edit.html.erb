@@ -1,0 +1,83 @@
+
+  <script src="/js/editor.js"></script>
+  <script src="/js/editor_p.js"></script>
+  <script src="/js/editor_img.js"></script>
+  <script src="/js/editor_video.js"></script>
+    <header>
+      <h2>專業課程</h2>
+      <%= render 'admin/instructions/menu' %>
+    </header>
+    <article>
+      <%= form_for([:admin, @instruction, @course]) do |f| %>
+      <div class="title-edit">   
+      <div class="button" id="button-up"> <a href="<%= admin_instruction_course_path( @instruction, @course ) %>" data-method="delete" data-confirm="確定刪除？" class="right">刪除文章<img src="/images/trash.png"></a></div>
+        <h3>文章預覽</h3>     
+        <div class="box">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="85%"> <%= f.text_field :name, :placeholder => '課程標題' %></td>              
+              <td width="15%" align="center"><%= @course.created_at.strftime('%Y-%m-%d') %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--title-edit-->
+      
+      <div class="box-edit">
+        <div class="box">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="8%" valign="top"><%= f.label :cover, '封面：' %></td>
+              <td width="92%" valign="top"><%= f.file_field :cover %></td>
+            </tr>
+            <tr>
+              <td valign="top"><%= f.label :description, '簡介：' %></td>
+              <td valign="top"><%= f.text_area :description %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+            
+      <div class="article-edit" id="editorPanel"></div>
+      <!--edit-article-->           
+      <div class="preview preview-edit" id="articleContent"></div>
+      <!--preview-->
+      <div class="button" id="button-down"> <a href="<%= admin_entries_path %>" class="left"><img src="/images/arrow-left.png">返回列表</a>
+      <a href="javascript: document.forms[0].submit();" class="right light">儲存發佈<img src="/images/update.png"></a></div>
+      <!--button--> 
+      
+      
+	<%= f.fields_for @course.article do | a | %>
+	
+		<%= a.hidden_field :content, {:id => 'course_content'} %>
+	
+	<% end %>
+
+      
+       <% end %>
+    </article>
+    
+  
+<script type="text/javascript">
+$("#submit").click(function(){
+  $(this).parents("form:first").submit();
+});
+
+
+$(document).ready(function(){
+	editor.init({ articleModel: 'course', photoUpload: '../../../../peditor/<%= @course.article.id %>/createPhoto' });
+
+	$("#submit").click(function(e){
+		e.preventDefault();
+
+		if(!editor.isPostNotSent()){
+			$("#edit_article_<%= @course.article.id %>").submit();
+		}
+		else{
+			editor.alert("段落編輯尚未完成。", "error");
+		}
+		
+	});
+});
+
+</script>

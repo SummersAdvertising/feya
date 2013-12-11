@@ -1,3 +1,8 @@
+PATH
+  remote: ~/rorprojects/local_gems/peditor
+  specs:
+    peditor (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -168,6 +173,7 @@ DEPENDENCIES
   kaminari
   mini_magick
   mysql2
+  peditor!
   rails (= 3.2.8)
   remotipart
   rename

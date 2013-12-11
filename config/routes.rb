@@ -6,7 +6,7 @@ Feya::Application.routes.draw do
   resources :testimonies
   
   resources :entries
-  resources :classes do 
+  resources :instructions do 
   	resources :courses
   end
   
@@ -70,6 +70,14 @@ Feya::Application.routes.draw do
     
     resources :testimonies 
     resources :entries 
+    
+    resources :instructions do 
+	  	resources :courses do 
+	  		member do
+	  			get :switch
+	  		end
+	  	end
+    end
 
     resources :products, :only => [:index, :new, :edit, :create, :update] do
       member do

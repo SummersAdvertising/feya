@@ -23,7 +23,7 @@ class Admin::EntriesController < AdminController
 
   # GET /admin/entries/new
   # GET /admin/entries/new.json
-  def new
+  def create
     @entry = Entry.new(params[:admin_entry])
     @entry.article = Article.new
 
@@ -49,10 +49,11 @@ class Admin::EntriesController < AdminController
     @entry = Entry.find(params[:id])
 
     respond_to do |format|
-      if @entry.update_attributes(params[:entry]) && ( params[ :article ].nil? ^ @entry.article.update_attributes( params[ :article ] ) )
-        format.html { redirect_to admin_entry_path(@entry), notice: 'Entry was successfully updated.' }
+      if @entry.update_attributes(params[:entry]) && ( params[ :entry ][ :article ].nil? ^ @entry.article.update_attributes( params[ :entry ][ :article ] ) )
+        format.html { redirect_to admin_entries_path, notice: 'Entry was successfully updated.' }
         format.json { head :no_content }
       else
+      
         format.html { render action: "edit" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
       end

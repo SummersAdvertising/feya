@@ -60,3 +60,5 @@ gem 'capistrano'
 gem 'rename'
 
 gem 'awesome_nested_set'
+
+gem 'peditor', :path => '~/rorprojects/local_gems/peditor'

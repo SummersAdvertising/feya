@@ -2,52 +2,46 @@
 <html>
 <head>
 <!--[if lt IE 9]>
-<script src="/js/html5.js"></script>
+<script src="js/html5.js"></script>
 <![endif]-->
 <meta charset="utf-8">
-<title>夏天廣告購物車系統</title>
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>霏亞後台管理系統</title>
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/css/admin/style.css">
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag 'application' %>
 <%= csrf_meta_tags %>
+
 </head>
 
 <body>
-	<header>
-		<div id="tool"><img src="/images/tool-1.png"/>聯絡客服 01-23456789 <span>|</span><%= link_to (image_tag("/images/tool-2.png")+"登出"), admin_logout_path %> <span>|</span> <a href="/"><img src="/images/tool-3.png">回首頁</a></div>
-	</header>
-	<section id="container">
-		<aside>
-			<% if session[:admin] %>
-			<h3>管理者中心</h3>
-
-			<div class="side">
-				<h4><a href="/admin"><img src="/images/li-close.png">商品管理</a></h4>
-			</div>
-			<div class="side">
-				<h4><a href="/admin/orders"><img src="/images/li-close.png">訂單管理</a></h4>
-			</div>
-			<div class="side">
-				<h4><a href="/admin/orderrefunds"><img src="/images/li-close.png">客服管理</a></h4>
-			</div>
-			<div class="side">
-				<h4><a href="/admin/members"><img src="/images/li-close.png">會員管理</a></h4>
-			</div>
-			<div class="side">
-				<h4><a href="/admin/testimonies"><img src="/images/li-close.png">使用者見證管理</a></h4>
-			</div>
-			<div class="side">
-				<h4><a href="/admin/entries"><img src="/images/li-close.png">最新消息管理</a></h4>
-			</div>
-			<div class="side">
-				<h4><a href="/admin/categories"><img src="/images/li-close.png">類別管理</a></h4>
-			</div>
-			<% end %>
-		</aside>
-
-		<%= yield %>
-
-	</section>
-	<footer></footer>
+<header id="header">
+  <h1>祥譽後台管理系統</h1>
+  <aside id="aside"> <a href="#" id="aside-1">index</a><a href="#" id="aside-2">Edit profile</a><a href="<%= admin_logout_path %>" id="aside-3">Log out</a> </aside>
+</header>
+<section id="container">
+  <nav id="nav">
+    <ul>
+      <li><a href="<%= admin_categories_path %>"><img src="/images/box.png">商品管理</a></li>
+      <li><a href="<%= admin_orders_path %>"><img src="/images/page.png">訂單管理</a></li>
+      <li><a href="<%= admin_orderrefunds_path %>"><img src="/images/comments.png">客服管理</a></li>
+      <li><a href="<%= admin_members_path %>"><img src="/images/group.png">會員管理</a></li>
+    </ul>
+    <ul>
+      <li><a href="<%= admin_instructions_path %>"><img src="/images/book.png">專業課程</a></li>
+      <li><a href="#"><img src="/images/shake.png">加盟資訊</a></li>
+      <li><a href="<%= admin_testimonies_path %>"><img src="/images/woman.png">學員見證</a></li>
+      <li><a href="<%= admin_entries_path %>"><img src="/images/news.png">最新消息</a></li>
+    </ul>
+    <ul>
+      <li><a href="#"><img src="/images/manager.png">管理者列表</a></li>
+    </ul>
+  </nav>
+  <section id="content">
+    <%= yield %>
+  </section>
+</section>
 </body>
 </html>
+
