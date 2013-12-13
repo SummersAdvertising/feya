@@ -9,7 +9,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
     	<% entries.each do | entry | %>
 		  <tr>
-		    <td width="12%" class="date"><%= entry.title %></td>
+		    <td width="12%" class="date"><%= entry.created_at.strftime('%Y.%m.%d') %></td>
 		    <td width="88%"><a href="<%= entry_path( entry ) %>"><%= entry.article.get_meta %>...</a></td>
 		  </tr>
 		  <% end %>

@@ -5,6 +5,10 @@ class AdminController < ApplicationController
 	def login
 		redirect_to admin_root_path if(session[:admin])
 		@admin = Admin.new
+		
+		respond_to do | format |
+			format.html { render :layout => nil }
+		end
 	end
 
 	def checkAdmin

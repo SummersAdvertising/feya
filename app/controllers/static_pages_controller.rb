@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
 	def index
+		@entries = Entry.limit(3)
+	
 	end
 	
 	def show

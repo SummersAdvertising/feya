@@ -112,7 +112,7 @@ Feya::Application.routes.draw do
       end
     end
     
-    root :to => "products#index"
+    root :to => "categories#index"
   end
 
   root :to => "static_pages#index"
