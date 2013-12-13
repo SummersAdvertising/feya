@@ -2,7 +2,7 @@
 class ProductsController < ApplicationController
   before_filter :record_login_redirect_path
   before_filter :count_cartitems
-
+  before_filter :get_category
 
   def show
     @order = Order.new
@@ -36,4 +36,10 @@ class ProductsController < ApplicationController
 
     return false    
   end
+  
+private
+	def get_category
+		@categories = Category.order( :lft => :asc )
+		@category = Category.find( params[ :category_id ] )
+	end  
 end

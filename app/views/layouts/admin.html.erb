@@ -10,8 +10,18 @@
 <title>霏亞後台管理系統</title>
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/css/admin/style.css">
+<%= stylesheet_link_tag 'application' %>
 <%= javascript_include_tag 'application' %>
 <%= csrf_meta_tags %>
+
+
+<script>
+	$(document).ready(function() {		
+	<% if !flash[ :notice ].nil? %>
+		Alertify.log.success('<%= flash[ :notice ] %>');
+	<% end %>
+	});
+</script>
 
 </head>
 
@@ -26,7 +36,7 @@
       <li><a href="<%= admin_categories_path %>"><img src="/images/box.png">商品管理</a></li>
       <li><a href="<%= admin_orders_path %>"><img src="/images/page.png">訂單管理</a></li>
       <li><a href="<%= admin_orderrefunds_path %>"><img src="/images/comments.png">客服管理</a></li>
-      <li><a href="<%= admin_members_path %>"><img src="/images/group.png">會員管理</a></li>
+      <li><a href="<%= admin_members_path %>"><img src="/images/group.png">會員列表</a></li>
     </ul>
     <ul>
       <li><a href="<%= admin_instructions_path %>"><img src="/images/book.png">專業課程</a></li>

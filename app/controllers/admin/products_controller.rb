@@ -1,6 +1,8 @@
 #encoding: UTF-8
 class Admin::ProductsController < AdminController
   layout "admin"
+
+  before_filter :get_category
   
   def index
     @products = Product.order("created_at DESC").page(params[:page])
@@ -32,7 +34,7 @@ class Admin::ProductsController < AdminController
 
         @stock.save
 
-        format.html { redirect_to  edit_admin_product_path(@product), notice: 'Product was successfully created.' }
+        format.html { redirect_to  edit_admin_category_product_path(@product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         @products = Product.order("created_at DESC").page(params[:page])
@@ -43,7 +45,7 @@ class Admin::ProductsController < AdminController
   end
 
   def create
-    @product = Product.new(params[:product])
+    @product = @category.products.build(params[:product])
     @product.status = "上架"
 
     @product.article = Article.new
@@ -58,8 +60,8 @@ class Admin::ProductsController < AdminController
         @stock.amount = nil
 
         @stock.save
-
-        format.html { redirect_to  edit_admin_product_path(@product), notice: 'Product was successfully created.' }
+        
+        format.html { redirect_to  edit_admin_category_product_path(@category, @product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         @products = Product.order("created_at DESC").page(params[:page])
@@ -75,7 +77,7 @@ class Admin::ProductsController < AdminController
     
     respond_to do |format|
       if @product.update_attributes(params[:product]) && @product.article.update_attributes( params[ :article ] )
-        format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]), notice: ( @product.name + '已更新。') }
+        format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]), notice: ( @product.name + '已更新。') }
         format.json { head :no_content }
       else
         @products = Product.order("created_at DESC").page(params[:page])
@@ -91,7 +93,7 @@ class Admin::ProductsController < AdminController
     @product.save
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]) }
+      format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]) }
       format.json { render json: @product }
     end
     
@@ -103,12 +105,16 @@ class Admin::ProductsController < AdminController
     @product.save
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_product_path(@product, :page => params[:page]) }
+      format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]) }
       format.json { render json: @product }
     end
     
   end
   
-  
+private
+	def get_category
+		@category = Category.find( params[ :category_id ] )
+		@categories = Category.order( 'lft ASC, created_at ASC' ).all
+	end  
   
 end

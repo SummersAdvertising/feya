@@ -1,3 +1,176 @@
+
+<script>
+$(function(){	
+	$('.log').hide()
+	$('#log-ctrl').click(function(){			
+			$('.log').stop().show().animate({right:0},1000,'easeOutCubic')						
+	});
+	$('.log a').click(function(){			
+			$('.log').stop().animate({right:-185},1000,'easeOutCubic',function(){
+					$(this).hide()
+				})					
+	});
+})
+</script>
+
+
+
+<header>
+  <h2>訂單管理</h2>
+  	<nav>
+  		<a href="/admin/orders?type=new" class="<%= 'active' if @order.status == 'new' %>">未處理訂單</a>
+		<a href="/admin/orders?type=check" class="<%= 'active' if @order.status == 'check' %>">已收款訂單</a>
+		<a href="/admin/orders?type=processing" class="<%= 'active' if @order.status == 'processing' %>">處理中訂單</a>
+		<a href="/admin/orders?type=deliver" class="<%= 'active' if @order.status == 'deliver' %>">已出貨訂單</a>
+		<a href="/admin/orders?type=cancel" class="<%= 'active' if @order.status == 'cancel' %>">已取消訂單</a></h3>
+	</nav>
+</header>
+<article>
+<% if (@order.orderlogs.count > 0) %>
+
+  <div class="log"> <a href="#"><img src="images/cancel-large.png"></a>
+    <ul>
+    <% @order.orderlogs.each do |log| %>
+      <li><span><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></span><br>
+        <%= log.description %> </li>
+        <% end %>
+     </ul>
+  </div>
+  <!--log-->
+<% end %>
+
+	<div class="transport">
+<div class="button" id="button-up"> <%= link_to ("取消訂單 " + image_tag('/images/cancel-large.png')).html_safe, admin_order_changestatus_cancel_path(@order), :method => :post, :style => "color:red", :class => "changeStatus right" if @order.status != "cancel" %></div>
+<h3>訂單資訊</h3>
+<div class="box">
+<%= form_for(@order, :url => admin_order_path(@order, :page => params[:page]) ) do |f| %>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  
+    <tr>
+      <th width="35%" align="left">明細</th>
+      <th width="10%" align="center">規格</th>
+      <th width="15%" align="center">數量</th>
+      <th width="10%" align="center">折扣價</th>
+      <th width="10%" align="center">小計</th>
+    </tr>
+    <% @ordersum = 0 %>			
+    <% @order.orderitems.select('orderitems.*, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').each do |item| %>
+    <% itemsum = item.itemprice.to_i * item.amount.to_i %>
+    <% @ordersum = @ordersum + itemsum %>
+    <tr>
+      <td align="left"><%= item.itemname %></td>
+      <td align="center"><%= item.itemtype %></td>
+      <td align="center" class="count"><input type="number" class="text" style="width:100px!important" name="orderitem[<%=item.id%>]" value="<%=item.amount%>" /></td>
+      <td align="center"><%= item.itemprice %> </td>
+      <td align="center"><%= itemsum %></td>
+    </tr>
+    <% end %>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="76%">&nbsp;</td>
+      <td width="9%">訂單總計</td>
+      <td width="15%" align="right"><b>NT$ <%= @ordersum %></b></td>
+    </tr>
+  </table>
+  <%= f.submit "修改訂單", :style => "width: 80px!important; margin-right: 5px;", :class => 'right' %>
+<% end %>
+</div>
+</div>
+<!--transport-->
+
+  <div class="transport">
+    <h3>訂購人資訊</h3>
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="10%" align="left" valign="top">中文姓名：</th>
+          <td width="40%" valign="top"><%= @order.buyername %></td>
+          <th width="10%" align="left" valign="top">手機號碼：</th>
+          <td width="40%" valign="top"><%= @order.buyertel %></td>
+        </tr>
+        <tr>
+          <th align="left" valign="top">電子郵件：</th>
+          <td valign="top"><%= @order.email %></td>
+          <th align="left" valign="top">聯絡地址：</th>
+          <td valign="top"><%= @order.receiveraddress %> </td>
+        </tr>
+        <tr>
+          <th align="left" valign="top">發票資訊：</th>
+          <td colspan="3" valign="top"><%= @order.invoicetype %> / 發票抬頭：<%= (@order.invoicename && @order.invoicename.length > 0) ? @order.invoicename : "未填寫。" %> 統一編號：<%= (@order.companynum && @order.companynum.length > 0) ? @order.companynum : "未填寫。" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="transport">
+    <h3>收件人資訊</h3>
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="10%" align="left" valign="top">中文姓名：</th>
+          <td width="40%" valign="top"><%= @order.receivername %></td>
+          <th width="10%" align="left" valign="top">手機號碼：</th>
+          <td width="40%" valign="top"><%= @order.receivertel %></td>
+        </tr>
+        <tr>
+          <th align="left" valign="top">送貨地址：</th>
+          <td valign="top"><%= @order.receiveraddress %></td>
+          <th align="left" valign="top">宅配方式：</th>
+          <td valign="top"><%= @order.paytype %></td>
+          
+			<% if @order.payaccount %>
+			<tr>
+				<th>付款日期</th>
+				<td colspan="3"><%= @order.paydate %></td>
+			</tr>
+			<tr>
+				<th>付款時間</th>
+				<td colspan="3"><%= @order.paytime %></td>
+			</tr>
+			<tr>
+				<th>付款帳號末五碼</th>
+				<td colspan="3"><%= @order.payaccount %></td>
+			</tr>
+			<% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!--transport-->
+  <div class="button" id="button-down"> <!--a href="#" class="left"><img src="images/arrow-left.png">新訂單</a> <a href="#" class="right light">已處理<img src="images/arrow-right.png"></a--> 
+  
+  
+	<% case @order.status %>
+		<% when 'new' %>
+			<% if @order.paytype == "匯款" %>
+			<%= link_to ("確認已收款" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_check_path(@order), :method => :post, :class => "changeStatus active right light" %>
+			<% else %>
+			<%= link_to ("確認訂單成立" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active right light" %>
+			<% end %>
+		
+		<% when 'check' %>
+			<%= link_to ("確認訂單成立" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
+		
+		<% when 'processing' %>
+			<%= form_for(@order, :url => admin_order_changestatus_deliver_path(@order), :method => :post) do |f| %>
+				<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
+				<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
+				<a href="#" id="submitDeliver">確認出貨</a>
+			<% end %>
+		
+		<% when 'deliver' %>
+			<%= "已出貨" %><br>
+			運送方式 : <%= @order.shippingway %> / 追蹤碼 : <%= @order.shippingcode %>
+		<% when 'cancel' %>
+			<%= "已取消此筆訂單" %>
+	<% end %>
+  </div>
+  <!--button--> 
+</article>
+
 <section class="content" id="sv-order">
 	<h3>訂單管理
 		<a href="/admin/orders?type=new" class="<%= 'active' if @order.status == 'new' %>">未處理訂單(<%= @countnew %>)</a>
@@ -9,8 +182,7 @@
 		<%= render 'list' %>
 
 		<h3>
-			出貨明細　<%= @order.ordernum %>
-			<%= link_to "取消訂單", admin_order_changestatus_cancel_path(@order), :method => :post, :style => "color:red", :class => "changeStatus" if @order.status != "cancel" %>
+			出貨明細　
 		</h3>
 
 		<% if @order.errors.any? %>

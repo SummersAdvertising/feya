@@ -1,12 +1,21 @@
-<section class="content" id="sv-product-list">
-	<h3>商品管理</h3>
-	<%= render 'list' %>
-
-	<div class="new-top">
-		<h3><%= link_to '新增商品', new_admin_product_path %></h3>
-	</div>
-</section>
-
-<script type="text/javascript">
-$("div.side").eq(0).find("img").attr("src","/images/li-open.png");
-</script>
+<header>
+  <h2>商品管理</h2>
+  <nav> <a href="#" class="active">上架</a><a href="#">下架</a></nav>
+</header>
+<article>   
+ 
+  <div class="button" id="button-down"> <a href="<% admin_category_products_path( @category ) %>" data-method="post" class="right light">新增商品<img src="/images/add.png"></a></div>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <% @products.each do | product | %>    	
+      <tr>
+        <td width="85%"><a href="<%= edit_admin_category_product_path( @category, product ) %>"><%= product.name %></a></td>
+        <td width="15%" align="center"><%= product.created_at.strftime('%Y-%m-%d') %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <div class="page"> 
+	  <%= paginate @products %>
+  </div>
+</article>

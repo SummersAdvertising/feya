@@ -1,23 +1,127 @@
-<section class="content" id="sv-product-list">
-	<h3>商品管理</h3>
 
-	<%= render 'list' %>
+  <script src="/js/editor.js"></script>
+  <script src="/js/editor_p.js"></script>
+  <script src="/js/editor_img.js"></script>
+  <script src="/js/editor_video.js"></script>
+<header>
+  <h2>商品管理</h2>
+  <%= render 'admin/categories/menu' %>
+</header>
 
-	<div class="new-top">
-		<h3>編輯商品
-			<%= link_to "上架" ,enable_admin_product_path(@product, :page => params[:page]), :class => @product.status == "上架" ? "active" : "", :method => :post %>
-			<%= link_to "下架" ,disable_admin_product_path(@product, :page => params[:page]), :class => @product.status == "下架" ? "active" : "", :method => :post %>
-		</h3>
-	</div>
-
-	<%= form_for(@product, :url => admin_product_path(@product, :page => params[:page])) do |f| %>
-	<%= render :partial => 'form', :locals => { :f => f} %>
+<article>  
+ <%= form_for(@product, :url => admin_category_product_path(@category, @product, :page => params[:page])) do |f| %>  
+  <div class="box-edit">      	
+  <div class="button" id="button-up"> 
+  
+  	<% if @product.status == "下架"  %>
+		<%= link_to ("商品上架 " + image_tag('/images/up.png')).html_safe ,enable_admin_category_product_path(@category, @product, :page => params[:page]), :class => 'right', :method => :post %>
+	<% else %>
+		<%= link_to ("商品下架 " + image_tag('/images/offshelf.png')).html_safe ,disable_admin_category_product_path(@category, @product, :page => params[:page]), :class => 'right', :method => :post %>
 	<% end %>
-</section>
+  </div>
+  
+  
+  <h3>商品資料</h3>
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="8%" valign="top">圖片：</td>
+          <td width="92%" colspan="3" valign="top"><%= f.file_field :cover %></td>
+        </tr>
+        <tr>
+          <td valign="top">名稱：</td>
+          <td valign="top"><%= f.text_field :name, :class => 'text'  %></td>
+          <td align="center" valign="top">編號：</td>
+          <td valign="top"><input name="" type="text" class="text"></td>
+        </tr>
+        <tr>
+          <td valign="top">訂價：</td>
+          <td valign="top"><%= f.number_field :price, :class => 'text' %></td>
+          <td align="center" valign="top">折扣：</td>
+          <td valign="top"><%= f.number_field :saleprice, :class => 'text'  %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+      <div class="button" id="button-down"><a href="javascript: document.forms[0].submit();" class="right light">儲存商品<img src="/images/update.png"></a></div>
+      <!--button--> 
+      
+      
+   <% end %>
+  <h3>庫存管理</h3>
+  <%= form_for [:admin, @category, @product, @product.stocks.build] do | s | %>
+  <div class="post-edit">
+      <div class="box">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="95%" class="text"><%= s.text_field :typename, :placeholder => '輸入規格尺寸', :class => 'text' %></td>
+            <td width="5%" class="send"><input name="" onclick="document.forms[1].submit();" type="button"></td>
+          </tr>
+        </table>
+      </div>          
+  </div>
+  <% end %>
+	<%= form_for(@product.stocks.first, :url => updateStocks_admin_category_product_stocks_path(@category, @product), :method => :post ) do |f| %>
+	
+	  <div class="list">
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	      <% @product.stocks.each do | stock | %>
+	      <% next if stock.id.nil? %>
+	      
+	      <tr>
+	        <td width="78%"><a href="javascript: void(0);"><%= stock.typename == "default" ? "未指定" : stock.typename %></a></td>
+	        <% if stock.typename != 'default' %>
+	        <td width="15%" align="center"><input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></td>
+		    <td width="7%" align="center" class="delete">
+		  		<%= (link_to "", admin_category_product_stock_path(@category, @product, stock), :method => :delete, :data => { :confirm => "確定刪除分類?"} ) %>
+		  	</td>
+		  	<% end %>
+	      </tr>
+	      <% end %>
+	    </table>
+	  </div>
+  <% end %>
+	  
+      <div class="button" id="button-down"><a href="javascript: document.forms[2].submit();" class="right light">更新庫存<img src="/images/update.png"></a></div></div>
+  
 
+      <div class="article-edit" id="editorPanel"></div>
+      <!--edit-article-->           
+      <div class="preview preview-edit" id="articleContent"></div>
+      <!--preview-->
+      
+	
+      <div class="button" id="button-down"> <a href="<%= admin_category_path( @category ) %>" class="left"><img src="/images/arrow-left.png">返回列表</a>
+      <a href="javascript: document.forms[3].submit();" class="right light">儲存文章<img src="/images/update.png"></a></div>
+
+      
+</article>
+
+<%= form_for @product.article, :url => admin_article_path( @product.article ), :id => "#edit_article_" + @product.article.id.to_s do | a | %>	
+	<%= a.hidden_field :content, {:id => 'article_content'} %>	
+<% end %>
+  
 <script type="text/javascript">
-if("<%= notice %>"){
-	Alertify.log.success("<%= notice %>");
-}
-$("div.side").eq(0).find("img").attr("src","/images/li-open.png");
+$("#submit").click(function(){
+  $(this).parents("form:first").submit();
+});
+
+
+$(document).ready(function(){
+	editor.init({ articleModel: 'article', photoUpload: '../../../../peditor/<%= @product.article.id %>/createPhoto' });
+
+	$("#submit").click(function(e){
+		e.preventDefault();
+
+		if(!editor.isPostNotSent()){
+			$("#edit_article_<%= @product.article.id %>").submit();
+		}
+		else{
+			editor.alert("段落編輯尚未完成。", "error");
+		}
+		
+	});
+});
+
 </script>

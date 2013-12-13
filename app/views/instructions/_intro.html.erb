@@ -1,0 +1,13 @@
+
+  <div id="crumb"> <a href="<%= root_url %>">首頁</a> &gt; <a href="<%= instructions_path %>">專業課程</a> &gt; <a href="#"><%= @instruction.name %></a> </div>
+  <!--crumb-->
+  <ul class="tab">
+  <% @instructions.each do | instruction | %>  	
+    <li class="<%= 'active' if instruction.id == @instruction.id %>"><a href="<%= instruction_path instruction %>"><%= instruction.name %></a></li>
+    <li><span>│</span></li>
+  <% end %>
+  </ul>
+  <div class="intro">
+      <h3><%= @instruction.name %></h3>
+      <p><%= @instruction.description.gsub(/\n/, '<br />').html_safe %></p>
+    </div>

@@ -1,15 +1,26 @@
-<section class="content" id="sv-order">
-	<h3>訂單管理
-		<a href="/admin/orders?type=new" class="<%= 'active' if params[:type] == 'new' %>">未處理訂單(<%= @countnew %>)</a>
+		
+<header>
+  <h2>訂單管理</h2>
+  <nav>
+  		<a href="/admin/orders?type=new" class="<%= 'active' if params[:type] == 'new' %>">未處理訂單(<%= @countnew %>)</a>
 		<a href="/admin/orders?type=check" class="<%= 'active' if params[:type] == 'check' %>">已收款訂單(<%= @countcheck %>)</a>
 		<a href="/admin/orders?type=processing" class="<%= 'active' if params[:type] == 'processing' %>">處理中訂單(<%= @countprocessing %>)</a>
 		<a href="/admin/orders?type=deliver" class="<%= 'active' if params[:type] == 'deliver' %>">已出貨訂單(<%= @countdeliver %>)</a>
 		<a href="/admin/orders?type=cancel" class="<%= 'active' if params[:type] == 'cancel' %>">已取消訂單(<%= @countcancel %>)</a></h3>
+	</nav>
+</header>
+<article>   
 
-
-		<%= render 'list' %>
-</section>
-
-<script type="text/javascript">
-$("div.side").eq(1).find("img").attr("src","/images/li-open.png");
-</script>
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <% @orders.each do |order| %>
+      <tr>
+        <td width="60%"><%= link_to (order.ordernum+" : 共"+order.orderitems.count.to_s+"件商品"), admin_order_path(order, :page => params[:page]) %></td>
+        <td width="25%"><%= order.paytype %></td>
+        <td width="15%" align="center"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+      </tr>
+		<% end %>
+	</table>
+  </div>
+  <div class="page"><%= paginate @orders, :theme => 'page' %></div>
+</article>

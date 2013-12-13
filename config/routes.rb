@@ -66,7 +66,24 @@ Feya::Application.routes.draw do
 
     resources :members, :only => [:index]
     
-    resources :categories
+    resources :categories  do 	
+    	
+	    resources :products, :only => [:index, :new, :edit, :create, :update] do
+	      member do
+	        match "enable", :via => :post
+	        match "disable", :via => :post
+	      end
+	
+	      resources :stocks, :only => [:index, :create, :destroy] do
+	        collection do
+	          match "updateStocks", :via => :post
+	        end
+	      end
+	    end
+    
+    end
+    
+    resources :articles
     
     resources :testimonies 
     resources :entries 
@@ -79,18 +96,6 @@ Feya::Application.routes.draw do
 	  	end
     end
 
-    resources :products, :only => [:index, :new, :edit, :create, :update] do
-      member do
-        match "enable", :via => :post
-        match "disable", :via => :post
-      end
-
-      resources :stocks, :only => [:index, :create, :destroy] do
-        collection do
-          match "updateStocks", :via => :post
-        end
-      end
-    end
 
     resources :orderrefunds, :only => [:index] do
       member do

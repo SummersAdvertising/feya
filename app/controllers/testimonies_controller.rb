@@ -1,9 +1,9 @@
 class TestimoniesController < ApplicationController
 	def index
-		redirect_to testimony_path( :id => 1 )
-	end
-	
-	def show
+		
+		@testimonies = Testimony.page( params[ :page ] ).per(5)
+		
+		@instructions = Instruction.order( :sort => :asc )
 		
 	end
 end

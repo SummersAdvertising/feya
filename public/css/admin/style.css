@@ -283,6 +283,11 @@ position:relative;top:2px;filter:alpha(opacity=50);opacity:.5}
 position:relative;top:2px;filter:alpha(opacity=50);opacity:.5}
 .post .send input:hover{filter:alpha(opacity=100);opacity:1}
 
+.post-edit input{border:none;background:none;width:100%}
+.post-edit .send input{background:url(/images/add.png) center center no-repeat;cursor:pointer;
+position:relative;top:2px;filter:alpha(opacity=50);opacity:.5}
+.post-edit .send input:hover{filter:alpha(opacity=100);opacity:1}
+
 .preview{border:1px solid #ddd;background:#fff;}
 .preview .part{padding:15px;position:relative}
 .preview .part:hover,.preview .part-edit,.preview .part-edit:hover{border-left:5px solid #F2F2F2;padding-left:10px;cursor:all-scroll}

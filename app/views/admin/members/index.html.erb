@@ -1,13 +1,10 @@
-<section class="content" id="sv-member">
-  <h3>會員管理</h3>
-  <div class="member-content">
+
+<header>
+  <h2>會員列表</h2>
+</header>
+<article>
+  <div class="list">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <th align="center">名稱</th>
-        <th align="center">email</th>
-        <th align="center">聯絡電話</th>
-        <th align="center">地址</th>
-      </tr>
       <% @members.each do |member| %>
       <tr>
         <td align="center"><%= member.username %></td>
@@ -16,9 +13,7 @@
         <td align="center"><%= member.address %></td>
       </tr>
       <% end %>
-    </table>
+      </table>
   </div>
-</section>
-<script type="text/javascript">
-$("div.side").eq(3).find("img").attr("src","/images/li-open.png");
-</script>
+  <div class="page"> <%= paginate @members %></div>
+</article>

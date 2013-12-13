@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
 
   mount_uploader :cover, ProductcoverUploader
 
-  paginates_per 13
+  paginates_per 20
 
   def price_value
   	if (!self.price || !(self.price.is_a? Integer) || self.price <= 0)

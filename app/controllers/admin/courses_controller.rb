@@ -49,9 +49,10 @@ class Admin::CoursesController < AdminController
   # PUT /admin/courses/1.json
   def update
     @course = Course.find(params[:id])
-
+    
     respond_to do |format|
       if @course.update_attributes(params[:course]) && ( params[ :course ][ :article ].nil? ^ @course.article.update_attributes( params[ :course ][ :article ] ) )
+      
         format.html { redirect_to admin_instruction_path( @instruction ), notice: 'Course was successfully updated.' }
         format.json { head :no_content }
       else

@@ -1,6 +1,8 @@
 <nav> 
-	<% @instructions.each do | instruction | %>
-		<a class="<%= 'active' if @instruction.id == instruction.id %>" href="<%= admin_instruction_path( instruction ) %>"><%= instruction.name %></a>
+	<% @categories.each do | category | %>
+		<a class="<%= 'active' if @category.id == category.id %>" href="<%= admin_category_path( category ) %>"><%= category.name %></a>
 	<% end %>
-	<a href="<%= new_admin_instruction_path %>" class="add" title="新增分類"><img src="/images/add.png"></a>
+	<% if params[ :controller ] == 'admin/categories' %>
+		<a href="<%= new_admin_category_path %>" class="add" title="新增分類"><img src="/images/add.png"></a>
+	<% end %>
 </nav>

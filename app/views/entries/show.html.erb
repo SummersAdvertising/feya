@@ -1,12 +1,19 @@
+
+  <script src="/js/editor.js"></script>
+  <script src="/js/editor_p.js"></script>
+  <script src="/js/editor_img.js"></script>
+  <script src="/js/editor_video.js"></script>
+
 <link rel="stylesheet" href="/css/new.css">
 <article id="new" _height='auto'>
-  <div id="crumb"> <a href="#">首頁</a> &gt; <a href="#">最新消息</a></div>
+  <div id="crumb"> <a href="<%= root_url %>">首頁</a> &gt; <a href="#">最新消息</a></div>
   <!--crumb-->
   <div class="left">
     <h3><img src="/images/nw-03.gif"></h3>
     <ul>
-      <li class="active"><a href="#">2013 (28)</a></li>
-      <li><a href="#">2014 (8)</a></li>
+      <% @entries_grouped.each do | date, entries | %>
+      <li class="active"><a href="<%= entries_path( :year => date.year ) %>"><%= date.year %> (<%= entries.count %>)</a></li>
+      <% end %>
     </ul>
   </div>
   <div class="right">
@@ -14,14 +21,21 @@
     <div class="hgroup">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td align="right" class="date">2013.12.25</td>
+          <td align="right" class="date"><% @entry.created_at.strftime('%Y-%m-%d') %></td>
         </tr>
         <tr>
-          <td><a>霏亞為愛回饋活動為"長期失業者"及"身心障礙人士"開立
-            免費授課班級</a></td>
+          <td><a><%= @entry.title %></a></td>
         </tr>
       </table>
     </div>
-    <article class="peditor"> 概略課程介紹，光療凝膠保養實務班 2013081。另有考取美容乙級‧考取美容丙級‧新娘顧問達人班‧時尚造型‧時尚美甲養成‧全方位行動美容達人班‧時尚造型班 </article>
+    <article id="articleContent" class="peditor"></article>
   </div>
 </article>
+
+
+<input id="article_content" style="display:none;" type="text" value="<%= @entry.article.content %>">
+<script>
+	$(document).ready(function() {	
+		editor.output();	
+	});
+</script>

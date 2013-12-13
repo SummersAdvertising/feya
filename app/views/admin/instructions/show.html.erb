@@ -3,13 +3,19 @@
   <h2>專業課程</h2>
   <%= render 'menu' %>
 </header>
+<% if !@instruction.nil?  %>
 <article>
 
 	 <div class="title-show">
     <div class="button" id="button-up"> <a href="<%= edit_admin_instruction_path( @instruction ) %>" class="right">編輯簡介<img src="/images/edit-large.png"></a></div>
     <h3>分類簡介</h3>
     <div class="box">
-      <p><%= @instruction.description %></p>
+    	<table>
+	    	<tr>
+		    	<td width="15%"><%= image_tag @instruction.cover.thumb, :style => 'padding: 16px;' %></td>
+		    	<td width="85%"><p><%= @instruction.description %></p></td>
+	    	</tr>
+    	</table>      
     </div>
   </div>
 
@@ -29,3 +35,4 @@
   </div>
   <div class="page"> <a href="#">&lt;</a><a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">&gt;</a></div>
 </article>
+<% end %>

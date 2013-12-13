@@ -1,30 +1,32 @@
-<section class="content" id="sv-service">
-	<h3>客服管理<a href="/admin/orderrefunds?type=done" <%= 'class=active' if(@status=='已處理') %> >已處理</a><a href="/admin/orderrefunds?type=new" <%= 'class=active' if(@status=='未處理') %> >未處理</a></h3>
-	<div class="service-content">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<th width="20%" align="center">申請日期</th>
-				<th width="20%" align="center">訂單編號</th>
-				<th width="50%" align="left">訊息內容</th>
-				<th width="10%" align="center">處理狀態</th>
-			</tr>
-			<% @orderrefunds.each do |orderrefund| %>
-			<tr>
-				<td align="center"><%= orderrefund.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-				<td align="center"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.order_id), :target => "_blank" %></td>
-				<td align="left"><%= simple_format(orderrefund.description.html_safe) %></td>
-				<td align="center">
-					<%if orderrefund.status =='未處理' %>
-					<%=link_to "設為已處理", done_admin_orderrefund_path(orderrefund), :method => :post, data: { confirm: "確定將此留言設為已處理?" } %>
-					<% else %>
-					<%= orderrefund.status %>
-					<% end %>
-				</td>
-			</tr>
+
+<header>
+  <h2>客服管理</h2>
+ 
+</header>
+<article>
+  
+  <div class="list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <% @orderrefunds.each do |orderrefund| %>
+      <tr>
+        <td width="5%">&nbsp;</td>
+        <td width="17%"><%= link_to orderrefund.ordernum, admin_order_path(orderrefund.order_id), :target => "_blank" %></td>
+        <td width="53%"><%= simple_format(orderrefund.description.html_safe) %></td>
+        <td width="7%" align="center">
+			<%if orderrefund.status =='未處理' %>
+			<%=link_to "設為已處理", done_admin_orderrefund_path(orderrefund), :method => :post, data: { confirm: "確定將此留言設為已處理?" } %>
+			<% else %>
+			<%= orderrefund.status %>
 			<% end %>
-		</table>
-	</div>
-</section>
+		</td>
+        <td width="18%" align="center"><%= orderrefund.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="page"> <%= paginate @orderrefunds %></div>
+</article>
+
 
 <script type="text/javascript">
 $("div.side").eq(2).find("img").attr("src","/images/li-open.png");

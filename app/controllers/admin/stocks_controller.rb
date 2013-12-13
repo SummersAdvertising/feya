@@ -1,6 +1,9 @@
 #encoding: UTF-8
 class Admin::StocksController < AdminController
   layout "admin"
+  
+  before_filter :get_product
+  
   def index
     @product = Product.find(params[:product_id])
     @stocks = @product.stocks
@@ -14,15 +17,14 @@ class Admin::StocksController < AdminController
     
     @stock = @product.stocks.new
     @stock.typename = params[:stock][:typename]
-
     
     if(@stock.save)
       respond_to do |format|
-        format.html { redirect_to admin_product_stocks_path(params[:product_id]), notice: ( '已新增產品種類: '+@stock.typename+'。') }
+        format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), notice: ( '已新增產品種類: '+@stock.typename+'。') }
       end
     else
       respond_to do |format|
-        format.html { redirect_to admin_product_stocks_path(params[:product_id]), alert: (@stock.typename.length > 0 ? '此分類已存在。' : '請輸入分類名稱。') }
+        format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), alert: (@stock.typename.length > 0 ? '此分類已存在。' : '請輸入分類名稱。') }
       end
     end
   end
@@ -36,7 +38,7 @@ class Admin::StocksController < AdminController
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_product_stocks_path(params[:product_id]), notice: ( '商品庫存已更新。') }
+      format.html { redirect_to edit_admin_category_product_path(@category, @product), notice: ( '商品庫存已更新。') }
     end
   end
 
@@ -53,7 +55,16 @@ class Admin::StocksController < AdminController
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_product_stocks_path(params[:product_id]) }
+      format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), notice: ( '已刪除商品種類。')  }
     end    
   end
+  
+private
+	def get_product
+		@product = Product.find( params[ :product_id ] )
+		@category = Category.find( params[ :category_id ] )
+	end  
+  
 end
+
+

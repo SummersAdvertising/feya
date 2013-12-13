@@ -29,11 +29,11 @@
     <%= link_to "會員登入 | ", new_member_session_path %>
     <a href="/orders/cart">購物車</a> </div>
     <ul id="nav">
-      <li id="nav-1" class="<%= 'active' if params[:controller] == 'classes' || params[ :controller ] == 'courses' %>"><a href="<%= classes_path %>">專業課程</a>
+      <li id="nav-1" class="<%= 'active' if params[:controller] == 'instructions' || params[ :controller ] == 'courses' %>"><a href="<%= instructions_path %>">專業課程</a>
         <ul class="menu">
-          <li><a href="#">專業美容證照</a></li>
-          <li><a href="#">美容美體實務技術</a></li>
-          <li><a href="#">國際時尚造型</a></li>
+          <% Instruction.order( 'sort asc' ).each do | instruction | %>
+          <li><a href="<%= instruction_path( instruction ) %>"><%= instruction.name %></a></li>
+          <% end %>
         </ul>
       </li>
       <li id="nav-2" class="<%= 'active' if params[:controller] == 'testimonies' %>"><a href="<%= testimonies_path %>">學員見證</a></li>
@@ -41,10 +41,9 @@
       <a id="home" href="<%= root_url %>"></a>
       <li id="nav-4" class="<%= 'active' if params[:controller] == 'categories' || params[ :controller ] == 'products' %>"><a href="<%= categories_path %>">美容商品</a>
         <ul class="menu">
-          <li><a href="#">美容美體商品</a></li>
-          <li><a href="#">芳香精油（單方）</a></li>
-          <li><a href="#">芳香精油（複方）</a></li>
-          <li><a href="#">優惠商品</a></li>
+          <% Category.order( 'lft asc' ).each do | category | %>
+          <li><a href="<%= category_path( category ) %>"><%= category.name %></a></li>
+          <% end %>
         </ul></li>
       <li id="nav-5" class="<%= 'active' if params[:controller] == 'tickets' %>"><a href="<%= new_ticket_path %>">加盟資訊</a></li>
       <li id="nav-6" class="<%= 'active' if params[:pagename] == 'about' %>"><a href="<%= page_pages_path( :pagename =>  'about' ) %>">關於霏亞</a></li>
@@ -56,7 +55,7 @@
 <%= yield %>
 <footer _height='none'>
   <div class="container">
-    <nav><a href="<%= classes_path %>">專 業 課 程 </a>│ <a href="<%= testimonies_path %>">學 員 見 證</a> │ <a href="<%= page_pages_path( :pagename =>  'professional' ) %>">專 業 師 資 </a>│ <a href="<%= categories_path %>">美 容 商 品 </a>│ <a href="<%= entries_path %>">最 新 消 息 </a>│ <a href="<%= page_pages_path( :pagename =>  'about' ) %>">關 於 霏 亞</a></nav>
+    <nav><a href="<%= instructions_path %>">專 業 課 程 </a>│ <a href="<%= testimonies_path %>">學 員 見 證</a> │ <a href="<%= page_pages_path( :pagename =>  'professional' ) %>">專 業 師 資 </a>│ <a href="<%= categories_path %>">美 容 商 品 </a>│ <a href="<%= entries_path %>">最 新 消 息 </a>│ <a href="<%= page_pages_path( :pagename =>  'about' ) %>">關 於 霏 亞</a></nav>
     <p>台北　台北市中山區長安東路二段82號<br>
       桃園　桃園縣蘆竹鄉中正路308號18樓之2<br>
       鶯歌　新北市鶯歌區永明街67-3號<br>

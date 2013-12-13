@@ -118,8 +118,8 @@ var editor = {
 	ajaxupdate: function(){
 		$.ajax({
 			type: "POST",
-			url: $("form, .edit_"+ editor.settings.articleModel).attr("action"),
-			data: $("form, .edit_"+ editor.settings.articleModel).serialize()
+			url: $(".edit_"+ editor.settings.articleModel).attr("action"),
+			data: $(".edit_"+ editor.settings.articleModel).serialize()
 		});
 		editor.alert("文章變更已儲存", "success");
 	},
