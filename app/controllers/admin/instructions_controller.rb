@@ -38,6 +38,8 @@ class Admin::InstructionsController < AdminController
 	        format.html { redirect_to admin_instruction_path(@instruction), notice: 'Instruction was successfully created.' }
 	        format.json { render json: @instruction, status: :created, location: @instruction }
 	      else
+	      	flash[ :warning ] = @instruction.errors.messages.values.flatten.join('<br>')
+	      	get_instructions()
 	        format.html { render action: "new" }
 	        format.json { render json: @instruction.errors, status: :unprocessable_entity }
 	      end
@@ -54,6 +56,8 @@ class Admin::InstructionsController < AdminController
 	        format.html { redirect_to admin_instruction_path(@instruction), notice: 'Instruction was successfully created.' }
 	        format.json { render json: @instruction, status: :created, location: @instruction }
 	      else
+	      	flash[ :warning ] = @instruction.errors.messages.values.flatten.join('<br>')
+	      	get_instructions()
 	        format.html { render action: "new" }
 	        format.json { render json: @instruction.errors, status: :unprocessable_entity }
 	      end

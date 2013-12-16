@@ -19,7 +19,12 @@
 	$(document).ready(function() {		
 	<% if !flash[ :notice ].nil? %>
 		Alertify.log.success('<%= flash[ :notice ] %>');
+	<% elsif !flash[ :warning ].nil? %>
+		Alertify.log.error('<%= flash[ :warning ] %>');
 	<% end %>
+	
+	
+	
 	});
 </script>
 

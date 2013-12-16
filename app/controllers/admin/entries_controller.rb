@@ -32,6 +32,8 @@ class Admin::EntriesController < AdminController
         format.html { redirect_to edit_admin_entry_path(@entry), notice: 'Entry was successfully created.' }
         format.json { render json: @entry, status: :created, location: @entry }
       else
+      	flash[ :warning ] = @entry.errors.messages.values.flatten.join('<br>')
+      	      	
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
       end
@@ -54,6 +56,8 @@ class Admin::EntriesController < AdminController
         format.json { head :no_content }
       else
       
+      	flash[ :warning ] = @entry.errors.messages.values.flatten.join('<br>')
+      	
         format.html { render action: "edit" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
       end

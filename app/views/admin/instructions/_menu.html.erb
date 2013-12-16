@@ -1,5 +1,6 @@
 <nav> 
 	<% @instructions.each do | instruction | %>
+	
 		<a class="<%= 'active' if @instruction.id == instruction.id %>" href="<%= admin_instruction_path( instruction ) %>"><%= instruction.name %></a>
 	<% end %>
 	<a href="<%= new_admin_instruction_path %>" class="add" title="新增分類"><img src="/images/add.png"></a>

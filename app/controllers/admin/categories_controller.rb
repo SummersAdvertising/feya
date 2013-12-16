@@ -35,7 +35,9 @@ class Admin::CategoriesController < AdminController
 	        format.html { redirect_to admin_category_path(@category), notice: 'Category was successfully created.' }
 	        format.json { render json: @category, status: :created, location: @category }
 	      else
-	        format.html { render action: "new" }
+	      	flash[ :warning ] = @instruction.errors.messages.values.flatten.join('<br>')
+	      	get_categories()
+	        format.html { render action: "edit" }
 	        format.json { render json: @category.errors, status: :unprocessable_entity }
 	      end
 	    end
@@ -51,6 +53,8 @@ class Admin::CategoriesController < AdminController
 	        format.html { redirect_to admin_category_path(@category), notice: 'Category was successfully created.' }
 	        format.json { render json: @category, status: :created, location: @category }
 	      else
+	      	flash[ :warning ] = @instruction.errors.messages.values.flatten.join('<br>')
+	      	get_categories()
 	        format.html { render action: "new" }
 	        format.json { render json: @category.errors, status: :unprocessable_entity }
 	      end

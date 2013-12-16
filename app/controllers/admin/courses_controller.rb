@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Admin::CoursesController < AdminController
 	
 	before_filter :get_instruction
@@ -28,13 +29,17 @@ class Admin::CoursesController < AdminController
   def create
     @course = @instruction.courses.build(params[:admin_course])
     @course.article = Article.new
+    @course.name = '未命名課程'
 
     respond_to do |format|
       if @course.save
         format.html { redirect_to edit_admin_instruction_course_path(@instruction, @course), notice: 'Course was successfully created.' }
         format.json { render json: @course, status: :created, location: @course }
+        
       else
-        format.html { render action: "new" }
+      	flash[ :warning ] = @course.errors.messages.values.flatten.join('<br>')
+      	
+        format.html { render action: "edit" }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
@@ -57,6 +62,8 @@ class Admin::CoursesController < AdminController
         format.json { head :no_content }
       else
       
+      	flash[ :warning ] = @course.errors.messages.values.flatten.join('<br>')
+      	
         format.html { render action: "edit" }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -70,7 +77,7 @@ class Admin::CoursesController < AdminController
     @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_courses_url }
+      format.html { redirect_to admin_instruction_path( @instruction ) }
       format.json { head :no_content }
     end
   end

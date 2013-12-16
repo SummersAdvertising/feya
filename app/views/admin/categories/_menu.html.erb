@@ -1,5 +1,6 @@
 <nav> 
 	<% @categories.each do | category | %>
+	
 		<a class="<%= 'active' if @category.id == category.id %>" href="<%= admin_category_path( category ) %>"><%= category.name %></a>
 	<% end %>
 	<% if params[ :controller ] == 'admin/categories' %>

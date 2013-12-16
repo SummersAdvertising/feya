@@ -64,6 +64,9 @@ class Admin::ProductsController < AdminController
         format.html { redirect_to  edit_admin_category_product_path(@category, @product), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
+      
+      	flash[ :warning ] = @product.errors.messages.values.flatten.join('<br>')
+      
         @products = Product.order("created_at DESC").page(params[:page])
         format.html { render action: "index" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -80,6 +83,9 @@ class Admin::ProductsController < AdminController
         format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]), notice: ( @product.name + '已更新。') }
         format.json { head :no_content }
       else
+      
+	    flash[ :warning ] = @product.errors.messages.values.flatten.join('<br>')
+      
         @products = Product.order("created_at DESC").page(params[:page])
         format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
