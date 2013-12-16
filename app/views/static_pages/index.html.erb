@@ -6,9 +6,9 @@
 <span>堅持教學師資，堅持品質永遠的小班教學</span>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="center" width="33%"><img src="images/df-02.jpg"><br><br><a href="#"></a></td>
-    <td align="center" width="34%"><img src="images/df-03.jpg"><br><br><a href="#"></a></td>
-    <td align="center" width="33%"><img src="images/df-04.jpg"><br><br><a href="#"></a></td>
+    <td align="center" width="33%"><img src="images/df-02.jpg"><br><br><a href="<%=  instruction_path( Instruction.where( :name => '專業美容證照' ).first ) %>"></a></td>
+    <td align="center" width="34%"><img src="images/df-03.jpg"><br><br><a href="<%= instruction_path( Instruction.where( :name => '美容美體實務' ).first ) %>"></a></td>
+    <td align="center" width="33%"><img src="images/df-04.jpg"><br><br><a href="<%= instruction_path( Instruction.where( :name => '國際時尚造型' ).first ) %>"></a></td>
   </tr>
 </table>
 </div>

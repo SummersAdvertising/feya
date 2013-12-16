@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Admin::TestimoniesController < AdminController
   # GET /admin/testimonies
   # GET /admin/testimonies.json
@@ -15,12 +16,15 @@ class Admin::TestimoniesController < AdminController
   def create
     @testimony = Testimony.new
     @testimony.article = Article.new
+    @testimony.title = '未命名'
 
     respond_to do |format|
       if @testimony.save
         format.html { redirect_to edit_admin_testimony_path(@testimony), notice: 'Testimony was successfully created.' }
         format.json { render json: @testimony, status: :created, location: @testimony }
       else
+      
+      	flash[ :warning ] = @testimony.errors.messages.values.flatten.join('<br>')
         format.html { render action: "index" }
         format.json { render json: @testimony.errors, status: :unprocessable_entity }
       end
@@ -42,6 +46,9 @@ class Admin::TestimoniesController < AdminController
         format.html { redirect_to admin_testimonies_path, notice: 'Testimony was successfully updated.' }
         format.js { head :no_content }
       else
+      
+      	flash[ :warning ] = @testimony.errors.messages.values.flatten.join('<br>')
+      	
         format.html { render action: "edit" }
         format.js { render json: @testimony.errors, status: :unprocessable_entity }
       end

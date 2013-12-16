@@ -9,5 +9,5 @@
   </ul>
   <div class="intro">
       <h3><%= @instruction.name %></h3>
-      <p><%= @instruction.description.gsub(/\n/, '<br />').html_safe %></p>
+      <p><%= @instruction.description.gsub(/\n/, '<br />').html_safe if !@instruction.description.nil? %></p>
     </div>
