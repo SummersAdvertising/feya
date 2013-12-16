@@ -58,6 +58,16 @@ class Admin::InstructionsController < AdminController
 	    end
 	
 	end
+	
+	def destroy
+		@instruction = Instruction.find( params[ :id ] )
+		@instruction.destroy
+		
+		respond_to do | format |
+			format.html{ redirect_to admin_instructions_path }
+		end
+		
+	end
 
 private
 	def get_instructions

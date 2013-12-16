@@ -3,6 +3,6 @@ class Testimony < ActiveRecord::Base
   
   mount_uploader :cover, TestimonyUploader
   
-  belongs_to :article
+  belongs_to :article, :dependent => :destroy
   
 end

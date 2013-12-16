@@ -6,7 +6,7 @@
 
 <%  if !@category.nil? %>
 <article>
-  <div class="button" id="button-down"> <a href="<%= admin_category_products_path( @category ) %>" data-method="post" class="right light">新增商品<img src="/images/add.png"></a></div>
+  <div class="button" id="button-down"> <a href="<%= admin_category_products_path( @category ) %>" data-method="post" class="right light">新增商品<img src="/images/add.png"></a> <a href="<%= admin_category_path( @category ) %>" data-method="delete" data-confirm="確定刪除此分類？" class="right">刪除分類<img src="/images/trash.png"></a></div>
   <div class="list">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <% @products.each do | product | %>      	

@@ -58,6 +58,17 @@ class Admin::CategoriesController < AdminController
 	
 	end
 
+
+	def destroy
+		@category = Category.find( params[ :id ] )
+		@category.destroy
+		
+		respond_to do | format |
+			format.html{ redirect_to admin_categories_path }
+		end
+		
+	end
+
 private
 	def get_categories
 		@categories = Category.order('lft ASC, created_at ASC').all

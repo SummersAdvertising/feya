@@ -3,7 +3,7 @@ class Course < ActiveRecord::Base
 
   mount_uploader :cover, CourseUploader
   
-  belongs_to :article
+  belongs_to :article, :dependent => :destroy
   belongs_to :instruction
   
   before_save :defaults

@@ -3,5 +3,5 @@ class Category < ActiveRecord::Base
 
   attr_accessible :depth, :lft, :name, :parent_id, :rgt, :status, :type
   
-  has_many :products
+  has_many :products, :dependent => :destroy
 end

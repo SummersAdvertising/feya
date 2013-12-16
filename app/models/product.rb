@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
  # validates :name, :price, :presence => true
  #validate :price_value
   
-  belongs_to :article
+  belongs_to :article, :dependent => :destroy
   
   belongs_to :category
 
