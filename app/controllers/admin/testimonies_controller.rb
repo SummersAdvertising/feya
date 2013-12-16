@@ -2,7 +2,7 @@ class Admin::TestimoniesController < AdminController
   # GET /admin/testimonies
   # GET /admin/testimonies.json
   def index
-    @testimonies = Testimony.all
+    @testimonies = Testimony.page( params[ :page ] ).per(20)
 
     respond_to do |format|
       format.html # index.html.erb

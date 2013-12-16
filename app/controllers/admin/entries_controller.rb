@@ -2,8 +2,8 @@ class Admin::EntriesController < AdminController
   # GET /admin/entries
   # GET /admin/entries.json
   def index
-    @entries = Entry.all
-
+    @entries = Entry.page( params[ :page ] ).per(20)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @entries }

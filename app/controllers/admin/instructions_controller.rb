@@ -25,6 +25,8 @@ class Admin::InstructionsController < AdminController
 	def show
 		
 		@instruction = Instruction.find( params[ :id ] )
+		
+		@courses = @instruction.courses.page( params[ :page ] ).per( 20 )
 		 
 	end
 	
