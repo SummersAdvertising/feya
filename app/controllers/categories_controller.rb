@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 	before_filter :get_categories
 	
 	def index
-		redirect_to category_path( :id => 1 )
+		redirect_to category_path( Category.first )
 	end
 	
 	def show

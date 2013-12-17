@@ -1,49 +1,65 @@
-
 <!doctype html>
 <html>
 <head>
-	<!--[if lt IE 9]>
-	<script src="/js/html5.js"></script>
-	<![endif]-->
-	<meta charset="utf-8">
-	<title>夏天廣告購物車系統</title>
-	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/css/iframe.css">
-	<%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>霏亞國際美容機構</title>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/style-m.css">
+<link rel="stylesheet" href="/css/enter.css">
+
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+
+<script src="/js/auto-full-height.min.js"></script>
 </head>
+
 <body>
-	<section id="iframe-login">
-		<div class="login">
-			<h3>會員登入</h3>
-			<%= form_for(resource, :as => resource_name, :url => member_session_path()) do |f| %>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td colspan="2"><%= f.email_field :email, :autofocus => true, :placeholder => "電子郵件" %></td>
-				</tr>
-				<tr>
-					<td colspan="2"><%= f.password_field :password, :placeholder => "密碼" %></td>
-				</tr>
-				<tr>
-					<td width="56%" valign="middle"><input name="" type="text" placeholder="驗證碼"></td>
-					<td width="44%" valign="middle"><img src="/example_img/03.jpg" width="69" height="29"><span>不分大小寫</span></td>
-				</tr>
-				<tr>
-					<td class="forget"><a href="#">忘記密碼 ?</a></td>
-					<td align="right" class="button"><a id = "submit" href="#">登入</a></td>
-					<td>&nbsp;</td>
-					<td align="right" class="button"><a href="/">取消</a></td>
-				</tr>
-			</table>
-			<% end %>
-		</div>
-		<div class="register">
-			<h3>第一次購物</h3>
-			<a href="/members/sign_up">註冊成為會員。</a>
-			</div>
-		</section>
-	</body>
+<header _height='none'>
+  <div id="top"> <img src="/images/mb-02.png"> <a id="back" href="index.html">回首頁 &gt;</a></div>
+</header>
+<article _height='auto'>
+  <div class="left">
+    <h3><img src="/images/mb-05.png"></h3>
+    
+    
+		<%= form_for(resource, :as => resource_name, :url => member_session_path()) do |f| %>	    
+		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td colspan="2"><%= f.email_field :email, :autofocus => true, :class => 'text', :placeholder => "電子郵件" %></td>
+		      </tr>
+		      <tr>
+		        <td width="50%"><%= f.password_field :password, :placeholder => "密碼", :class => 'text', :style => 'width:95%' %></td>
+		        <td width="50%"><a href="#">忘記密碼</a></td>
+		      </tr>
+		      <tr>
+		        <td colspan="2">&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td colspan="2" align="right" class="button"><a id="submit" href="#">登 入</a><a href="/">取 消</a></td>
+		      </tr>
+		    </table>
+    
+		<% end %>
+  </div>
+  <div class="right">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center"><h3><img src="/images/mb-06.png"></h3></td>
+    <td><div class="button"><a href="/members/sign_up">註冊</a></div></td>
+  </tr>
+</table>   
+  </div>
+</article>
+<%= render 'layouts/footer' %>
+</body>
 </html>
+
+
 
 <script type="text/javascript">
 $("#submit").click(function(){

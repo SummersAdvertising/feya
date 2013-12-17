@@ -20,7 +20,7 @@
 .single a:hover{background:#FFEC4C;box-shadow:-4px 4px 0 #C490BF;text-decoration:none}
 
 .quick{border:1px solid #362E2B;width:24px;height:119px;text-align:center;
-padding:5px 0 0 0;font:300 11px "新細明體",arial;position:fixed;color:#362E2B;margin:0 0 0 720px}
+padding:5px 0 0 0;font:300 11px "新細明體",arial;position:fixed;color:#362E2B;margin:0 0 0 1120px}
 .quick a{font:300 11px "新細明體",arial;background:#AE5DA1;color:#fff;display:block;width:20px;
 padding:3px 0;margin:3px 0 0 1px;text-shadow:0 -1px 0 #843377}
 .quick span{color:#f2c84b;display:block;padding:2px 0}

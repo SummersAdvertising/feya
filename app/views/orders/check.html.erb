@@ -10,31 +10,20 @@
 </div>
 <% end %>
 
-<!--
-<% if @traceItems %>
-<div class="box">
-	<h4>以下商品已售完，請選擇是否加入追蹤清單。</h4>
-<% Stock.where(:id => @traceItems).select('products.name, stocks.*').joins("LEFT OUTER JOIN products on products.id = stocks.product_id").each do |tracebook| %>
-<p><%= tracebook.name %><%= ("("+tracebook.typename+")" if tracebook.typename != "default") %></p>
-<% end %>
-</div>
-<% end %>
--->
-
 <article _height='auto'>
   <div id="step"><img src="/images/sc-04.jpg"></div>
   <div id="content">
     <div id="detail">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <th width="24%" align="center">明細</th>
+          <th width="20%" align="center">圖片</th>
+          <th width="12%" align="center">明細</th>
           <th width="8%" align="center">規格</th>
           <th width="22%" align="center">數量</th>
           <th width="10%" align="center">單價</th>
           <th width="10%" align="center">折扣價</th>
           <th width="10%" align="center">小計</th>
           <th width="8%" align="center">庫存</th>
-          <th width="8%" align="center">刪除</th>
         </tr>
         
 		  <% @orderPrice = 0 %>
@@ -43,7 +32,7 @@
 		  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
 		  <% @orderPrice = @orderPrice + @itemSum %>
 		  <tr>
-		    <td align="center"><%= item[:image] ? image_tag("/uploads/product/"+item[:image]) : "未上傳圖片。" %></td>
+		    <td align="center"><%= item[:image] ? image_tag("/uploads/product/"+item[:image], :style => 'max-width: 100px;') : "未上傳圖片。" %></td>
 		    <td align="center"><%= item[:name] %></td>
 		    <td align="center"><%= item[:typename] %></td>
 		    <td align="center" class="count"><%= item[:amount] %></td>
@@ -77,52 +66,67 @@
     </div>
   </div>
   <!--content-->
+  <%= form_for(@order) do |f| %>
   <div id="info">
+  
+    
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="10%" valign="top" class="way">宅配貨到付款</td>
-        <td width="5%" align="center" valign="top"><input type="radio" name="radio" class="radio" value=""></td>
+        <td width="5%" align="center" valign="top"><input data-fee="150" type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
         <td width="85%" valign="top">宅配貨到付款，將酌收 50 元物流費。若單筆購物滿 499 元，即享有免運費優惠（「貨到付款」服務僅限台灣本島）。</td>
       </tr>
       <tr>
         <td valign="top" class="way">宅配一般付款</td>
-        <td align="center" valign="top"><input type="radio" name="radio" class="radio" value=""></td>
+        <td align="center" valign="top"><input data-fee="60" type="radio" name="order[paytype]" class="radio" value="匯款"></td>
         <td valign="top" style="line-height:1.7em">宅配一般付款，請至郵局匯款XXX，將酌收 50 元物流費。若單筆購物滿 499 元，即享有免運費優惠。<br>
           ※ 匯款戶名：夏天廣告有限公司　　國泰世華銀行 信義分行(總行代碼013)　　帳號：888-88-888888-8</td>
       </tr>
     </table>
+    
+    
+	<input type="hidden" name="orderItems" value="<%= @orderItems.to_json %>">
+
     <div id="form">
       <h3>填寫您的資料
-        <input name="" type="checkbox" value="" class="checkbox">
+        <input name="" name="updateMemberinfo" type="checkbox" value="" class="checkbox">
         <span>更新為會員資料</span></h3>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <th width="9%" align="left">中文姓名</th>
-          <td width="24%"><input name="" type="text" class="text"></td>
+          <td width="24%"><%= f.text_field :buyername, :value => current_member.username, :class => 'text' %></td>
           <td width="67%">&nbsp;</td>
         </tr>
         <tr>
           <th align="left">電子郵件</th>
-          <td><input name="" type="text" class="text"></td>
+          <td><input type="text" class="text" value="<%= current_member.email %>" disabled></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <th align="left">手機號碼</th>
-          <td><input name="" type="text" class="text"></td>
+          <td><%= f.text_field :buyertel, :value => current_member.tel, :class => 'text' %></td>
           <td>&nbsp;</td>
         </tr>
       </table>
+      
+      
+      
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <th width="9%" align="left">發票資訊</th>
           <td colspan="5"><span>※ 依統一發票使用辦法規定：個人戶（二聯式）發票一經開立，不得任意更改為公司戶（三聯式）發票。</span></td>
         </tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <th width="7%" align="left">發票</th>
+		  <td width="21%"><%= f.select :invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]]) %></td>
+		</tr>
         <tr>
           <td>&nbsp;</td>
           <th width="7%" align="left">統一編號</th>
-          <td width="21%"><input name="" type="text" class="text"></td>
+          <td width="21%"><%= f.text_field :companynum, :class => 'text' %></td>
           <th width="7%" align="left">發票抬頭</th>
-          <td width="21%"><input name="" type="text" class="text"></td>
+          <td width="21%"><%= f.text_field :invoicename, :class => 'text' %></td>
           <td width="35%">&nbsp;</td>
         </tr>
         <tr>
@@ -132,225 +136,65 @@
       </table>
     </div>
     <!--form-->
+    
     <h4>收件人資訊
-      <input name="" type="checkbox" value="" class="checkbox">
+      <input type="checkbox" class="checkbox" id="asBuyer">
       <span>同訂購人</span></h4>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <th width="9%" align="left">中文姓名</th>
-        <td width="24%"><input name="" type="text" class="text"></td>
+        <td width="24%"><%= f.text_field :receivername, :class => 'text' %></td>
         <td width="67%">&nbsp;</td>
       </tr>
       <tr>
         <th align="left">手機號碼</th>
-        <td><input name="" type="text" class="text"></td>
+        <td><%= f.text_field :receivertel, :class => 'text' %></td>
         <td>&nbsp;</td>
       </tr>
     </table>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <th width="9%" align="left">送貨地址</th>
-        <td width="58%"><input name="" type="text" class="text"></td>
+        <td width="58%"><%= f.text_field :receiveraddress, :value => current_member.receiveaddress, :class => 'text' %></td>
         <td width="33%">&nbsp;</td>
       </tr>
       <tr>
+	      <td>
+      	<% if current_member.addressbooks.count > 0 %>
+	      	選擇常用地址：<br/>
+	      	<% current_member.addressbooks.each do |addressbook| %>
+	      		<span><a href="#" class="addressbook"><%= addressbook.address %></a></span><br/>
+	      	<% end %>
+      	<% end %>
+      	</td>
+      </tr>
+      <tr>
         <td>&nbsp;</td>
-        <td><input name="" type="checkbox" value="" class="checkbox">
+        <td><input type="checkbox" name="addAddressbook" class="checkbox">
           加入常用地址
-          <input name="" type="checkbox" value="" class="checkbox">
+         <input type="checkbox" name="setDefault" class="checkbox">
           設為預設地址</td>
         <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="checkbox" name="check" class="checkbox">
+         我已仔細閱讀並明瞭「網站使用條款」、「隱私權政策」、「免責聲明」等所載內容及其意義，<br>
+          茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。</td>
       </tr>
     </table>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td align="right" class="button"><a href="#" id="return">繼 續 購 物</a><a href="#">上 一 步</a><a href="#">下 一 步</a></td>
+        <td align="right" class="button">  <a href="/" id="back">繼續購物</a><a href="/orders/cart" id="prev">上一步</a><a href="#" id="next">下一步</a> </td>
       </tr>
     </table>
   </div>
 </article>
 
-<section class="content" id="order-step1">
-	<div id="detail">
-		<table id="cartItems" width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <th width="8%" align="center">&nbsp;</th>
-		    <th width="16%" align="center">明細</th>
-		    <th width="8%" align="center">顏色</th>
-		    <th width="22%" align="center">數量</th>
-		    <th width="10%" align="center">單價</th>
-		    <th width="10%" align="center">折扣價</th>
-		    <th width="10%" align="center">小計</th>
-		    <th width="8%" align="center">現貨庫存</th>
-		  </tr>
-
-		  <% @orderPrice = 0 %>
-		  <% @orderItems.each do |item| %>
-
-		  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
-		  <% @orderPrice = @orderPrice + @itemSum %>
-		  <tr>
-		    <td align="center"><%= item[:image] ? image_tag("/uploads/product/"+item[:image]) : "未上傳圖片。" %></td>
-		    <td align="center"><%= item[:name] %></td>
-		    <td align="center"><%= item[:typename] %></td>
-		    <td align="center" class="count"><%= item[:amount] %></td>
-		    <td align="center"><%= item[:price] %></td>
-		    <td align="center"><%= item[:saleprice] || item[:price] %></td>
-		    <td align="center"><%= @itemSum %></td>
-		    <td align="center">有</td>
-		  </tr>
-		  <% end %>
-		  
-		</table>
-	</div>
-	<div id="check">
-		<table width="240" border="0" align="right" cellpadding="0" cellspacing="0">
-		  <tr>
-		    <td width="120">購物小計</td>
-		    <td width="120">NT$ <span class="sum"><%= @orderPrice %></span></td>
-		  </tr>
-		  <tr>
-		    <td>運費</td>
-		    <td>NT$ <span class="shippingfee">150</span></td>
-		  </tr>
-		  <tr>
-		    <td class="total">訂單總計</td>
-		    <td class="total">NT$ <span class="orderprice"><%= @orderPrice + 150 %></span></td>
-		  </tr>
-		  <tr>
-		    <td>預期產生折扣金</td>
-		    <td><span class="discountpoint"><%= (@orderPrice/200).floor %></span>  點</td>
-		  </tr>
-		</table>
-	</div>
-</section>
-
-<%= form_for(@order) do |f| %>
-<section class="content order-step2" style="margin:25px 0 0 0">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-    <td width="10%" valign="top" class="way">宅配貨到付款</td>
-    <td width="5%" valign="top"><input data-fee="150" type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
-    <td width="85%" valign="top">宅配貨到付款，將酌收 150 元物流費。（「貨到付款」服務僅限台灣本島）。</td>
-  </tr>
-  <tr>
-    <td valign="top" class="way">宅配一般付款</td>
-    <td valign="top"><input data-fee="60" type="radio" name="order[paytype]" class="radio" value="匯款"></td>
-    <td valign="top" style="line-height:1.7em">宅配一般付款，請至郵局匯款XXX，將酌收 60 元物流費。<br>
-      ※ 匯款戶名：夏天廣告有限公司　　國泰世華銀行 信義分行(總行代碼013)　　帳號：888-88-888888-8</td>
-  </tr>
-</table>
-</section>
-
-<section class="content order-step2">
-	<input type="hidden" name="orderItems" value="<%= @orderItems.to_json %>">
-
-	<h3>填寫您的資料
-		<input type="checkbox" name="updateMemberinfo" class="checkbox">
-		<span>更新為會員資料</span></h3>
-
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <th width="9%" align="left">中文姓名</th>
-      <td width="24%"><%= f.text_field :buyername, :value => current_member.username %></td>
-    </tr>
-    <tr>
-      <th align="left">電子郵件</th>
-      <td><input type="text" value="<%= current_member.email %>" disabled></td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <th align="left">手機號碼</th>
-      <td><%= f.text_field :buyertel, :value => current_member.tel %></td>
-      <td>&nbsp;</td>
-    </tr>
-  </table>
-
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:30px 0">
-    <tr>
-      <th width="9%" align="left">發票資訊</th>
-      <td colspan="5"><span>※ 依統一發票使用辦法規定：個人戶（二聯式）發票一經開立，不得任意更改為公司戶（三聯式）發票。</span></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <th width="7%" align="left">發票</th>
-      <td width="21%"><%= f.select :invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]]) %></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <th width="7%" align="left">發票抬頭</th>
-      <td width="21%"><%= f.text_field :invoicename %></td>
-      <th width="7%" align="left">統一編號</th>
-      <td width="21%"><%= f.text_field :companynum %></td>
-      <td width="35%">&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td colspan="5" align="left"><span><a href="#">電子發票說明</a> ，核准文號：北區國稅北縣三字第0980023790號</span></td>
-    </tr>
-  </table>
-
-  <h3 style="border-top:1px solid #E6E6E6;padding:30px 0;height:80px">收件人資訊
-    <input type="checkbox" class="checkbox" id="asBuyer">
-    <span>同訂購人</span></h3>
-
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <th width="9%" align="left">中文姓名</th>
-      <td width="24%"><%= f.text_field :receivername %></td>
-    </tr>
-    <tr>
-      <th align="left">手機號碼</th>
-      <td><%= f.text_field :receivertel %></td>
-      <td>&nbsp;</td>
-    </tr>
-  </table>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <th width="9%" align="left">送貨地址</th>
-      <td width="41%"><%= f.text_field :receiveraddress, :value => current_member.receiveaddress %></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>
-      	<% if current_member.addressbooks.count > 0 %>
-      	選擇常用地址：<br/>
-      	<% current_member.addressbooks.each do |addressbook| %>
-      	<span><a href="#" class="addressbook"><%= addressbook.address %></a></span><br/>
-      	<% end %>
-      	<% end %>
-      	
-        <input type="checkbox" name="addAddressbook" class="checkbox">
-        <span>加入常用地址</span>
-        <input type="checkbox" name="setDefault" class="checkbox">
-        <span>設為預設地址</span>
-      </td>
-      <td>&nbsp;</td>
-    </tr>
-  </table>
-  <div id="agree">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="22%" align="right" valign="top"><input type="checkbox" name="check" class="checkbox"></td>
-        <td width="78%">我已仔細閱讀並明瞭「網站使用條款」、「隱私權政策」、「免責聲明」等所載內容及其意義，<br>
-          茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。</td>
-      </tr>
-    </table>
-  </div>
-</section>
-
-<section class="content order-step2" style="position:relative;top:-1px">
-	<% @discountceiling =  (@orderPrice/10).floor %>
-	<p>您目前可用點數：<strong><%= current_member.discountpoint %></strong>點，本次訂單您需要抵用點數：<input name="discount" type="number" value="<%= (current_member.discountpoint > @discountceiling) ? @discountceiling : current_member.discountpoint %>" style="width:150px"><br>
-		<span>* 購物金一點可以抵一元。</span>
-	</p>
-</section>
 
 <% end %>
 <!-- the end of the form -->
 
-<div id="button"> 
-  <a href="/" id="back"><img src="/images/left.png">繼續購物</a><a href="/orders/cart" id="prev"><img src="/images/left.png">上一步</a><a href="#" id="next">下一步<img src="/images/right.png"></a> </div>
 
 
 <script type="text/javascript">

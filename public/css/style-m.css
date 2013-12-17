@@ -14,7 +14,7 @@ header{background:url(../images/mb-banner.jpg) 0 0 no-repeat;height:195px}
 #top a:hover{color:#333;text-decoration:underline}
 #top img{position:absolute;right:120px;bottom:-210px}
 
-#back{background:#FFCC00;padding:0 10px;position:absolute;right:40px;bottom:-72px}
+#back{background:#FFCC00;padding:0 10px;}
 #back:hover{background:#FFDF5D;text-decoration:none!important}
 
 /*-----------------------------------------------------------------------頁身---*/

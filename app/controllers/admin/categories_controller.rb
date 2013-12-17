@@ -24,7 +24,7 @@ class Admin::CategoriesController < AdminController
 	
 	def show		
 		@category = Category.find( params[ :id ] )
-		@products = @category.products.page( params[ :page ] )
+		@products = @category.products.where( "delete_flag IS NULL ").order("created_at DESC").page(params[:page])
 	end
 	
 	def update

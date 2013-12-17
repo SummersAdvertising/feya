@@ -5,7 +5,7 @@ class Admin::ProductsController < AdminController
   before_filter :get_category
   
   def index
-    @products = Product.order("created_at DESC").page(params[:page])
+    @products = Product.where( "delete_flag IS NULL ").order("created_at DESC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -92,6 +92,17 @@ class Admin::ProductsController < AdminController
       end
     end
   end
+
+
+  def destroy
+  	@product = Product.find( params[ :id ] )
+  	@product.update_attribute(:delete_flag, true)
+  	
+  	respond_to do | format |
+  		format.html { redirect_to admin_category_path( @category ) }
+  	end
+  end
+
 
   def enable
     @product = Product.find(params[:id])

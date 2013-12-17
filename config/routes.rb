@@ -68,7 +68,7 @@ Feya::Application.routes.draw do
     
     resources :categories  do 	
     	
-	    resources :products, :only => [:index, :new, :edit, :create, :update] do
+	    resources :products, :only => [:index, :new, :edit, :create, :update, :destroy] do
 	      member do
 	        match "enable", :via => :post
 	        match "disable", :via => :post

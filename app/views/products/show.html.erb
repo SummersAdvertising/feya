@@ -27,51 +27,68 @@ $(function(){
 <article id="products">
   <%= render 'categories/menu' %>
   
+  <div class="quick"><p>購物車</p><span><%= @cartitems_count %></span>件<a href="/orders/cart">結帳</a></div>
+  
   <div class="right">
     <div class="content">
+    <% if @product %>
+    
     <%= form_for(@cartitem, :url => add_cart_orders_path) do |f| %>
     
       <table width="100%" border="0" cellspacing="0" cellpadding="0">      
         <tr>
           <td width="43%" valign="top" id="cover"><img src="<%= @product.cover %>"></td>
           <td width="57%" valign="top"><h4><%= @product.name %></h4>
-      <% if !@product.hasType && @product.hasStock %>
         <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
+        
+        <p> 專業價 <del>$ <%= @product.price %></del><br>
+          限時優惠 <strong>$ <%= @product.saleprice %></strong><br>
+        </p>
+            
         <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
-        <tr>
-          <td class="count">庫存 <%= @product.stocks.first.amount %>
-          </td>
-        </tr>
+        	庫存 <%= @product.stocks.first.amount %>        
         
-        
-            <div class="size"> 數量
-              <select name="">
-                <option>選 擇 數 量</option>
-              </select>
+             <% if @product.hasType %>
+            <div class="size"> 規格
+	             <select id="productType" name="orderitem[stock_id]">
+	              <% @product.stocks.each do |stock| %>
+		              <% if !stock.amount || stock.amount > 0 %>
+		             	 <option value="<%= stock.id %>"><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+		              <% end %>
+	              <% end %>
+	            </select>
               <br>
-              規格
-              <select name="">
-                <option>選 擇 規 格</option>
-              </select>
+	            數量 <%= f.text_field :amount, :class => 'text' %>
+              
             </div>
+            
+            <% end %>
         <% end %>
-        <% elsif !@product.hasStock %>
-        <div class="size"> 本商品目前無庫存。   </div>
         
+            <%= link_to '', "#", :id => "submit", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name, :stockceiling => @product.stocks.first.amount } %></td>
+            
+        <% if !@product.hasStock %>
+        <div class="size"> 本商品目前無庫存。   </div>        
         <% end %>
-            <p> 專業價 <del>$ <%= @product.price %></del><br>
-              限時優惠 <strong>$ <%= @product.saleprice %></strong><br>
-            </p>
-            <a href="#"></a></td>
         </tr>
         
         <tr>
           <td colspan="2" align="center" valign="top"><br>
             <img src="/images/pd-06.gif"></td>
         </tr>
+        <tr>
+          <td class="add"></td>
+        </tr>
+	        
       </table>
       <% end %>
       <article id="articleContent" class="peditor"> </article>
+      
+      
+	  <% else %>
+	  <p>找不到此商品。</p>
+	  <% end %>
+      
     </div>
     <!--content--> 
   </div>
@@ -84,3 +101,13 @@ $(function(){
 		editor.output();	
 	});
 </script>
+
+
+  <script type="text/javascript">
+  if("<%= alert || notice %>"){
+    alert("<%= alert || notice %>");
+  }
+  $("#submit").click(function(){
+    $("#new_orderitem").submit();
+  });
+  </script>

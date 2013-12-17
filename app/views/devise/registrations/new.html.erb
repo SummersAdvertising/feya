@@ -1,49 +1,51 @@
-<section class="content order-step2">
-	<h3>填寫您的資料</h3>
 
+<link rel="stylesheet" href="/css/enter.css">
+
+
+<article _height='auto'>
+  <div id="content">
+  <h3><img src="/images/mb-09.png"></h3>
+  
 	<%= form_for(resource, :as => resource_name, :url => member_registration_path()) do |f| %>
-  <%= devise_error_messages! %>
+	<%= devise_error_messages! %>
+	
+  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15%">中文姓名</td>
+        <td width="85%"><%= f.text_field :username, :class => 'text', :autofocus => true %></td>
+      </tr>
+	  <tr>
+        <td width="15%">電子郵件</td>
+        <td width="85%"><%= f.email_field :email, :class => 'text' %></td>
+      </tr>
+      <tr>
+        <td width="15%">手機號碼</td>
+        <td width="85%"><%= f.text_field :tel, :class => 'text' %></td>
+      </tr>
+      <tr>
+        <td width="15%">設定密碼</td>
+        <td width="85%"><%= f.password_field :password, :class => 'text' %></td>
+      </tr>
+      <tr>
+        <td width="15%">確認密碼</td>
+        <td width="85%"><%= f.password_field :password_confirmation, :class => 'text' %></td>
+      </tr>
+      <tr>
+        <td colspan="2">收件地址(可不填)<br><%= f.text_field :address, :class => 'text' %></td>
+      </tr>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" id="next" class="button"><a href="#">登 入</a></td>
+      </tr>
+    </table>
+  </div>
+</article>
 
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	  <tr>
-	    <th width="9%" align="left">中文姓名</th>
-	    <td width="24%"><%= f.text_field :username, :autofocus => true %></td>
-	  </tr>
-	  <tr>
-	    <th align="left">電子郵件</th>
-	    <td><%= f.email_field :email%></td>
-	    <td>&nbsp;</td>
-	  </tr>
-	  <tr>
-	    <th align="left">設定密碼</th>
-	    <td><%= f.password_field :password %></td>
-	    <td>&nbsp;</td>
-	  </tr>
-	  <tr>
-	    <th align="left">密碼確認</th>
-	    <td><%= f.password_field :password_confirmation %></td>
-	    <td>&nbsp;</td>
-	  </tr>
-	  <tr>
-	    <th align="left">手機號碼</th>
-	    <td><%= f.text_field :tel %></td>
-	    <td>&nbsp;</td>
-	  </tr>
-	</table>
-
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	  <tr>
-	    <th width="9%" align="left">收件地址(可不填)</th>
-	    <td width="41%"><%= f.text_field :address %></td>
-	  </tr>
-	</table>
 
 	<% end %>
 
-</section>
-<div id="button">
-	<a href="#" id="next">下一步<img src="/images/right.png"></a>
-</div>
 
 <script type="text/javascript">
 $("ul.step>li").eq(2).addClass("active");

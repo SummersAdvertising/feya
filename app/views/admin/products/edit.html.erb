@@ -12,7 +12,8 @@
  <%= form_for(@product, :url => admin_category_product_path(@category, @product, :page => params[:page])) do |f| %>  
   <div class="box-edit">      	
   <div class="button" id="button-up"> 
-  
+  	<a href="<%= admin_category_product_path( @category, @product ) %>" data-method="delete" data-confirm="確定刪除此商品？" class="right">刪除商品<img src="/images/trash.png"></a>
+  	
   	<% if @product.status == "下架"  %>
 		<%= link_to ("商品上架 " + image_tag('/images/up.png')).html_safe ,enable_admin_category_product_path(@category, @product, :page => params[:page]), :class => 'right', :method => :post %>
 	<% else %>

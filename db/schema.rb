@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131213073616) do
+ActiveRecord::Schema.define(:version => 20131217043707) do
 
   create_table "addressbooks", :force => true do |t|
     t.integer  "member_id"
@@ -188,6 +188,7 @@ ActiveRecord::Schema.define(:version => 20131213073616) do
     t.string   "cover"
     t.integer  "article_id"
     t.integer  "category_id"
+    t.boolean  "delete_flag"
   end
 
   create_table "stocks", :force => true do |t|

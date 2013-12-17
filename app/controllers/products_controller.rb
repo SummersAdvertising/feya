@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
 
     return false    
   end
-  
+    
 private
 	def get_category
 		@categories = Category.order( :lft => :asc )
