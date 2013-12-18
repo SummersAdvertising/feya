@@ -29,7 +29,14 @@ class CourseUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :resize_to_fit=> [297, 191]
+   version :list do
+     process :resize_to_fill => [297, 191]
+   end
+   
+   version :inner do
+     process :resize_to_fill => [482, 383]
+   end
+  
   #
   # def scale(width, height)
   #   # do something

@@ -6,7 +6,7 @@
   <div class="list">
     <% @courses.each do | course | %>    	
 	  	<section>
-		    <img src="<%= course.cover %>">
+		    <img src="<%= course.cover.list %>">
 		    <h4><%= course.name %></h4>
 		    <p><%= course.description %></p>
 		    <a class="more" href="<%= instruction_course_path( @instruction, course ) %>"></a>

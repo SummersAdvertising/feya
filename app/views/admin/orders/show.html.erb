@@ -1,4 +1,6 @@
 
+<script src="/js/jquery.easing.1.3.js"></script>
+
 <script>
 $(function(){	
 	$('.log').hide()
@@ -28,7 +30,7 @@ $(function(){
 <article>
 <% if (@order.orderlogs.count > 0) %>
 
-  <div class="log"> <a href="#"><img src="images/cancel-large.png"></a>
+  <div class="log"> <a href="#"><img src="/images/cancel-large.png"></a>
     <ul>
     <% @order.orderlogs.each do |log| %>
       <li><span><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></span><br>
@@ -40,7 +42,9 @@ $(function(){
 <% end %>
 
 	<div class="transport">
-<div class="button" id="button-up"> <%= link_to ("取消訂單 " + image_tag('/images/cancel-large.png')).html_safe, admin_order_changestatus_cancel_path(@order), :method => :post, :style => "color:red", :class => "changeStatus right" if @order.status != "cancel" %></div>
+<div class="button" id="button-up"> 
+<a href="#" class="right" id="log-ctrl">訂單狀態</a>
+<%= link_to ("取消訂單 " + image_tag('/images/cancel-large.png')).html_safe, admin_order_changestatus_cancel_path(@order), :confirm => '確定取消訂單？', :method => :post, :style => "color:red", :class => "changeStatus right" if @order.status != "cancel" %></div>
 <h3>訂單資訊</h3>
 <div class="box">
 <%= form_for(@order, :url => admin_order_path(@order, :page => params[:page]) ) do |f| %>
@@ -160,197 +164,29 @@ $(function(){
 				<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
 				<a href="#" id="submitDeliver">確認出貨</a>
 			<% end %>
-		
-		<% when 'deliver' %>
-			<%= "已出貨" %><br>
-			運送方式 : <%= @order.shippingway %> / 追蹤碼 : <%= @order.shippingcode %>
 		<% when 'cancel' %>
 			<%= "已取消此筆訂單" %>
 	<% end %>
   </div>
   <!--button--> 
+  
+  <% if @order.status == 'deliver' %>
+  	
+  <div class="transport">
+    <h3>寄送訊息</h3>
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="15%" align="left" valign="top">運送方式 : </th>
+          <td valign="top"><%= @order.shippingway %></td>
+          <th width="15%" align="left" valign="top">追蹤碼：</th>
+          <td valign="top"><%= @order.shippingcode %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% end %>
 </article>
-
-<section class="content" id="sv-order">
-	<h3>訂單管理
-		<a href="/admin/orders?type=new" class="<%= 'active' if @order.status == 'new' %>">未處理訂單(<%= @countnew %>)</a>
-		<a href="/admin/orders?type=check" class="<%= 'active' if @order.status == 'check' %>">已收款訂單(<%= @countcheck %>)</a>
-		<a href="/admin/orders?type=processing" class="<%= 'active' if @order.status == 'processing' %>">處理中訂單(<%= @countprocessing %>)</a>
-		<a href="/admin/orders?type=deliver" class="<%= 'active' if @order.status == 'deliver' %>">已出貨訂單(<%= @countdeliver %>)</a>
-		<a href="/admin/orders?type=cancel" class="<%= 'active' if @order.status == 'cancel' %>">已取消訂單(<%= @countcancel %>)</a></h3>
-
-		<%= render 'list' %>
-
-		<h3>
-			出貨明細　
-		</h3>
-
-		<% if @order.errors.any? %>
-		<p style="color:red">
-			<% @order.errors.full_messages.each do |message| %>
-			<%= message %><br>
-			<% end %>
-		</p>
-		<% end %>
-
-		<div class="order-detail">
-			<h4>訂購人資訊</h4>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<th width="10%">中文姓名</th>
-					<td width="27%"><%= @order.buyername %></td>
-					<th width="10%">電子郵件</th>
-					<td width="53%"><%= @order.email %></td>
-				</tr>
-				<tr>
-					<th>手機號碼</th>
-					<td colspan="3"><%= @order.buyertel %></td>
-				</tr>
-				<tr>
-					<th>發票資訊</th>
-					<td colspan="3">
-						<%= @order.invoicetype %> / 發票抬頭：<%= (@order.invoicename && @order.invoicename.length > 0) ? @order.invoicename : "未填寫。" %> 統一編號：<%= (@order.companynum && @order.companynum.length > 0) ? @order.companynum : "未填寫。" %></td>
-				</tr>
-			</table>
-			<h4>收件人資訊</h4>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<th width="10%">中文姓名</th>
-					<td width="27%"><%= @order.receivername %></td>
-					<th width="10%">手機號碼</th>
-					<td width="53%"><%= @order.receivertel %></td>
-				</tr>
-				<tr>
-					<th>送貨地址</th>
-					<td colspan="3"><%= @order.receiveraddress %></td>
-				</tr>
-				<tr>
-					<th>宅配方式</th>
-					<td colspan="3"><%= @order.paytype %></td>
-				</tr>
-				<% if @order.payaccount %>
-				<tr>
-					<th>付款日期</th>
-					<td colspan="3"><%= @order.paydate %></td>
-				</tr>
-				<tr>
-					<th>付款時間</th>
-					<td colspan="3"><%= @order.paytime %></td>
-				</tr>
-				<tr>
-					<th>付款帳號末五碼</th>
-					<td colspan="3"><%= @order.payaccount %></td>
-				</tr>
-				<% end %>
-			</table>
-		</div>
-		<div class="order-list">
-			<%= form_for(@order, :url => admin_order_path(@order, :page => params[:page]) ) do |f| %>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<th width="29%" align="center">商品名稱</th>
-					<th width="12%" align="center">分類</th>
-					<th width="35%" align="center">單價</th>
-					<th width="12%" align="center">數量</th>
-					<th width="12%" align="center">小計</th>
-				</tr>
-
-				<% @ordersum = 0 %>				
-				<% @order.orderitems.select('orderitems.*, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').each do |item| %>
-				<% itemsum = item.itemprice.to_i * item.amount.to_i %>
-				<% @ordersum = @ordersum + itemsum %>
-
-				<tr>
-					<td align="center"><%= item.itemname %></td>
-					<td align="center"><%= item.itemtype %></td>
-					<td align="center"><%= item.itemprice %></td>
-					<td align="center"><input type="number" name="orderitem[<%=item.id%>]" value="<%=item.amount%>" /></td>
-					<td align="center"><%= itemsum %></td>
-				</tr>
-				<% end %>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center">購物小計</td>
-					<td align="center"><%= @ordersum %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center">運費小計</td>
-					<td align="center"><%= @order.shippingfee %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center">抵用購物金</td>
-					<td align="center"><%= @order.discount %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center" class="total">訂單總計</td>
-					<td align="center" class="total"><%= @ordersum + @order.shippingfee - @order.discount %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td> 
-					<td align="center" class="total">產生購物金</td>
-					<td align="center" class="total"><%= @order.discountpoint %></td>
-				</tr>
-				<tr>
-					<td colspan="5" align="right"><%= f.submit "修改訂單", :style => "width: 80px!important; margin-right: 5px;" %></td>
-				</tr>
-			</table>
-			<% end %>
-			<h4>處理狀態</h4>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td colspan="5" style="padding:15px 0">
-						<% case @order.status %>
-						<% when 'new' %>
-						<% if @order.paytype == "匯款" %>
-						<%= link_to "確認已收款", admin_order_changestatus_check_path(@order), :method => :post, :class => "changeStatus active" %>
-						<% else %>
-						<%= link_to "確認訂單成立", admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
-						<% end %>
-
-						<% when 'check' %>
-						<%= link_to "確認訂單成立", admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
-						
-						<% when 'processing' %>
-						<%= form_for(@order, :url => admin_order_changestatus_deliver_path(@order), :method => :post) do |f| %>
-							<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
-							<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
-							<a href="#" id="submitDeliver">確認出貨</a>
-						<% end %>
-
-						<% when 'deliver' %>
-						<%= "已出貨" %><br>
-						運送方式 : <%= @order.shippingway %> / 追蹤碼 : <%= @order.shippingcode %>
-						<% when 'cancel' %>
-						<%= "已取消此筆訂單" %>
-						<% end %>
-						
-
-		
-					</td>
-				</tr>
-			</table>
-			
-		</div>
-
-		<% if (@order.orderlogs.count > 0) %>
-		<div class="order-log">
-			<h4>訂單狀態</h4>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<% @order.orderlogs.each do |log| %>
-				<tr>
-					<td width="19%" align="center"><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-					<td width="81%"><%= log.description %></td>
-				</tr>
-				<% end %>
-			</table>
-
-		</div>
-
-		<% end %>
-</section>
 
 <script type="text/javascript">
 if("<%= alert %>"){
