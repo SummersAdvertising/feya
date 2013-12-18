@@ -2,53 +2,65 @@
 <html>
 <head>
 <!--[if lt IE 9]>
-<script src="/js/html5.js"></script>
+<script src="js/html5.js"></script>
 <![endif]-->
 <meta charset="utf-8">
-<title>夏天廣告購物車系統</title>
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>霏亞國際美容機構</title>
 <link rel="stylesheet" href="/css/reset.css">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/style-m.css">
+<link rel="stylesheet" href="/css/member.css">
+
 <%= javascript_include_tag "application" %>
+<script src="/js/auto-full-height.min.js"></script>
+
 <%= stylesheet_link_tag    "application", :media => "all" %>
 <%= csrf_meta_tags %>
+
+
+<script>
+	$(document).ready(function() {		
+	<% if !flash[ :notice ].nil? %>
+		Alertify.log.success('<%= flash[ :notice ] %>');
+	<% elsif !flash[ :warning ].nil? %>
+		Alertify.log.error("<%= flash[ :warning ].html_safe %>");
+	<% end %>
+	
+	});
+</script>
+
 </head>
 
 <body>
-<header>
-  <div id="tool">
-  	<a href="/">首頁</a> <span>|</span> 
-  	<a href="/orders/cart"><img src="/images/tool-3.png">購物車</a> <span>|</span> 
-  	
-  	<% if current_member %>
-  	<a href="<%= service_root_path %>"><img src="/images/tool-2.png">帳戶</a> <span>|</span> 
-  	<%= link_to "登出", destroy_member_session_path, :method => :delete %>
-  	<% else %>
-  	<%= link_to "登入", new_member_session_path %>
-  	<% end %>
-
+<header _height='none'>
+  <div id="top"> <%= current_member.username %> 您好　│  
+  <% if current_member %>
+	  <a href="<%= service_root_path %>"><img src="/images/tool-2.png">帳戶</a> | 
+	  <%= link_to "登出", destroy_member_session_path, :method => :delete %> | 
+  <% else %>
+  	<%= link_to "登入", new_member_session_path %> | 
+  <% end %>
+  <a href="#">購物車</a> <img src="/images/mb-03.png"> 
+  <a id="back" href="<%= root_url %>">回首頁 &gt;</a>
   </div>
 </header>
-<section id="container">
-  <aside>
-    <h3>會員中心</h3>
-    <div class="side">
-      <h4><a href="<%= service_orders_path %>"><img src="/images/li-close.png">訂單查詢</a></h4>
-    </div>
-    <div class="side">
-      <h4><a href="<%= edit_member_registration_path %>"><img src="/images/li-close.png">會員資料</a></h4>
-    </div>
-    <div class="side">
-      <h4><a href="/service/points"><img src="/images/li-close.png">購物金記錄</a></h4>
-    </div>
-    <div class="side">
-      <h4><a href="<%= service_addressbooks_path %>"><img src="/images/li-close.png">常用地址設定</a></h4>
-    </div>
-    <!-- <div class="side">
-      <h4><a href="#"><img src="/images/li-close.png">聯絡客服</a></h4>
-    </div> -->
-  </aside>
-  <%= yield %>
-</section>
-<footer></footer>
+<article _height='auto'>
+  <div class="left">
+    <h3> <img src="/images/mb-08.png"></h3>
+    <ul>
+      <li class="<%= 'active' if params[ :controller ] == 'service/order' %>"><a href="<%= service_orders_path %>">訂單查詢</a></li>
+      <li class="<%= 'active' if params[ :controller ] == 'member' %>"><a href="<%= edit_member_registration_path %>">會員資料</a></li>
+      <li class="<%= 'active' if params[ :controller ] == 'service/addressbook' %>"><a href="<%= service_addressbooks_path %>">常用地址設定</a></li>
+    </ul>
+  </div>
+
+<%= yield %>
+
+</article>
+<%= render 'layouts/footer' %>
 </body>
 </html>
+
+
+

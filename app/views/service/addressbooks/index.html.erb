@@ -1,17 +1,9 @@
-<section class="content" id="mb-add">
-	<h3>常用地址設定</h3>
-	<p class="alert">
-		<%= alert %>
-	</p>
-	<% if @address.errors.any? %>	
-	<p style="color:red">
-		<% @address.errors.full_messages.each do |message| %>
-		<%= message %>
-		<br>
-		<% end %>
-	</p>
-	<% end %>
-	<div class="add-content">
+
+<div class="right">
+	<h4>常用地址設定</h4>
+	<%= form_for(@address, :url =>service_addressbooks_path, :method => :post) do |f| %>
+	<div class="content">
+	
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<% @addresses.each do |addressbook| %>
 			<tr>
@@ -22,23 +14,9 @@
 			</tr>
 			<% end %>
 		</table>
-	</div>
-	<div class="add-content">
-		<%= form_for(@address, :url =>service_addressbooks_path, :method => :post) do |f| %>
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="mb-add-new">
-			<tr>
-				<td width="92%" align="left">
-					<%= f.text_field :address %></td>
-				<td width="8%">
-					<a href="#" id="submit">新增</a>
-				</td>
-			</tr>
-		</table>
-		<% end %>	
-	</div>
-</section>
-<script type="text/javascript">
-$("#submit").click(function(){
-	$(this).parents("form:first").submit();
-});
-</script>
+				
+		<%= f.text_field :address, :class => 'text' %></td>
+	</div>  
+	<input name="" onclick="document.forms[0].submit();" type="button" value="儲存" class="button">
+	<% end %>	
+</div>

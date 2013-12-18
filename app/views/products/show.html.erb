@@ -37,7 +37,7 @@ $(function(){
     
       <table width="100%" border="0" cellspacing="0" cellpadding="0">      
         <tr>
-          <td width="43%" valign="top" id="cover"><img src="<%= @product.cover %>"></td>
+          <td width="43%" valign="top" id="cover"><img src="<%= @product.cover.inner %>"></td>
           <td width="57%" valign="top"><h4><%= @product.name %></h4>
         <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
         

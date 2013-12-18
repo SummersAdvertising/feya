@@ -19,15 +19,20 @@ class Cart::CartController < ApplicationController
 		@stock = Stock.find(params[:orderitem][:stock_id])
 		
 		if(@stock)
-			if(!@stock.amount || @stock.amount >= params[:orderitem][:amount].to_i )
+			params[:orderitem][:amount] = params[:orderitem][:amount].to_i > 0 ? params[:orderitem][:amount].to_i : 1
+			@cartitems[params[:orderitem][:stock_id]] = 0 if @cartitems[params[:orderitem][:stock_id]].nil?
+			
+			if(!@stock.amount || @stock.amount >= params[:orderitem][:amount] + @cartitems[params[:orderitem][:stock_id]] )
 				#write cookie
 				if(cookies[:cart])
 					@cartitems = JSON.parse(cookies[:cart])
 				else
 					@cartitems = Hash.new
 				end
-
-				@cartitems[params[:orderitem][:stock_id]] = params[:orderitem][:amount]
+				
+				
+				@cartitems[params[:orderitem][:stock_id]] += params[:orderitem][:amount]
+				
 				cookies[:cart] = @cartitems.to_json
 
 				respond_to do |format|

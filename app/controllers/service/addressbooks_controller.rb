@@ -15,6 +15,8 @@ class Service::AddressbooksController < ApplicationController
 				format.html { redirect_to  service_addressbooks_path }
 				format.json { render json: @address, status: :created, location: @address }
 			else
+				flash[ :warning ] = @addresses.errors.messages.values.flatten.join('<br>')
+			
 				@addresses = Addressbook.where(:member_id => current_member.id).all
 
 				format.html { render action: "index" }

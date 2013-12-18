@@ -1,0 +1,30 @@
+
+<header>
+  <h2>加盟資訊</h2>
+</header>
+<article>
+  <div class="member">       
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="10%" valign="middle">姓名：</td>
+          <td width="40%" valign="top"><%= @ticket.name %></td>
+          <td width="10%" valign="middle">電話：</td>
+          <td width="40%" valign="top"><%= @ticket.phone %></td>
+        </tr>
+        <tr>
+          <td valign="middle">Email：</td>
+          <td valign="top"><%= @ticket.email %></td>
+          <td valign="middle">地址：</td>
+          <td valign="top"><%= @ticket.address %></td>
+        </tr>
+        <tr>
+          <td valign="middle">其他：</td>
+          <td colspan="3" valign="top"><%= @ticket.comment.gsub( /\n/, '<br>' ) %></td>
+        </tr>             
+      </table>
+    </div>
+  </div>
+  <div class="button" id="button-down"> <a href="<%= admin_tickets_path %>" class="left"><img src="/images/arrow-left.png">返回列表</a> </div>
+  <!--button--> 
+</article>

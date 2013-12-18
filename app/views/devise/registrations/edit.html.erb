@@ -1,50 +1,39 @@
 
-<section class="content" id="mb-info">
-    <h3>修改會員資料</h3>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <%= devise_error_messages! %>
+  <div class="right">
+  <h4>修改會員資料</h4>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <div class="content">
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <td width="15%">中文姓名</td>
+	    <td width="85%"><%= f.text_field :username, :class => 'text' %></td>
+	  </tr>
+	  <tr>
+	    <td>電子郵件</td>
+	    <td><%= f.email_field :email, :disabled => true, :class => 'text' %></td>
+	  </tr>
+	  <tr>
+	    <td>手機號碼</td>
+	    <td><%= f.text_field :tel, :class => 'text' %></td>
+	  </tr>
+	  <tr>
+	    <td>新密碼</td>
+	    <td><%= f.password_field :password, :autocomplete => "off", :class => 'text' %></td>
+	  </tr>
+	  <tr>
+	    <td>確認新密碼</td>
+	    <td><%= f.password_field :password_confirmation, :class => 'text' %></td>
+	  </tr>
+  </table>
+  
+  
+  </div>
+  <input name="" type="button" value="儲存" class="button bt">
+  </div>
+<% end %>
 
-  <div class="info-content">    
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <th width="14%" align="left">中文姓名</th>
-        <td width="28%"><%= f.text_field :username %></td>
-      </tr>
-      <tr>
-        <th align="left">電子郵件</th>
-        <td><%= f.email_field :email, :disabled => true %></td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <th align="left">手機號碼</th>
-        <td><%= f.text_field :tel %></td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <th width="9%" align="left">聯絡地址</th>
-        <td width="41%"><%= f.text_field :address %></td>
-      </tr>
-        <tr>
-          <th align="left">新密碼</th>
-          <td><%= f.password_field :password, :autocomplete => "off" %></td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <th align="left">確認新密碼</th>
-          <td><%= f.password_field :password_confirmation %></td>
-          <td>&nbsp;</td>
-        </tr>
-      </table>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="100%" class="bt"><a>確認修改</a></td>
-        </tr>
-      </table>
-    </div>
-    <% end %>
-  </section>
+  
 <script type="text/javascript">
 $(".bt").click(function(){
   $(this).parents("form:first").submit();
