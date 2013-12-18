@@ -32,10 +32,10 @@ $(function(){
           <td align="center"><img width="195" src="<%= product.cover %>"></td>
         </tr>
         <tr>
-          <td valign="top"><%= link_to product.name, category_product_path(product,  :category_id => 1 ) %></td>
+          <td valign="top"><%= link_to product.name, category_product_path(@category, product ) %></td>
         </tr>
         <tr>
-          <td align="right" class="price">專業價 <b>$ 1,050</b></td>
+          <td align="right" class="price">專業價 <b>$ <%= product.saleprice.nil? ? product.price : product.saleprice %></b></td>
         </tr>
       </table>
     </div>

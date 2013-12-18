@@ -1,8 +1,10 @@
 #encoding: utf-8
 class Product < ActiveRecord::Base
   attr_accessible :description, :name, :price, :saleprice, :cover
- # validates :name, :price, :presence => true
- #validate :price_value
+
+ validates_presence_of :name, :message => '產品名稱不得空白'
+ validates_presence_of :price, :message => '請輸入產品價格'
+ validate :price_value
   
   belongs_to :article, :dependent => :destroy
   
@@ -14,7 +16,7 @@ class Product < ActiveRecord::Base
 
   def price_value
   	if (!self.price || !(self.price.is_a? Integer) || self.price <= 0)
-  		errors.add(:price, "price must be a positive number.")
+  		errors.add(:price, "價格格式錯誤")
   	end
   end
 

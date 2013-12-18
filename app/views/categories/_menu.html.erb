@@ -1,16 +1,16 @@
 
 
-  <div id="crumb"> <a href="<%= root_url %>">首頁</a> &gt; <a href="<%= categories_path %>">美容商品</a> &gt; <a href="javascript: void(0);">商品介紹</a></div>
-  <!--crumb-->
+<div id="crumb"> <a href="<%= root_url %>">首頁</a> &gt; <a href="<%= categories_path %>">美容商品</a> &gt; <a href="javascript: void(0);">商品介紹</a></div>
+<!--crumb-->
 
-  <div class="left">
-    <div id="left-header"></div>
-    <div id="left-body">
-      <ul>
-      	<% @categories.each do | category | %>
-      		<li class="<%= 'active' if category.id == @category.id %>"><a href="<%= category_path( category ) %>">{ <%= category.name %> }</a></li>
-      	<% end %>
-      </ul>
-    </div>
-    <div id="left-footer"></div>
-  </div>
+<div class="left">
+<div id="left-header"></div>
+<div id="left-body">
+  <ul>
+  	<% @categories.each do | category | %>
+  		<li class="<%= 'active' if category.id == @category.id %>"><a href="<%= category_path( category ) %>">{ <%= category.name %> }</a></li>
+  	<% end %>
+  </ul>
+</div>
+<div id="left-footer"></div>
+</div>
