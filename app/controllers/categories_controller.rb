@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
 		@category = Category.find( params[ :id ] )
 			
 	    @order = Order.new
-	    @products = Product.where(:status => "上架").all
+	    @products = @category.products.where(:status => "上架").all
 	
 	    respond_to do |format|
 	      format.html # index.html.erb
