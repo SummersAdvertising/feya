@@ -36,9 +36,9 @@ $(function(){
         </tr>
         <tr>
           <td align="right" class="price">
-          	  <% if product.saleprice > 0 %>
-		          專業價 <del>$ <%= product.price %></del> 
-		          限時優惠 <strong>$ <%= product.saleprice %></strong>
+          	  <% if !product.saleprice.nil? && product.saleprice > 0 %>
+		          <span style="font-size: 8px;"><del>專業價 $ <%= product.price %></del> </span><br>
+		          限時優惠 <b>$ <%= product.saleprice %></b>
 		     <% else %>
 	          	專業價 <b>$ <%= product.price %></b>
 	        <% end %>
