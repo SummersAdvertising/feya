@@ -35,7 +35,14 @@ $(function(){
           <td valign="top"><%= link_to product.name, category_product_path(@category, product ) %></td>
         </tr>
         <tr>
-          <td align="right" class="price">專業價 <b>$ <%= product.saleprice.nil? ? product.price : product.saleprice %></b></td>
+          <td align="right" class="price">
+          		<% if @product.saleprice > 0 %>
+		          專業價 <del>$ <%= @product.price %></del> 
+		          限時優惠 <strong>$ <%= @product.saleprice %></strong>
+		        <% else %>
+	          	專業價 <b>$ <%= product.price %></b>
+	        <% end %>
+          </td>
         </tr>
       </table>
     </div>

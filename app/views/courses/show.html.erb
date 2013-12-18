@@ -13,7 +13,7 @@
       <tr>
         <td width="61%" valign="top" id="cover"><%= image_tag @course.cover %></td>
         <td width="39%" valign="top"><h4><%= @course.name %></h4>
-          <p><%= @course.description.gsub(/\n/, "<br />").html_safe if !@course.nil? %></p>
+          <p><%= @course.description.gsub(/\n/, "<br />").html_safe if !@course.description.nil? %></p>
           <span><img src="/images/cs-07.gif">  </span></td>
       </tr>
       <tr>
