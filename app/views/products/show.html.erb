@@ -41,9 +41,13 @@ $(function(){
           <td width="57%" valign="top"><h4><%= @product.name %></h4>
         <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
         
+        <% if @product.saleprice > 0 %>
         <p> 專業價 <del>$ <%= @product.price %></del><br>
           限時優惠 <strong>$ <%= @product.saleprice %></strong><br>
         </p>
+        <% else %>
+        <p> 專業價  $ <%= @product.price %></p>
+        <% end %>
             
         <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
         	庫存 <%= @product.stocks.first.amount %>        

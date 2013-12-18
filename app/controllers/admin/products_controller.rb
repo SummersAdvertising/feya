@@ -49,6 +49,9 @@ class Admin::ProductsController < AdminController
     @product.status = "上架"
 
     @product.article = Article.new
+    @product.name = '未命名商品'
+    @product.price = 0
+    @product.saleprice = 0
 
     @photo = Photo.new
 

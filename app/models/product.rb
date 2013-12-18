@@ -15,7 +15,7 @@ class Product < ActiveRecord::Base
   paginates_per 20
 
   def price_value
-  	if (!self.price || !(self.price.is_a? Integer) || self.price <= 0)
+  	if (!self.price || !(self.price.is_a? Integer) || self.price < 0)
   		errors.add(:price, "價格格式錯誤")
   	end
   end
