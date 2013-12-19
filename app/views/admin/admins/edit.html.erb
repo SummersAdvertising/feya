@@ -1,0 +1,28 @@
+
+<header>
+  <h2>修改個人資料</h2>
+</header>
+<article>
+  <%= form_for [:admin, @admin] do | f | %>
+  <div class="member">
+    <div class="box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="10%" valign="middle">姓名：</td>
+          <td valign="top"><%= f.text_field :username, :class => 'text', :style => 'width:95%!important' %></td>
+          <td width="10%" valign="middle">Email：</td>
+          <td width="40%" valign="top"><%= f.text_field :email, :class => 'text' %></td>
+        </tr>
+        <tr>
+          <td valign="middle" class="name">密碼：</td>
+          <td valign="top"><%= f.password_field :password, :class => 'text', :style => 'width:95%!important' %></td>
+          <td valign="middle">確認密碼：</td>
+          <td valign="top"><%= f.password_field :password_confirmation, :class => 'text' %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="button" id="button-down"> <a href="<%= admin_admins_path %>" class="left"><img src="/images/arrow-left.png">返回列表</a> <a href="javascript: document.forms[0].submit();" class="right light">儲存<img src="/images/save.png"></a></div>
+  <% end %>
+  <!--button--> 
+</article>

@@ -1,0 +1,41 @@
+
+    <header>
+      <h2>管理者列表</h2>      
+    </header>
+    <article>
+         <%= form_for [:admin, @admin] do | f | %>
+      <div class="member">
+                  
+        <div class="box">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="10%" valign="middle">姓名：</td>
+              <td valign="top"><%= f.text_field :username, :style => 'width:95%!important', :class => 'text' %></td>
+              <td width="10%" valign="middle">Email：</td>
+              <td width="40%" valign="top"><%= f.text_field :email, :class => 'text' %></td>
+            </tr>
+            <tr>
+              <td valign="middle" class="name">密碼：</td>
+              <td valign="top"><%= f.password_field :password, :style => 'width:95%!important', :class => 'text' %></td>
+              <td valign="middle">確認密碼：</td>
+              <td valign="top"><%= f.password_field :password_confirmation, :style => 'width:95%!important', :class => 'text' %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+        <% end %>
+      <div class="button" id="button-down"> <a href="javascript: document.forms[0].submit();" class="right light">新增管理員<img src="images/add.png"></a></div>
+      <div class="list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        	<% @admins.each do | admin | %>        		
+	          <tr>
+	            <td width="18%"><%= admin.username %></td>
+	            <td width="72%"><%= admin.email %></td>
+	            <td width="5%" class="edit"><a href="<%= edit_admin_admin_path( admin ) %>"></a></td>
+	            <td width="5%" class="delete"><%= link_to '', admin_admin_path( admin ), :method => :delete, :confirm => '確認刪除？' %></td>
+	          </tr>
+        	<% end %>
+        </table>
+      </div>
+      
+    </article>

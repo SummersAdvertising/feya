@@ -83,15 +83,20 @@ $(function(){
    </div>
   </div><!--left-->
   <div class="right">
+  
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td><img src="/images/wn-07.gif"></td>
       </tr>
-      <% @instructions.each do | instruction | %>
-	      <tr>
-	        <td><%= link_to image_tag( instruction.cover.thumb ), instruction_path( instruction ), :class => 'cate' %></td>
-	      </tr>      	
-      <% end %>
+      <tr>
+        <td><a id="cate-1" class="cate" href="<%=  instruction_path( Instruction.where( :name => '專業美容證照' ).first ) %>"></a></td>
+      </tr>
+      <tr>
+        <td><a id="cate-2" class="cate" href="<%= instruction_path( Instruction.where( :name => '美容美體實務' ).first ) %>"></a></td>
+      </tr>
+      <tr>
+        <td><a id="cate-3" class="cate" href="<%= instruction_path( Instruction.where( :name => '國際時尚造型' ).first ) %>"></a></td>
+      </tr>
     </table>
   </div>
   

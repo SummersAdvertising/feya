@@ -11,7 +11,7 @@ var editor = {
 
 		linkedp: false,
 		linkedimg: false,
-		p_selectList: ["paragraphFontClass", "paragraphFontColor", "paragraphFontSize"],
+		p_selectList: [/*"paragraphFontClass", "paragraphFontColor", "paragraphFontSize"*/],
 		paragraphFontClass: { "內文": "part-content", "標題": "part-title" }, 
 		paragraphFontColor: { "顏色": "default", "黑色": "#000", "藍色": "#00F" }, 
 		paragraphFontSize: { "大小": "default", 14:14, 28:28 }

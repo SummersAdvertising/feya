@@ -68,6 +68,8 @@ Feya::Application.routes.draw do
     
     resources :tickets, :only => [ :index, :show, :destroy ]
     
+    resources :admins
+    
     resources :categories  do 	
     	
 	    resources :products, :only => [:index, :new, :edit, :create, :update, :destroy] do
