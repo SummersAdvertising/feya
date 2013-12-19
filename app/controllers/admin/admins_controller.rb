@@ -24,8 +24,13 @@ class Admin::AdminsController < AdminController
 	end
 	
 	def update
-		@admin = Admin.find( params[ :id ] )
+	
+		if params[ :admin ][ :password ].empty?
+			params[ :admin ].delete( :password)
+			params[ :admin ].delete(:password_confirmation)
+		end
 		
+		@admin = Admin.find( params[ :id ] )
 		
 		respond_to do | format |
 			if @admin.update_attributes( params[ :admin ] )

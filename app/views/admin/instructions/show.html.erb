@@ -24,7 +24,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <% @courses.each do | course | %>      	
 	      <tr class="<%= course.status != 'disable' ? '' : 'hidden' %>">
-	        <td><% image_tag('images/hidden.png', :width => 16, :height => 16) if course.status != 'enable' %></td>
+	        <td><%= image_tag('/images/hidden.png', :width => 16, :height => 16) if course.status != 'enable' %></td>
 	        <td><a href="<%= edit_admin_instruction_course_path( @instruction, course ) %>"><%= course.name %></a></td>
 	        <td align="center"><a href="<%= switch_admin_instruction_course_path( @instruction, course, :page => params[ :page ] ) %>"><%= course.status == 'disable' ? '顯示' : '隱藏' %></a></td>
 	        <td align="center"><%= course.created_at.strftime( '%Y-%m-%d' ) %></td>

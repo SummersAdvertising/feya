@@ -29,24 +29,23 @@
 <span>整合美容市場學習支援，開發多元化、多樣化教育類別，整合美容市場學習支援，開發多元化、多樣化教育類別</span>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="center" width="20%"><a id="p1" href="#"></a></td>
-    <td align="center" width="20%"><a id="p2" href="#"></a></td>
-    <td align="center" width="20%"><a id="p3" href="#"></a></td>
-    <td align="center" width="20%"><a id="p4" href="#"></a></td>
-    <td align="center" width="20%"><a id="p5" href="#"></a></td>
+    <td align="center" width="20%"><a id="p1" href="<%= page_pages_path( :pagename => 'professional') %>"></a></td>
+    <td align="center" width="20%"><a id="p2" href="<%= page_pages_path( :pagename => 'professional', :anchor => 'prof-1' ) %>"></a></td>
+    <td align="center" width="20%"><a id="p3" href="<%= page_pages_path( :pagename => 'professional', :anchor => 'prof-2' ) %>"></a></td>
+    <td align="center" width="20%"><a id="p4" href="<%= page_pages_path( :pagename => 'professional', :anchor => 'prof-3' ) %>"></a></td>
+    <td align="center" width="20%"><a id="p5" href="<%= page_pages_path( :pagename => 'professional', :anchor => 'prof-4' ) %>"></a></td>
   </tr>
 </table>
 </div>
 <div id="products">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <th width="24%" align="center"><h3><img src="/images/df-13.jpg"><br><br><a href="#"></a></h3>
+    <th width="24%" align="center"><h3><img src="/images/df-13.jpg"><br><br><a href="<%= categories_path %>"></a></h3>
 </th>
     <td width="12%">&nbsp;</td>
-    <td width="16%" align="center"><img src="/images/sample/image03.jpg" width="128" height="103"><br><a href="#">霏亞系列保養</a></td>
-    <td width="16%" align="center"><img src="/images/sample/image03.jpg" width="128" height="103"><br><a href="#">霏亞系列保養</a></td>
-    <td width="16%" align="center"><img src="/images/sample/image03.jpg" width="128" height="103"><br><a href="#">霏亞系列保養</a></td>
-    <td width="16%" align="center"><img src="/images/sample/image03.jpg" width="128" height="103"><br><a href="#">霏亞系列保養</a></td>
+    <% @products.each do | product | %>
+    <td width="16%" align="center"><img src="<%= product.cover.list %>" width="128" height="103"><br><a href="<%= category_product_path( product.category, product ) %>"><%= product.name %></a></td>
+    <% end %>
   </tr>
 </table>
 
