@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
 	def index
 		@entries = Entry.limit(3)
 		
-		@products = Product.where( :status => '上架' ).limit(4)
+		@products = Product.where( "status = '上架' AND delete_flag IS NULL" ).limit(4)
 		
 	end
 	
