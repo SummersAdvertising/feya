@@ -20,7 +20,6 @@ class Cart::CartController < ApplicationController
 		
 		if(@stock)
 			params[:orderitem][:amount] = params[:orderitem][:amount].to_i > 0 ? params[:orderitem][:amount].to_i : 1
-			@cartitems[params[:orderitem][:stock_id]] = 0 if @cartitems[params[:orderitem][:stock_id]].nil?
 			
 			if(!@stock.amount || @stock.amount >= params[:orderitem][:amount] + @cartitems[params[:orderitem][:stock_id]] )
 				#write cookie
@@ -30,6 +29,7 @@ class Cart::CartController < ApplicationController
 					@cartitems = Hash.new
 				end
 				
+				@cartitems[params[:orderitem][:stock_id]] = 0 if @cartitems[params[:orderitem][:stock_id]].nil?
 				
 				@cartitems[params[:orderitem][:stock_id]] += params[:orderitem][:amount]
 				
