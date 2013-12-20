@@ -26,7 +26,7 @@ Feya::Application.routes.draw do
     match 'articles/:id/uploadPhoto' => 'articles#createPhoto', :via => [:post] 
     match 'articles/:artid/deletePhoto/:id' => 'articles#destroyPhoto', :via => [:delete]
 
-  devise_for :members, :controllers => { :sessions => "sessions", :registrations => "registrations" }
+  devise_for :members, :controllers => { :sessions => "sessions", :registrations => "registrations", :passwords => "passwords" }
   
   resources :orders, :only => [:create] do
   	collection do
