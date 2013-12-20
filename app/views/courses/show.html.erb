@@ -28,11 +28,14 @@
 	  <article>
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
-		    <td width="28%"><div><img src="/images/sample/image01.jpg"><a href="#">指甲藝術 →</a></div></td>
+		  <% @courses.each do | course | %>		  
+		    <td width="28%"><div><img src="<%= course.cover.list %>"><a href="<%= instruction_course_path( @instruction, course ) %>"><%= course.name %> →</a></div></td>
 		    <td width="8%">&nbsp;</td>
-		    <td width="28%"><div><img src="/images/sample/image01.jpg"><a href="#">指甲藝術 →</a></div></td>
+		  <% end %>
+		  <% (0..(3-@courses.length) ).each do | i | %>
+		    <td width="28%"><div>&nbsp;</div></td>
 		    <td width="8%">&nbsp;</td>
-		    <td width="28%"><div><img src="/images/sample/image01.jpg"><a href="#">指甲藝術 →</a></div></td>
+		  <% end %>
 		  </tr>
 		</table>
 	</article>

@@ -25,6 +25,16 @@
 <%= stylesheet_link_tag    "application", :media => "all" %>
 <%= csrf_meta_tags %>
 
+<script>
+	$(document).ready(function() {		
+	<% if !flash[ :notice ].nil? %>
+		Alertify.log.success('<%= flash[ :notice ] %>');
+	<% elsif !flash[ :warning ].nil? %>
+		Alertify.log.error("<%= flash[ :warning ].html_safe %>");
+	<% end %>
+	
+	});
+</script>
 
 </head>
 
@@ -38,7 +48,8 @@
 	  	<%= link_to "登出 │ ", destroy_member_session_path, :method => :delete %>
 	 <% else %>  	
 	 	<%= link_to "會員登入 │ ", new_member_session_path %>
-  	<% end %><a href="/orders/cart">購物車</a> </div>
+  	<% end %>
+  	<a href="/orders/cart">購物車</a> </div>
     <ul id="nav">
       <li id="nav-1" class="<%= 'active' if params[:controller] == 'instructions' || params[ :controller ] == 'courses' %>"><a href="<%= instructions_path %>">專業課程</a>
         <ul class="menu">

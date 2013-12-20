@@ -25,19 +25,19 @@
 
 <body>
 <header _height='none'>
-  <div id="top"> <%= current_member.username %> 您好　│<a href="#">您的帳戶</a>│<a href="#">購物車</a> <img src="/images/sc-01.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
+  <div id="top">   
+  	<% if current_member %>
+  		<%= current_member.username %> 您好 │<a href="<%= service_root_path %>">您的帳戶</a> | 
+	  	<%= link_to "登出 ", destroy_member_session_path, :method => :delete %> │
+	 <% else %>  	
+	 	<%= link_to "會員登入", new_member_session_path %> │
+  	<% end %>
+  
+  　<a href="/orders/cart">購物車</a> <img src="/images/sc-01.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
 </header>
 
 <%= yield %>
 
-<footer _height='none'>
-  <div class="container">
-    <nav><a href="#">專 業 課 程 </a>│ <a href="#">學 員 見 證</a> │ <a href="#">專 業 師 資 </a>│ <a href="#">美 容 商 品 </a>│ <a href="#">最 新 消 息 </a>│ <a href="#">關 於 霏 亞</a></nav>
-    <p>台北　台北市中山區長安東路二段82號<br>
-      桃園　桃園縣蘆竹鄉中正路308號18樓之2<br>
-      鶯歌　新北市鶯歌區永明街67-3號<br>
-      <span>Copyright (C) 霏亞國際 All Rights Reserved.</span></p>
-  </div>
-</footer>
+<%= render 'layouts/footer' %>
 </body>
 </html>

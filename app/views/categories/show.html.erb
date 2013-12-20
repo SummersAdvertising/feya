@@ -23,7 +23,7 @@ $(function(){
   
    <%= render 'menu' %>
   <div class="right">
-    <div class="quick">購物車<span><%= @cartitems_count %></span>件<a href="#">結帳</a></div>
+    <div class="quick">購物車<span><%= @cartitems_count %></span>件<a href="/orders/cart">結帳</a></div>
     <% @products.each do | product | %>
     
     <div class="single">

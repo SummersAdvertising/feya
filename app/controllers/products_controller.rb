@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
   def show
     @order = Order.new
-    @product = Product.where(:status => "上架", :id => params[:id]).first
+    @product = Product.where("status = '上架' AND delete_flag IS NULL AND id = #{params[:id]}").first
     @cartitem = Orderitem.new
     
     if(@product)

@@ -20,7 +20,7 @@ class InstructionsController < ApplicationController
 		@instructions = Instruction.order( 'sort ASC' )
 		@instruction = Instruction.find( params[ :id ] )
 		
-		@courses = @instruction.courses
+		@courses = @instruction.courses.where(" status = 'enable'")
 		
 	end
 end

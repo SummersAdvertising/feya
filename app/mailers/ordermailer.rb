@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Ordermailer < ActionMailer::Base
-  default from: "mailer@example.com"
+  default from: "adword@summers.com.tw"
   def newOrder(receiver, order)
   	@order = order
 
