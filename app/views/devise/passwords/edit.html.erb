@@ -1,16 +1,53 @@
-<h2>Change your password</h2>
+<!doctype html>
+<html>
+<head>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>霏亞國際美容機構</title>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/style-m.css">
+<link rel="stylesheet" href="/css/enter.css">
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password, :autofocus => true %></div>
+<script src="/js/auto-full-height.min.js"></script>
+</head>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
+<body>
+<header _height='none'>
+  <div id="top"> <img src="/images/mb-02.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
+</header>
+<article _height='auto'>
+  <div class="left">
+    <h3 style="color: #00b1ae;font: 300 19px verdana; padding-top: 28px;">{ 重設密碼 }</h3>
+    
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+    	
+		  <%= devise_error_messages! %>
+		  <%= f.hidden_field :reset_password_token %>
+  
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	      <tr>
+	        <td colspan="2"><%= f.password_field :password, :autofocus => true, :class => 'text', :placeholder => "請輸入您想更改的密碼" %></td>
+	      </tr>
+	      <tr>
+	        <td colspan="2"><%= f.password_field :password_confirmation, :class => 'text', :placeholder => "請再次確認密碼" %></td>
+	      </tr>
+	      
+	      <tr>
+	        <td colspan="2" align="right" class="button"><a id="submit" href="javascript: document.forms[0].submit();"> 確認更改密碼 </a></td>
+	      </tr>
+	    </table>
+    
+		<% end %>
+  </div>
+</article>
+<%= render 'layouts/footer' %>
+</body>
+</html>
 
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
