@@ -33,7 +33,7 @@
 	 <% else %>  	
 	 	<%= link_to "會員登入 | ", new_member_session_path %>
   	<% end %>
-    <a href="/orders/cart">購物車</a> </div>
+    │<a href="/orders/cart">購物車</a> </div>
     <ul id="nav">
       <li id="nav-1" class="<%= 'active' if params[:controller] == 'instructions' || params[ :controller ] == 'courses' %>"><a href="<%= instructions_path %>">專業課程</a>
         <ul class="menu">

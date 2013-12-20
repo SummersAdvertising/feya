@@ -71,7 +71,7 @@
 	      <% next if stock.id.nil? %>
 	      
 	      <tr>
-	        <td width="78%"><a href="javascript: void(0);"><%= stock.typename == "default" ? "未指定" : stock.typename %></a></td>
+	        <td width="78%"><a href="javascript: void(0);"><%= stock.typename == "default" ? "" : stock.typename %></a></td>
 	        <% if stock.typename != 'default' %>
 	        <td width="15%" align="center"><input type="number" name="stock[<%=stock.id%>]" value="<%=stock.amount%>" /></td>
 		    <td width="7%" align="center" class="delete">
