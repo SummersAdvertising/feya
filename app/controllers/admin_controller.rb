@@ -20,7 +20,7 @@ class AdminController < ApplicationController
 				session[:admin] = @dbData
 				format.html { redirect_to admin_root_path }
 			else
-				flash[:loginError] = "帳號或密碼輸入錯誤。"
+				flash[:warning] = "帳號或密碼輸入錯誤。"
 				format.html { redirect_to admin_login_path }
 			end
 		end
