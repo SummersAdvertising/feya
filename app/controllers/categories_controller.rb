@@ -1,6 +1,6 @@
 # encoding: utf-8
 class CategoriesController < ApplicationController
-	
+	before_filter :count_cartitems
 	before_filter :get_categories
 	
 	def index

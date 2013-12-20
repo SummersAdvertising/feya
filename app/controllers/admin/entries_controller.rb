@@ -24,7 +24,7 @@ class Admin::EntriesController < AdminController
   # GET /admin/entries/new
   # GET /admin/entries/new.json
   def create
-    @entry = Entry.new(params[:admin_entry])
+    @entry = Entry.new
     @entry.article = Article.new
 
     respond_to do |format|
