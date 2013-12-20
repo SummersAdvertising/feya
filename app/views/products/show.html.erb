@@ -39,7 +39,7 @@ $(function(){
         <tr>
           <td width="43%" valign="top" id="cover"><img src="<%= @product.cover.inner %>"></td>
           <td width="57%" valign="top"><h4><%= @product.name %></h4>
-        <input type="hidden" value="<%= @product.stocks.first.id %>" name="orderitem[stock_id]">
+        <input type="hidden" value="<%= @stock_first && @stock_first.id %>" name="orderitem[stock_id]">
         
         <% if !@product.saleprice.nil? && @product.saleprice > 0 %>
         <p> 專業價 <del>$ <%= @product.price %></del><br>
@@ -49,8 +49,8 @@ $(function(){
         <p> 專業價  $ <%= @product.price %></p>
         <% end %>
             
-        <% if @product.stocks.first.amount && @product.stocks.first.amount >0 %>
-        	庫存 <%= @product.stocks.first.amount %>
+        <% if @stock_first && @stock_first.amount && @stock_first && @stock_first.amount >0 %>
+        	庫存 <%= @stock_first && @stock_first.amount %>
         
              <% if @product.hasType %>
             <div class="size"> 規格
@@ -69,7 +69,7 @@ $(function(){
             <% end %>
         <% end %>
         
-            <%= link_to '', "#", :id => "submit", :data => { :stockid => @product.stocks.first.id, :stockname => @product.name, :stockceiling => @product.stocks.first.amount } %></td>
+            <%= link_to '', "#", :id => "submit", :data => { :stockid => @stock_first && @stock_first.id, :stockname => @product.name, :stockceiling => @stock_first && @stock_first.amount } %></td>
             
         <% if !@product.hasStock %>
         <div class="size"> 本商品目前無庫存。   </div>        
