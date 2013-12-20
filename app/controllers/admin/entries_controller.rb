@@ -24,7 +24,7 @@ class Admin::EntriesController < AdminController
   # GET /admin/entries/new
   # GET /admin/entries/new.json
   def create
-    @entry = Entry.new(params[:admin_entry])
+    @entry = Entry.new
     @entry.article = Article.new
 
     respond_to do |format|
@@ -33,7 +33,6 @@ class Admin::EntriesController < AdminController
         format.json { render json: @entry, status: :created, location: @entry }
       else
       	flash[ :warning ] = @entry.errors.messages.values.flatten.join('<br>')
-      	      	
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
       end

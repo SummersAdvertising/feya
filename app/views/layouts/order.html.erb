@@ -2,7 +2,7 @@
 <html>
 <head>
 <!--[if lt IE 9]>
-<script src="js/html5.js"></script>
+<script src="/js/html5.js"></script>
 <![endif]-->
 <meta charset="utf-8">
 <meta name="Robots" content="index,follow"/>
@@ -25,7 +25,7 @@
 
 <body>
 <header _height='none'>
-  <div id="top"> XXX 您好　│<a href="#">您的帳戶</a>│<a href="#">購物車</a> <img src="/images/sc-01.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
+  <div id="top"> <%= current_member.username %> 您好　│<a href="#">您的帳戶</a>│<a href="#">購物車</a> <img src="/images/sc-01.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
 </header>
 
 <%= yield %>
