@@ -56,12 +56,12 @@
         <tr>
           <td width="80%">&nbsp;</td>
           <td width="10%">運費</td>
-          <td width="10%" align="right">NT$ 0</td>
+          <td width="10%" align="right">NT$ <%= @orderPrice > 2000 ? '<del class="shippingfee">95</del>'.html_safe : '<span class="shippingfee">95</span>'.html_safe %></td>
         </tr>
         <tr>
           <td width="80%">&nbsp;</td>
           <td width="10%" class="total">訂單總計</td>
-          <td width="10%" align="right" class="total">NT$ <%= @orderPrice %></td>
+          <td width="10%" align="right" class="total">NT$ <span class="orderprice"><%= @orderPrice > 2000 ? @orderPrice : @orderPrice + 95 %></span></td>
         </tr>
       </table>
     </div>
@@ -73,15 +73,15 @@
     
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="10%" valign="top" class="way">宅配貨到付款</td>
-        <td width="5%" align="center" valign="top"><input data-fee="150" type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
-        <td width="85%" valign="top">宅配貨到付款，將酌收 50 元物流費。若單筆購物滿 499 元，即享有免運費優惠（「貨到付款」服務僅限台灣本島）。</td>
+        <td width="10%" valign="top" class="way">郵局貨到付款</td>
+        <td width="5%" align="center" valign="top"><input data-fee="95" type="radio" name="order[paytype]" class="radio" value="貨到付款" checked ></td>
+        <td width="85%" valign="top">宅配貨到付款，將酌收 95 元物流費。若單筆購物滿 2000 元，即享有免運費優惠（「貨到付款」服務僅限台灣本島）。</td>
       </tr>
       <tr>
-        <td valign="top" class="way">宅配一般付款</td>
-        <td align="center" valign="top"><input data-fee="60" type="radio" name="order[paytype]" class="radio" value="匯款"></td>
-        <td valign="top" style="line-height:1.7em">宅配一般付款，請至郵局匯款XXX，將酌收 50 元物流費。若單筆購物滿 499 元，即享有免運費優惠。<br>
-          ※ 匯款戶名：夏天廣告有限公司　　國泰世華銀行 信義分行(總行代碼013)　　帳號：888-88-888888-8</td>
+        <td valign="top" class="way">郵局匯款</td>
+        <td align="center" valign="top"><input data-fee="65" type="radio" name="order[paytype]" class="radio" value="匯款"></td>
+        <td valign="top" style="line-height:1.7em">宅配一般付款，請至先匯款，將酌收 65 元物流費。若單筆購物滿 2000 元，即享有免運費優惠。<br>
+          ※ 匯款戶名：霏亞國際管理顧問有限公司　　永豐銀行-鶯歌分行(代碼 807-1402)　　帳號：140-001-00396667</td>
       </tr>
     </table>
     
@@ -159,16 +159,18 @@
         <td width="58%"><%= f.text_field :receiveraddress, :value => current_member.receiveaddress, :class => 'text' %></td>
         <td width="33%">&nbsp;</td>
       </tr>
-      <tr>
-	      <td>
       	<% if current_member.addressbooks.count > 0 %>
-	      	選擇常用地址：<br/>
+      <tr>
+	      <th>
+	      	常用地址：<br/>
+      	</th>
+      	<td>	      	
 	      	<% current_member.addressbooks.each do |addressbook| %>
 	      		<span><a href="#" class="addressbook"><%= addressbook.address %></a></span><br/>
 	      	<% end %>
-      	<% end %>
       	</td>
       </tr>
+      	<% end %>
       <tr>
         <td>&nbsp;</td>
         <td><input type="checkbox" name="addAddressbook" class="checkbox">
@@ -207,8 +209,8 @@ if("<%= alert %>"){
 
 $(".radio").click(function(){
 	var shippingfee = parseInt($(this).data("fee"));
-	$("span.orderprice").text(parseInt("<%= @orderPrice %>") + shippingfee);
-	$("span.shippingfee").text(shippingfee);
+	$("span.orderprice").text(parseInt("<%= @orderPrice %>") + (<%= @orderPrice %> > 2000 ? 0 : shippingfee) );
+	$(".shippingfee").text(shippingfee);
 });
 
 $("#asBuyer").change(function(){

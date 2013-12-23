@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/css/style-m.css">
 <link rel="stylesheet" href="/css/member.css">
+<link rel="stylesheet" href="/css/shopcart.css">
 
 <%= javascript_include_tag "application" %>
 <script src="/js/auto-full-height.min.js"></script>
@@ -41,7 +42,7 @@
   <% else %>
   	<%= link_to "登入", new_member_session_path %> | 
   <% end %>
-  <a href="#">購物車</a> <img src="/images/mb-03.png"> 
+  <a href="/orders/cart">購物車</a> <img src="/images/mb-03.png"> 
   <a id="back" href="<%= root_url %>">回首頁 &gt;</a>
   </div>
 </header>

@@ -59,7 +59,7 @@ class Admin::OrdersController < AdminController
         @member.save
 
         @orderlog = @order.orderlogs.new
-        @orderlog.description = "退貨扣除購物金：" + @substract.to_s + "點"
+        @orderlog.description = ""
         @orderlog.save
       end
     end

@@ -23,9 +23,9 @@ class OrdersController < ApplicationController
 
 		case @order.paytype
 		when "匯款"
-			@order.shippingfee = 60
+			@order.shippingfee = 65
 		when "貨到付款"
-			@order.shippingfee = 150
+			@order.shippingfee = 95
 		else
 			@order.shippingfee = 0
 		end

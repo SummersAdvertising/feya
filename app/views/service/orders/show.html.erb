@@ -23,11 +23,11 @@
 		<div class="order-list">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<th width="52%" align="center">商品名稱</th>
-					<th width="12%" align="center">分類</th>
-					<th width="12%" align="center">單價</th>
-					<th width="12%" align="center">數量</th>
-					<th width="12%" align="center">訂單金額</th>
+					<td width="52%" align="center"><h4>商品名稱</h4></td>
+					<td width="12%" align="center"><h4>分類</h4></td>
+					<td width="12%" align="center"><h4>單價</h4></td>
+					<td width="12%" align="center"><h4>數量</h4></td>
+					<td width="12%" align="center"><h4>訂單金額</h4></td>
 				</tr>
 	
 				<% @ordersum = 0 %>
@@ -51,22 +51,12 @@
 				<tr>
 					<td colspan="3" align="center">&nbsp;</td>
 					<td align="center">運費小計</td>
-					<td align="center"><%= @order.shippingfee %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center">抵用購物金</td>
-					<td align="center"><%= @order.discount %></td>
+					<td align="center"><%= @ordersum > 2000 ? 0 : @order.shippingfee %></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center">&nbsp;</td>
 					<td align="center" class="total">訂單總計</td>
-					<td align="center" class="total"><%= @ordersum + @order.shippingfee - @order.discount %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td> 
-					<td align="center" class="total">產生購物金</td>
-					<td align="center" class="total"><%= @order.discountpoint %></td>
+					<td align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee) %></td>
 				</tr>
 			</table>
 	
@@ -142,23 +132,24 @@
 					<td>
 						<%= f.text_field :payaccount %>
 					</td>
+				</tr>
+				<tr>
 					<th>匯款日期</th>
 					<td>
-						<%= f.text_field :paydate, :value => Date.today.strftime("%Y-%m-%d") %></td>
-					<td>
-	
+						<%= f.text_field :paydate, :value => Date.today.strftime("%Y-%m-%d") %>
+					</td>
+				</tr>
+				<tr>
 					<th>匯款日期</th>
 					<td>
 						<%= f.select(:paytime, options_for_select([["上午0-1時"],["上午1-2時"],["上午2-3時"],["上午3-4時"],["上午4-5時"],["上午5-6時"],["上午6-7時"],["上午7-8時"],["上午8-9時"],["上午9-10時"],["上午10-11時"],["上午11-12時"],["下午12-13時"],["下午13-14時"],["下午14-15時"],["下午15-16時"],["下午16-17時"],["下午17-18時"],["下午18-19時"],["下午19-20時"],["下午20-21時"],["下午21-22時"],["下午22-23時"],["下午23-24時"]]) ) %>
 					</td>
-	
-					<td>
-						<a href="#" id="submit">確認送出</a>
-					</td>
 				</tr>
 			</table>
+			
 			<% end %>
 		</div>
+		
 		<% end %>
 	
 	<script type="text/javascript">
@@ -197,6 +188,9 @@
 	<% end %>
 	
 </div>
+			<% if (@order.paytype == "匯款" && !@order.payaccount && @order.status == "new" ) %>
+			<a href="#" class="button" style="float: right;" id="submit">確認送出</a>
+			<% end %>
 </div>
 
 <section class="content" id="mb-order">
