@@ -19,10 +19,11 @@
 .single a{color:#333;display:block;padding:0 0 0 5px;max-height:48px;position:relative;overflow:hidden;text-decoration:underline;font-size:13px}
 .single a:hover{background:#FFEC4C;box-shadow:-4px 4px 0 #C490BF;text-decoration:none}
 
-.quick{border:1px solid #362E2B;width:24px;height:119px;text-align:center;
+.quick{border:1px solid #362E2B;width:23px;height:119px;text-align:center;
 padding:5px 0 0 0;font:300 11px "新細明體",arial;position:fixed;color:#362E2B;margin:0 0 0 720px}
-.quick a{font:300 11px "新細明體",arial;background:#AE5DA1;color:#fff;display:block;width:20px;
+.quick a{font:300 11px "新細明體",arial;background:#AE5DA1;color:#fff;display:block;width:19px;
 padding:3px 0;margin:3px 0 0 1px;text-shadow:0 -1px 0 #843377}
+
 .quick span{color:#f2c84b;display:block;padding:2px 0}
 .quick a:hover{background:#D393C9}
 

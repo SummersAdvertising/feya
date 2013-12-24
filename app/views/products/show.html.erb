@@ -21,6 +21,12 @@ $(function(){
 		}
 		$qa_content.slideToggle()
 	}).siblings().addClass('open_on').hide();
+	
+	window.resize = function() {
+		console.log( $('div.right').offset().left + $('div.right').width() + 30 );
+		$('.quick').offset({left: $('div.right').offset().left + $('div.right').width() + 30});
+	}	
+	
 });
 </script>
 
