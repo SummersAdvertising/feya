@@ -5,13 +5,13 @@ class CoursesController < ApplicationController
 	def show
 		@course = Course.find( params[ :id ] )
 		
-		@courses = @instruction.courses.where( "status = 'enable' AND id <> #{params[:id]}")
+		@courses = @instruction.courses.where( "status = 'enable' AND id <> #{params[:id]}").limit(3)
 		
 	end
 	
 	private
 		def get_instruction
 			@instruction = Instruction.find( params[ :instruction_id ] )
-			@instructions = Instruction.order('sort ASC, created_at ASC').limit(3)
+			@instructions = Instruction.order('sort ASC, created_at ASC')
 		end  
 end
