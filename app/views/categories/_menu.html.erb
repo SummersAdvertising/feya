@@ -1,4 +1,28 @@
 
+<style>
+	#cart-quick{
+		padding: 0px 20px;
+	
+		
+	}
+	#cart-quick p{		
+		background: white;
+		padding: 1px;
+		padding-left: 6px;
+		border: #777 1px solid;
+	}
+	#cart-quick a{		
+		margin-top: 1px;
+		margin-right: 1px;
+		float: right;
+	}
+	
+	#cart-amount{
+		color: orange;
+		margin: 0 2px;
+	}
+</style>
+
 
 <div id="crumb"> <a href="<%= root_url %>">首頁</a> &gt; <a href="<%= categories_path %>">美容商品</a> &gt; <a href="javascript: void(0);">商品介紹</a></div>
 <!--crumb-->
@@ -6,6 +30,12 @@
 <div class="left">
 <div id="left-header"></div>
 <div id="left-body">
+	
+	<div id="cart-quick">
+		<p>購物車 <span id="cart-amount"><%= @cartitems_count %></span> 件<a href="/orders/cart"><img src="/images/shop-icon.jpg" /></a></p>
+	</div>
+   
+
   <ul>
   	<% @categories.each do | category | %>
   		<li class="<%= 'active' if category.id == @category.id %>"><a href="<%= category_path( category ) %>">{ <%= category.name %> }</a></li>

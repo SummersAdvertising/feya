@@ -9,11 +9,9 @@ class CoursesController < ApplicationController
 		
 	end
 	
-
 	private
 		def get_instruction
 			@instruction = Instruction.find( params[ :instruction_id ] )
-			@instructions = Instruction.order('sort ASC, created_at ASC').all
+			@instructions = Instruction.order('sort ASC, created_at ASC').limit(3)
 		end  
-
 end

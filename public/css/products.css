@@ -9,7 +9,7 @@
 
 .left ul{padding:0 30px;}
 .left li{height:50px;background:url(../images/pd-02.gif) 0 bottom no-repeat;padding:10px 0 0 0}
-.left a{color:#000;display:block;padding:0 0 0 5px}
+.left a{color:#000;padding:0 0 0 5px}
 .left a:hover{color:#C490BF}
 .left .active a{background:#FFEC4C;box-shadow:-4px 4px 0 #C490BF;}
 
