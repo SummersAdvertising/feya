@@ -1,5 +1,8 @@
 #encoding: utf-8
 class StaticPagesController < ApplicationController
+
+	before_filter :clear_flash
+
 	def index
 		@entries = Entry.limit(3)
 		
