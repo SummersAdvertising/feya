@@ -9,8 +9,11 @@
 <meta http-equiv="content-language" content="zh-TW" />
 <title>霏亞國際美容機構</title>
 <link rel="stylesheet" href="/css/reset.css">
+
 <link rel="stylesheet" href="/css/style-m.css">
 <link rel="stylesheet" href="/css/enter.css">
+
+<%= stylesheet_link_tag    "application", :media => "all" %>
 
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
@@ -22,9 +25,18 @@
 <header _height='none'>
   <div id="top"> <img src="/images/mb-02.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
 </header>
-<article _height='auto'>
+<article id="loginArticle" _height='auto'>
   <div class="left">
     <h3><img src="/images/mb-05.png"></h3>
+        	
+
+	<script>
+		<% if flash[ :notice ] %>	
+		
+			Alertify.dialog.alert("<%= flash[ :notice ] %>");
+		
+		<% end %>
+	</script>
     
     
 		<%= form_for(resource, :as => resource_name, :url => member_session_path()) do |f| %>	    

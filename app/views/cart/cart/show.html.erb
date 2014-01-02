@@ -23,7 +23,7 @@
 			  <% @orderPrice = 0 %>
 			  <% @orderItems.each do |item| %>
 		
-				  <% @itemSum = (item[:saleprice] || item[:price]).to_i * item[:amount].to_i %>
+				  <% @itemSum = ( !item[:saleprice].nil? && item[:saleprice] > 0 ? item[:saleprice].to_i : item[:price].to_i ) * item[:amount].to_i %>
           <%# @itemSum = item[:price].to_i * item[:amount].to_i %>
 				  <% @orderPrice = @orderPrice + @itemSum %>
 				  <tr>

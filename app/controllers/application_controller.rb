@@ -23,9 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   def count_cartitems
+  
     if(cookies[:cart])
       @cartitems = JSON.parse(cookies[:cart]) 
-      @cartitems_count = @cartitems.length
+      @cartitems_count = @cartitems.inject(0) { | s, i | s += i[1] }
     else
       @cartitems_count = 0
     end

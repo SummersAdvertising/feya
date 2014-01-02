@@ -43,6 +43,6 @@ padding:3px 0;margin:3px 0 0 1px;text-shadow:0 -1px 0 #843377}
 .content .size select{border:1px solid #959595;padding:5px;width:200px;color:#959595;margin:5px 0 5px 10px}
 .content .size select:hover{background:#eee}
 
-.content p{color:#959595}
+.content p{}
 .content del{color:#f2b705;font-size:20px}
 .content strong{color:#e5004f;font-size:25px}

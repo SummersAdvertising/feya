@@ -1,5 +1,5 @@
 
-article{background:url(../images/mb-01.jpg) right bottom no-repeat; min-height: 522px;}
+article#loginArticle{background:url(../images/mb-01.jpg) right bottom no-repeat; min-height: 522px;}
 
 article .left {width:460px;background:url(../images/cs-03.gif);padding:10px 15px;float:left}
 article .left a{color:#00b1ae;text-decoration:underline}

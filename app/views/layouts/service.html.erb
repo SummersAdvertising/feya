@@ -35,16 +35,13 @@
 
 <body>
 <header _height='none'>
-  <div id="top"> <%= current_member.username %> 您好　│  
-  <% if current_member %>
-	  <a href="<%= service_root_path %>"><img src="/images/tool-2.png">帳戶</a> | 
-	  <%= link_to "登出", destroy_member_session_path, :method => :delete %> | 
-  <% else %>
-  	<%= link_to "登入", new_member_session_path %> | 
-  <% end %>
-  <a href="/orders/cart">購物車</a> <img src="/images/mb-03.png"> 
-  <a id="back" href="<%= root_url %>">回首頁 &gt;</a>
-  </div>
+  <div id="top">   
+  	<% if current_member -%>
+  		<%= current_member.username -%> 您好 │<a href="<%= service_root_path -%>">帳戶</a> | <%= link_to "登出 ", destroy_member_session_path, :method => :delete -%> │
+	 <% else -%>  	
+	 	<%= link_to "會員登入", new_member_session_path -%> │
+  	<% end -%>
+<a href="/orders/cart">購物車</a> <img src="/images/sc-01.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
 </header>
 <article _height='auto'>
   <div class="left">

@@ -21,13 +21,13 @@
 		<% end %>
 	
 		<div class="order-list">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table style="margin-bottom: 24px;" width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="52%" align="center"><h4>商品名稱</h4></td>
-					<td width="12%" align="center"><h4>分類</h4></td>
-					<td width="12%" align="center"><h4>單價</h4></td>
-					<td width="12%" align="center"><h4>數量</h4></td>
-					<td width="12%" align="center"><h4>訂單金額</h4></td>
+					<td width="52%"><h4>商品名稱</h4></td>
+					<td width="12%"><h4>分類</h4></td>
+					<td width="12%"><h4>單價</h4></td>
+					<td width="12%"><h4>數量</h4></td>
+					<td width="12%"><h4>訂單金額</h4></td>
 				</tr>
 	
 				<% @ordersum = 0 %>
@@ -36,27 +36,15 @@
 				<% @ordersum = @ordersum + itemsum %>
 	
 				<tr>
-					<td align="center"><%= item.itemname %></td>
-					<td align="center"><%= item.itemtype %></td>
-					<td align="center"><%= item.itemprice %></td>
-					<td align="center"><%= item.amount %></td>
-					<td align="center"><%= itemsum %></td>
+					<td><%= item.itemname %></td>
+					<td><%= item.itemtype %></td>
+					<td><%= item.itemprice %></td>
+					<td><%= item.amount %></td>
+					<td><%= itemsum %></td>
 				</tr>
 				<% end %>
 				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center">購物小計</td>
-					<td align="center"><%= @ordersum %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center">運費小計</td>
-					<td align="center"><%= @ordersum > 2000 ? 0 : @order.shippingfee %></td>
-				</tr>
-				<tr>
-					<td colspan="3" align="center">&nbsp;</td>
-					<td align="center" class="total">訂單總計</td>
-					<td align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee) %></td>
+					<th style="padding: 24px 0px; border-bottom: 1px solid; border-top: 1px dashed;" colspan="5" align="left">購物小計: <%= @ordersum %> / 運費小計: <%= @ordersum > 2000 ? 0 : @order.shippingfee %> / 訂單總計: <%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee) %></th>
 				</tr>
 			</table>
 	
@@ -105,8 +93,8 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<% @order.orderlogs.each do |log| %>
 				<tr>
-					<td width="19%" align="center"><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-					<td width="81%"><%= log.description %></td>
+					<td width="30%" align="center"> - <%= log.created_at.strftime("%Y-%m-%d %H:%M") %>：</td>
+					<td width="70%"><%= log.description %></td>
 				</tr>
 				<% end %>
 			</table>
@@ -128,20 +116,15 @@
 	
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<th>請輸入匯款帳號後五碼</th>
+					<th align="left">請輸入匯款帳號後五碼</th>
 					<td>
-						<%= f.text_field :payaccount %>
+						<%= f.text_field :payaccount, :class => 'text' %>
 					</td>
 				</tr>
 				<tr>
-					<th>匯款日期</th>
+					<th align="left">匯款時間</th>
 					<td>
-						<%= f.text_field :paydate, :value => Date.today.strftime("%Y-%m-%d") %>
-					</td>
-				</tr>
-				<tr>
-					<th>匯款日期</th>
-					<td>
+						<%= f.text_field :paydate, :value => Date.today.strftime("%Y-%m-%d"), :class => 'text', :style => 'width: 100px;' %>
 						<%= f.select(:paytime, options_for_select([["上午0-1時"],["上午1-2時"],["上午2-3時"],["上午3-4時"],["上午4-5時"],["上午5-6時"],["上午6-7時"],["上午7-8時"],["上午8-9時"],["上午9-10時"],["上午10-11時"],["上午11-12時"],["下午12-13時"],["下午13-14時"],["下午14-15時"],["下午15-16時"],["下午16-17時"],["下午17-18時"],["下午18-19時"],["下午19-20時"],["下午20-21時"],["下午21-22時"],["下午22-23時"],["下午23-24時"]]) ) %>
 					</td>
 				</tr>
