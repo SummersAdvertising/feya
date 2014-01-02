@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
 				@orderItem = @order.orderitems.new
 				@orderItem.stock_id = orderItem[:id]
 				@orderItem.amount = orderItem[:amount]
-				@orderItem.itemprice = orderItem[:saleprice] ? orderItem[:saleprice] : orderItem[:price]
+				@orderItem.itemprice = !orderItem[:saleprice].nil? && orderItem[:saleprice] > 0 ? orderItem[:saleprice] : orderItem[:price]
 				@orderItem.itemname = orderItem[:name]
 				@orderItem.itemtype = orderItem[:typename]
 
