@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  after_filter :clear_flash, :only => [ :show, :index ]
+
+  def clear_flash
+  	flash.delete( :notice )
+  	flash.delete( :warning )
+  end
 
   def is_admin
   	unless(session[:admin])
