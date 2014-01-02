@@ -8,8 +8,7 @@
     <div id="detail">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <th width="24%" align="center">明細</th>
-          <th width="8%" align="center">規格</th>
+          <th width="32%" align="center">明細</th>
           <th width="22%" align="center">數量</th>
           <th width="10%" align="center">單價</th>
           <th width="10%" align="center">折扣價</th>
@@ -27,15 +26,14 @@
           <%# @itemSum = item[:price].to_i * item[:amount].to_i %>
 				  <% @orderPrice = @orderPrice + @itemSum %>
 				  <tr>
-				    <td align="center"><%= item[:name] %></td>
-				    <td align="center"><%= item[:typename] %></td>
+				    <td align="center"><%= item[:name] + ( !item[:typename].nil? && item[:typename] != '未指定' ? ' - '+ item[:typename] : '' ) %></td>
 				    <td align="center" class="count">
 				    	<%= link_to "-", minus_cart_orders_path(item[:id]), :method => :post, :class => "minor" %>
 				    	<input disabled type="text" value="<%= item[:amount] %>">
 				    	<%= link_to "+", plus_cart_orders_path(item[:id]), :method => :post, :class => "plus" %>
 				    </td>
 				    <td align="center"><%= item[:price] %></td>
-				    <td align="center"><%= item[:saleprice] || item[:price] %></td>
+				    <td align="center"><%= !item[:saleprice].nil? && item[:saleprice] > 0 ? item[:saleprice].to_i : item[:price].to_i %></td>
 				    <td align="center"><%= @itemSum %></td>
 				    <td align="center">有</td>
 				    <td align="center" class="delete"><%= link_to image_tag('/images/sc-03.gif'), delete_cart_orders_path(item[:id]), :method => :delete, :data => {:confirm => "確定刪除？"} %></td>

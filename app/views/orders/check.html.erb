@@ -38,7 +38,7 @@
 		    <td align="center"><%= item[:typename] %></td>
 		    <td align="center" class="count"><%= item[:amount] %></td>
 		    <td align="center"><%= item[:price] %></td>
-		    <td align="center"><%= item[:saleprice] || item[:price] %></td>
+		    <td align="center"><%= !item[:saleprice].nil? && item[:saleprice] > 0 ? item[:saleprice].to_i : item[:price].to_i %></td>
 		    <td align="center"><%= @itemSum %></td>
 		    <td align="center">有</td>
 		  </tr>

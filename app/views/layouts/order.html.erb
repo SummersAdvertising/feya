@@ -26,6 +26,7 @@
 <body>
 <header _height='none'>
   <div id="top">   
+  <a href="<%= root_path %>" style="display: block;position: absolute;width: 160px;height: 100px; text-decoration: none;">&nbsp;</a>
   	<% if current_member -%>
   		<%= current_member.username -%> 您好 │<a href="<%= service_root_path -%>">帳戶</a> | <%= link_to "登出 ", destroy_member_session_path, :method => :delete -%> │
 	 <% else -%>  	
