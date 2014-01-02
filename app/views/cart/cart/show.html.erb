@@ -26,7 +26,7 @@
           <%# @itemSum = item[:price].to_i * item[:amount].to_i %>
 				  <% @orderPrice = @orderPrice + @itemSum %>
 				  <tr>
-				    <td align="center"><%= item[:name] + ( !item[:typename].nil? && item[:typename] != '未指定' ? ' - '+ item[:typename] : '' ) %></td>
+				    <td align="center"><%= item[:name] + ( !item[:typename].nil? && item[:typename] != '未指定' ? ' （ '+ item[:typename] + '）' : '' ) %></td>
 				    <td align="center" class="count">
 				    	<%= link_to "-", minus_cart_orders_path(item[:id]), :method => :post, :class => "minor" %>
 				    	<input disabled type="text" value="<%= item[:amount] %>">
