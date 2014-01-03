@@ -30,5 +30,9 @@ background-repeat:no-repeat;background-position:0 0;}
 #witness .page a:hover{color:#999}
 #witness .page .active{background:#FFE86B;padding:0 2px;text-decoration:underline}
 
+#witness .chance { margin-top: 24px; }
+
 #witness .chance > img{margin:30px 0}
 #witness .chance p{color:#4B4746}
+
+.testimony-content img { max-width: 450px; }

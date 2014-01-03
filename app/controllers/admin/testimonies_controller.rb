@@ -16,7 +16,7 @@ class Admin::TestimoniesController < AdminController
   def create
     @testimony = Testimony.new
     @testimony.article = Article.new
-    @testimony.title = '未命名'
+    @testimony.title = '未命名學員'
 
     respond_to do |format|
       if @testimony.save

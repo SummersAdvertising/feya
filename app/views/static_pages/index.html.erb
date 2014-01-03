@@ -27,7 +27,7 @@
     <td width="21%" valign="bottom"><img src="images/df-06.jpg" width="168" height="69"></td>
     <td width="79%"><ul>
     <% @entries.each do | entry | %>    	
-    	<li><span><%= entry.created_at.strftime('%Y-%m-%d') %></span><a href="<%= entry_path( entry ) %>"><%= entry.article.get_meta %> ... more</a></li>
+    	<li><span><%= entry.created_at.strftime('%Y-%m-%d') %></span><a href="<%= entry_path( entry ) %>"><%= entry.title %> ... more</a></li>
     <% end %>
 </ul></td>
   </tr>

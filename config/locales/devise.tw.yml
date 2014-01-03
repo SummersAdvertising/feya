@@ -44,13 +44,25 @@ zh-tw:
   errors:
     messages:
       not_saved: '您的資料尚未儲存，請參考下列錯誤：'
-
   activerecord:
     errors:
       models:
+        addressbook:
+          attributes:
+            address:
+            taken: '此地址已被使用'
+        order:
+          attributes:
+            receiveraddress: 
+              blank: '收件地址必填'
+            receivername:  
+              blank: '收件者姓名必填'
+            receivertel:  
+              blank: '收件人電話必填'
         member:
           attributes:
             password:
               blank: '必填'
             email:
               blank: '不得空白'  
+              taken: '這個信箱已經被註冊囉！'

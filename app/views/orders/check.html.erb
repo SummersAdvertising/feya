@@ -1,14 +1,3 @@
-<% if @orderItems && @orderItems.length>0 %>
-
-<% if @order.errors.any? %>
-<div id="error_explanation">
-  <ul>
-    <% @order.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
 
 <article _height='auto'>
   <div id="step"><img src="/images/sc-04.jpg"></div>

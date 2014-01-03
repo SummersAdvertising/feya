@@ -9,11 +9,11 @@
 <meta http-equiv="content-language" content="zh-TW" />
 <title>霏亞國際美容機構</title>
 <link rel="stylesheet" href="/css/reset.css">
+<%= stylesheet_link_tag    "application", :media => "all" %>
 
 <link rel="stylesheet" href="/css/style-m.css">
 <link rel="stylesheet" href="/css/enter.css">
 
-<%= stylesheet_link_tag    "application", :media => "all" %>
 
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
@@ -27,7 +27,7 @@
   <div id="top">
   	<a href="<%= root_path %>" style="display: block;position: absolute;width: 160px;height: 100px; text-decoration: none;">&nbsp;</a> <img src="/images/mb-02.png"> <a id="back" href="<%= root_url %>">回首頁 &gt;</a></div>
 </header>
-<article _height='auto'>
+<article id="loginArticle" _height='auto'>
 <%= yield %>
 </article>
 

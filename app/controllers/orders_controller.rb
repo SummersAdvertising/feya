@@ -134,7 +134,7 @@ class OrdersController < ApplicationController
 			end
 
 		else
-
+			flash[ :warning ] = @order.errors.messages.values.flatten.join('<br />')
 			respond_to do |format|
 				format.html { render action: "check"}
 				format.json { render json: @order }

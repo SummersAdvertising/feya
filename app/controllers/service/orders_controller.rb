@@ -56,7 +56,7 @@ class Service::OrdersController < ApplicationController
 				Ordermailer.delay.refund(current_member.email, @orderrefund)
 				format.html { redirect_to service_order_path(@order), notice: '您的問題已送出，請等待客服人員與您聯繫。' }
 			else
-				@orders = current_member.orders.orders.order("created_at DESC").page(params[:page])
+				@orders = current_member.orders.order("created_at DESC").page(params[:page])
 				format.html { redirect_to service_order_path(@order), alert: '請輸入問題描述' }
 				format.json { render json: @order.errors, status: :unprocessable_entity }
 			end
