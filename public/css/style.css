@@ -62,3 +62,4 @@ footer a:hover{color:#F5D856}
 footer p span{color:#a6937c}
 footer .container{width:940px;margin:0 auto;background:url(../images/footer.jpg) 0 25px no-repeat;text-align:right;padding:50px 0 0 0}
 
+#articleContent img{ max-width: 800px; }
