@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
 
 private
 	def get_grouped_entries
-		@entries = Entry.all
+		@entries = Entry.order( :created_at => :desc )
 		@entries_grouped = Entry.all.group_by { | e | e.created_at.beginning_of_month }		
 	end
 
