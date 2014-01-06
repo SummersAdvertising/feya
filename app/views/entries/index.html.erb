@@ -10,7 +10,7 @@
     	<% entries.each do | entry | %>
 		  <tr>
 		    <td width="12%" class="date"><%= entry.created_at.strftime('%Y.%m.%d') %></td>
-		    <td width="88%"><a href="<%= entry_path( entry ) %>"><%= entry.article.get_meta %>...</a></td>
+		    <td width="88%"><a href="<%= entry_path( entry ) %>"><%= entry.title %></a></td>
 		  </tr>
 		  <% end %>
    </table>
