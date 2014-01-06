@@ -35,7 +35,7 @@
 				    <td align="center"><%= item[:price] %></td>
 				    <td align="center"><%= !item[:saleprice].nil? && item[:saleprice] > 0 ? item[:saleprice].to_i : item[:price].to_i %></td>
 				    <td align="center"><%= @itemSum %></td>
-				    <td align="center">有</td>
+				    <td align="center"><%= item[:delete_flat] ? "已取消" : "有" %></td>
 				    <td align="center" class="delete"><%= link_to image_tag('/images/sc-03.gif'), delete_cart_orders_path(item[:id]), :method => :delete, :data => {:confirm => "確定刪除？"} %></td>
 				  </tr>
 			  <% end %>

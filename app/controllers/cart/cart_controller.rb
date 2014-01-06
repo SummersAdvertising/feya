@@ -6,7 +6,7 @@ class Cart::CartController < ApplicationController
 	def show
 		if(cookies[:cart] && cookies[:cart].length > 0)
 			@checkItems = JSON.parse(cookies[:cart])
-
+		
 			@checkResult = checkItem(@checkItems)
 
 			@orderItems = @checkResult[0]
@@ -101,8 +101,9 @@ class Cart::CartController < ApplicationController
 	def checkItem(checkItems)
 		@orderItems = Array.new
 		@traceItems = Array.new
+		
+		@items = Stock.where(:id => checkItems.keys ).select("stocks.*, products.name, products.price, products.saleprice, products.cover, products.delete_flag").joins('LEFT OUTER JOIN products on products.id = stocks.product_id')
 
-		@items = Stock.where(:id => checkItems.keys ).select("stocks.*, products.name, products.price, products.saleprice, products.cover").joins('LEFT OUTER JOIN products on products.id = stocks.product_id')
 		@items.each do |stockItem|
 			if(stockItem.amount)
 				if(stockItem.amount > checkItems[stockItem.id.to_s].to_i)

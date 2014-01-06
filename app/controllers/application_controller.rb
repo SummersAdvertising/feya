@@ -32,6 +32,14 @@ class ApplicationController < ActionController::Base
   
     if(cookies[:cart])
       @cartitems = JSON.parse(cookies[:cart]) 
+      
+      @cartitems.each do | key, num |      
+      	 stock = Stock.find(key)
+	     @cartitems.delete(key) if stock.product.delete_flag
+      end
+      
+      cookies[:cart] = @cartitems.to_json
+      
       @cartitems_count = @cartitems.inject(0) { | s, i | s += i[1] }
     else
       @cartitems_count = 0

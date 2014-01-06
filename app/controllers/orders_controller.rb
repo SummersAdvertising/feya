@@ -149,7 +149,7 @@ class OrdersController < ApplicationController
 	def checkItem(checkItems)
 		@orderItems = Array.new
 		@traceItems = Array.new
-
+		
 		@items = Stock.where(:id => checkItems.keys ).select("stocks.*, products.name, products.price, products.saleprice, products.cover").joins('LEFT OUTER JOIN products on products.id = stocks.product_id')
 		@items.each do |stockItem|
 			if(stockItem.amount)
