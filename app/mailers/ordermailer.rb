@@ -1,10 +1,10 @@
 #encoding: utf-8
 class Ordermailer < ActionMailer::Base
-  default from: "adword@summers.com.tw"
+  default from: "\"霏亞國際美容教育機構\" <service@feya-spa.com.tw>"
   def newOrder(receiver, order)
   	@order = order
 
-  	mail(:to => [ receiver, Admin.first.email ], :subject => "訂單成立通知")  	
+  	mail(:to => [ receiver ], :subject => "訂單成立通知")  	
   end
 
   def runoutofproduct(traceitems)

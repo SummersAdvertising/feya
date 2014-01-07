@@ -44,12 +44,12 @@
         <tr>
           <td colspan="3" align="center">&nbsp;</td>
           <td align="center">運費小計</td>
-          <td align="center"><%= @order.shippingfee %></td>
+          <td align="center"><%= @ordersum > 2000 ? ('<del>' + @order.shippingfee.to_s + '</del>').html_safe : @order.shippingfee %></td>
         </tr>
         <tr>
           <td colspan="3" align="center">&nbsp;</td>
           <td align="center" class="total">訂單總計</td>
-          <td align="center" class="total"><%= @ordersum + @order.shippingfee %></td>
+          <td align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee).to_i %></td>
         </tr>
       </table>
     </div>

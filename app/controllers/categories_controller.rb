@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
 		@category = Category.find( params[ :id ] )
 			
 	    @order = Order.new
-	    @products = @category.products.where("status = '上架' AND delete_flag IS NULL").page( params[ :page ] ).per( 9 )
+	    @products = @category.products.where("status = '上架' AND delete_flag IS NULL").order( :created_at => :desc ).page( params[ :page ] ).per( 9 )
 	
 	    respond_to do |format|
 	      format.html # index.html.erb
