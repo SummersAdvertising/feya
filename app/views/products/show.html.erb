@@ -72,10 +72,11 @@ $(function(){
             <% end %>
         <% end %>
         
-            <%= link_to '', "#", :id => "submit", :data => { :stockid => @stock_first && @stock_first.id, :stockname => @product.name, :stockceiling => @stock_first && @stock_first.amount } %></td>
             
         <% if !@product.hasStock %>
         <div class="size"> 本商品目前無庫存。   </div>        
+        <% else %>
+         <%= link_to '', "#", :id => "submit", :data => { :stockid => @stock_first && @stock_first.id, :stockname => @product.name, :stockceiling => @stock_first && @stock_first.amount } %></td>
         <% end %>
         </tr>
         
