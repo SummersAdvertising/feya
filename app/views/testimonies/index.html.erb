@@ -37,9 +37,8 @@ $(function(){
         <article class="text">
           <table class="testimony-content" width="95%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="22%" valign="top"><img src="<%= t.cover %>" width="106" height="95"></td>
+              <td width="22%" valign="top"><img src="<%= (t.cover.length>0 ?t.cover : '/images/anonymous.jpg') %>" width="106" height="95"></td>
               <td width="78%" valign="top">
-              	
               
               		<% 
               		
