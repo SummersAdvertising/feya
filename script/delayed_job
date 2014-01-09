@@ -3,3 +3,9 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
 require 'delayed/command'
 Delayed::Command.new(ARGV).daemonize
+
+set :rails_env, "production" #added for delayed job  
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
