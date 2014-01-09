@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
 		@entries = Entry.limit(3).order( "created_at desc" )
 		
 		
-		@products = Product.where( "status = '上架' AND delete_flag IS NULL" ).limit(4)
+		@products = Product.where( "status = '上架' AND delete_flag IS NULL" ).order( "created_at desc" ).limit(4)
 		
 	end
 	

@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     @cartitem = Orderitem.new
     
     if(@product)
-      @stock_first = @product.stocks.where( "typename = 'default' OR amount > 0" ).first
+      @stock_first = @product.stocks.where( "typename = 'default' OR amount > 0" ).order( "created_at desc" ).first
       @product["hasType"] = (@stock_first && @stock_first.typename != "default")
       @product["hasStock"] = hasStocks?(@product)
     end
