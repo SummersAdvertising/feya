@@ -18,3 +18,4 @@
 /config/deploy
 
 /public/uploads
+/public/assets/*
