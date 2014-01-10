@@ -10,8 +10,8 @@
   <div class="list">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <% @products.each do | product | %>      	
-	      <tr class="<%= product.status != 'disable' ? '' : 'hidden' %>">
-	        <td><% image_tag('images/hidden.png', :width => 16, :height => 16) if product.status != 'enable' %></td>
+	      <tr class="<%= product.status != '下架' ? '' : 'hidden' %>">
+	        <td><%= '<img src="/images/hidden.png" width="16" height="16" />'.html_safe if product.status != '上架' %></td>
 	        <td><a href="<%= edit_admin_category_product_path( @category, product ) %>"><%= product.name || '尚未設定名稱' %></a></td>
 	        <td align="center"><%= product.created_at.strftime( '%Y-%m-%d' ) %></td>
 	        <td>
