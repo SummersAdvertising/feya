@@ -159,12 +159,13 @@ var editor = {
 		$(".editorChild.active").find("*").each(function(){
 			switch(this.tagName){
 				case "SELECT":
-				$(this).val("1");
+					$(this).val("1");
 				break;
-				case "OPTION":
+					case "OPTION":
 				break;
 				default:
-				$(this).val("");
+					if $(this).is(':not(:hidden)')
+						$(this).val("");
 				break;
 			}
 		});

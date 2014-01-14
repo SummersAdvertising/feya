@@ -26,8 +26,8 @@ editor.img = {
 		
 		var input = $("<input>");
 		input.attr("id", editor.img.fileinputID).attr("name", editor.img.fileinputName).attr("type", "file");
-
-		form.append(input).append($("<br>")).append($("input[name='authenticity_token']").clone());
+		
+		form.append(input).append($("<br>")).append($("input[name='authenticity_token']").eq(0).clone().change(function() { console.log('我被改變了'); }));
 
 		if(editor.settings.linkedimg){
 			var link = $("<input>");

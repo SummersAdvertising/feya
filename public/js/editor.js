@@ -168,7 +168,9 @@ var editor = {
 				case "OPTION":
 				break;
 				default:
-				$(this).val("");
+					if($(this).is(':not(:hidden)') ) {
+						$(this).val("");
+					}
 				break;
 			}
 		});
