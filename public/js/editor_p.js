@@ -124,7 +124,7 @@ editor.p = {
 		  $(p).append(a);
 		}
 		else{
-		  $(p).html(paragraph.content);
+		  $(p).html(paragraph.content.replace(/ (.+?)\((https?:\/\/[a-zA-Z0-9\.\_\-\?\&\=\;\#\/]+)\)/g, ' <a href="$2">$1</a> ') );
 		}
 
 		$(paragraphBox).append(p);
@@ -272,3 +272,12 @@ editor.p = {
 function capitalize(str){
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+function trans_links() {
+	$('p:contains(https)').html( $('p:contains(http)').html().replace(/ (\w+)\((https?:\/\/[a-zA-Z0-9\.\_\-\?\&\=\;\#\/]+)\)/g, '<a href="$2">$1</a>') );
+}
+
+$(document).ready( function() {
+//	trans_links();
+} );
+
