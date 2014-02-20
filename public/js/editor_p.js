@@ -124,7 +124,7 @@ editor.p = {
 		  $(p).append(a);
 		}
 		else{
-		  $(p).html(paragraph.content.replace(/ ([^ \(\)]+?)\((https?:\/\/[a-zA-Z0-9\.\_\-\?\&\=\;\#\/]+)\)/g, ' <a href="$2">$1</a> ') );
+		  $(p).html(paragraph.content.replace(/ ([^ \(\)]+?)\((https?:\/\/[a-zA-Z0-9\.\_\-\?\&\=\;\#\/]+)\)/g, ' <a target="_blank" href="$2">$1</a> ') );
 		}
 
 		$(paragraphBox).append(p);
