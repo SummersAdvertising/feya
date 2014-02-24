@@ -8,7 +8,7 @@
 	  	<section>
 		    <img src="<%= course.cover.list %>">
 		    <h4><%= course.name %></h4>
-		    <p><%= course.description.gsub(/\n/, '<br >') unless course.description.nil? %></p>
+		    <p><%= course.description.gsub(/\n/, '<br >').html_safe unless course.description.nil? %></p>
 		    <a class="more" href="<%= instruction_course_path( @instruction, course ) %>"></a>
 	    </section>
     <% end %>
