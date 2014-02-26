@@ -10,6 +10,9 @@ class TicketsController < ApplicationController
 		respond_to do | format |	
 			if @ticket.save
 				flash[ :dialog ] = '謝謝您的詢問，我們將儘快回覆您！'
+				
+				TicketMailer.send_notice( @ticket ).deliver
+				
 				format.html { redirect_to new_ticket_path }
 			else
 				flash[ :warning ] = @ticket.errors.messages.values.flatten.join('<br>')
