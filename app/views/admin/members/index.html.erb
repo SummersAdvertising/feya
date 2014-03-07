@@ -11,6 +11,7 @@
         <td align="center"><%= member.email %></td>
         <td align="center"><%= member.tel %></td>
         <td align="center"><%= member.address %></td>
+        <td align="center"><%= link_to image_tag('/images/delete.png'), admin_member_path( member ), :method => :delete, :confirm => "確定刪除此使用者？" %></td>
       </tr>
       <% end %>
       </table>

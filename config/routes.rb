@@ -64,7 +64,7 @@ Feya::Application.routes.draw do
     get "login", "logout"
     match "checkAdmin", :via => :post
 
-    resources :members, :only => [:index]
+    resources :members, :only => [:index, :destroy]
     
     resources :tickets, :only => [ :index, :show, :destroy ]
     

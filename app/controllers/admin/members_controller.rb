@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Admin::MembersController < AdminController
   layout "admin"
   
@@ -9,4 +10,16 @@ class Admin::MembersController < AdminController
       format.json { render json: @members }
     end
   end
+  
+  def destroy
+  	@member = Member.find( params[ :id ] )
+  	
+  	@member.destroy
+  	
+  	respond_to do | format |
+  		format.html { redirect_to admin_members_path, notice: '成功刪除使用者。' }
+  	end
+  	
+  end
+  
 end
