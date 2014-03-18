@@ -6,10 +6,25 @@
   <div class="list">
     <% @courses.each do | course | %>    	
 	  	<section>
-		    <img src="<%= course.cover.list %>">
-		    <h4><%= course.name %></h4>
-		    <p><%= course.description.gsub(/\n/, '<br >').html_safe unless course.description.nil? %></p>
-		    <a class="more" href="<%= instruction_course_path( @instruction, course ) %>"></a>
+	  	
+	      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	        <tr>
+	          <td><img src="<%= course.cover.list %>"></td>
+	        </tr>
+	        <tr>
+	          <td><h4><%= course.name %></h4></td>
+	        </tr>
+	        <tr>
+	          <td><p><%= course.description.gsub(/\n/, '<br >').html_safe unless course.description.nil? %></p></td>
+	        </tr>
+	        <tr>
+	          <td align="right" class="price"><del>專業價 $ <%= course.price %></del><br>
+	            限時優惠 <b>$ <%= course.sell %></b></td>
+	        </tr>
+	        <tr>
+	          <td align="right"><a class="more" href="<%= instruction_course_path( @instruction, course ) %>">&nbsp;</a></td>
+	        </tr>
+	      </table>
 	    </section>
     <% end %>
   </div>

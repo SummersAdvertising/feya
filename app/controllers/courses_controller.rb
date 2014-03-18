@@ -5,6 +5,8 @@ class CoursesController < ApplicationController
 	def show
 		@course = Course.find( params[ :id ] )
 		
+		@inquirement = @course.inquirements.build
+		
 		@courses = @instruction.courses.where( "status = 'enable' AND id <> #{params[:id]}").sample(3)
 		
 	end

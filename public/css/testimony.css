@@ -1,38 +1,28 @@
-#banner{background:url(../images/wn-banner.jpg) center 0 no-repeat}
+#banner{background:url(/images/wn-banner.jpg) center 0 no-repeat}
 
-#witness{overflow:hidden}
-#witness .intro{clear:both;background:url(../images/wn-01.jpg) 0 0 no-repeat;height:361px;padding:130px 0 0 260px;margin:0 0 50px 0}
-#witness .intro p{width:340px;color:#362e2b;line-height:1.9em}
-#witness .intro b{background:#FFEC4C}
+#intro{background:url(/images/wn-01.jpg) 0 0 no-repeat;width:100%;height:361px;padding:155px 0 0 400px}
+#intro p{width:460px;line-height:2em}
+#intro b{background:#FFEC4C;padding:2px 5px}
 
-#witness > .right{width:220px}
-#witness .right .cate{display:block;width:140px;height:133px;
-background-repeat:no-repeat;background-position:0 0;}
-#cate-1{background-image:url(../images/wn-08.gif)}
-#cate-2{background-image:url(../images/wn-09.gif)}
-#cate-3{background-image:url(../images/wn-10.gif)}
-#cate-1:hover{background-image:url(../images/wn-08h.gif)}
-#cate-2:hover{background-image:url(../images/wn-09h.gif)}
-#cate-3:hover{background-image:url(../images/wn-10h.gif)}
+h3{margin:45px 0 0px 0}
 
-#witness .right table{width:140px;text-align:center;margin:0 auto 50px auto}
-#witness .right td{padding:10px 0;border-bottom:1px solid #B9AA98}
+#main{overflow:hidden}
+.left{width:190px;padding:22px 0 0 0}
+.left li{text-align:center;padding:15px 0;border-top:1px solid #E4DDD6}
+.left li:first-child{border:none}
+.left a:hover{background:url(/images/wn-13.gif)}
+.left a{color:#59493f;font:300 17px 微軟正黑體,Microsoft JhengHei;padding:2px 10px}
 
-#witness > .left{width:620px}
-#witness .single{background:url(../images/wn-04.gif) center bottom no-repeat;padding:30px 0;color:#4C4643;font-size:14px}
-#witness h4{color:#362e2b;font:300 24px 微軟正黑體,Microsoft JhengHei;background:url(../images/wn-11.gif) right center no-repeat;padding:0 0 0 10px;cursor:pointer}
-#witness h4 span{font-size:14px;color:#4C4643}
-#witness .single article{padding:30px 0 0 0}
-#witness .single img{margin:10px 0}
+.right{width:700px}
+.right td{color:#362e2b;font-size:22px}
+.right section{padding:35px 15px}
+.right .yellow{background:#FEFCEC}
+.right p{margin:25px 0;font-size:14px;color:#362e2b}
+.right p img{max-width:100%;height:auto}
 
-#witness .page{text-align:center;padding:50px 0}
-#witness .page a{display:inline-block;color:#362e2b;margin:0 5px}
-#witness .page a:hover{color:#999}
-#witness .page .active{background:#FFE86B;padding:0 2px;text-decoration:underline}
+.page{text-align:right}
+.page a:hover{text-decoration:underline}
+.page a{display:inline-block;margin:0 3px;padding:0 3px}
+.page .active{background:#FFE86B}
 
-#witness .chance { margin-top: 24px; }
-
-#witness .chance > img{margin:30px 0}
-#witness .chance p{color:#4B4746}
-
-.testimony-content img { max-width: 450px; }
+#job p{text-align:center;padding:30px 0}

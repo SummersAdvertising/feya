@@ -1,7 +1,7 @@
 #encoding: utf-8
 class StaticPagesController < ApplicationController
 
-	before_filter :clear_flash
+	before_filter :clear_flash, :only => [ :show ]
 
 	def index
 		@entries = Entry.limit(3).order( "created_at desc" )
@@ -15,7 +15,7 @@ class StaticPagesController < ApplicationController
 		pagename = params[ :pagename ]
 		
 		respond_to do | format | 
-			format.html { render :template => 'static_pages/' + pagename }
+			format.html { render :template => 'static_pages/' + pagename, layout: pagename == 'privacy' ? false : true }
 		end
 		
 	end

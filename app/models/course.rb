@@ -1,11 +1,13 @@
 # encoding: utf-8
 class Course < ActiveRecord::Base
-  attr_accessible :article_id, :description, :instruction_id, :name, :sort, :status, :cover
+  attr_accessible :article_id, :description, :instruction_id, :name, :sort, :status, :cover, :price, :sell, :quota
 
   mount_uploader :cover, CourseUploader
   
   belongs_to :article, :dependent => :destroy
   belongs_to :instruction
+  
+  has_many :inquirements
   
   before_save :defaults
   

@@ -1,0 +1,33 @@
+<section id="content">
+    <header>
+      <h2>顧客詢問</h2>
+    </header>
+    <article>
+      <div class="ask">
+	    <% @inquirements.each do |inquirement| %>
+        <div class="box">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="13%"><%= inquirement.created_at.strftime('%Y-%m-%d') %></td>
+              <td colspan="2"><%= inquirement.course.instruction.name %>/<%= inquirement.course.name %></td>
+              <td width="3%" align="right"><a href="<%= admin_inquirement_path( inquirement ) %>" data-method="delete" data-confirm="確定刪除此篇詢問？"><img src="/images/trash.png"></a></td>
+            </tr>
+            <tr>
+              <td align="left"><%= inquirement.name %></td>
+              <td width="13%"><%= inquirement.phone %></td>
+              <td width="71%" align="left"><%= link_to inquirement.email, "mailto: #{inquirement.email}", :target => :_blank %></td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="4"><p><%= inquirement.description.gsub(/\n/, '<br />').html_safe unless inquirement.description.nil? %></p></td>
+            </tr>
+          </table>
+        </div>
+  		<% end %>
+      </div>
+      <!--ask-->
+      
+	  <div class="page">  <%= paginate @inquirements %> </div>
+</article>
+</section>
+

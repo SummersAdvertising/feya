@@ -27,12 +27,20 @@
         <div class="box">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="8%" valign="top"><%= f.label :cover, '封面：' %></td>
-              <td width="92%" valign="top"><%= f.file_field :cover %></td>
+              <td width="8%" valign="top"><%= f.label :price, '原價：' %></td>
+              <td width="40%" valign="top"><%= f.text_field :price, :class => :text %></td>
+              <td width="10%" valign="top" align="center"><%= f.label :sell, '優惠價：' %></td>
+              <td width="42%" valign="top"><%= f.text_field :sell, :class => :text %></td>
+            </tr>
+            <tr>
+              <td width="8%" valign="top"><%= f.label :quota, '剩餘名額：' %></td>
+              <td width="40%" valign="top"><%= f.text_field :quota, :class => :text %></td>
+              <td width="10%" valign="top" align="center"><%= f.label :cover, '封面：' %></td>
+              <td width="42%" valign="top"><%= f.file_field :cover %></td>
             </tr>
             <tr>
               <td valign="top"><%= f.label :description, '簡介：' %></td>
-              <td valign="top"><%= f.text_area :description %></td>
+              <td colspan="3" valign="top"><%= f.text_area :description %></td>
             </tr>
           </table>
         </div>

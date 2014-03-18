@@ -98,6 +98,22 @@
         </tr>
       </table>
       
+      <table style="margin: 12px auto; border-top: 1px dashed #00b1ae; border-bottom: 1px dashed #00b1ae;" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="25%" align="left">剩餘的紅利點數：</th>
+          <td width="50%">
+          	<%= current_member.discountpoint %> (當您的消費點數滿千元，即可使用五十點，一點可折抵一元。)
+          	</td>
+          <td width="25%">&nbsp;</td>
+        </tr>
+          <th align="left">本次使用紅利點數：</th>
+          <td>
+          	<input id="discount-use" name="discount" type="number" class="text" value="0"> <br />
+          	<a href="javascript: $('#discount-use').val('<%= ( @orderPrice / 1000 ) * 50 < current_member.discountpoint ?  ( @orderPrice / 1000 ) * 50 : current_member.discountpoint  %>');">點此使用可能的最大值</a>
+          	</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
       
       
       <table width="100%" border="0" cellspacing="0" cellpadding="0">

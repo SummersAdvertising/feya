@@ -7,7 +7,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <% @members.each do |member| %>
       <tr>
-        <td align="center"><%= member.username %></td>
+        <td align="center"><%= member.username %> (<%= member.discountpoint %>)</td>
         <td align="center"><%= member.email %></td>
         <td align="center"><%= member.tel %></td>
         <td align="center"><%= member.address %></td>

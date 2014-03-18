@@ -1,21 +1,24 @@
 #banner{background:url(../images/cs-banner.jpg) center 0 no-repeat}
 
-#course .tab{height:60px;background:url(../images/cs-01.gif) 0 bottom no-repeat}
+#course .tab{height:70px;background:url(../images/cs-01.gif) 0 bottom no-repeat}
 #course .tab li{float:left;padding:0 10px}
-#course .tab li a{font-size:19px;color:#000;display:block}
+#course .tab li a{font-size:25px;color:#000;display:block}
 #course .tab li span{color:#D1C0A5;position:relative;top:3px}
 #course .tab .active a{background:#FFEC4C;padding:0px 5px;box-shadow:-4px 4px 0 #C490BF}
 
 #course .intro{background:url(../images/cs-02.gif) center 0 no-repeat;height:95px;margin:25px 0;overflow:hidden;padding:0 60px;overflow:hidden}
 #course .intro h3{font:900 italic 35px 微軟正黑體,Microsoft JhengHei;color:#00b1ae;float:left;width:30%}
 #course .intro p{float:right;width:70%}
-.list{clear:both}
 
-#course .list{background:url(../images/cs-06.png) center 40px repeat-y #E4DDD6;overflow:hidden;}
+#course .list{background:url(../images/cs-06.png) center 40px repeat-y #E4DDD6;overflow:hidden;clear:both}
 #course .list section{background:url(../images/cs-03.gif);width:345px;height:455px;float:left;padding:25px;margin:38px 62px}
-#course .list h4{background:#00B1AE;color:#fff;padding:1px 5px;font:300 18px 微軟正黑體,Microsoft JhengHei;margin:20px 0}
-#course .list p{font-size:14px;line-height:1.5em}
-#course .list a{display:block;background:url(../images/cs-04.png) 0 0 no-repeat;width:137px;height:35px;margin:25px auto 0 auto}
+#course .list h4{background:#00B1AE;color:#fff;padding:1px 5px;font:300 18px 微軟正黑體,Microsoft JhengHei}
+#course .list td{padding:0 0 10px 0}
+#course .list p{height:60px;position:relative;overflow:hidden;font-size:14px}
+#course .list .price{color:#959595;font-size:18px}
+#course .list .price del{font-size:14px}
+#course .list .price b{color:#c490bf}
+#course .list a{display:inline-block;background:url(../images/cs-04.png) 0 0 no-repeat;width:137px;height:35px}
 #course .list a:hover{background:url(../images/cs-04h.png) 0 0 no-repeat}
 
 #course .content{border:1px solid #E4DDD6;padding:50px;margin:0 0 25px 0}
@@ -26,7 +29,29 @@
 
 #course .others{border:1px solid #E4DDD6;padding:10px}
 #course .others article{background:url(../images/cs-03.gif);padding:10px}
-#course .others img{width:297px;height: 191px}
+#course .others img{width:270px;height:120px}
 #course .others div{position:relative}
 #course .others a{position:absolute;bottom:7px;right:0;background:#00B1AE;padding:5px 10px;color:#fff}
 #course .others a:hover{background:#C490BF}
+
+#info{overflow:hidden;background:url(../images/cs-08.gif) center bottom no-repeat;padding:0 0 45px 0}
+#info p{margin:0!important;height:110px;padding:10px 0 0 0;position:relative;overflow:hidden}
+#info .left{width:58%}
+#info .left img{max-width:100%;height:auto}
+#info .right{width:40%}
+#info .right .price{color:#959595;line-height:2.5em;padding:15px 0}
+#info .right del{color:#f2b705;font-weight:900}
+#info .right b{color:#d61518;font:900 25px 微軟正黑體,Microsoft JhengHei!important}
+#info .text{font-size:13px;line-height:1.5em}
+#info td{padding:2.5px 0}
+#info a:hover{filter:alpha(opacity=80);opacity:.8}
+
+#form{background:url(../images/cs-13.jpg) 0 0 repeat-x #E9E9E9;width:700px;margin:0 auto;border:1px solid #D9D9D9;border-radius:10px;padding:40px;box-shadow:0 0 5px #ddd}
+#form .button{background:url(../images/cs-12.gif) 0 0 no-repeat;width:107px;height:29px;border:none;cursor:pointer}
+#form input{width:100%;border:none;padding:5px 10px;font:300 15px 微軟正黑體,Microsoft JhengHei;color:#00B1AE}
+#form b{font-size:10px;color:#d61518}
+#form textarea{width:100%;padding:10px;border:none;font:300 15px 微軟正黑體,Microsoft JhengHei;color:#00B1AE;min-height:250px}
+#form .button:hover{position:relative;top:2px}
+#form th{padding:10px 10px 10px 0}
+
+#cboxClose{background:url(../images/cs-14.png) 0 0 no-repeat;width:25px;height:25px;right:143px;top:8px;position:absolute;border:0;text-indent:-9999px;}

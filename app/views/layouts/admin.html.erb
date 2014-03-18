@@ -44,9 +44,11 @@
       <li><a href="<%= admin_members_path %>"><img src="/images/group.png">會員列表</a></li>
     </ul>
     <ul>
-      <li><a href="<%= admin_instructions_path %>"><img src="/images/book.png">專業課程</a></li>
+      <li class="sub-title"><a href="<%= admin_instructions_path %>"><img src="/images/book.png">專業課程</a>
+        <div class="sub-text"> <a href="<%= admin_instructions_path %>">課程列表</a> <a href="<%= admin_inquirements_path %>">顧客詢問</a> </div>
+      </li>
       <li><a href="<%= admin_tickets_path %>"><img src="/images/shake.png">加盟資訊</a></li>
-      <li><a href="<%= admin_testimonies_path %>"><img src="/images/woman.png">學員見證</a></li>
+      <li><a href="<%= admin_instruction_testimonies_path( Instruction.order('sort ASC, created_at ASC').first ) %>"><img src="/images/woman.png">學員見證</a></li>
       <li><a href="<%= admin_entries_path %>"><img src="/images/news.png">最新消息</a></li>
     </ul>
     <ul>

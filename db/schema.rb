@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131218091649) do
+ActiveRecord::Schema.define(:version => 20140317092659) do
 
   create_table "addressbooks", :force => true do |t|
     t.integer  "member_id"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(:version => 20131218091649) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "cover"
+    t.integer  "price"
+    t.integer  "sell"
+    t.integer  "quota"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -82,6 +85,16 @@ ActiveRecord::Schema.define(:version => 20131218091649) do
     t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "inquirements", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.text     "description"
+    t.integer  "course_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "instructions", :force => true do |t|
@@ -204,8 +217,9 @@ ActiveRecord::Schema.define(:version => 20131218091649) do
     t.integer  "article_id"
     t.string   "cover"
     t.string   "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "instruction_id"
   end
 
   create_table "tickets", :force => true do |t|

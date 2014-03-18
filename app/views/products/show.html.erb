@@ -55,7 +55,7 @@ $(function(){
         <% if @stock_first && @stock_first.amount && @stock_first && @stock_first.amount >0 %>
         	庫存 <%= @stock_first && @stock_first.amount %>
         
-             <% if @product.hasType %>
+            <% if @product.hasType %>
             <div class="size"> 規格
 	             <select id="productType" name="orderitem[stock_id]">
 	              <% @product.stocks.each do |stock| %>
@@ -116,6 +116,15 @@ $(function(){
     alert("<%= alert %>");
   }
   $("#submit").click(function(){
-    $("#new_orderitem").submit();
+	if ( !$('#orderitem_amount').val().match(/^\d+$/) ) {
+		Alertify.log.error('訂購數量請填寫數字');	  
+	} else {
+		$("#new_orderitem").submit();
+	}
+    
   });
+  
+    
+  
+  
   </script>

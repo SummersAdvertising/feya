@@ -1,10 +1,14 @@
 # encoding: utf-8
 class Admin::TestimoniesController < AdminController
+
+  before_filter :get_instructions, :only => [ :index, :show, :new, :edit ]
+
   # GET /admin/testimonies
   # GET /admin/testimonies.json
   def index
-    @testimonies = Testimony.page( params[ :page ] ).per(20)
-
+	@instruction = Instruction.find( params[ :instruction_id ] )
+    @testimonies = @instruction.testimonies.page( params[ :page ] ).per(20)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @testimonies }
@@ -14,6 +18,8 @@ class Admin::TestimoniesController < AdminController
   # GET /admin/testimonies/new
   # GET /admin/testimonies/new.json
   def create
+	@instruction = Instruction.find( params[ :instruction_id ] )
+	
     @testimony = Testimony.new
     @testimony.article = Article.new
     @testimony.title = '未命名學員'
@@ -34,16 +40,19 @@ class Admin::TestimoniesController < AdminController
   # GET /admin/testimonies/1/edit
   def edit
     @testimony = Testimony.find(params[:id])
+	@instruction = @testimony.instruction.nil? ? Instruction.first : @testimony.instruction
+	
   end
 
   # PUT /admin/testimonies/1
   # PUT /admin/testimonies/1.json
   def update
     @testimony = Testimony.find(params[:id])
+	@instruction = Instruction.find( params[ :instruction_id ] )
 
     respond_to do |format|
       if @testimony.update_attributes(params[:testimony]) && ( params[ :article ].nil? ^ @testimony.article.update_attributes( params[ :article ] ) )
-        format.html { redirect_to admin_testimonies_path, notice: 'Testimony was successfully updated.' }
+        format.html { redirect_to admin_instruction_testimonies_path( @testimony.instruction ), notice: 'Testimony was successfully updated.' }
         format.js { head :no_content }
       else
       
@@ -62,8 +71,15 @@ class Admin::TestimoniesController < AdminController
     @testimony.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_testimonies_path }
+      format.html { redirect_to admin_instruction_testimonies_path( @instruction ) }
       format.json { head :no_content }
     end
   end
+  
+
+private
+	def get_instructions
+		@instructions = Instruction.order('sort ASC, created_at ASC').all
+	end
+  
 end

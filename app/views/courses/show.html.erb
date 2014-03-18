@@ -3,26 +3,83 @@
   <script src="/js/editor_p.js"></script>
   <script src="/js/editor_img.js"></script>
   <script src="/js/editor_video.js"></script>
+  
+  
+	<script src="/js/jquery.colorbox-min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$(".call-notes").colorbox({inline:true, width:970});
+	});
+	</script>
 
 <link rel="stylesheet" href="/css/course.css">
+<link rel="stylesheet" href="/css/colorbox.css">
 
 <article id="course">
   <%= render 'instructions/intro' %>
+  
   <div class="content">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="61%" valign="top" id="cover"><%= image_tag @course.cover.inner %></td>
-        <td width="39%" valign="top"><h4><%= @course.name %></h4>
-          <p><%= @course.description.gsub(/\n/, "<br />").html_safe if !@course.description.nil? %></p>
-          <span><img src="/images/cs-07.gif">  </span></td>
-      </tr>
-      <tr>
-        <td colspan="2" valign="top"><br>
-<img src="/images/cs-08.gif" width="829" height="21"></td>
-      </tr>
-    </table>
+    <div id="info">
+      <div class="left"><%= image_tag @course.cover.inner %></div>
+      <div class="right">
+        <h4><%= @course.name %></h4>
+        <p><%= @course.description.gsub(/\n/, "<br />").html_safe if !@course.description.nil? %></p>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td colspan="2" class="price">剩餘名額   <%= @course.quota %><br>
+              專業價 <del>$ <%= @course.price %></del><br>
+              限時優惠 <b>$ <%= @course.sell %> </b></td>
+          </tr>
+          <tr>
+            <td width="45%" valign="middle"><a href="#form" class="call-notes"><img src="/images/cs-10.gif"></a></td>
+            <td width="55%" valign="top" class="text">線上填寫資料，我們將會<br>
+              儘快為您服務</td>
+          </tr>
+          <tr>
+            <td valign="middle"><a href="#"><img src="/images/cs-11.gif"></a></td>
+            <td valign="top" class="text">下載刷卡單，填寫並回傳<br>
+              單據，即有專人為您服務</td>
+          </tr>
+        </table>
+      </div>      
+    </div>
+    <div style='display:none'>
+        <div id="form">
+    <%= form_for [@instruction, @course, @inquirement] do | f | %>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <th width="14%" align="right" valign="top"><b>&gt;</b> 姓 名</th>
+		    <td width="86%"><%= f.text_field :name %></td>
+		  </tr>
+		  <tr>
+		    <th align="right" valign="top"><b>&gt;</b> 電 話</th>
+		    <td><%= f.text_field :phone %></td>
+		  </tr>
+		  <tr>
+		    <th align="right" valign="top"><b>&gt;</b> 郵 件</th>
+		    <td><%= f.text_field :email %></td>
+		  </tr>
+		  <tr>
+		    <th align="right" valign="top"><b>&gt;</b> 內 容</th>
+		    <td><%= f.text_area :description %></td>
+		  </tr>
+		  <tr>
+		    <td colspan="2" align="center">
+		    <br>
+		    <br>
+		    	<%= f.submit '', :class => 'button' %>
+		    </td>
+		    </tr>
+		</table>
+      <% end %>
+		
+      </div>
+        <!--notes--> 
+    </div>
     <article id="articleContent" class="peditor"> </article>
-  </div><!--content-->
+  </div>
+  
+  
   	<h4><img src="/images/cs-09.gif"></h4>
   <div class="others">
 	  <article>

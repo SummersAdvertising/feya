@@ -7,9 +7,9 @@
       <h2>學員見證</h2>
     </header>
     <article>
-      <%= form_for([:admin, @testimony]) do |f| %>
+      <%= form_for [:admin, @instruction, @testimony] do |f| %>
       <div class="title-edit">   
-      <div class="button" id="button-up"> <a href="<%= admin_testimony_path( @testimony ) %>" data-method="delete" data-confirm="確定刪除？" class="right">刪除文章<img src="/images/trash.png"></a></div>
+      <div class="button" id="button-up"> <a href="<%= admin_instruction_testimony_path( @instruction, @testimony ) %>" data-method="delete" data-confirm="確定刪除？" class="right">刪除文章<img src="/images/trash.png"></a></div>
         <h3>文章預覽</h3>     
         <div class="box">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -26,6 +26,15 @@
         <div class="box">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
+              <td width="8%" valign="top"><%= f.label :instruction_id, '所屬課程分類：' %></td>
+              <td width="92%" valign="top">
+              <select name="testimony[instruction_id]">
+	              <% Instruction.order('sort ASC, created_at ASC').each do | instruction | %>
+	              	<option value="<%= instruction.id %>" <%= 'selected="selected"'.html_safe if instruction.id == @testimony.instruction_id %> ><%= instruction.name %></option>
+	              <% end %>
+              </select></td>
+            </tr>
+            <tr>
               <td width="8%" valign="top"><%= f.label :cover, '封面：' %></td>
               <td width="92%" valign="top"><%= f.file_field :cover %></td>
             </tr>
@@ -37,7 +46,7 @@
       <!--edit-article-->           
       <div class="preview preview-edit" id="articleContent"></div>
       <!--preview-->
-      <div class="button" id="button-down"> <a href="<%= admin_testimonies_path %>" class="left"><img src="/images/arrow-left.png">返回列表</a>
+      <div class="button" id="button-down"> <a href="<%= admin_instruction_testimony_path( @instruction ) %>" class="left"><img src="/images/arrow-left.png">返回列表</a>
       <a href="javascript: document.forms[0].submit();" class="right light">儲存發佈<img src="/images/update.png"></a></div>
       <!--button--> 
       

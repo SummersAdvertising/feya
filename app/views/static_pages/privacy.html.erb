@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>霏亞國際美容機構</title>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/style-m.css">
+<link rel="stylesheet" href="/css/privacy.css">
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/auto-full-height.min.js"></script>
+</head>
+
+<body>
+<header _height='none'>
+
+  <div id="top"> 
+	  <% if current_member %>
+	  	<a href="<%= service_root_path %>">帳戶 | </a> 
+	  	<%= link_to "登出 │ ", destroy_member_session_path, :method => :delete %>
+	 <% else %>  	
+	 	<%= link_to "會員登入 │ ", new_member_session_path %>
+  	<% end %>
+  	<a href="/orders/cart">購物車</a><img src="/images/mb-03.png">
+	  <a id="back" href="<%= root_url %>">回首頁 &gt;</a>
+  </div>
+</header>
+<article _height='auto'>
+<h3>網站使用條款</h3>
+<p>
+歡迎您進入霏亞國際管理顧問有限公司的網站，請您在進入網站、使用服務或訂購產品（所有定義，請參照下列條款）之前，先詳細閱讀下列網站使用條款，以協助您瞭解您與 http://www.feya-one.com.tw/（以下稱為本網站）之間的法律權利義務。
+當您進入並使用本網站，即視同您已同意遵守本「使用條款」與其他有關著作權、版權、商標專用權、網路智慧財產權、隱私權等之法律規定。
+若您不同意接受本網站條款，請離開本網站、立即停用網站服務，且勿經由本網站訂購任何產品。當您使用本網站之服務時，您已閱讀並同意以下網站使用條款。
+</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="3%" align="center" valign="top">1.</td>
+    <td width="97%" valign="top">您同意使用本條款之內容表示等，以電子文件作為表示方式。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">2.</td>
+    <td valign="top">您提供給本網站的一切資訊（包括但不限於個人資料與聯絡資訊），均為正確且完整之資訊。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">3.</td>
+    <td valign="top">本網站依照個人資料保護法令相關規定保護您的個人資料，並遵守本網站隱私權保護政策。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">4.</td>
+    <td valign="top">本網站將於知悉您的帳號密碼遭冒用時，立即停止該帳號所衍生交易之處理及後續利用。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">5.</td>
+    <td valign="top">如本網站無法接受您的訂單，將於收到您的訂單後三個工作日內通知您。但法令另有規定者除外。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">6.</td>
+    <td valign="top">您瞭解並同意，欲訂購產品或使用某些服務必須先註冊成會員，除本條款外，會員還應遵守本網站會員條款及其他條件。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">7.</td>
+    <td valign="top">若您未滿 20 歲，或為法令規定未具備完全行為能力者，請由家長(或監護人)陪同閱讀、瞭解並同意本網站服務條款後，方得使用或繼續使用本網站之服務。當您使用或繼續使用本網站之服務時，即推定您家長(或監護人)已閱讀、瞭解並同意本網站使用條款的所有內容及其後修改變更。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">8.</td>
+    <td valign="top">為確保兒童及青少年使用網路之安全，避免隱私權受到侵犯，家長(或監護人)應盡到下列義務：<br>
+未滿十二歲之兒童使用本服務時，應全程在旁陪伴，十二歲以上未滿十八歲之青少年使用本服務時，亦應斟酌是否給予同意。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">9.</td>
+    <td valign="top">您不得拷貝系統、或檔案供未經授權之本人或其他任何人使用。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">10.</td>
+    <td valign="top">您不得竊取他人於本中心之用戶帳號；不得非法或未授權而取得額外之系統或網路資源。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">11.</td>
+    <td valign="top">您不得向本中心網站輸入或上載任何含有病毒、或其他意圖損害、干擾、降低本中心之系統或網路效率或相關之服務品質之電腦程式路徑。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">12.</td>
+    <td valign="top">本公司得不定時增刪修改網頁資訊內容，或變更網頁服務功能，無需事先或另行通知；亦得不定時修訂本「使用條款」，並於網站張貼時隨 即生效，無需事先或另行通知或負擔任何責任；本中心並保留限制進出網站之權利。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">13.</td>
+    <td valign="top">若您對本網站有任何問題，請透過聯絡我們之客服信箱聯絡，我們將儘速為您解決。</td>
+  </tr>
+</table>
+ <h3>隱私權政策</h3>
+ <p>關於霏亞國際管理顧問有限公司所有之「http://www.feya-one.com.tw/」（以下稱本網站）對因使用本網站或以超聯結方式進入本網站者，本網站於遵守「個人資料保護法」及中華民國之法律規範前提下，茲就隱私權聲明如下：</p>
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="3%" align="center" valign="top">一、</td>
+    <td width="97%" valign="top">個人資料取得：<br>
+本網站取得之會員資料是用來從事協助您的購買、訊息傳遞及發貨處理使用，註冊成為本網站會員或自願填寫問卷者，本網站將就相關訊息提<br>
+供更完善的服務，所有取得的個人資料，僅供本網站內部使用。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">二、</td>
+    <td valign="top">Cookies 運用：<br>
+當訪客透過瀏覽器進入本網站時，本網站的伺服器會發送 cookies 至訪客的瀏覽器內，訪客可選擇修改對 cookies 的接受程度，但訪客若選擇<br>
+拒絕所有的 cookies，將可能導致無法使用部份個人化服務，或是參與部份的活動。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">三、</td>
+    <td valign="top">個人資料運用：<br>
+訪客或會員提供之個人資料，本網站僅供內部使用，所謂之內部係指本網站及本網站之合作夥伴（例如代理公司、相關技術公司、提供獎品公<br>
+司、物流公司等）一方或共同提供，若有第三者共用您資料時，本公司會先徵求您的同意，您可以選擇是否接受參與特定服務或活動優惠。未<br>
+得到會員同意，本網站所蒐集的個人資料將不會透露於第三人使用。本公司可透過電子郵件、郵件、電話等提供與本服務有關之資訊。<br>
+本公司亦得於會員使用服務之分析、本服務之行銷、本服務調查分析及統計等、新服務之開發或既有服務之改善等目的範圍內蒐集、處理及利 <br>
+用您的個人資料。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">四、</td>
+    <td valign="top">會員資料查詢及修改：<br>
+當您在本網站註冊成為會員之後，可以利用您登入後的帳號和密碼，隨時在本網站之會員專區中變更個人資料，或享受各種會員權利及購物 <br>
+優惠。您對於您的個人資料，有查詢及閱覽、製給複製本、補充或更正、停止處理及利用、刪除等需求時可與本公司聯絡，本公司將盡速處<br>
+理。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">五、</td>
+    <td valign="top">免責聲明：<br>
+有下列情形之一，本網站不負任何責任：<br>
+1. 因利用本網站所為之任何聯結方式進入非本網站之內容者。<br>
+2. 因訪客或會員自行洩露、共享或遭盜取帳號、密碼者。<br>
+3. 任何由外力入侵（包括但不限於駭客、電腦病毒或政府機關強制介入或管制）。<br>
+4. 據法律或行政命令需予揭露之資訊，或經有權機關依法定程序要求提供。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">六、</td>
+    <td valign="top">隱私權修改：<br>
+本隱私權內容可能修改，將於本網站揭露，但不另行通知，請訪客或會員不定期查閱，本隱私權聲明本網站保留修改權及最終解釋權。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">七、</td>
+    <td valign="top">會員資料保護政策：<br>
+本公司將盡力以合理合法之技術及保護程序，保障所有會員的個人資料。對於任何可能侵害會員的措施，本網站於知悉後必立即改進，並隨<br>
+時歡迎各位會員的指正。</td>
+  </tr>
+</table>
+<h3>免責聲明</h3>
+<p>當您成為（http://www.feya-one.com.tw/）網站（以下簡稱「本網站」）的用戶後，您已詳細閱讀及明確瞭解本「免責聲明」，並同意，屬下列情況發生時本網站毋需負擔任何責任：</p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="3%" align="center" valign="top">一、</td>
+    <td width="97%" valign="top">您使用本站服務之風險會由您個人承擔。用戶同意使用「本網站」各項服務系基於用戶的個人意願，並同意自負任何風險，包括因為自「本網站」下載資料或圖片，或自「本網站」服務中獲得之資料導致發生任何資源流失等結果。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">二、</td>
+    <td valign="top">「本網站」就各項服務，不負任何明示或默示之擔保責任。「本網站」不保證各項服務之穩定、安全、無誤、及不中斷用戶明示承擔使用本服務之所有風險及可能發生之任何損害。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">三、</td>
+    <td valign="top">用戶在「本網站」填寫之物件資訊、個人資料、上傳圖片等行為，純屬用戶個人行為，「本網站」對其內容之真實性或完整性不負有任何責任。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">四、</td>
+    <td valign="top">本站將於知悉您的帳號密碼遭冒用時，立即停止該帳號所生交易之處理及後續利用。</td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">五、</td>
+    <td valign="top">本站確保與您交易之電腦系統具有符合一般可合理期待之安全性。</td>
+  </tr>
+</table>
+
+</article>
+<footer _height='none'>
+  <div class="container">
+        <nav><a href="#">專 業 課 程 </a>│ <a href="#">學 員 見 證</a> │ <a href="#">專 業 師 資 </a>│ <a href="#">美 容 商 品 </a>│ <a href="#"> 加 盟 資 訊 </a>│ <a href="#">關 於 霏 亞</a></nav>
+    <p>台北　台北市中山區長安東路二段82號<br>
+      桃園　桃園縣蘆竹鄉中正路308號18樓之2<br>
+      鶯歌　新北市鶯歌區永明街67-3號<br>
+      <span>Copyright (C) 霏亞國際 All Rights Reserved.</span></p>
+  </div>
+</footer>
+</body>
+</html>

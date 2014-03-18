@@ -2,6 +2,7 @@
 class Instruction < ActiveRecord::Base
   attr_accessible :description, :name, :sort, :status, :cover
   has_many :courses
+  has_many :testimonies
   
   mount_uploader :cover, InstructionUploader
   

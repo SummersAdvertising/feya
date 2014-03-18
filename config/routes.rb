@@ -1,5 +1,6 @@
 Feya::Application.routes.draw do
 
+
   resources :articles
   resources :photos
   
@@ -7,7 +8,9 @@ Feya::Application.routes.draw do
   
   resources :entries
   resources :instructions do 
-  	resources :courses
+  	resources :courses do   	
+	  resources :inquirements
+  	end
   end
   
   resources :categories do 
@@ -87,13 +90,17 @@ Feya::Application.routes.draw do
     
     end
     
-    resources :articles
-    
-    resources :testimonies 
-    resources :entries 
+	resources :articles
+	
+	resources :inquirements
+	
+	resources :entries 
     
     resources :instructions do 
-	  	resources :courses do 
+		resources :testimonies 
+		
+	  	resources :courses do 	
+		  	resources :inquirements
 	  		member do
 	  			get :switch
 	  		end
