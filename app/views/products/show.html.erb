@@ -116,7 +116,7 @@ $(function(){
     alert("<%= alert %>");
   }
   $("#submit").click(function(){
-	if ( !$('#orderitem_amount').val().match(/^\d+$/) ) {
+	if ( $('#orderitem_amount').length > 0 && !$('#orderitem_amount').val().match(/^\d+$/) ) {
 		Alertify.log.error('訂購數量請填寫數字');	  
 	} else {
 		$("#new_orderitem").submit();

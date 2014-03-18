@@ -33,6 +33,10 @@
         <td colspan="2">收件地址(可不填)<br><%= f.text_field :address, :class => 'text' %></td>
       </tr>
       <tr>
+        <td colspan="2">註冊確認： <input type="checkbox" id="agree-privacy" /> 我已閱讀服務條款並同意註冊成為會員。<a target="_blank" href="<%= page_pages_path( :pagename => 'privacy' ) %>">按此檢視本站的服務條款</a>
+        </td>
+      </tr>
+      <tr>
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
@@ -49,6 +53,12 @@
 $("ul.step>li").eq(2).addClass("active");
 
 $("#next").click(function(){
-	$("#new_member").submit();
+	if ( $('#agree-privacy').prop("checked") ) {		
+		$("#new_member").submit();
+	} else {
+		alert('您必須同意本站的隱私權條款才能註冊成為會員喔！');
+	}
 });
+
+
 </script>
