@@ -8,6 +8,8 @@ Feya::Application.routes.draw do
   
   resources :entries
   resources :instructions do 
+  	resources :testimonies
+  
   	resources :courses do   	
 	  resources :inquirements
   	end

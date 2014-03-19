@@ -55,3 +55,6 @@
 #form th{padding:10px 10px 10px 0}
 
 #cboxClose{background:url(../images/cs-14.png) 0 0 no-repeat;width:25px;height:25px;right:143px;top:8px;position:absolute;border:0;text-indent:-9999px;}
+
+#exp{text-align:right;padding:100px 0 0 0}
+#exp a:hover{filter:alpha(opacity=80);opacity:.8}

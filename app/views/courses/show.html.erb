@@ -77,6 +77,7 @@
         <!--notes--> 
     </div>
     <article id="articleContent" class="peditor"> </article>
+<div id="exp"><a href="<%= instruction_testimonies_path( @instruction, :anchor => :crumb ) %>"><img src="/images/cs-15.jpg" width="369" height="49"></a></div>
   </div>
   
   
@@ -103,5 +104,26 @@
 <script>
 	$(document).ready(function() {	
 		editor.output();	
+		
+		$('#new_inquirement').submit(function() {
+		
+			var errors = '';
+				
+			if ( $('input[name="inquirement[name]"]').val().length <= 0 ) {
+				errors += " 請寫上您的姓名 \n";
+			}
+			
+			if ( $('input[name="inquirement[phone]"]').val().length <= 0 && $('input[name="inquirement[email]"]').val().length <= 0 ) {
+				errors += " 請寫上您的電話或信箱（擇一） \n";
+			} else if ( $('input[name="inquirement[email]"]').val().length > 0  && !$('input[name="inquirement[email]"]').val().match(/^\w+@[a-zA-Z0-9\-\_]+\.[a-zA-Z]{2,3}$/) ) {
+				errors += "您的信箱填寫有誤";
+			}
+		
+			if (errors) {
+				alert( errors );
+				return false;
+			}
+		});
+		
 	});
 </script>

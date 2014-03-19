@@ -8,8 +8,6 @@ $(function(){
 	}, function(){
 		$(this).removeClass('open_on');
 	}).click(function(){
-
-
 		var $qa_content = $(this).next('.single article');
 		if(!$qa_content.is(':visible')){
 			$('.single article:visible').slideUp();
@@ -19,83 +17,65 @@ $(function(){
 });
 </script>
 
-<article id="witness">
+<article id="testimony">
   <div id="crumb"> <a href="<%= root_url %>">首頁</a> &gt; <a href="#">學員見證</a></div>
   <!--crumb-->
-  <div class="left">
-    <div class="intro">
-      <p>面對很多間教育機構與培訓團體，開出來的課程好像很多樣，課程時間長以及堂數不合理的多，只能說如果師資群非常的專業，現場經驗豐富，教程完全標準統一，教學內容能跟職場實際結合應用，這才是每個學生付出寶貴學費的收穫！當然，霏亞保證同樣的課程，<b>新開的班級免費讓舊學員回娘家上課</b>，這是霏亞秉持的教育回饋！</p>
-    </div>
-    <div class="content">
-      <h3><img src="/images/wn-02.gif"></h3>
-      <% testimony_num = [ '見證一', '見證二', '見證三', '見證四', '見證五',  ] %>
-      <% count = 0 %>
-      <% @testimonies.each do | t | %>
+  <div id="intro">
+    <p>面對很多間教育機構與培訓團體，開出來的課程好像很多樣，課程時間長以及堂數不合理的多，只能說如果師資群非常的專業，現場經驗豐富，教程完全標準統一，教學內容能跟職場實際結合應用，這才是每個學生付出寶貴學費的收穫！當然，霏亞保證同樣的課程，<b>新開的班級免費讓舊學員回娘家上課</b>，這是霏亞秉持的教育回饋！</p>
+  </div>
+  <h3><img src="/images/wn-02.gif"></h3>
+  <div id="main">
+    <div class="left"> <img src="/images/wn-12.gif">
+      <ul>
+      <% @instructions.each do | instruction | %>
+        <li class="<%= "active" if instruction.id == @instruction.id %>"><a href="<%= instruction_testimonies_path(instruction) %>">{ <%= instruction.name %> }</a></li>
+      <% end %>
+      </ul>
+      <img src="/images/wn-12.gif"> </div>
+    <div class="right">
+    
+    <% @testimonies.each_with_index do | t, i | %>
       
-      <section class="single">
-        <h4><%= t.title %> <span>/ <%= testimony_num[ count ] %><% count +=1 %></span></h4>
-        <article class="text">
-          <table class="testimony-content" width="95%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="22%" valign="top"><img src="<%= (t.cover.length>0 ?t.cover : '/images/anonymous.jpg') %>" width="106" height="95"></td>
-              <td width="78%" valign="top">
-              
-              		<% 
+      <section class="<%= 'yellow' if i % 2 == 1 %>">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="18%"><img src="<%= (t.cover.length>0 ?t.cover : '/images/wn-03.gif') %>" width="106" height="95"></td>
+            <td width="82%" valign="bottom"><%= t.title %></td>
+          </tr>
+        </table>
+        <% 
               		
-              		begin
-	              		articles = JSON.parse(t.article.content)
-	              	
-		              	articles.each do | a |
-		              		case a['type']
-		              		when 'p'
-		              		%>
-		              		<p><%= a['content'] %></p>
-		              		<%	              		
-		              		when 'img'
-		              		%>
-		              		<img src="<%= a['path'] %>" />
-		              		<%	              		
-		              		when 'video'
-		              		%>
-		              		<iframe width="480" height="290" frameborder="" data-provider="youtube" src="<%= a['embencode'] %>"></iframe>
-		              		<%	              		
-		              		end
-		              	end
-              		rescue              
-              		%><p>敬請期待精采分享。</p><%		
+      		begin
+          		articles = JSON.parse(t.article.content)
+          	
+              	articles.each do | a |
+              		case a['type']
+              		when 'p'
+              		%>
+              		<p><%= a['content'] %></p>
+              		<%	              		
+              		when 'img'
+              		%>
+              		<p><img src="<%= a['path'] %>" /></p>
+              		<%	              		
+              		when 'video'
+              		%>
+              		<iframe width="480" height="290" frameborder="" data-provider="youtube" src="<%= a['embencode'] %>"></iframe>
+              		<%	              		
               		end
-              		
-              		 %>
-              
-	           
-            </tr>
-          </table>
-        </article>
+              	end
+      		rescue              
+      		%><p>敬請期待精采分享。</p><%		
+      		end
+      		
+      		 %>
       </section>
       <% end %>
-    </div><!--content-->
-    <%= paginate @testimonies, :theme => "testimony", :exclude => [ :first, :last ] %>
-    <div class="chance">
-  <h3><img src="/images/wn-05.gif"></h3>
-  <img src="/images/wn-06.gif">
-   </div>
-  </div><!--left-->
-  <div class="right">
-  
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><img src="/images/wn-07.gif"></td>
-      </tr>
-      <tr>
-        <td><a id="cate-1" class="cate" href="<%=  instruction_path( Instruction.where( :name => '專業美容證照' ).first ) %>"></a></td>
-      </tr>
-      <tr>
-        <td><a id="cate-2" class="cate" href="<%= instruction_path( Instruction.where( :name => '美容美體實務' ).first ) %>"></a></td>
-      </tr>
-      <tr>
-        <td><a id="cate-3" class="cate" href="<%= instruction_path( Instruction.where( :name => '國際時尚造型' ).first ) %>"></a></td>
-      </tr>
-    </table>
+      <%= paginate @testimonies, :theme => "testimony", :exclude => [ :first, :last ] %>
+    </div>
   </div>
-  
+  <div id="job">
+  <h3><img src="/images/wn-05.gif"></h3>
+  <p><img src="/images/wn-06.gif"></p>
+  </div>
 </article>

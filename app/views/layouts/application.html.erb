@@ -71,7 +71,7 @@
           <% end %>
         </ul>
       </li>
-      <li id="nav-2" class="<%= 'active' if params[:controller] == 'testimonies' %>"><a href="<%= testimonies_path %>">學員見證</a></li>
+      <li id="nav-2" class="<%= 'active' if params[:controller] == 'testimonies' %>"><a href="<%= instruction_testimonies_path( Instruction.first ) %>">學員見證</a></li>
       <li id="nav-3" class="<%= 'active' if params[:pagename] == 'professional' %>"><a href="<%= page_pages_path( :pagename =>  'professional' ) %>">專業師資</a></li>
       <a id="home" href="<%= root_url %>"></a>
       <li id="nav-4" class="<%= 'active' if params[:controller] == 'categories' || params[ :controller ] == 'products' %>"><a href="<%= categories_path %>">美容商品</a>
