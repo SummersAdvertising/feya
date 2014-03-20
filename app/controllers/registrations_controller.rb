@@ -24,6 +24,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource
         
     resource.discountpoint = 50
+    resource.receiveaddress = params[ :address ]
 
     if resource.save
       if resource.active_for_authentication?
