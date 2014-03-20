@@ -58,7 +58,12 @@ class Admin::Changestatus::OrdersController < AdminController
   def cancel
   	@order.status = "cancel"
   	@order.save
-
+  	
+  	@member = @order.member
+  	@member.discountpoint = @order.discount
+  	
+  	@member.save
+  	
     logstatus_mail(@order, "已取消")
 
   	respond_to do |format|

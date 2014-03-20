@@ -6,15 +6,20 @@
 <body>
   <% case @order.status %>
   <% when "check" %>
-  <% @msg = "已收到您的匯款，將儘速處理您的訂單。" %>
+  <p><%= "已收到您的匯款，將儘速處理您的訂單。" %></p>
   <% when "processing" %>
-  <% @msg = "您的訂單已成立，將儘速為您出貨。" %>
+  <p><%= "您的訂單已成立，將儘速為您出貨。" %>	</p>
   <% when "deliver" %>
-  <% @msg = "您訂購的商品已寄出。" %>
+	  <p><%= "您訂購的商品已寄出。" %></p>
+	  <% if @order.shippingcode.length > 0 %>
+	  <p>物流追蹤連結： <%= @order.shippingcode %></p>
+	  <% end %>
   <% when "cancel" %>
-  <% @msg = "您的訂單已取消。" %>
+	  <p><%= "您的訂單已取消。" %></p>
+	  <% if @order.discount > 0 %>
+	  	<p>您的購物金 共 <%= @order.discount %> 點 已返還，歡迎再次消費。</p>
+	  <% end %>
   <% end %>
-  <p><%= @msg %></p>
   <p>下單時間：<%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
   <p>訂單編號：<%= @order.ordernum %></p>
 </body>

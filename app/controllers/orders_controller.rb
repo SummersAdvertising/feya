@@ -100,14 +100,14 @@ class OrdersController < ApplicationController
 
 				if(params[:discount] && (params[:discount].to_i.is_a? Integer)  && params[:discount].to_i > 0)
 					if(params[:discount].to_i > current_member.discountpoint)
-						if(current_member.discountpoint > (@ordersum/10).floor)
-							@order.discount = (@ordersum/10).floor
+						if(current_member.discountpoint >  max_discount_point(@ordersum) )
+							@order.discount =  max_discount_point(@ordersum)
 						else
 							@order.discount = current_member.discountpoint
 						end
 					else
-						if(params[:discount].to_i > (@ordersum/10).floor)
-							@order.discount = (@ordersum/10).floor
+						if(params[:discount].to_i > max_discount_point(@ordersum) )
+							@order.discount = max_discount_point(@ordersum)
 						else
 							@order.discount = params[:discount].to_i
 						end
@@ -172,4 +172,9 @@ class OrdersController < ApplicationController
 
 		return [@orderItems, @traceItems]
 	end
+	
+	def max_discount_point( ordersum )
+		 (ordersum/1000).floor * 50
+	end
+	
 end
