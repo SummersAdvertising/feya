@@ -69,7 +69,9 @@ class Admin::TestimoniesController < AdminController
   def destroy
     @testimony = Testimony.find(params[:id])
     @testimony.destroy
-
+    
+	@instruction = Instruction.find( params[ :instruction_id ] )
+    
     respond_to do |format|
       format.html { redirect_to admin_instruction_testimonies_path( @instruction ) }
       format.json { head :no_content }

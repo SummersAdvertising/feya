@@ -5,7 +5,7 @@ class Testimony < ActiveRecord::Base
   mount_uploader :cover, TestimonyUploader
   
   belongs_to :article, :dependent => :destroy
-  belongs_to :instruction, :dependent => :destroy
+  belongs_to :instruction
    
   validates_presence_of :title, :message => '名稱為必填'
  

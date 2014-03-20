@@ -17,7 +17,10 @@ class InquirementsController < ApplicationController
   # POST /inquirements.json
   def create
     @inquirement = @course.inquirements.build(params[:inquirement])
-
+    
+    @inquirement.course_name = @course.name
+    @inquirement.instruction_name = @course.instruction.name
+    
     respond_to do |format|
       if @inquirement.save
         format.html { redirect_to instruction_course_path( @instruction, @course ), notice: '已經收到您的詢問，將會有專業人員與您聯絡！' }

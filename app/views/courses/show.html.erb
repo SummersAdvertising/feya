@@ -36,7 +36,7 @@
               儘快為您服務</td>
           </tr>
           <tr>
-            <td valign="middle"><a href="#"><img src="/images/cs-11.gif"></a></td>
+            <td valign="middle"><a href="<%= @course.credit_form.nil? ? "javascript: alert('很抱歉，目前本課程還未接受線上刷卡，請聯絡本中心客服人員或填寫詢問單！')".html_safe : @course.credit_form %>"><img src="/images/cs-11.gif"></a></td>
             <td valign="top" class="text">下載刷卡單，填寫並回傳<br>
               單據，即有專人為您服務</td>
           </tr>

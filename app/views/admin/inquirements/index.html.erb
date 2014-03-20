@@ -9,7 +9,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td width="13%"><%= inquirement.created_at.strftime('%Y-%m-%d') %></td>
-              <td colspan="2"><%= inquirement.course.instruction.name %>/<%= inquirement.course.name %></td>
+              <td colspan="2"><%= inquirement.instruction_name %>/<%= inquirement.course_name %></td>
               <td width="3%" align="right"><a href="<%= admin_inquirement_path( inquirement ) %>" data-method="delete" data-confirm="確定刪除此篇詢問？"><img src="/images/trash.png"></a></td>
             </tr>
             <tr>

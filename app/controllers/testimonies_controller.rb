@@ -5,7 +5,7 @@ class TestimoniesController < ApplicationController
 		
 		@instruction = Instruction.find( params[ :instruction_id ] )
 		
-		@testimonies = @instruction.testimonies.page( params[ :page ] ).per(5)
+		@testimonies = @instruction.testimonies.order( "created_at DESC" ).page( params[ :page ] ).per(5)
 		
 		
 	end

@@ -27,6 +27,15 @@
         <div class="box">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
+              <td width="10%" valign="top"><%= f.label :cover, '封面：' %></td>
+              <td colspan="3" width="42%" valign="top">
+              	<%= f.file_field :cover %><br /> <br />
+              	<% unless @course.cover.nil? %>
+              	<img style="width: 50%;" src="<%= @course.cover %>" />
+              	<% end %>
+              </td>
+            </tr>
+            <tr>
               <td width="8%" valign="top"><%= f.label :price, '原價：' %></td>
               <td width="40%" valign="top"><%= f.text_field :price, :class => :text %></td>
               <td width="10%" valign="top" align="center"><%= f.label :sell, '優惠價：' %></td>
@@ -35,8 +44,12 @@
             <tr>
               <td width="8%" valign="top"><%= f.label :quota, '剩餘名額：' %></td>
               <td width="40%" valign="top"><%= f.text_field :quota, :class => :text %></td>
-              <td width="10%" valign="top" align="center"><%= f.label :cover, '封面：' %></td>
-              <td width="42%" valign="top"><%= f.file_field :cover %></td>
+              <td width="10%" valign="top" align="center"><%= f.label :credit_form, '線上刷卡單：' %><br /> (2MB 以下)</td>
+              <td width="42%" valign="top"><%= f.file_field :credit_form -%> 
+              	<% unless @course.credit_form.nil? -%>
+              	( 下載 <a href="<%= @course.credit_form %>">目前的刷卡單</a> )
+              	<% end -%>
+              </td>
             </tr>
             <tr>
               <td valign="top"><%= f.label :description, '簡介：' %></td>
