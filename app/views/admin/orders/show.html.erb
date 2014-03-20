@@ -164,12 +164,21 @@ $(function(){
 			<%= link_to ("確認訂單成立" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
 		
 		<% when 'processing' %>
-		  <div class="transport">
+		  <div class="transport box-edit">
 		    <h3>寄送訊息</h3>
 		    <div class="box">
-			<%= form_for(@order, :url => admin_order_changestatus_deliver_path(@order), :method => :post) do |f| %>
-				<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
-				<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
+			<%= form_for(@order, :url => admin_order_changestatus_deliver_path(@order), :method => :post) do |f| %>				
+		        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		          <tr>
+		            <td width="21%">運送方式：</td>
+		            <td width="79%"><%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></td>
+		          </tr>
+		          <tr>
+		            <td>追蹤連結：</td>
+		            <td><%= f.text_field :shippingcode, :class => "text" %></td>
+		          </tr>
+		        </table>
+			
 				<a href="#" id="submitDeliver">確認出貨</a>
 			<% end %>
 		    </div>
@@ -188,7 +197,7 @@ $(function(){
         <tr>
           <th width="15%" align="left" valign="top">運送方式 : </th>
           <td valign="top"><%= @order.shippingway %></td>
-          <th width="15%" align="left" valign="top">追蹤碼：</th>
+          <th width="15%" align="left" valign="top">追蹤連結：</th>
           <td valign="top"><%= @order.shippingcode %></td>
         </tr>
       </table>

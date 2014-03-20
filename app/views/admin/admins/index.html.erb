@@ -20,6 +20,10 @@
               <td valign="middle">確認密碼：</td>
               <td valign="top"><%= f.password_field :password_confirmation, :style => 'width:95%!important', :class => 'text' %></td>
             </tr>
+	        <tr>
+	          <td width="10%" valign="middle">接收電子信：</td>
+	          <td valign="top"><%= f.check_box :mail_flag,  {}, true %></td>
+	        </tr>
           </table>
         </div>
       </div>
