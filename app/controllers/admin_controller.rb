@@ -3,11 +3,14 @@ class AdminController < ApplicationController
 	before_filter :is_admin, :except => [:login, :checkAdmin]
 
 	def login
-		redirect_to admin_root_path if(session[:admin])
 		@admin = Admin.new
 		
 		respond_to do | format |
-			format.html { render :layout => nil }
+			if session[:admin]
+				redirect_to admin_root_path 
+			else
+				format.html { render :layout => nil }
+			end
 		end
 	end
 

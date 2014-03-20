@@ -26,7 +26,7 @@ class Admin::TestimoniesController < AdminController
 
     respond_to do |format|
       if @testimony.save
-        format.html { redirect_to edit_admin_testimony_path(@testimony), notice: 'Testimony was successfully created.' }
+        format.html { redirect_to edit_admin_instruction_testimony_path( @instruction, @testimony), notice: 'Testimony was successfully created.' }
         format.json { render json: @testimony, status: :created, location: @testimony }
       else
       
