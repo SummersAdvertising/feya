@@ -29,8 +29,9 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
         	<% @admins.each do | admin | %>        		
 	          <tr>
+	          	<td width="7%"><%= '<img src="/images/msg.png" alt="接收通知" />'.html_safe if admin.mail_flag %></td>
 	            <td width="18%"><%= admin.username %></td>
-	            <td width="72%"><%= admin.email %></td>
+	            <td width="65%"><%= admin.email %></td>
 	            <td width="5%" class="edit"><a href="<%= edit_admin_admin_path( admin ) %>"></a></td>
 	            <td width="5%" class="delete"><%= link_to '', admin_admin_path( admin ), :method => :delete, :confirm => '確認刪除？' %></td>
 	          </tr>

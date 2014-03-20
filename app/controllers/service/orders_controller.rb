@@ -24,7 +24,10 @@ class Service::OrdersController < ApplicationController
 				#order log
 				@orderlog = @order.orderlogs.new
 				@orderlog.description = "通知已匯款。"
+				
 				@orderlog.save
+
+				Ordermailer.delay.payment_notice( @order )
 
 				respond_to do |format|
 					format.html { redirect_to service_order_path(@order) }

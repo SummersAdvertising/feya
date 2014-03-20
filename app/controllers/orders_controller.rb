@@ -42,6 +42,11 @@ class OrdersController < ApplicationController
 				format.json { render json: @order }
 			end
 		elsif(@order.save)
+		
+			if @order.paytype == "貨到付款"
+				Ordermailer.delay.new_order_notice(@order)
+			end
+		
 			#if(params[:updateMemberinfo]) => update
 			if(params[:updateMemberinfo] || params[:setDefault])
 				if(params[:updateMemberinfo])
@@ -112,7 +117,7 @@ class OrdersController < ApplicationController
 				end
 
 				#count discountpoints
-				@order.discountpoint = (@ordersum / 200).floor
+				@order.discountpoint = 0 #(@ordersum / 200).floor
 				current_member.discountpoint = current_member.discountpoint + @order.discountpoint - @order.discount
 
 				if(@order.save)

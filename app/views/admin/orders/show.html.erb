@@ -164,19 +164,23 @@ $(function(){
 			<%= link_to ("確認訂單成立" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active" %>
 		
 		<% when 'processing' %>
+		  <div class="transport">
+		    <h3>寄送訊息</h3>
+		    <div class="box">
 			<%= form_for(@order, :url => admin_order_changestatus_deliver_path(@order), :method => :post) do |f| %>
 				<p>運送方式 : <%= f.select(:shippingway, options_for_select([["請選擇運送方式", ""],["宅配", "宅配"],["郵寄", "郵寄"]]) ) %></p>
 				<p>追蹤碼 : <%= f.text_field :shippingcode %></p>
 				<a href="#" id="submitDeliver">確認出貨</a>
 			<% end %>
+		    </div>
+		  </div>
 		<% when 'cancel' %>
 			<%= "已取消此筆訂單" %>
 	<% end %>
   </div>
   <!--button--> 
   
-  <% if @order.status == 'deliver' %>
-  	
+  <% if @order.status == 'deliver' %>  	
   <div class="transport">
     <h3>寄送訊息</h3>
     <div class="box">

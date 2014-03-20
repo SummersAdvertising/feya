@@ -6,7 +6,21 @@ class Ordermailer < ActionMailer::Base
 
   	mail(:to => [ receiver ], :subject => "訂單成立通知")  	
   end
-
+  
+  def new_order_notice( order )  	
+  	@order = order
+  	
+  	mail( :to => Admin.where( :mail_flag => true ).pluck( :email ), :subject => "新訂單指定貨到付款通知" )
+  	
+  end
+  
+  def payment_notice( order )
+  	@order = order
+  	
+  	mail( :to => Admin.where( :mail_flag => true ).pluck( :email ), :subject => "匯款完成通知" )
+  	
+  end
+  
   def runoutofproduct(traceitems)
     @traceitems = Stock.where(:id => traceitems).select('products.name, stocks.*').joins("LEFT OUTER JOIN products on products.id = stocks.product_id")
 

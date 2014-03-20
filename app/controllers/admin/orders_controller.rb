@@ -43,7 +43,7 @@ class Admin::OrdersController < AdminController
 
       if(@refundSum > 0 && @order.discountpoint > 0 )
 
-        @substract = (@refundSum / 200).floor
+        @substract = 0 #(@refundSum / 200).floor
 
         if(@order.discountpoint > @substract)
           @order.discountpoint = @order.discountpoint - @substract

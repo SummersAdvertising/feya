@@ -102,7 +102,7 @@
         <tr>
           <th width="25%" align="left">剩餘的紅利點數：</th>
           <td width="50%">
-          	<%= current_member.discountpoint %> (當您的消費點數滿千元，即可使用五十點，一點可折抵一元。)
+          	<span id="currentPoints"><%= current_member.discountpoint %></span> (當您的消費點數滿千元，即可使用五十點，一點可折抵一元。)
           	</td>
           <td width="25%">&nbsp;</td>
         </tr>
@@ -185,14 +185,14 @@
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="2"><input type="checkbox" name="check" class="checkbox">
+        <td colspan="2"><input type="checkbox" id="agreePrivacy" name="check" class="checkbox">
          我已仔細閱讀並明瞭 <a target="_blank" href="<%= page_pages_path( :pagename => 'privacy' ) %>">「網站使用條款」、「隱私權政策」、「免責聲明」</a> 等所載內容及其意義，<br>
           茲同意該等條款規定，並願遵守網站現今、嗣後規範的各種規則。</td>
       </tr>
     </table>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td align="right" class="button">  <a href="<%= categories_path %>" id="back">繼續購物</a><a href="/orders/cart" id="prev">上一步</a><a href="#" id="next">下一步</a> </td>
+        <td align="right" class="button">  <a href="<%= categories_path %>" id="back">繼續購物</a><a href="/orders/cart" id="prev">上一步</a><a href="javascript: void( 0 );" id="next">下一步</a> </td>
       </tr>
     </table>
   </div>
@@ -234,7 +234,15 @@ $(".addressbook").click(function(event){
 });
 
 $("#next").click(function(){
-	$("#new_order").submit();
+	
+	if ( !$('#agreePrivacy').prop( "checked" ) ) {
+		alert('請先同意本站的「網站使用條款」、「隱私權政策」、「免責聲明」才能繼續購買喔！');
+	} else if ( ( $('#discount-use').val() > <%= current_member.discountpoint %> ) || $('#discount-use').val() > ( <%= ( @orderPrice / 1000 ) * 50 %> ) ) {
+		alert('您的紅利點數餘額不足或無法使用，請檢查您的剩餘點數！');
+	} else {		
+		$("#new_order").submit();
+	}
+	
 });
 </script>
 

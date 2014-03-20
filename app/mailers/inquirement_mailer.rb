@@ -6,7 +6,7 @@ class InquirementMailer < ActionMailer::Base
   def send_notice(inquirement)
   	@inquirement = inquirement
   	
-  	mail(:to => Admin.pluck( :email ),
+  	mail(:to => Admin.where( :mail_flag => true ).pluck( :email ),
   	     :subject => "[霏亞國際官網] 收到使用者詢問囉！")
   	
   end
