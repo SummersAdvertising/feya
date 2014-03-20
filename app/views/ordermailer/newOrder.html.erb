@@ -48,8 +48,13 @@
         </tr>
         <tr>
           <td colspan="3" align="center">&nbsp;</td>
+          <td align="center">抵用購物金</td>
+          <td align="center"><%= @order.discount %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
           <td align="center" class="total">訂單總計</td>
-          <td align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee).to_i %></td>
+          <td align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee).to_i  - @order.discount %></td>
         </tr>
       </table>
     </div>

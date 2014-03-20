@@ -30,7 +30,7 @@
               <td width="10%" valign="top"><%= f.label :cover, '封面：' %></td>
               <td colspan="3" width="42%" valign="top">
               	<%= f.file_field :cover %><br /> <br />
-              	<% unless @course.cover.nil? %>
+              	<% unless @course.cover.file.nil? %>
               	<img style="width: 50%;" src="<%= @course.cover %>" />
               	<% end %>
               </td>
@@ -46,7 +46,7 @@
               <td width="40%" valign="top"><%= f.text_field :quota, :class => :text %></td>
               <td width="10%" valign="top" align="center"><%= f.label :credit_form, '線上刷卡單：' %><br /> (2MB 以下)</td>
               <td width="42%" valign="top"><%= f.file_field :credit_form -%> 
-              	<% unless @course.credit_form.nil? -%>
+              	<% unless @course.credit_form.file.nil? -%>
               	( 下載 <a href="<%= @course.credit_form %>">目前的刷卡單</a> )
               	<% end -%>
               </td>

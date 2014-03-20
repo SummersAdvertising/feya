@@ -74,10 +74,15 @@ $(function(){
   <tr>
       <td colspan="3">&nbsp;</td>
     </tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td >抵用購物金</td>
+		<td align="right"><b><%= @order.discount %></b></td>
+	</tr>
     <tr>
       <td width="76%">&nbsp;</td>
       <td width="9%">訂單總計</td>
-      <td width="15%" align="right"><b>NT$ <%= @ordersum %></b></td>
+      <td width="15%" align="right"><b>NT$ <%= @ordersum - @order.discount  %></b></td>
     </tr>
   </table>
   <%= f.submit "修改訂單", :style => "width: 80px!important; margin-right: 5px;", :class => 'right' %>

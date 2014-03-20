@@ -1,0 +1,35 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+</head>
+
+<body>
+
+<table width="100%" border="1" bordercolor="eeeeee" cellspacing="5" cellpadding="0">
+  <tr>
+    <th width="9%" height="30" >客戶姓名</th>
+    <td width="24%" bgcolor="#f3f3f3" style="padding:0 0 0 10px"><%= @inquirement.name %></td>
+    <th width="9%">連絡電話</th>
+    <td width="24%" bgcolor="#f3f3f3" style="padding:0 0 0 10px"><%= @inquirement.phone %></td>
+    <th width="9%">電子郵件</th>
+    <td width="25%" bgcolor="#f3f3f3" style="padding:0 0 0 10px"><%= @inquirement.email %></td>
+  </tr>
+  <tr>
+    <th width="9%" height="30" >有興趣的課程</th>
+    <td width="24%" bgcolor="#f3f3f3" style="padding:0 0 0 10px"><%= @inquirement.course_name %></td>
+    <th width="9%">課程分類</th>
+    <td colspan="3" width="24%" bgcolor="#f3f3f3" style="padding:0 0 0 10px"><%= @inquirement.instruction_name %></td>
+  </tr>
+  <tr>
+    <th height="30">描述</th>
+    <td colspan="5" bgcolor="#f3f3f3" style="padding:0 0 0 10px">
+    <%= @inquirement.description %>
+  </tr>
+</table>
+
+
+</body>
+</html>

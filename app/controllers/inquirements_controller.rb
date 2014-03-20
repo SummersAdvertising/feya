@@ -23,6 +23,9 @@ class InquirementsController < ApplicationController
     
     respond_to do |format|
       if @inquirement.save
+      	
+      	InquirementMailer.send_notice( @inquirement ).deliver
+      
         format.html { redirect_to instruction_course_path( @instruction, @course ), notice: '已經收到您的詢問，將會有專業人員與您聯絡！' }
         format.json { render json: @inquirement, status: :created, location: @inquirement }
       else
