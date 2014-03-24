@@ -117,6 +117,11 @@ Feya::Application.routes.draw do
     end
 
     resources :orders, :only => [:index, :show, :update] do
+    
+      collection do
+      	post :expire
+      end
+    
       namespace :changestatus do
         match "check", :via => :post
         match "processing", :via => :post

@@ -47,6 +47,10 @@ zh-tw:
   activerecord:
     errors:
       models:
+        admin:
+          attributes:
+            password_confirmation:
+              blank: '密碼驗證不得空白'
         addressbook:
           attributes:
             address:

@@ -8,49 +8,7 @@
   <p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
   <p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
   <div class="box"> 
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <th width="29%" align="center">商品名稱</th>
-          <th width="12%" align="center">分類</th>
-          <th width="35%" align="center">單價</th>
-          <th width="12%" align="center">數量</th>
-          <th width="12%" align="center">小計</th>
-        </tr>
-
-        <% @ordersum = 0 %>       
-        <% @order.orderitems.select('orderitems.*, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').each do |item| %>
-        <% itemsum = item.itemprice.to_i * item.amount.to_i %>
-        <% @ordersum = @ordersum + itemsum %>
-
-        <tr>
-          <td align="center"><%= item.itemname %></td>
-          <td align="center"><%= item.itemtype %></td>
-          <td align="center"><%= item.itemprice %></td>
-          <td align="center"><%= item.amount %></td>
-          <td align="center"><%= itemsum %></td>
-        </tr>
-        <% end %>
-        <tr>
-          <td colspan="3" align="center">&nbsp;</td>
-          <td align="center">購物小計</td>
-          <td align="center"><%= @ordersum %></td>
-        </tr>
-        <tr>
-          <td colspan="3" align="center">&nbsp;</td>
-          <td align="center">運費小計</td>
-          <td align="center"><%= @ordersum > 2000 ? ('<del>' + @order.shippingfee.to_s + '</del>').html_safe : @order.shippingfee %></td>
-        </tr>
-        <tr>
-          <td colspan="3" align="center">&nbsp;</td>
-          <td align="center">抵用購物金</td>
-          <td align="center"><%= @order.discount %></td>
-        </tr>
-        <tr>
-          <td colspan="3" align="center">&nbsp;</td>
-          <td align="center" class="total">訂單總計</td>
-          <td align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee).to_i  - @order.discount %></td>
-        </tr>
-      </table>
+    <%= render 'order_content' %>
     </div>
 </body>
 </html>

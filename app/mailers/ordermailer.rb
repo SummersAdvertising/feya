@@ -14,6 +14,13 @@ class Ordermailer < ActionMailer::Base
   	
   end
   
+  def remittance_notice( order )
+  	@order = order
+  	
+  	mail( :to => order.member.email, :subject => "訂單付款方式須知" )  	
+  	
+  end
+  
   def payment_notice( order )
   	@order = order
   	

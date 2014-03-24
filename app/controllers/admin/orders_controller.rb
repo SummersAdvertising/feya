@@ -70,4 +70,14 @@ class Admin::OrdersController < AdminController
     end
   end
 
+  def expire
+  
+  	Order.where( "updated_at < ? AND status = ?", (Time.now - 3.day), 'new' ).update_all( { :status => 'hidden' } )
+  	
+  	respond_to do | format |
+  		format.html { redirect_to admin_orders_path( :type => :new ), notice: '超過三天未處理的新訂單已清除' }
+  	end
+  
+  end
+
 end

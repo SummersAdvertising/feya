@@ -1,0 +1,43 @@
+<table width="100%" style="border: 1px gray solid; border-collapse:collapse;" border- cellspacing="0" cellpadding="0">
+        <tr>
+          <th style="border: 1px gray solid;" width="29%">商品名稱</th>
+          <th style="border: 1px gray solid;" width="12%">分類</th>
+          <th style="border: 1px gray solid;" width="35%">單價</th>
+          <th style="border: 1px gray solid;" width="12%">數量</th>
+          <th style="border: 1px gray solid;" width="12%">小計</th>
+        </tr>
+
+        <% @ordersum = 0 %>       
+        <% @order.orderitems.select('orderitems.*, stocks.product_id as productlink').joins('LEFT OUTER JOIN stocks on stocks.id = orderitems.stock_id').each do |item| %>
+        <% itemsum = item.itemprice.to_i * item.amount.to_i %>
+        <% @ordersum = @ordersum + itemsum %>
+
+        <tr>
+          <td style="border: 1px gray solid;" align="center"><%= item.itemname %></td>
+          <td style="border: 1px gray solid;" align="center"><%= item.itemtype %></td>
+          <td style="border: 1px gray solid;" align="center"><%= item.itemprice %></td>
+          <td style="border: 1px gray solid;" align="center"><%= item.amount %></td>
+          <td style="border: 1px gray solid;" align="center"><%= itemsum %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td style="border: 1px gray solid;" align="center">購物小計</td>
+          <td style="border: 1px gray solid;" align="center"><%= @ordersum %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td style="border: 1px gray solid;" align="center">運費小計</td>
+          <td style="border: 1px gray solid;" align="center"><%= @ordersum > 2000 ? ('<del>' + @order.shippingfee.to_s + '</del>').html_safe : @order.shippingfee %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td style="border: 1px gray solid;" align="center">抵用購物金</td>
+          <td style="border: 1px gray solid;" align="center"><%= @order.discount %></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">&nbsp;</td>
+          <td style="border: 1px gray solid;" align="center" class="total">訂單總計</td>
+          <td style="border: 1px gray solid;" align="center" class="total"><%= @ordersum + (@ordersum > 2000 ? 0 : @order.shippingfee).to_i  - @order.discount %></td>
+        </tr>
+      </table>
