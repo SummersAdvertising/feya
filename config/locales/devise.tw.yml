@@ -66,3 +66,4 @@ zh-tw:
             email:
               blank: '不得空白'  
               taken: '這個信箱已經被註冊囉！'
+              not_found: '您的信箱尚未註冊喔！'

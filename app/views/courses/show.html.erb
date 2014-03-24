@@ -115,7 +115,7 @@
 			
 			if ( $('input[name="inquirement[phone]"]').val().length <= 0 && $('input[name="inquirement[email]"]').val().length <= 0 ) {
 				errors += " 請寫上您的電話或信箱（擇一） \n";
-			} else if ( $('input[name="inquirement[email]"]').val().length > 0  && !$('input[name="inquirement[email]"]').val().match(/^\w+@[a-zA-Z0-9\-\_]+(\.[a-zA-Z]{2,3})+$/) ) {
+			} else if ( $('input[name="inquirement[email]"]').val().length > 0  && !$('input[name="inquirement[email]"]').val().match(/^\w+@[a-zA-Z0-9\-\_\.]+(\.[a-zA-Z]{2,3})+$/) ) {
 				errors += "您的信箱填寫有誤";
 			}
 		

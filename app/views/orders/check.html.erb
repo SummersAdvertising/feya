@@ -109,7 +109,7 @@
           <th align="left">本次使用紅利點數：</th>
           <td>
           	<input id="discount-use" name="discount" type="number" class="text" value="0"> <br />
-          	<a href="javascript: $('#discount-use').val('<%= ( @orderPrice / 1000 ) * 50 < current_member.discountpoint ?  ( @orderPrice / 1000 ) * 50 : current_member.discountpoint  %>');">點此使用可能的最大值</a>
+          	<a onclick="$('#discount-use').val('<%= ( @orderPrice / 1000 ) * 50 < current_member.discountpoint ?  ( @orderPrice / 1000 ) * 50 : current_member.discountpoint  %>');" href="javascript: void (0);">點此使用可能的最大值</a>
           	</td>
           <td>&nbsp;</td>
         </tr>
@@ -124,9 +124,16 @@
 		<tr>
 		  <td>&nbsp;</td>
 		  <th width="7%" align="left">發票</th>
-		  <td width="21%"><%= f.select :invoicetype, options_for_select([["二聯式", "二聯式"], ["三聯式", "三聯式"]]) %></td>
+		  <td width="21%">
+		  <select id="order_invoicetype" name="order[invoicetype]">
+		  	<option value="二聯式" <%= 'selected="selected"'.html_safe if @order.invoicetype == '二聯式' %>>二聯式</option>
+		  	<option value="三聯式" <%= 'selected="selected"'.html_safe if @order.invoicetype == '三聯式' %>>三聯式</option></select>
+		  </td>
+          <th width="7%" align="left">&nbsp;</th>
+          <td width="21%">&nbsp;</td>
+          <td width="35%">&nbsp;</td>
 		</tr>
-        <tr>
+        <tr id="invoiceBlocks" style="<%= 'display: none;'.html_safe if @order.invoicetype != '三聯式' %>">
           <td>&nbsp;</td>
           <th width="7%" align="left">統一編號</th>
           <td width="21%"><%= f.text_field :companynum, :class => 'text' %></td>
@@ -244,6 +251,17 @@ $("#next").click(function(){
 	}
 	
 });
+
+$('#order_invoicetype').change( function() {
+	
+	if ( $('#order_invoicetype').val() == '二聯式' ) {
+		$('#invoiceBlocks').hide();
+	} else {
+		$('#invoiceBlocks').show();
+	}
+	
+} );
+
 </script>
 
 <% else %>

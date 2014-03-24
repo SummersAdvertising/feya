@@ -21,8 +21,8 @@
               <td valign="top"><%= f.password_field :password_confirmation, :style => 'width:95%!important', :class => 'text' %></td>
             </tr>
 	        <tr>
-	          <td width="10%" valign="middle">接收電子信：</td>
-	          <td valign="top"><%= f.check_box :mail_flag,  {}, true %></td>
+	          <td width="10%" valign="middle"></td>
+	          <td valign="top"><%= f.check_box :mail_flag,  {:style => "width: inherit!important;"}, true %> 接收電子信</td>
 	        </tr>
           </table>
         </div>
@@ -31,7 +31,8 @@
       <div class="button" id="button-down"> <a href="javascript: document.forms[0].submit();" class="right light">新增管理員<img src="/images/add.png"></a></div>
       <div class="list">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        	<% @admins.each do | admin | %>        		
+        	<% @admins.each do | admin | %>    
+        	<% next if admin.nil? %>    		
 	          <tr>
 	          	<td width="7%"><%= '<img src="/images/msg.png" alt="接收通知" />'.html_safe if admin.mail_flag %></td>
 	            <td width="18%"><%= admin.username %></td>

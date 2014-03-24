@@ -12,6 +12,7 @@ class Admin::AdminsController < AdminController
 			if @admin.save
 				format.html { redirect_to admin_admins_path, notice: '新增管理員成功' }
 			else
+				@admins = Admin.all
 				flash[ :warning ] = @admin.errors.messages.values.flatten.join('<br>')
 				format.html { render :index }
 			end
@@ -36,6 +37,7 @@ class Admin::AdminsController < AdminController
 			if @admin.update_attributes( params[ :admin ] )
 				format.html { redirect_to admin_admins_path, notice: '更新管理員成功' }
 			else
+				@admins = Admin.all
 				flash[ :warning ] = @admin.errors.messages.values.flatten.join('<br>')
 				format.html { render :edit }
 			end
