@@ -30,7 +30,9 @@ class Admin::CoursesController < AdminController
     @course = @instruction.courses.build(params[:admin_course])
     @course.article = Article.new
     @course.name = '未命名課程'
-
+    @course.price = 0
+    @course.quota = 0
+    
     respond_to do |format|
       if @course.save
         format.html { redirect_to edit_admin_instruction_course_path(@instruction, @course), notice: 'Course was successfully created.' }
@@ -77,7 +79,7 @@ class Admin::CoursesController < AdminController
     @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_instruction_path( @instruction ) }
+      format.html { redirect_to admin_instruction_path( @instruction ), notice: '課程刪除完成' }
       format.json { head :no_content }
     end
   end

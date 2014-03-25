@@ -27,7 +27,13 @@
 	        <td><%= image_tag('/images/hidden.png', :width => 16, :height => 16) if course.status != 'enable' %></td>
 	        <td>剩餘 <%= course.quota.nil? ? 0 : course.quota %> 名額 </td>
 	        <td><a href="<%= edit_admin_instruction_course_path( @instruction, course ) %>"><%= course.name %></a></td>
-	        <td align="center"><del><%= course.price %></del> <%= course.sell %> </td>
+	        <td align="center">
+	        	<% if course.sell.nil? && !course.price.nil? %>
+	        		<%= course.price %>
+	        	<% elsif !course.price.nil? %>
+	        		<del><%= course.price %></del> <%= course.sell %> 
+	        	<% end %>
+	        	</td>
 	        <td align="center"><a href="<%= switch_admin_instruction_course_path( @instruction, course, :page => params[ :page ] ) %>"><%= course.status == 'disable' ? '顯示' : '隱藏' %></a></td>
 	        <td align="center"><%= course.created_at.strftime( '%Y-%m-%d' ) %></td>
 	      </tr>

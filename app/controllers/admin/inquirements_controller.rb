@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Admin::InquirementsController < AdminController
   # GET /inquirements
   # GET /inquirements.json
@@ -28,7 +29,7 @@ class Admin::InquirementsController < AdminController
     @inquirement.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_inquirements_url }
+      format.html { redirect_to admin_inquirements_url, notice: '該筆詢問已刪除' }
       format.json { head :no_content }
     end
   end
