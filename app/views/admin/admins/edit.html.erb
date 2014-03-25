@@ -14,15 +14,15 @@
           <td width="40%" valign="top"><%= f.text_field :email, :class => 'text' %></td>
         </tr>
         <tr>
-          <td width="10%" valign="middle">接收電子信：</td>
-          <td valign="top"><%= f.check_box :mail_flag,  {}, true %></td>
-        </tr>
-        <tr>
           <td valign="middle" class="name">密碼：</td>
           <td valign="top"><%= f.password_field :password, :class => 'text', :style => 'width:95%!important' %></td>
           <td valign="middle">確認密碼：</td>
           <td valign="top"><%= f.password_field :password_confirmation, :class => 'text' %></td>
         </tr>
+	        <tr>
+	          <td width="10%" valign="middle"></td>
+	          <td valign="top"><%= f.check_box :mail_flag,  {:style => "width: inherit!important;"}, true %> 接收電子信</td>
+	        </tr>
       </table>
     </div>
   </div>

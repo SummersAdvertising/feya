@@ -31,8 +31,10 @@
 	$(document).ready(function() {		
 	<% if !flash[ :notice ].nil? %>
 		Alertify.log.success('<%= flash[ :notice ] %>');
+		<% flash.delete( :notice ) %>
 	<% elsif !flash[ :warning ].nil? %>
 		Alertify.log.error("<%= flash[ :warning ].html_safe %>");
+		<% flash.delete( :warning ) %>
 	<% end %>
 	
 	});

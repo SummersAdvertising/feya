@@ -3,10 +3,11 @@ class Order < ActiveRecord::Base
   attr_accessible :member_id, :shippingcode, :shippingfee, :shippingway, :status, :buyername, :buyertel, :invoicetype, :invoicename, :companynum, :receivername, :receiveraddress, :receivertel, :paytype, :paydate, :paytime, :payaccount
   validates :member_id, :status, :buyername, :buyertel, :invoicetype, :receivername, :receiveraddress, :receivertel, :paytype, :presence => true
   validates :shippingcode, :shippingway, :presence => true, :if => :is_finish?
-  validates :invoicename, :companynum, :presence => true, :if => :is_company?
+  validates :invoicename, presence: { :message => "發票抬頭不得空白" }, :if => :is_company?
+ # validates :companynum, presence: { :message => "統一編號不得空白" }, :if => :is_company?
   
-  validates_format_of :companynum, :with => /\d+/, :message => "統一編號格式有誤", :if => :is_company?
-  validates :payaccount, format: { with: /\d{5}/, message: "請輸入正確的匯款帳戶" }, :if => :is_payment?
+  validates_format_of :companynum, :with => /^\d{8}$/, :message => "統一編號格式有誤", :if => :is_company?
+  validates :payaccount, format: { with: /^\d{5}$/, message: "請輸入正確的匯款帳戶" }, :if => :is_payment?
 
   before_save :checkpoints
 
