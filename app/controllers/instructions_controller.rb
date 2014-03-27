@@ -20,7 +20,7 @@ class InstructionsController < ApplicationController
 		@instructions = Instruction.order( 'sort ASC, created_at ASC' )
 		@instruction = Instruction.find( params[ :id ] )
 		
-		@courses = @instruction.courses.where(" status = 'enable'")
+		@courses = @instruction.courses.where(" status = 'enable'  AND price > 0")
 		
 	end
 end

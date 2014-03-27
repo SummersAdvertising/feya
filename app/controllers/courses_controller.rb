@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
 		
 		@inquirement = @course.inquirements.build
 		
-		@courses = @instruction.courses.where( "status = 'enable' AND id <> #{params[:id]}").sample(3)
+		@courses = @instruction.courses.where( "status = 'enable' AND id <> #{params[:id]} AND price > 0").sample(3)
 		
 	end
 	
