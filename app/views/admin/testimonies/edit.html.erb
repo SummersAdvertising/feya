@@ -9,7 +9,7 @@
     <article>
       <%= form_for [:admin, @instruction, @testimony] do |f| %>
       <div class="title-edit">   
-      <div class="button" id="button-up"> <a href="<%= admin_instruction_testimony_path( @instruction, @testimony ) %>" data-method="delete" data-confirm="確定刪除？" class="right">刪除文章<img src="/images/trash.png"></a></div>
+      <div class="button" id="button-up"> <a href="<%= admin_instruction_testimony_path( @instruction, @testimony ) %>" data-method="delete" data-confirm="確定刪除？" class="right">刪除見證<img src="/images/trash.png"></a></div>
         <h3>文章預覽</h3>     
         <div class="box">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -69,7 +69,7 @@ $("#submit").click(function(){
 
 
 $(document).ready(function(){
-	editor.init({ articleModel: 'testimony', photoUpload: '../../peditor/<%= @testimony.article.id %>/createPhoto' });
+	editor.init({ articleModel: 'testimony', photoUpload: '/admin/peditor/<%= @testimony.article.id %>/createPhoto' });
 
 	$("#submit").click(function(e){
 		e.preventDefault();

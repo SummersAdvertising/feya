@@ -155,9 +155,9 @@ $(function(){
 	<% case @order.status %>
 		<% when 'new' %>
 			<% if @order.paytype == "匯款" %>
-			<%= link_to ("確認已收款" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_check_path(@order), :method => :post, :class => "changeStatus active right light" %>
+				<%= link_to ("確認已收款" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_check_path(@order), :method => :post, :class => "changeStatus active right light" %>
 			<% else %>
-			<%= link_to ("確認訂單成立" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active right light" %>
+				<%= link_to ("確認訂單成立" + image_tag('/images/arrow-right.png') ).html_safe, admin_order_changestatus_processing_path(@order), :method => :post, :class => "changeStatus active right light" %>
 			<% end %>
 		
 		<% when 'check' %>

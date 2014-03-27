@@ -27,8 +27,6 @@ class Service::OrdersController < ApplicationController
 				
 				@orderlog.save
 
-				Ordermailer.delay.payment_notice( @order )
-
 				respond_to do |format|
 					format.html { redirect_to service_order_path(@order) }
 				end

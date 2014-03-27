@@ -23,6 +23,8 @@ class Admin::StocksController < AdminController
         format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), notice: ( '已新增產品種類: '+@stock.typename+'。') }
       end
     else
+	    flash[ :warning ] = @stock.errors.messages.values.flatten.join('<br>')
+      
       respond_to do |format|
         format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), alert: (@stock.typename.length > 0 ? '此分類已存在。' : '請輸入分類名稱。') }
       end
@@ -55,7 +57,7 @@ class Admin::StocksController < AdminController
     end
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), notice: ( '已刪除商品種類。')  }
+      format.html { redirect_to edit_admin_category_product_path(@category, params[:product_id]), notice: ( '已刪除庫存種類。')  }
     end    
   end
   

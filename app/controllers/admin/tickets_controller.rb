@@ -1,6 +1,6 @@
 class Admin::TicketsController < AdminController
 	def index
-		@tickets = Ticket.page( params[ :page ] ).per( 20 )
+		@tickets = Ticket.order('created_at DESC').page( params[ :page ] ).per( 20 )
 	end
 	
 	def show

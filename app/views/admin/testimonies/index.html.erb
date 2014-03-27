@@ -1,17 +1,20 @@
 
+<% unless @instructions.nil? %>
 <header>
   <h2>學員見證</h2>
   <nav> 
+  	
 	<% @instructions.each do | instruction | %>
 	
 		<a class="<%= 'active' if @instruction.id == instruction.id %>" href="<%= admin_instruction_testimonies_path( instruction ) %>"><%= instruction.name %></a>
 	<% end %>
+	
 </nav>
 </header>
     
 <article>
   <div class="button" id="button-down">
-  <a href="<%= admin_instruction_testimonies_path( @instruction ) %>" data-method="post" class="right light" rel="nofollow">新增文章<img src="/images/add.png"></a></div>
+  <a href="<%= admin_instruction_testimonies_path( @instruction ) %>" data-method="post" class="right light" rel="nofollow">新增見證<img src="/images/add.png"></a></div>
   <div class="list">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <% @testimonies.each do |testimony| %>
@@ -24,4 +27,9 @@
   </div>
   <div class="page"> <%= paginate @testimonies %></div>
 </article>
+<% else %>
 
+<header>
+  <h2>尚無法建立任何見證，請先至課程列表建立分類！</h2>
+</header>
+<% end %>

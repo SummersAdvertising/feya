@@ -26,7 +26,7 @@ class Admin::TestimoniesController < AdminController
 
     respond_to do |format|
       if @testimony.save
-        format.html { redirect_to edit_admin_instruction_testimony_path( @instruction, @testimony), notice: 'Testimony was successfully created.' }
+        format.html { redirect_to edit_admin_instruction_testimony_path( @instruction, @testimony), notice: '成功建立新學員見證' }
         format.json { render json: @testimony, status: :created, location: @testimony }
       else
       
@@ -52,7 +52,7 @@ class Admin::TestimoniesController < AdminController
 
     respond_to do |format|
       if @testimony.update_attributes(params[:testimony]) && ( params[ :article ].nil? ^ @testimony.article.update_attributes( params[ :article ] ) )
-        format.html { redirect_to admin_instruction_testimonies_path( @testimony.instruction ), notice: 'Testimony was successfully updated.' }
+        format.html { redirect_to admin_instruction_testimonies_path( @testimony.instruction ), notice: '成功更新學員見證' }
         format.js { head :no_content }
       else
       
@@ -73,7 +73,7 @@ class Admin::TestimoniesController < AdminController
 	@instruction = Instruction.find( params[ :instruction_id ] )
     
     respond_to do |format|
-      format.html { redirect_to admin_instruction_testimonies_path( @instruction ) }
+      format.html { redirect_to admin_instruction_testimonies_path( @instruction ), notice: "成功刪除學員見證" }
       format.json { head :no_content }
     end
   end

@@ -34,7 +34,7 @@ class Admin::ProductsController < AdminController
 
         @stock.save
 
-        format.html { redirect_to  edit_admin_category_product_path(@product), notice: 'Product was successfully created.' }
+        format.html { redirect_to  edit_admin_category_product_path(@product), notice: '成功建立商品' }
         format.json { render json: @product, status: :created, location: @product }
       else
         @products = Product.order("created_at DESC").page(params[:page])
@@ -64,7 +64,7 @@ class Admin::ProductsController < AdminController
 
         @stock.save
         
-        format.html { redirect_to  edit_admin_category_product_path(@category, @product), notice: 'Product was successfully created.' }
+        format.html { redirect_to  edit_admin_category_product_path(@category, @product), notice: '成功建立商品' }
         format.json { render json: @product, status: :created, location: @product }
       else
       
@@ -102,7 +102,7 @@ class Admin::ProductsController < AdminController
   	@product.update_attribute(:delete_flag, true)
   	
   	respond_to do | format |
-  		format.html { redirect_to admin_category_path( @category ) }
+  		format.html { redirect_to admin_category_path( @category ), notice: "商品刪除完成" }
   	end
   end
 
@@ -113,7 +113,7 @@ class Admin::ProductsController < AdminController
     @product.save
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]) }
+      format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]), notice: "商品上架完成" }
       format.json { render json: @product }
     end
     
@@ -125,7 +125,7 @@ class Admin::ProductsController < AdminController
     @product.save
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]) }
+      format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]), notice: "商品下架完成" }
       format.json { render json: @product }
     end
     
