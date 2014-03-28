@@ -5,7 +5,7 @@
   <!--crumb--> 
     <% @entries_grouped.each do | date, entries | %>
   <div id="list">
-  	<h3 class="date" style="font-weight: 600; font-size: 22px; font-family: Century;">{ <%= date.year %> }</h3>
+  	<h3 class="date" style="font-weight: 600; font-size: 22px; font-family: Century;"><span style="background: url(/images/ny-b.png);">{ <%= date.year %> }</span></h3>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
     	<% entries.each do | entry | %>
 		  <tr>
