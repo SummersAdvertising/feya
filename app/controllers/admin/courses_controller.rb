@@ -35,7 +35,7 @@ class Admin::CoursesController < AdminController
     
     respond_to do |format|
       if @course.save!
-        format.html { redirect_to edit_admin_instruction_course_path(@instruction, @course), notice: 'Course was successfully created.' }
+        format.html { redirect_to edit_admin_instruction_course_path(@instruction, @course), notice: '成功建立課程' }
         format.json { render json: @course, status: :created, location: @course }
         
       else
@@ -61,7 +61,7 @@ class Admin::CoursesController < AdminController
     respond_to do |format|
       if @course.update_attributes(params[:course]) && ( params[ :course ][ :article ].nil? ^ @course.article.update_attributes( params[ :course ][ :article ] ) )
       
-        format.html { redirect_to admin_instruction_path( @instruction ), notice: 'Course was successfully updated.' }
+        format.html { redirect_to admin_instruction_path( @instruction ), notice: '成功更新課程' }
         format.json { head :no_content }
       else
       

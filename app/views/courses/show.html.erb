@@ -20,7 +20,7 @@
   
   <div class="content">
     <div id="info">
-      <div class="left"><%= (image_tag @course.cover.inner) unless @course.cover.nil? %></div>
+      <div class="left"><%= (image_tag @course.cover.inner) unless @course.cover.file.nil? %></div>
       <div class="right">
         <h4><%= @course.name %></h4>
         <p><%= @course.description.gsub(/\n/, "<br />").html_safe if !@course.description.nil? %></p>
@@ -29,7 +29,7 @@
             <td colspan="2" class="price">剩餘名額   <%= @course.quota %><br>
             <% if !@course.price.nil? && @course.sell.nil? %>
               專業價 $ <%= @course.price %>
-            <% elsif !@course.sell.nil? %>
+              <% elsif !@course.sell.nil? %>
               專業價 <del>$ <%= @course.price %></del><br>
               限時優惠 <b>$ <%= @course.sell %> </b>
              <% end %>
