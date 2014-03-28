@@ -21,11 +21,11 @@ class Admin::ProductsController < AdminController
   def new
     @product = Product.new
     @product.status = "下架"
+    @product.price = 0
 
     @product.article = Article.new
 
     @photo = Photo.new
-
     respond_to do |format|
       if @product.save
         @stock = @product.stocks.new
@@ -46,12 +46,11 @@ class Admin::ProductsController < AdminController
 
   def create
     @product = @category.products.build(params[:product])
-    @product.status = "上架"
+    @product.status = "下架"
 
     @product.article = Article.new
     @product.name = '未命名商品'
     @product.price = 0
-    @product.saleprice = 0
 
     @photo = Photo.new
 

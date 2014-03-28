@@ -6,6 +6,7 @@
     <li class="<%= 'active' if instruction.id == @instruction.id %>"><a href="<%= instruction_path instruction %>"><%= instruction.name %></a></li>
     <li><span>│</span></li>
   <% end %>
+  	<li style="clear:both; float:none;">&nbsp;</li>
   </ul>
   <div class="intro">
       <h3><%= @instruction.name %></h3>

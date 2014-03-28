@@ -1,6 +1,6 @@
 #banner{background:url(../images/cs-banner.jpg) center 0 no-repeat}
 
-#course .tab{height:70px;background:url(../images/cs-01.gif) 0 bottom no-repeat}
+#course .tab{background:url(../images/cs-01.gif) 0 bottom no-repeat}
 #course .tab li{float:left;padding:0 10px}
 #course .tab li a{font-size:25px;color:#000;display:block}
 #course .tab li span{color:#D1C0A5;position:relative;top:3px}

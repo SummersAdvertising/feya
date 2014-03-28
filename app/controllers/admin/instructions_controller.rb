@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Admin::InstructionsController < AdminController
 
 	before_filter :get_instructions, :only => [ :index, :show, :new, :edit ]
@@ -35,7 +36,7 @@ class Admin::InstructionsController < AdminController
 		
 		respond_to do |format|
 	      if @instruction.update_attributes( params[ :instruction ] )
-	        format.html { redirect_to admin_instruction_path(@instruction), notice: 'Instruction was successfully created.' }
+	        format.html { redirect_to admin_instruction_path(@instruction), notice: '成功更新課程分類' }
 	        format.json { render json: @instruction, status: :created, location: @instruction }
 	      else
 	      	flash[ :warning ] = @instruction.errors.messages.values.flatten.join('<br>')
@@ -53,7 +54,7 @@ class Admin::InstructionsController < AdminController
 
 	    respond_to do |format|
 	      if @instruction.save
-	        format.html { redirect_to admin_instruction_path(@instruction), notice: 'Instruction was successfully created.' }
+	        format.html { redirect_to admin_instruction_path(@instruction), notice: '成功建立課程分類' }
 	        format.json { render json: @instruction, status: :created, location: @instruction }
 	      else
 	      	flash[ :warning ] = @instruction.errors.messages.values.flatten.join('<br>')
@@ -70,7 +71,7 @@ class Admin::InstructionsController < AdminController
 		@instruction.destroy
 		
 		respond_to do | format |
-			format.html{ redirect_to admin_instructions_path }
+			format.html{ redirect_to admin_instructions_path, notice: '成功刪除課程分類'  }
 		end
 		
 	end
