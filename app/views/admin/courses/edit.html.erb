@@ -45,13 +45,19 @@
             <tr>
               <td width="8%" valign="top"><%= f.label :quota, '剩餘名額：' %></td>
               <td width="40%" valign="top"><%= f.text_field :quota, :class => :text %></td>
-              <td width="10%" valign="top" align="center"><%= f.label :credit_form, '線上刷卡單：' %><br /> (2MB 以下)</td>
-              <td width="42%" valign="top"><%= f.file_field :credit_form -%> 
-              	<% unless @course.credit_form.file.nil? -%>
-              	( 下載 <a href="<%= @course.credit_form %>">目前的刷卡單</a> )
-              	<% end -%>
+            </tr>
+            <tr>
+              <td width="10%" valign="top"><%= f.label :credit_form, '線上刷卡單：' %></td>
+              <td colspan="3" valign="top"><%= f.file_field :credit_form -%>  (請使用英文檔名，2MB 以下)
               </td>
             </tr>
+             <% unless @course.credit_form.file.nil? -%>
+            <tr>
+              <td width="10%" valign="top">已有刷卡單</td>
+              <td colspan="3" valign="top"><a style="text-decoration: underline;" href="<%= @course.credit_form %>">點此下載</a>
+              </td>
+            </tr>
+             <% end -%>
             <tr>
               <td valign="top"><%= f.label :description, '簡介：' %></td>
               <td colspan="3" valign="top"><%= f.text_area :description %></td>
