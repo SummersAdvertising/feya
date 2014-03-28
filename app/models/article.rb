@@ -5,6 +5,8 @@ class Article < ActiveRecord::Base
   #delete the blank diretory built by carrierwave
   before_destroy :remember_id
   after_destroy :remove_id_directory
+  
+  has_one :draft
 
   def get_meta
 
@@ -29,10 +31,32 @@ class Article < ActiveRecord::Base
 	  	
   end
 
+  def erase_draft
+  	self.draft.destroy
+  end
+  
+  def drafting
+  	
+  	self.draft.build( { name: self.name, content: self.content } )
+  	
+  	self.draft.save
+  	
+  end
+
+  def publish
+  	
+  	self.name = self.draft.name
+  	self.content = self.draft.content
+  	
+  	erase_draft
+  	
+  end
+
   protected
   def remember_id
     @id = id
   end
+  
 
   def remove_id_directory
     FileUtils.remove_dir("#{Rails.root}/public/uploads/#{@id}", :force => true)

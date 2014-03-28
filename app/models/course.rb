@@ -22,11 +22,6 @@ class Course < ActiveRecord::Base
 
   validates_numericality_of :quota, :message => '名額必須為數字', :unless => "quota.nil?"
   
-    
-  def check_price?
-  	
-  end
-  
   def defaults
   	self.status ||= 'enable' 
   end

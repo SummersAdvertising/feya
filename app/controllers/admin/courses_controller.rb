@@ -34,12 +34,13 @@ class Admin::CoursesController < AdminController
     @course.quota = 0
     
     respond_to do |format|
-      if @course.save
+      if @course.save!
         format.html { redirect_to edit_admin_instruction_course_path(@instruction, @course), notice: 'Course was successfully created.' }
         format.json { render json: @course, status: :created, location: @course }
         
       else
       	flash[ :warning ] = @course.errors.messages.values.flatten.join('<br>')
+      	
       	
         format.html { render action: "edit" }
         format.json { render json: @course.errors, status: :unprocessable_entity }

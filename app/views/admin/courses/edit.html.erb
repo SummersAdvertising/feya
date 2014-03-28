@@ -8,6 +8,7 @@
       <%= render 'admin/instructions/menu' %>
     </header>
     <article>
+    
       <%= form_for([:admin, @instruction, @course]) do |f| %>
       <div class="title-edit">   
       <div class="button" id="button-up"> <a href="<%= admin_instruction_course_path( @instruction, @course ) %>" data-method="delete" data-confirm="確定刪除？" class="right">刪除課程<img src="/images/trash.png"></a></div>

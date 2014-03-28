@@ -11,8 +11,8 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <% @entries.each do |entry| %>
       <tr>
-        <td><a href="#"><%= link_to entry.title, edit_admin_entry_path(entry) %></a></td>
-        <td align="center"><%= entry.created_at.strftime('%Y-%m-%d') %></td>
+        <td><%= link_to entry.title, edit_admin_entry_path(entry) %></td>
+        <td align="center"><%= link_to entry.created_at.strftime('%Y-%m-%d'), edit_admin_entry_path(entry) %></td>
       </tr>
       <% end %>
     </table>
