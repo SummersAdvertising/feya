@@ -45,8 +45,6 @@ class OrdersController < ApplicationController
 		
 			if @order.paytype == "貨到付款"
 				Ordermailer.delay.new_order_notice(@order)
-			elsif @order.paytype == "匯款"
-				Ordermailer.delay.remittance_notice( @order )
 			end
 		
 			#if(params[:updateMemberinfo]) => update

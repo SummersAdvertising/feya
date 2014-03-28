@@ -8,6 +8,7 @@
   <p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
   <p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
   <p>帳單末五碼 : <%= @order.shippingcode %></p>
+  <p><%= link_to "請點此查看此筆訂單", root_url + admin_order_path( @order ) %></p>
   <div class="box"> 
     <%= render 'order_content' %>
     </div>

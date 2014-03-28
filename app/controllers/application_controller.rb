@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def is_admin
   	unless(session[:admin])
+  		session[ :last_path ] = request.original_url
   		redirect_to admin_login_path
   	end
   end

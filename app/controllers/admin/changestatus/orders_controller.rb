@@ -22,7 +22,7 @@ class Admin::Changestatus::OrdersController < AdminController
     	@order.status = "processing"
     	@order.save
 
-      logstatus_mail(@order, "處理中")
+      # logstatus_mail(@order, "處理中")
     end
 
     respond_to do |format|

@@ -54,7 +54,7 @@
              <% unless @course.credit_form.file.nil? -%>
             <tr>
               <td width="10%" valign="top">已有刷卡單</td>
-              <td colspan="3" valign="top"><a style="text-decoration: underline;" href="<%= @course.credit_form %>">點此下載</a>
+              <td colspan="3" valign="top"><a style="text-decoration: underline;" target="_blank" href="<%= @course.credit_form %>">點此下載</a> ( 請點右鍵 > 另存新檔下載 )
               </td>
             </tr>
              <% end -%>

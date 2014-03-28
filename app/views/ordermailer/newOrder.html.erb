@@ -6,9 +6,13 @@
 <body>
   <p>訂單成立通知，以下是您的購物明細。</p>
   
+  <% if @order.paytype == '匯款' %>
   <h4>＊請注意＊</h4>
-  <p>若您使用匯款方式，請將款項匯至戶名：霏亞國際管理顧問有限公司　　永豐銀行-鶯歌分行(代碼 807-1402)　　帳號：140-001-00396667</p>
+  <p>您使用匯款方式，請將款項匯至戶名：霏亞國際管理顧問有限公司　　永豐銀行-鶯歌分行(代碼 807-1402)　　帳號：140-001-00396667</p>
   
+  <p>請匯款完畢後 <%= link_to "點此", root_url + service_order_path( @order ) %> 登入填寫資訊，<br />霏亞國際管理顧問有限公司再次謝謝您的惠顧！</p>
+  <% end %>
+
   <p>下單時間 : <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></p>
   <p>訂購者 : <%= @order.buyername %> 電話 : <%= @order.buyertel %></p>
   <p>收件者 : <%= @order.receivername %> 電話 : <%= @order.receivertel %></p>

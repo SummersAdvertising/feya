@@ -21,7 +21,11 @@ class AdminController < ApplicationController
 		respond_to do |format|
 			if(@dbData && pswordCheck(@admin.password, @dbData.password))
 				session[:admin] = @dbData
-				format.html { redirect_to admin_root_path }
+				if session[ :last_path ].nil?
+					format.html { redirect_to admin_root_path, notice: "您已經成功登入" }
+				else
+					format.html { redirect_to session[ :last_path ], notice: "您已經成功登入" }
+				end
 			else
 				flash[:warning] = "帳號或密碼輸入錯誤。"
 				format.html { redirect_to admin_login_path }
