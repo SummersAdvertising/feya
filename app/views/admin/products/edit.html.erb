@@ -94,7 +94,7 @@
       
 	
       <div class="button" id="button-down"> <a href="<%= restore_admin_category_product_path( @category, @product ) %>" data-confirm="您的編輯尚未完成，請問是否確定取消？" class="left"><img src="/images/arrow-left.png">放棄編輯</a>
-      <a href="<%= admin_category_path( @category ) %>" class="right light">儲存文章<img src="/images/update.png"></a></div>
+      <a href="javascript: document.forms[0].submit();" class="right light">儲存文章<img src="/images/update.png"></a></div>
 
       
 </article>
