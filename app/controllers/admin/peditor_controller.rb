@@ -3,9 +3,9 @@ class Admin::PeditorController < AdminController
 
   #create photo
   def createPhoto
-  
     @photo = Photo.new(params[:photo])
     @photo.article_id = params[:id]
+    @photo.status = 'drafting'
 
     respond_to do |format|
       if @photo.save
@@ -19,9 +19,7 @@ class Admin::PeditorController < AdminController
 
   def destroyPhoto
     @photo = Photo.find(params[:id])
-    @photopath = "public/uploads/"+ @photo.article_id.to_s + "/" + @photo.id.to_s + "-" + @photo.name
-    File.delete(@photopath) #carrierwave will handle this.
-    @photo.destroy
+    @photo.mark_deleting
 
     respond_to do |format|
           format.html { redirect_to :controller => 'photos', :action => 'index' }

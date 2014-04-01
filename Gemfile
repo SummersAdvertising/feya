@@ -30,7 +30,7 @@ gem 'devise'
 gem 'jquery-ui-rails'
 
 gem "mini_magick"
-gem 'carrierwave'
+gem 'carrierwave', "~> 0.9"
 
 gem 'kaminari'
 

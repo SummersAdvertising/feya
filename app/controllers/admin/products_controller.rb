@@ -16,6 +16,19 @@ class Admin::ProductsController < AdminController
   def edit
     @products = Product.order("created_at DESC").page(params[:page])
     @product = Product.find(params[:id])
+    
+    @draft = @product.article.drafting
+    
+  end
+  
+  def restore
+    @product = Product.find(params[:id])
+    @product.article.restore
+
+    respond_to do | format |
+    	format.html { redirect_to admin_category_path( @category ) }
+    end
+    
   end
   
   def new
@@ -81,7 +94,10 @@ class Admin::ProductsController < AdminController
     
     
     respond_to do |format|
-      if @product.update_attributes(params[:product]) && @product.article.update_attributes( params[ :article ] )
+      if @product.update_attributes(params[:product])
+      
+      	@product.article.publish
+      	
         format.html { redirect_to edit_admin_category_product_path(@category, @product, :page => params[:page]), notice: ( @product.name + '已更新。') }
         format.json { head :no_content }
       else

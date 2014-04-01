@@ -1,6 +1,5 @@
 Feya::Application.routes.draw do
 
-
   resources :articles
   resources :photos
   
@@ -75,12 +74,15 @@ Feya::Application.routes.draw do
     
     resources :admins
     
+    resources :drafts
+    
     resources :categories  do 	
     	
 	    resources :products, :only => [:index, :new, :edit, :create, :update, :destroy] do
 	      member do
 	        match "enable", :via => :post
 	        match "disable", :via => :post
+	  		get :restore
 	      end
 	
 	      resources :stocks, :only => [:index, :create, :destroy] do
@@ -105,6 +107,7 @@ Feya::Application.routes.draw do
 		  	resources :inquirements
 	  		member do
 	  			get :switch
+	  			get :restore
 	  		end
 	  	end
     end

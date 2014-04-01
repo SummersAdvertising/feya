@@ -7,7 +7,7 @@ class AdminController < ApplicationController
 		
 		respond_to do | format |
 			if session[:admin]
-				redirect_to admin_root_path 
+				format.html { redirect_to admin_root_path  }
 			else
 				format.html { render :layout => nil }
 			end

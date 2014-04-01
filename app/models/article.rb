@@ -32,14 +32,21 @@ class Article < ActiveRecord::Base
   end
 
   def erase_draft
-  	self.draft.destroy
+  	unless self.draft.nil?
+	  	self.draft.destroy
+	end
   end
   
   def drafting
   	
-  	self.draft.build( { name: self.name, content: self.content } )
+  	if self.draft.nil?
+	  	self.draft = Draft.new( { name: self.name, content: self.content, article_id: self.id } )
+	  	self.draft.save
+	else
+#		self.draft.update_attributes( { name: self.name, content: self.content } )
+	end
   	
-  	self.draft.save
+  	self.draft
   	
   end
 
@@ -48,8 +55,20 @@ class Article < ActiveRecord::Base
   	self.name = self.draft.name
   	self.content = self.draft.content
   	
+  	self.photos.where( "status = 'drafting'" ).update_all({ status: 'published' })
+  	
   	erase_draft
   	
+  	self.save
+  	
+  end
+  
+  def restore
+  
+	self.photos.where( "status = 'deleting'").update_all( { status: 'published' } )
+  	
+  	erase_draft
+  
   end
 
   protected
@@ -57,7 +76,6 @@ class Article < ActiveRecord::Base
     @id = id
   end
   
-
   def remove_id_directory
     FileUtils.remove_dir("#{Rails.root}/public/uploads/#{@id}", :force => true)
   end

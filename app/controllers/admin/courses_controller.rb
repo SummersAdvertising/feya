@@ -51,6 +51,19 @@ class Admin::CoursesController < AdminController
   # GET /admin/courses/1/edit
   def edit
     @course = Course.find(params[:id])
+    
+    @draft = @course.article.drafting
+    
+  end
+    
+  def restore
+    @course = Course.find(params[:id])
+    @course.article.restore
+
+    respond_to do | format |
+    	format.html { redirect_to admin_instruction_path( @instruction ) }
+    end
+    
   end
 
   # PUT /admin/courses/1
@@ -59,8 +72,10 @@ class Admin::CoursesController < AdminController
     @course = Course.find(params[:id])
     
     respond_to do |format|
-      if @course.update_attributes(params[:course]) && ( params[ :course ][ :article ].nil? ^ @course.article.update_attributes( params[ :course ][ :article ] ) )
-      
+      if @course.update_attributes( params[:course])
+      	
+      	@course.article.publish
+      	
         format.html { redirect_to admin_instruction_path( @instruction ), notice: '成功更新課程' }
         format.json { head :no_content }
       else
