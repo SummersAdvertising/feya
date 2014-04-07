@@ -60,7 +60,7 @@ class Admin::Changestatus::OrdersController < AdminController
   	@order.save
   	
   	@member = @order.member
-  	@member.discountpoint = @order.discount
+  	@member.discountpoint += @order.discount
   	
   	@member.save
   	

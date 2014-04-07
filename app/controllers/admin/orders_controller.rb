@@ -65,7 +65,7 @@ class Admin::OrdersController < AdminController
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_order_path(@order, :page => params[:page]), notice: 'Order was successfully updated.' }
+      format.html { redirect_to admin_order_path(@order, :page => params[:page]), notice: '訂單已更新' }
       format.json { head :no_content }
     end
   end
