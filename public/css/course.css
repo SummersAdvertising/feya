@@ -1,4 +1,4 @@
-#banner{background:url(../images/cs-banner.jpg) center 0 no-repeat}
+﻿#banner{background:url(../images/cs-banner.jpg) center 0 no-repeat}
 
 #course .tab{background:url(../images/cs-01.gif) 0 bottom no-repeat}
 #course .tab li{float:left;padding:0 10px}
@@ -7,8 +7,8 @@
 #course .tab .active a{background:#FFEC4C;padding:0px 5px;box-shadow:-4px 4px 0 #C490BF}
 
 #course .intro{background:url(../images/cs-02.gif) center 0 no-repeat;height:95px;margin:25px 0;overflow:hidden;padding:0 60px;overflow:hidden}
-#course .intro h3{font:900 italic 35px 微軟正黑體,Microsoft JhengHei;color:#00b1ae;float:left;width:30%}
-#course .intro p{float:right;width:70%}
+#course .intro h3{font:900 italic 35px 微軟正黑體,Microsoft JhengHei;color:#00b1ae;float:left;displai:inline-block;margin:0 5% 0 0}
+#course .intro p{float:left;width:65%}
 
 #course .list{background:url(../images/cs-06.png) center 40px repeat-y #E4DDD6;overflow:hidden;clear:both}
 #course .list section{background:url(../images/cs-03.gif);width:345px;height:455px;float:left;padding:25px;margin:38px 62px}
