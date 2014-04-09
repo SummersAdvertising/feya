@@ -38,57 +38,76 @@ $(function(){
     
     <%= form_for(@cartitem, :url => add_cart_orders_path) do |f| %>
     
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">      
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="43%" valign="top" id="cover"><img src="<%= @product.cover.inner %>"></td>
           <td width="57%" valign="top"><h4><%= @product.name %></h4>
         <input type="hidden" value="<%= @stock_first && @stock_first.id %>" name="orderitem[stock_id]">
         
-        <% if !@product.saleprice.nil? && @product.saleprice > 0 %>
-        <p> 專業價 <del>$ <%= @product.price %></del><br>
-          限時優惠 <strong>$ <%= @product.saleprice %></strong><br>
-        </p>
-        <% else %>
-        <p> 專業價  $ <%= @product.price %></p>
-        <% end %>
-            
         <% if @stock_first && @stock_first.amount && @stock_first && @stock_first.amount >0 %>
-        	庫存 <%= @stock_first && @stock_first.amount %>
-        
-            <% if @product.hasType %>
-            <div class="size"> 規格
-	             <select id="productType" name="orderitem[stock_id]">
+        	
+            <div class="size"> 數量
+            	
+              <%= f.select :amount, options_for_select(1 .. @stock_first.amount) %>
+              
+              
+              <br>
+              規格
+              <select id="productType" name="orderitem[stock_id]">
+              
 	              <% @product.stocks.each do |stock| %>
 		              <% if !stock.amount || stock.amount > 0 %>
-		             	 <option value="<%= stock.id %>"><%= stock.typename %><%= (": 庫存"+stock.amount.to_s+"個。") if stock.amount %></option>
+	             	 <option value="<%= stock.id %>" data-amount="<%= stock.amount %>"><%= stock.typename %></option>
 		              <% end %>
 	              <% end %>
-	            </select>
-              <br>
-	            數量 <%= f.text_field :amount, :class => 'text' %>
-              
+              </select>
             </div>
+        
+        
+              <script>
+              
+              	  function set_amount( amount ) {
+	              	  $('#orderitem_amount').children().remove();
+	              	  for( var i =1; i <= amount; i ++ ) {
+	              	  	$('<option value="' + i + '">' + i + '</option>').appendTo( $('#orderitem_amount') );
+	              	  }
+	              	  
+              	  }             	  
+	              	  
+		              $('#productType').change(function() {
+		              	
+		              console.log( $(this).children('option:selected').data('amount') );
+			              set_amount( $(this).children('option:selected').data('amount') )
+		              });
+	              	  
+              </script>
             
-            <% end %>
-        <% end %>
+        <% end %>        
         
             
+            <% if !@product.saleprice.nil? && @product.saleprice > 0 %>
+            <p> 專業價 <del>$ <%= @product.price %></del><br>
+              限時優惠 <strong>$ <%= @product.saleprice %></strong><br>
+            </p>
+	        <% else %>
+	        <p> 專業價  $ <%= @product.price %></p>
+	        <% end %>
+	        
         <% if !@product.hasStock %>
         <div class="size"> 本商品目前無庫存。   </div>        
         <% else %>
          <%= link_to '', "#", :id => "submit", :data => { :stockid => @stock_first && @stock_first.id, :stockname => @product.name, :stockceiling => @stock_first && @stock_first.amount } %></td>
         <% end %>
-        </tr>
         
+        </td>
+        </tr>
         <tr>
           <td colspan="2" align="center" valign="top"><br>
             <img src="/images/pd-06.gif"></td>
         </tr>
-        <tr>
-          <td class="add"></td>
-        </tr>
-	        
       </table>
+      
+      
       <% end %>
       <article id="articleContent" class="peditor"> </article>
       

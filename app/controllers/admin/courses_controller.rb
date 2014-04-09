@@ -70,7 +70,7 @@ class Admin::CoursesController < AdminController
   # PUT /admin/courses/1.json
   def update
     @course = Course.find(params[:id])
-    
+        
     respond_to do |format|
       if @course.update_attributes( params[:course])
       	
@@ -80,6 +80,8 @@ class Admin::CoursesController < AdminController
         format.json { head :no_content }
       else
       
+      	@draft = @course.article.drafting
+      	
       	flash[ :warning ] = @course.errors.messages.values.flatten.join('<br>')
       	
         format.html { render action: "edit" }

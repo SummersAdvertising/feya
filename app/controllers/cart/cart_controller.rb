@@ -43,7 +43,7 @@ class Cart::CartController < ApplicationController
 			
 			else
 				respond_to do |format|
-					format.html { redirect_to :back, alert: "商品的庫存量不足。" }
+					format.html { redirect_to :back, alert: "您已經放過此商品到購物車，額外購買的數量超過庫存數喔！請重新檢查" }
 				end
 			end
 
