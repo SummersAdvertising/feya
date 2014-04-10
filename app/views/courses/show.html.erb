@@ -44,7 +44,19 @@
           </tr>
         <% if @course.price.to_i > 0 && @course.quota.to_i > 0 %>
           <tr>
-            <td valign="middle"><a target="_blank" href="<%= @course.credit_form.file.nil? ? "javascript: alert('很抱歉，目前本課程還未接受線上刷卡，請聯絡本中心客服人員或填寫詢問單！'); return false;".html_safe : @course.credit_form %>"><img src="/images/cs-11.gif"></a></td>
+            <td valign="middle">
+            	<script>
+	            	function form_empty_alert() {
+		            	alert('很抱歉，目前本課程還未接受線上刷卡，請聯絡本中心客服人員或填寫詢問單！'); return false;
+	            	}
+	            	
+            	</script>
+            	<% if @course.credit_form.file.nil? %>
+            	<a onClick="form_empty_alert();" href="javascript: void(0);"><img src="/images/cs-11.gif"></a>
+            	<% else %>
+            	<a target="_blank" href="<%= @course.credit_form %>"><img src="/images/cs-11.gif"></a>
+            	<% end %>
+            	</td>
             <td valign="top" class="text">下載刷卡單，填寫並回傳<br>
               單據，即有專人為您服務</td>
           </tr>
