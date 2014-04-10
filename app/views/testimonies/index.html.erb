@@ -28,7 +28,7 @@ $(function(){
     <div class="left"> <img src="/images/wn-12.gif">
       <ul>
       <% @instructions.each do | instruction | %>
-        <li class="<%= "active" if instruction.id == @instruction.id %>"><a href="<%= instruction_testimonies_path(instruction) %>">{ <%= instruction.name %> }</a></li>
+        <li class="<%= "active" if instruction.id == @instruction.id %>"><a href="<%= instruction_testimonies_path(instruction, :anchor => :main ) %>">{ <%= instruction.name %> }</a></li>
       <% end %>
       </ul>
       <img src="/images/wn-12.gif"> </div>
