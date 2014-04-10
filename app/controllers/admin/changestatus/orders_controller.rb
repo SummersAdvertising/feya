@@ -33,16 +33,17 @@ class Admin::Changestatus::OrdersController < AdminController
   end
 
   def deliver
+  
   	if(@order.status == "processing" && params[:order][:shippingway].length>0 && params[:order][:shippingcode].length>0)
   		@order.shippingway = params[:order][:shippingway]
   		@order.shippingcode = params[:order][:shippingcode]
     	@order.status = "deliver"
     	@order.save
-
+  
       logstatus_mail(@order, "已出貨")
 
     	respond_to do |format|
-    		format.html { redirect_to  admin_order_path(@order), notice: 'Order was successfully created.' }
+    		format.html { redirect_to  admin_order_path(@order), notice: '您的訂單已設定為出貨' }
     		format.json { render json: @order }
     	end
 
@@ -77,7 +78,7 @@ class Admin::Changestatus::OrdersController < AdminController
     @orderlog = @order.orderlogs.new
     @orderlog.description = "訂單變更狀態為：" + status
     @orderlog.save
-
+    
     Ordermailer.delay.statuschange(Member.find(@order.member_id).email, @order)
   end
   

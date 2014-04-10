@@ -10,6 +10,7 @@
   <% when "processing" %>
   <p><%= "您的訂單已成立，將儘速為您出貨。" %>	</p>
   <% when "deliver" %>
+  
 	  <p><%= "您訂購的商品已寄出。" %></p>
 	  <% if @order.shippingcode.length > 0 %>
 	  <p>物流追蹤連結： <%= @order.shippingcode %></p>
