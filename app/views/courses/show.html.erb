@@ -24,6 +24,7 @@
       <div class="right">
         <h4><%= @course.name %></h4>
         <p><%= @course.description.gsub(/\n/, "<br />").html_safe if !@course.description.nil? %></p>
+        <% if @course.price.to_i > 0 && @course.quota.to_i > 0 %>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td colspan="2" class="price">剩餘名額   <%= @course.quota %><br>
@@ -46,6 +47,7 @@
               單據，即有專人為您服務</td>
           </tr>
         </table>
+        <% end %>
       </div>      
     </div>
     <div style='display:none'>

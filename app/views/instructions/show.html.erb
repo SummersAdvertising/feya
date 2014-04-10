@@ -19,11 +19,13 @@
 	        </tr>
 	        <tr>
 	          <td align="right" class="price">
-	          <% if course.sell.nil? %>
-	          專業價 $ <%= course.price %>
-	          <% else %>
-	          <del>專業價 $ <%= course.price %></del><br>
-	            限時優惠 <b>$ <%= course.sell %></b>
+	          <% if course.price.to_i > 0 && course.quota.to_i > 0 %>
+		          <% if course.sell.nil? %>
+		          專業價 $ <%= course.price %>
+		          <% else %>
+		          <del>專業價 $ <%= course.price %></del><br>
+		            限時優惠 <b>$ <%= course.sell %></b>
+		            <% end %>
 	            <% end %>
 	           </td>
 	        </tr>
