@@ -46,3 +46,5 @@ padding:3px 0;margin:3px 0 0 1px;text-shadow:0 -1px 0 #843377}
 .content p{}
 .content del{color:#f2b705;font-size:20px}
 .content strong{color:#e5004f;font-size:25px}
+
+#articleContent img{width:100%!important;height:auto;}

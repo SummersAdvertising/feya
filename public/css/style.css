@@ -60,6 +60,7 @@ footer{height:185px;color:#fff;font-size:12px;background:#362E2B}
 footer a{color:#fff;font-size:13px;color:#fff}
 footer a:hover{color:#F5D856}
 footer p span{color:#a6937c}
-footer .container{width:940px;margin:0 auto;background:url(../images/footer.jpg) 0 25px no-repeat;text-align:right;padding:50px 0 0 0}
+footer .container{position:relative;width:940px;margin:0 auto;background:url(../images/footer.jpg) 0 25px no-repeat;text-align:right;padding:50px 0 0 0}
+footer #email{position:absolute;top:60px;left:30px;width:360px;height:40px;display:block}
 
 #articleContent img{ max-width: 800px; }

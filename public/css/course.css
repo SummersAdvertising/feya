@@ -8,13 +8,13 @@
 
 #course .intro{background:url(../images/cs-02.gif) center 0 no-repeat;height:95px;margin:25px 0;overflow:hidden;padding:0 60px;overflow:hidden}
 #course .intro h3{font:900 italic 35px 微軟正黑體,Microsoft JhengHei;color:#00b1ae;float:left;displai:inline-block;margin:0 5% 0 0}
-#course .intro p{float:left;width:65%}
+#course .intro p{float:left;width:64%}
 
 #course .list{background:url(../images/cs-06.png) center 40px repeat-y #E4DDD6;overflow:hidden;clear:both}
 #course .list section{background:url(../images/cs-03.gif);width:345px;height:455px;float:left;padding:25px;margin:38px 62px}
 #course .list h4{background:#00B1AE;color:#fff;padding:1px 5px;font:300 18px 微軟正黑體,Microsoft JhengHei}
 #course .list td{padding:0 0 10px 0}
-#course .list p{height:60px;position:relative;overflow:hidden;font-size:14px}
+#course .list p{height:55px;position:relative;overflow:hidden;font-size:14px}
 #course .list .price{color:#959595;font-size:18px}
 #course .list .price del{font-size:14px}
 #course .list .price b{color:#c490bf}
