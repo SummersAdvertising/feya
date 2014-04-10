@@ -8,7 +8,7 @@
 #form td{width:100%;padding:10px 0}
 
 #form td input{width:100%;border:none;padding:5px}
-#form td textarea{min-height:150px;border:none;width:100%;padding:5px}
+#form td textarea{height:150px;border:none;width:100%;padding:5px}
 
 #send{background:url(../images/ju-02.gif) 0 0 no-repeat;width:213px!important;height:29px;border:none;margin:0 auto;cursor:pointer;}
 #send:hover{position:relative;top:3px}
