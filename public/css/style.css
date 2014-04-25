@@ -1,8 +1,8 @@
-
+﻿
 /*-----------------------------------------------------------------------全域---*/
 
 html{background:#FCF6EF}
-body{width:100%;max-width:1280px;min-width:940px;margin:0 auto;background:#fff;font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em}
+body{width:100%;max-width:1280px;min-width:1280px;margin:0 auto;background:#fff;font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em}
 a{font:300 15px 微軟正黑體,Microsoft JhengHei;line-height:1.7em;text-decoration:none;
 -webkit-transition:all ease .3s;-moz-transition:all ease .3s}
 
