@@ -1,3 +1,15 @@
+<style>
+#content > header {height:auto}
+#content > header nav{height:auto;width:645px;margin-top:1px}
+#content > header nav a{background:#e7e7e7;margin:0 5px 10px 0!important;padding:4px 10px 0 10px!important;height:30px;
+border-radius:5px;color:#000}
+#content > header nav a:hover,
+#content > header nav .active{border:none;background:#77566B;color:#fff}
+#content > header nav .add{background:none;opacity:1;filter:alpha(opacity=100);width:auto;}
+#content > header nav .add img{margin:0}
+#content > header nav .add:hover{background:#e7e7e7;}
+</style>
+
 <nav> 
 	<% @categories.each do | category | %>
 	
