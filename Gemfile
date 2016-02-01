@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
+gem 'rake', '~> 10.4.2'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -53,7 +55,10 @@ gem 'therubyracer'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+#gem 'capistrano', group: :development
+group :development  do
+	gem "capistrano", "~> 3.4"
+end
 
 # To use debugger
 # gem 'debugger'

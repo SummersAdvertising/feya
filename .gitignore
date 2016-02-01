@@ -16,6 +16,7 @@
 
 /config/environments
 /config/deploy
+/config/deploy.rb
 
-/public/uploads
+/public/uploads/*
 /public/assets/*
