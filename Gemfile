@@ -43,7 +43,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 
-gem 'therubyracer'
+gem 'therubyracer', "~> 0.11.4"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
