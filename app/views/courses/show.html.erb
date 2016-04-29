@@ -3,8 +3,8 @@
   <script src="/js/editor_p.js"></script>
   <script src="/js/editor_img.js"></script>
   <script src="/js/editor_video.js"></script>
-  
-  
+
+
 	<script src="/js/jquery.colorbox-min.js"></script>
 	<script>
 	$(document).ready(function(){
@@ -17,7 +17,7 @@
 
 <article id="course">
   <%= render 'instructions/intro' %>
-  
+
   <div class="content">
     <div id="info">
       <div class="left"><%= (image_tag @course.cover.inner) unless @course.cover.file.nil? %></div>
@@ -49,12 +49,12 @@
 	            	function form_empty_alert() {
 		            	alert('很抱歉，目前本課程還未接受線上刷卡，請聯絡本中心客服人員或填寫詢問單！'); return false;
 	            	}
-	            	
+
             	</script>
             	<% if @course.credit_form.file.nil? %>
             	<a onClick="form_empty_alert();" href="javascript: void(0);"><img src="/images/cs-11.gif"></a>
             	<% else %>
-            	<a target="_blank" href="<%= @course.credit_form %>"><img src="/images/cs-11.gif"></a>
+            	<a target="_blank" href="link?redirect_to=<%= @course.credit_form %>"><img src="/images/cs-11.gif"></a>
             	<% end %>
             	</td>
             <td valign="top" class="text">下載刷卡單，填寫並回傳<br>
@@ -62,7 +62,7 @@
           </tr>
         <% end %>
         </table>
-      </div>      
+      </div>
     </div>
     <div style='display:none'>
         <div id="form">
@@ -93,21 +93,21 @@
 		    </tr>
 		</table>
       <% end %>
-		
+
       </div>
-        <!--notes--> 
+        <!--notes-->
     </div>
     <article id="articleContent" class="peditor"> </article>
 <div id="exp"><a href="<%= instruction_testimonies_path( @instruction, :anchor => :intro ) %>"><img src="/images/cs-15.jpg" width="369" height="49"></a></div>
   </div>
-  
-  
+
+
   	<h4><img src="/images/cs-09.gif"></h4>
   <div class="others">
 	  <article>
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
-		  <% @courses.each do | course | %>		  
+		  <% @courses.each do | course | %>
 		    <td width="28%"><div><img src="<%= course.cover.list %>"><a href="<%= instruction_course_path( @instruction, course ) %>"><%= course.name %> →</a></div></td>
 		    <td width="8%">&nbsp;</td>
 		  <% end %>
@@ -126,28 +126,28 @@
 
 <input id="article_content" style="display:none;" type="text" value="<%= @course.article.content %>">
 <script>
-	$(document).ready(function() {	
-		editor.output();	
-		
+	$(document).ready(function() {
+		editor.output();
+
 		$('#new_inquirement').submit(function() {
-		
+
 			var errors = '';
-				
+
 			if ( $('input[name="inquirement[name]"]').val().length <= 0 ) {
 				errors += " 請寫上您的姓名 \n";
 			}
-			
+
 			if ( $('input[name="inquirement[phone]"]').val().length <= 0 && $('input[name="inquirement[email]"]').val().length <= 0 ) {
 				errors += " 請寫上您的電話或信箱（擇一） \n";
 			} else if ( $('input[name="inquirement[email]"]').val().length > 0  && !$('input[name="inquirement[email]"]').val().match(/^[\w\.]+@[a-zA-Z0-9\-\_]+(\.[a-zA-Z]{2,3})+$/) ) {
 				errors += "您的信箱填寫有誤";
 			}
-		
+
 			if (errors) {
 				alert( errors );
 				return false;
 			}
 		});
-		
+
 	});
 </script>

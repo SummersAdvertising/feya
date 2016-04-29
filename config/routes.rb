@@ -2,36 +2,39 @@ Feya::Application.routes.draw do
 
   resources :articles
   resources :photos
-  
+
   resources :testimonies
-  
+
   resources :entries
-  resources :instructions do 
+  resources :instructions do
   	resources :testimonies
-  
-  	resources :courses do   	
+
+  	resources :courses do
+      collection do
+        get :link
+      end
 	  resources :inquirements
   	end
   end
-  
-  resources :categories do 
+
+  resources :categories do
   	resources :products, :only => [:show]
   end
-  
+
   resources :tickets
-  
-  resources :pages, :controller => :static_pages, :action => :show do  	
+
+  resources :pages, :controller => :static_pages, :action => :show do
   	collection do
   		get ':pagename', :as => :page
   	end
-  	
+
   end
-  
-    match 'articles/:id/uploadPhoto' => 'articles#createPhoto', :via => [:post] 
-    match 'articles/:artid/deletePhoto/:id' => 'articles#destroyPhoto', :via => [:delete]
+
+  match 'articles/:id/uploadPhoto' => 'articles#createPhoto', :via => [:post]
+  match 'articles/:artid/deletePhoto/:id' => 'articles#destroyPhoto', :via => [:delete]
 
   devise_for :members, :controllers => { :sessions => "sessions", :registrations => "registrations", :passwords => "passwords" }
-  
+
   resources :orders, :only => [:create] do
   	collection do
       namespace :cart do
@@ -60,50 +63,50 @@ Feya::Application.routes.draw do
     #resources :tracebooks
     root :to => "orders#index"
   end
-  
+
   namespace :admin do
-  
-  	match 'peditor/:id/createPhoto' => 'peditor#createPhoto', :via => [:post] 
-  
+
+  	match 'peditor/:id/createPhoto' => 'peditor#createPhoto', :via => [:post]
+
     get "login", "logout"
     match "checkAdmin", :via => :post
 
     resources :members, :only => [:index, :destroy]
-    
+
     resources :tickets, :only => [ :index, :show, :destroy ]
-    
+
     resources :admins
-    
+
     resources :drafts
-    
-    resources :categories  do 	
-    	
+
+    resources :categories  do
+
 	    resources :products, :only => [:index, :new, :edit, :create, :update, :destroy] do
 	      member do
 	        match "enable", :via => :post
 	        match "disable", :via => :post
 	  		get :restore
 	      end
-	
+
 	      resources :stocks, :only => [:index, :create, :destroy] do
 	        collection do
 	          match "updateStocks", :via => :post
 	        end
 	      end
 	    end
-    
+
     end
-    
+
 	resources :articles
-	
+
 	resources :inquirements
-	
-	resources :entries 
-    
-    resources :instructions do 
-		resources :testimonies 
-		
-	  	resources :courses do 	
+
+	resources :entries
+
+    resources :instructions do
+		resources :testimonies
+
+	  	resources :courses do
 		  	resources :inquirements
 	  		member do
 	  			get :switch
@@ -120,11 +123,11 @@ Feya::Application.routes.draw do
     end
 
     resources :orders, :only => [:index, :show, :update] do
-    
+
       collection do
       	post :expire
       end
-    
+
       namespace :changestatus do
         match "check", :via => :post
         match "processing", :via => :post
@@ -132,10 +135,10 @@ Feya::Application.routes.draw do
         match "cancel", :via => :post
       end
     end
-    
+
     root :to => "categories#index"
   end
 
   root :to => "static_pages#index"
-  
+
 end
