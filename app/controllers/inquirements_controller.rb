@@ -17,16 +17,17 @@ class InquirementsController < ApplicationController
   # POST /inquirements.json
   def create
     @inquirement = @course.inquirements.build(params[:inquirement])
-    
+
     @inquirement.course_name = @course.name
     @inquirement.instruction_name = @course.instruction.name
-    
+
     respond_to do |format|
       if @inquirement.save
-      	
+
       	InquirementMailer.delay.send_notice( @inquirement )
-      
-        format.html { redirect_to instruction_course_path( @instruction, @course ), notice: '已經收到您的詢問，將會有專業人員與您聯絡！' }
+
+        # format.html { redirect_to instruction_course_path( @instruction, @course ), notice: '已經收到您的詢問，將會有專業人員與您聯絡！' }
+        format.html { redirect_to "#{instruction_courses_path(@instruction)}/link_ask?redirect_to=#{instruction_course_path( @instruction, @course )}?success=true", notice: '已經收到您的詢問，將會有專業人員與您聯絡！' }
         format.json { render json: @inquirement, status: :created, location: @inquirement }
       else
       	flash[ :warning ] = '您的資料填寫有誤！'
@@ -40,9 +41,9 @@ private
 	def get_courses
 		@instruction = Instruction.find( params[ :instruction_id ] )
 		@course = Course.find( params[ :course_id ] )
-		
-		
-		
+
+
+
 	end
 
 end

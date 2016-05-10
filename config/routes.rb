@@ -12,6 +12,7 @@ Feya::Application.routes.draw do
   	resources :courses do
       collection do
         get :link
+        get :link_ask
       end
 	  resources :inquirements
   	end
