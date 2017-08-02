@@ -35,7 +35,7 @@
 #course .others a:hover{background:#C490BF}
 
 #info{overflow:hidden;background:url(../images/cs-08.gif) center bottom no-repeat;padding:0 0 45px 0}
-#info p{margin:0!important;height:110px;padding:10px 0 0 0;position:relative;overflow:hidden}
+#info p{margin:0!important;font-size:17px;line-height:1.6em;min-height:110px;padding:10px 0;position:relative;overflow:hidden}
 #info .left{width:58%}
 #info .left img{max-width:100%;height:auto}
 #info .right{width:40%}
